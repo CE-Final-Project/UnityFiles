@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class sceneManager : MonoBehaviour {
-    public void Scene1() {
-        SceneManager.LoadScene("LoginSuccess");
+    public void MoveToScene(int sceneID) {
+        SceneManager.LoadScene(sceneID);
     }
 }
