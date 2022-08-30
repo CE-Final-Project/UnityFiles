@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/newWorld.unity
     guid: c4eb820603dd44d68b750b3b0a2b62fe
+  - enabled: 1
+    path: Assets/Scenes/inGame.unity
+    guid: b3484c74ba76b47b1b57e8b8e46e7d40
   m_configObjects: {}
