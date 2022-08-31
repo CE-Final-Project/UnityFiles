@@ -87,9 +87,6 @@ public class playerController : MonoBehaviour {
         } else {
             swordAttack.AttackRight();
         }
-        swordAttack.AttackLeft();
-
-        swordAttack.AttackRight();
     }
     public void LockMovement() {
         canMove = false;
