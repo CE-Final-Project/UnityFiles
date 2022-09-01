@@ -9,4 +9,9 @@ In this scene include login & signup by email, password set default window size 
 ### Main Menu Screen
 ![Screen Shot 2565-08-26 at 13 32 09](https://user-images.githubusercontent.com/63220854/186838429-9ae7c101-8e80-4d2e-94b7-86dcc5e5b510.jpg)
 
+## Sprint 3 : Study about Creating Map
+Study about creating a scene in game bt tilemap and add character that player can interact with.
+### In game Screen
+![Screen Shot 2565-09-01 at 20 56 16](https://user-images.githubusercontent.com/63220854/187932702-6cfc4925-a1ae-4c57-8d39-f2e50fa64661.jpg)
+
 Next up! Work on Random Map Generation Algorithm.
