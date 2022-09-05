@@ -88,6 +88,10 @@ public class playerController : MonoBehaviour {
             swordAttack.AttackRight();
         }
     }
+    public void EndSwordAttack() {
+        UnlockMovement();
+        swordAttack.StopAttack();
+    }
     public void LockMovement() {
         canMove = false;
     }

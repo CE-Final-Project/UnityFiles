@@ -11,7 +11,7 @@ public class fullScreenToggle : MonoBehaviour{
         }
         else {
             print("not full screen");
-            Screen.SetResolution(1280, 720, false);
+            Screen.SetResolution(1600, 900, false);
         }
     }
 }

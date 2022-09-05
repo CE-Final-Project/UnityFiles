@@ -5,24 +5,21 @@ using UnityEngine;
 public class SwordAttack : MonoBehaviour
 {
     public float damage = 3;
-    Vector2 rightattackOffset;
-    Collider2D swordColider;
+    Vector2 rightAttackOffset;
+    public Collider2D swordColider;
     
     private void Start() {
-        swordColider = GetComponent<Collider2D>();
-        rightattackOffset = transform.position;
+        rightAttackOffset = transform.position;
     }
     
     public void AttackRight() {
-        print("ATK RIGHT");
         swordColider.enabled = true;
-        transform.position = rightattackOffset;
+        transform.localPosition = rightAttackOffset;
     }
     
-    public void AttackLeft() {
-        print("ATK LEFT");
+    public void AttackLeft() { 
         swordColider.enabled = true;
-        transform.position = new Vector3(rightattackOffset.x * -1, rightattackOffset.y);
+        transform.localPosition = new Vector3(rightAttackOffset.x * -1, rightAttackOffset.y);
     }
     
     public void StopAttack() {
