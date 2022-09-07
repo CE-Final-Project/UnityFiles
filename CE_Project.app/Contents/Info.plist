@@ -7,7 +7,7 @@
     <key>CFBundleExecutable</key>
     <string>CE Project</string>
     <key>CFBundleGetInfoString</key>
-    <string>Unity Player version 2021.3.8f1 (b30333d56e81). (c) 2022 Unity Technologies ApS. All rights reserved.</string>
+    <string>Unity Player version 2021.3.9f1 (ad3870b89536). (c) 2022 Unity Technologies ApS. All rights reserved.</string>
     <key>CFBundleIconFile</key>
     <string>PlayerIcon.icns</string>
     <key>CFBundleIdentifier</key>
@@ -40,6 +40,6 @@
     <key>NSPrincipalClass</key>
     <string>PlayerApplication</string>
     <key>UnityBuildNumber</key>
-    <string>b30333d56e81</string>
+    <string>ad3870b89536</string>
   </dict>
 </plist>
