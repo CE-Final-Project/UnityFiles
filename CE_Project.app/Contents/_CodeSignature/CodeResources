@@ -530,7 +530,7 @@
 		</data>
 		<key>Resources/Data/Resources/unity_builtin_extra</key>
 		<data>
-		gTKktgssQXFGeknlmgEq2Pm02HA=
+		vqb62wMtsTNke8xfdFlP1hCsDVY=
 		</data>
 		<key>Resources/Data/RuntimeInitializeOnLoads.json</key>
 		<data>
@@ -554,7 +554,7 @@
 		</data>
 		<key>Resources/Data/globalgamemanagers</key>
 		<data>
-		idmrWAjgJYDCbF/Cirh604/4Q2g=
+		WZ9mxKay6EG/0DIWeQHpvOAGtxw=
 		</data>
 		<key>Resources/Data/globalgamemanagers.assets</key>
 		<data>
@@ -801,10 +801,10 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			4wh0jpsyxCE8fbE95T55pXozmxk=
+			XcLbukarhigLVew5iyeRpgGSn0g=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"e308748e9b32c4213c7db13de53e79a57a339b19"</string>
+			<string>cdhash H"5dc2dbba46ab86280b55ec398b2791a601929f48"</string>
 		</dict>
 		<key>Resources/Data/Managed/Assembly-CSharp.dll</key>
 		<dict>
@@ -1727,7 +1727,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			vtM8tX+Ybqa3YhljJGiLRTl2u0N71jOdbHSNeiUh7oQ=
+			FFJntoRuUlpbzP/4gJ+SZxmOF999ra3bvWiOA8cqlkg=
 			</data>
 		</dict>
 		<key>Resources/Data/RuntimeInitializeOnLoads.json</key>
@@ -1769,7 +1769,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			aMkv0Lnkhm3uwqPJFg0zdhOWgz9k0FRMEczwwMv4wk8=
+			tYeQ0HNkikpgDLvUPq8H2PSBbpzltWZpw0zTnXx7L60=
 			</data>
 		</dict>
 		<key>Resources/Data/globalgamemanagers.assets</key>
