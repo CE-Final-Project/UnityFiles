@@ -9,9 +9,13 @@ In this scene include login & signup by email, password set default window size 
 ### Main Menu Screen
 ![Screen Shot 2565-08-26 at 13 32 09](https://user-images.githubusercontent.com/63220854/186838429-9ae7c101-8e80-4d2e-94b7-86dcc5e5b510.jpg)
 
-## Sprint 3 : Study about Creating Map
-Study about creating a scene in game by tilemap and add character that player can interact with.
+## Sprint 3 & 4 : Study about Creating Map & Pause Menu
+Study about creating a scene in game by tilemap and add character that player can interact with it before study about procedural generation map.
 ### In game Screen
 ![Screen Shot 2565-09-01 at 20 56 16](https://user-images.githubusercontent.com/63220854/187932702-6cfc4925-a1ae-4c57-8d39-f2e50fa64661.jpg)
+Added 2 layers of map, first is layer of land and second is layer of object that player cannot walk through. Also added animation of player when walking and attacking
+### Pause Menu
+![Screenshot 2565-09-14 at 11 26 41](https://user-images.githubusercontent.com/63220854/190059461-10388c48-e92a-4943-831f-45d9920dafb6.jpg)
+Added some basic controls.
 
 Next up! Work on Random Map Generation Algorithm.
