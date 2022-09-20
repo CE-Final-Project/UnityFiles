@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ff6b5b559d0944329157a17d22f2599, type: 3}
-  m_Name: Forest
+  m_Name: Tundra
   m_EditorClassIdentifier: 
   tiles: []
   minHeight: 0.2
-  minMoisture: 0.4
-  minHeat: 0.4
+  minMoisture: 0
+  minHeat: 0
