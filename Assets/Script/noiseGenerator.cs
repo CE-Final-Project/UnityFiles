@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class noiseGenerator : MonoBehaviour
+public class NoiseGenerator : MonoBehaviour
 {
     public static float[,] Generate(int width, int height, float scale, Wave[] waves, Vector2 offset)
     {
@@ -28,7 +28,7 @@ public class noiseGenerator : MonoBehaviour
         return noiseMap;
     }
 }
-
+[System.Serializable]
 public class Wave
 {
     public float seed;
