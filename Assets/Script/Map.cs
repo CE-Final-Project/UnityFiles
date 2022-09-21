@@ -5,7 +5,6 @@ using UnityEngine;
 public class Map : MonoBehaviour
 {
     public BiomePreset[] biomes;
-    private BiomePreset biomeToReturn;
     public GameObject tilePrefab;
 
     [Header("Dimension")]
@@ -46,6 +45,7 @@ public class Map : MonoBehaviour
 
     BiomePreset GetBiome(float height, float moisture, float heat)
     {
+        BiomePreset biomeToReturn = null;
         List<BiomeTempData> biomeTemp = new List<BiomeTempData>();
         foreach (BiomePreset biome in biomes)
         {
