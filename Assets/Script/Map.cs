@@ -5,7 +5,7 @@ using UnityEngine;
 public class Map : MonoBehaviour
 {
     public BiomePreset[] biomes;
-    public BiomePreset biomeToReturn;
+    private BiomePreset biomeToReturn;
     public GameObject tilePrefab;
 
     [Header("Dimension")]
@@ -80,12 +80,6 @@ public class Map : MonoBehaviour
     void Start()
     {
         GenerateMap();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
 

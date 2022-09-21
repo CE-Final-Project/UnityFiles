@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ff6b5b559d0944329157a17d22f2599, type: 3}
   m_Name: Desert
   m_EditorClassIdentifier: 
-  tiles: []
+  tiles:
+  - {fileID: -34329061, guid: d619bab24cb594bbf974e8439fc857f3, type: 3}
+  - {fileID: 1239924661, guid: d619bab24cb594bbf974e8439fc857f3, type: 3}
+  - {fileID: -1061896757, guid: d619bab24cb594bbf974e8439fc857f3, type: 3}
   minHeight: 0.2
   minMoisture: 0
   minHeat: 0.5
