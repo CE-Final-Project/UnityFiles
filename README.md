@@ -18,4 +18,7 @@ Added 2 layers of map, first is layer of land and second is layer of object that
 ![Screenshot 2565-09-14 at 11 26 41](https://user-images.githubusercontent.com/63220854/190059461-10388c48-e92a-4943-831f-45d9920dafb6.jpg)
 Added some basic controls.
 
-Next up! Work on Random Map Generation Algorithm.
+It's time to implement with procedural generation algorithm. First we make 2D array of noise map and map it with biome preset to match it with correct map texture.
+![Screenshot 2565-09-23 at 15 38 37](https://user-images.githubusercontent.com/63220854/191922787-1cd553ce-f687-4f5e-a06b-ebc316c72871.jpg)
+
+Next up! Continue work on Random Map Generation Algorithm by add way to random seed and save it locally.
