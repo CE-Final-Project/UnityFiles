@@ -11453,18 +11453,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1547138352}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!114 &1143115179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12067,7 +12055,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1547138353
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12137,18 +12125,6 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: pauseMenu, Assembly-CSharp
         m_MethodName: Pause
         m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1547138352}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -12249,6 +12225,10 @@ PrefabInstance:
     - target: {fileID: 2046429271064962909, guid: 45801d354269b46f187a928d3a404dbc, type: 3}
       propertyPath: m_Name
       value: Slime (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4618556378052374302, guid: 45801d354269b46f187a928d3a404dbc, type: 3}
+      propertyPath: health
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45801d354269b46f187a928d3a404dbc, type: 3}
@@ -13368,6 +13348,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1079791058}
     - target: {fileID: 8767159444938022002, guid: 97f5fe662e6144e188b3db5ed21baf64, type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8767159444938022002, guid: 97f5fe662e6144e188b3db5ed21baf64, type: 3}
       propertyPath: collisionOffset
       value: 0.02
       objectReference: {fileID: 0}
@@ -13427,6 +13411,10 @@ PrefabInstance:
     - target: {fileID: 2046429271064962909, guid: 45801d354269b46f187a928d3a404dbc, type: 3}
       propertyPath: m_Name
       value: Slime
+      objectReference: {fileID: 0}
+    - target: {fileID: 4618556378052374302, guid: 45801d354269b46f187a928d3a404dbc, type: 3}
+      propertyPath: health
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45801d354269b46f187a928d3a404dbc, type: 3}
