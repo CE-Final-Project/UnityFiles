@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class playerController : MonoBehaviour {
-    
+
+    public HealthBar healthBar;
     public float moveSpeed = 1f;
     public float collisionOffset = 0.05f;
+    public float MaxPlayerHealth = 10;
+    public float CurrentPlayerHealth;
     public ContactFilter2D movementFilter;
     public SwordAttack swordAttack;
     
@@ -22,6 +25,8 @@ public class playerController : MonoBehaviour {
     // Start is called before the first frame update
     void Start()
     {
+        CurrentPlayerHealth = MaxPlayerHealth;
+        healthBar.SetMaxHealth(MaxPlayerHealth);
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -50,8 +55,17 @@ public class playerController : MonoBehaviour {
             } else if (movementInput.x > 0) {
                 spriteRenderer.flipX = false;
             }
+            if (Input.GetKeyDown(KeyCode.Backspace))
+            {
+                CurrentPlayerHealth -= 1;
+                healthBar.SetHealth(CurrentPlayerHealth);
+            }
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                CurrentPlayerHealth += 1;
+                healthBar.SetHealth(CurrentPlayerHealth);
+            }
         }
-        
     }
 
     private bool TryMove(Vector2 direction) {
