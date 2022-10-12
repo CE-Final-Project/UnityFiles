@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class playerController : MonoBehaviour {
 
     public HealthBar healthBar;
+    public pauseMenu pausemenu;
     public float moveSpeed = 1f;
     public float collisionOffset = 0.05f;
     public float MaxPlayerHealth = 10;
