@@ -22,8 +22,10 @@ It's time to implement with procedural generation algorithm. First we make 2D ar
 ![Screenshot 2565-09-23 at 15 38 37](https://user-images.githubusercontent.com/63220854/191922787-1cd553ce-f687-4f5e-a06b-ebc316c72871.jpg)
 
 ## Sprint 5 & 6 : In progress
-### Player Health Bar
-![Screenshot 2565-10-10 at 12 27 37](https://user-images.githubusercontent.com/63220854/194803474-98ec72b3-8b3d-4c72-81f8-fd810b8feed5.jpg)
+### Player Health Bar & Item Bar
+![Screenshot 2565-10-13 at 21 13 05](https://user-images.githubusercontent.com/63220854/195620995-508cfd9a-6c41-4051-ab6c-e0084a840775.jpg)
+
 Added Health bar linked to player's healt. In test build we assign max player health to 10 and can be increase or decrease by one to adjust player health just press Backspace or R.
+Added Item Bar but not fully function yet only link to setActive function.
 
 Next up! Continue work on Random Map Generation Algorithm by add way to random seed and save it locally.
