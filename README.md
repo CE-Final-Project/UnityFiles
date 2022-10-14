@@ -1,6 +1,6 @@
 # Unity Files
 This is repository for unity files and its property
-* not include file such as [.app, .dll]
+* not include file such as [.dll]
 
 ## Sprint 1 & 2 : Initial Project & Create Login/Menu Scene
 In this scene include login & signup by email, password set default window size to 1600*900 but not scalable. All function isn't work yet, just exit button that worked.
