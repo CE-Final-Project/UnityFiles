@@ -94,6 +94,7 @@ public class playerController : MonoBehaviour {
     }
     void OnFire() {
         animator.SetTrigger("swordAttack");
+        print("Attack at \nX = " + transform.position.x + ", Y = " + transform.position.y);
     }
     public void SwordAttack() {
         LockMovement();

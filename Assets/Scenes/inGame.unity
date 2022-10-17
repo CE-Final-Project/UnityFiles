@@ -12509,6 +12509,7 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 446140395}
   pauseButtonUI: {fileID: 1547138352}
   gameHUD: {fileID: 1302853458}
+  playerInstance: {fileID: 998236917}
 --- !u!1 &1547138352
 GameObject:
   m_ObjectHideFlags: 0
