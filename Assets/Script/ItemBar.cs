@@ -14,9 +14,6 @@ public class ItemBar : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            print("1");
-        }
+        //wait for inventory system
     }
 }
