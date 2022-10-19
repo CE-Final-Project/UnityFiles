@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class playerController : MonoBehaviour {
+public class playerController : MonoBehaviour
+{
 
     public HealthBar healthBar;
     public pauseMenu pausemenu;
@@ -13,7 +14,7 @@ public class playerController : MonoBehaviour {
     public float CurrentPlayerHealth;
     public ContactFilter2D movementFilter;
     public SwordAttack swordAttack;
-    
+
     Vector2 movementInput;
     SpriteRenderer spriteRenderer;
     Rigidbody2D rb;
@@ -32,86 +33,135 @@ public class playerController : MonoBehaviour {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    private void FixedUpdate() {
-        if(canMove) {
+    private void FixedUpdate()
+    {
+        if (canMove)
+        {
             // IF movement input is not 0, try to move
-            if(movementInput != Vector2.zero) {
+            if (movementInput != Vector2.zero)
+            {
                 bool success = TryMove(movementInput);
 
-                if(!success) {
+                if (!success)
+                {
                     success = TryMove(new Vector2(movementInput.x, 0));
                 }
-                if(!success) {
+                if (!success)
+                {
                     success = TryMove(new Vector2(0, movementInput.y));
                 }
 
                 animator.SetBool("isMoving", success);
-            } else {
+            }
+            else
+            {
                 animator.SetBool("isMoving", false);
             }
 
             // Set sprite direction
-            if(movementInput.x < 0) {
+            if (movementInput.x < 0)
+            {
                 spriteRenderer.flipX = true;
-            } else if (movementInput.x > 0) {
+            }
+            else if (movementInput.x > 0)
+            {
                 spriteRenderer.flipX = false;
             }
+
+            // Set player health
             if (Input.GetKeyDown(KeyCode.Backspace))
             {
-                CurrentPlayerHealth -= 1;
+                CurrentPlayerHealth -= 10;
                 healthBar.SetHealth(CurrentPlayerHealth);
             }
-            if(Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R))
             {
                 CurrentPlayerHealth += 1;
                 healthBar.SetHealth(CurrentPlayerHealth);
             }
+            if (CurrentPlayerHealth <= 0)
+            {
+                PlayerDead();
+                Respawn();
+            }
         }
     }
 
-    private bool TryMove(Vector2 direction) {
-        if(direction != Vector2.zero) {
+    private bool TryMove(Vector2 direction)
+    {
+        if (direction != Vector2.zero)
+        {
             int count = rb.Cast(
-            direction, 
-            movementFilter, 
-            castCollosions, 
+            direction,
+            movementFilter,
+            castCollosions,
             moveSpeed * Time.fixedDeltaTime + collisionOffset);
-            
-            if(count == 0) {
+
+            if (count == 0)
+            {
                 rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
                 return true;
             }
-            else {
+            else
+            {
                 return false;
             }
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
 
-    void OnMove(InputValue movementValue) {
+    void OnMove(InputValue movementValue)
+    {
         movementInput = movementValue.Get<Vector2>();
     }
-    void OnFire() {
+    void OnFire()
+    {
         animator.SetTrigger("swordAttack");
         print("Attack at \nX = " + transform.position.x + ", Y = " + transform.position.y);
     }
-    public void SwordAttack() {
+    public void SwordAttack()
+    {
         LockMovement();
-        if(spriteRenderer.flipX == true) {
+        if (spriteRenderer.flipX == true)
+        {
             swordAttack.AttackLeft();
-        } else {
+        }
+        else
+        {
             swordAttack.AttackRight();
         }
     }
-    public void EndSwordAttack() {
+    public void EndSwordAttack()
+    {
         UnlockMovement();
         swordAttack.StopAttack();
     }
-    public void LockMovement() {
+    public void LockMovement()
+    {
         canMove = false;
     }
-    public void UnlockMovement() {
+    public void UnlockMovement()
+    {
         canMove = true;
+    }
+    private void PlayerDead()
+    {
+        print("Player Dead");
+        animator.SetTrigger("dead");
+    }
+    private void Respawn()
+    {
+        animator.SetTrigger("respawn");
+        addHealth();
+        healthBar.SetHealth(CurrentPlayerHealth);
+        print("Respawn : " + CurrentPlayerHealth);
+        //yield return new WaitForSeconds(1);
+    }
+    private void addHealth()
+    {
+        CurrentPlayerHealth += 1;
     }
 }

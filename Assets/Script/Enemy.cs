@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
     }
 
     public void Defeated() {
+        print("Defeated Enemy");
         animator.SetTrigger("Defeated");
     }
 
