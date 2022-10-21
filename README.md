@@ -21,7 +21,7 @@ Added some basic controls.
 It's time to implement with procedural generation algorithm. First we make 2D array of noise map and map it with biome preset to match it with correct map texture.
 ![Screenshot 2565-09-23 at 15 38 37](https://user-images.githubusercontent.com/63220854/191922787-1cd553ce-f687-4f5e-a06b-ebc316c72871.jpg)
 
-## Sprint 5 & 6 : In progress
+## Sprint 5 & 6 : Health Bar & Item Bar
 ### Player Health Bar & Item Bar
 ![Screenshot 2565-10-13 at 21 13 05](https://user-images.githubusercontent.com/63220854/195620995-508cfd9a-6c41-4051-ab6c-e0084a840775.jpg)
 
