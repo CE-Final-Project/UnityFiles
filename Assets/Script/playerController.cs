@@ -12,6 +12,7 @@ public class playerController : MonoBehaviour
     public float collisionOffset = 0.05f;
     public float MaxPlayerHealth = 10;
     public float CurrentPlayerHealth;
+    public float CurrentPlayerPower;
     public ContactFilter2D movementFilter;
     public SwordAttack swordAttack;
 
@@ -71,7 +72,7 @@ public class playerController : MonoBehaviour
             // Set player health
             if (Input.GetKeyDown(KeyCode.Backspace))
             {
-                CurrentPlayerHealth -= 10;
+                CurrentPlayerHealth -= 1;
                 healthBar.SetHealth(CurrentPlayerHealth);
             }
             if (Input.GetKeyDown(KeyCode.R))
@@ -158,7 +159,6 @@ public class playerController : MonoBehaviour
         addHealth();
         healthBar.SetHealth(CurrentPlayerHealth);
         print("Respawn : " + CurrentPlayerHealth);
-        //yield return new WaitForSeconds(1);
     }
     private void addHealth()
     {

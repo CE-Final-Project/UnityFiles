@@ -19,11 +19,13 @@ public class fullScreenToggle : MonoBehaviour{
             {
                 print("full screen");
                 Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+                Screen.SetResolution(2650, 1600, true);
             }
             else
             {
                 print("not full screen");
                 Screen.fullScreenMode = FullScreenMode.Windowed;
+                Screen.SetResolution(1600, 900, false);
             }
         }
     }
