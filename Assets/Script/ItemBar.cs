@@ -9,7 +9,7 @@ public class ItemBar : MonoBehaviour
     
     void Start()
     {
-        
+        //Still waiting for inventory system
     }
 
     void Update()
