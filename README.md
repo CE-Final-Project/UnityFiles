@@ -28,4 +28,6 @@ It's time to implement with procedural generation algorithm. First we make 2D ar
 Added Health bar linked to player's healt. In test build we assign max player health to 10 and can be increase or decrease by one to adjust player health just press Backspace or R.
 Added Item Bar but not fully function yet only link to setActive function.
 
+
+## Sprint 7 & 8 : Ongoing
 Next up! Continue work on Random Map Generation Algorithm by add way to random seed and save it locally.
