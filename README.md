@@ -30,4 +30,5 @@ Added Item Bar but not fully function yet only link to setActive function.
 
 
 ## Sprint 7 & 8 : Ongoing
+Start 30 OCT
 Next up! Continue work on Random Map Generation Algorithm by add way to random seed and save it locally.
