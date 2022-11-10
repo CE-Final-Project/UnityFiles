@@ -1,9 +1,11 @@
 using System;
-using Script.Utils;
+using Unity.Game.ConnectionManagement.ConnectionStates;
+using Unity.Game.Utils;
 using Unity.Netcode;
 using UnityEngine;
+using VContainer;
 
-namespace Script.ConnectionManagement
+namespace Unity.Game.ConnectionManagement
 {
     public enum ConnectStatus
     {
@@ -48,6 +50,21 @@ namespace Script.ConnectionManagement
     
     public class ConnectionManager : MonoBehaviour
     {
-        
+        ConnectionState m_CurrentState;
+
+        [Inject]
+        NetworkManager m_NetworkManager;
+        public NetworkManager NetworkManager => m_NetworkManager;
+
+        [SerializeField]
+        int m_NbReconnectAttempts = 2;
+
+        public int NbReconnectAttempts => m_NbReconnectAttempts;
+
+        [Inject]
+        IObjectResolver m_Resolver;
+
+        public int MaxConnectedPlayers = 8;
+
     }
 }

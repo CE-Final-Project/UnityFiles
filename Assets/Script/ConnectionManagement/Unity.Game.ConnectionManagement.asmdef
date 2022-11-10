@@ -1,0 +1,20 @@
+{
+    "name": "Unity.Game.ConnectionManagement",
+    "rootNamespace": "",
+    "references": [
+        "Unity.Game.Utils",
+        "Unity.Game.Infrastructure",
+        "VContainer",
+        "Facepunch Transport for Netcode for GameObjects",
+        "Unity.Netcode.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

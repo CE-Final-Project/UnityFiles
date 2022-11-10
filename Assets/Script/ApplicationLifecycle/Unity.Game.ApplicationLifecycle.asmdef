@@ -1,0 +1,17 @@
+{
+    "name": "Unity.Game.ApplicationLifecycle",
+    "rootNamespace": "",
+    "references": [
+        "VContainer",
+        "Unity.Game.ApplicationLifecycle.Messages"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
