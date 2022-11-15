@@ -1,7 +1,11 @@
 {
-    "name": "Unity.Game.Infrastructure",
+    "name": "Survival.Game.Infrastructure",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "Unity.Netcode.Runtime",
+        "Unity.TextMeshPro",
+        "VContainer"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

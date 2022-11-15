@@ -1,6 +1,6 @@
 using System;
 
-namespace Unity.Game.Infrastructure.PubSub
+namespace Survival.Game.Infrastructure.PubSub
 {
     public interface IPublisher<T>
     {
