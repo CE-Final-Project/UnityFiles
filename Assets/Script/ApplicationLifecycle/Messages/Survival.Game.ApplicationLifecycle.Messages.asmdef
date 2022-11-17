@@ -1,5 +1,5 @@
 {
-    "name": "Unity.Game.ApplicationLifecycle.Messages",
+    "name": "Survival.Game.ApplicationLifecycle.Messages",
     "rootNamespace": "",
     "references": [],
     "includePlatforms": [],

@@ -1,4 +1,4 @@
-namespace Unity.Game.ApplicationLifecycle.Messages
+namespace Survival.Game.ApplicationLifecycle.Messages
 {
     public struct QuitApplicationMessage
     {

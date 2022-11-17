@@ -1,6 +1,6 @@
 using System;
 
-namespace Survival.Game.Infrastructure.PubSub
+namespace Survival.Game.Infrastructure
 {
     public interface IPublisher<T>
     {

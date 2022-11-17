@@ -1,9 +1,8 @@
-using Unity.Game.ConnectionManagement;
-using Unity.Game.Infrastructure.PubSub;
+using Survival.Game.Infrastructure;
 using Unity.Netcode;
 using VContainer;
 
-namespace Unity.Game.ConnectionManagement.ConnectionStates
+namespace Survival.Game.ConnectionManagement
 {
     /// <summary>
     /// Base class representing a connection state.

@@ -1,9 +1,13 @@
 {
-    "name": "Unity.Game.Utils",
+    "name": "Survival.Game.UnityServices",
     "rootNamespace": "",
     "references": [
-        "Unity.Netcode.Runtime",
-        "Unity.Collections"
+        "Unity.Services.Core",
+        "Unity.Services.Authentication",
+        "Unity.Services.Lobbies",
+        "Unity.Services.Relay",
+        "Survival.Game.Infrastructure",
+        "VContainer"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,12 +1,9 @@
 {
-    "name": "Unity.Game.ConnectionManagement",
+    "name": "Survival.Game.Utils",
     "rootNamespace": "",
     "references": [
-        "Unity.Game.Utils",
-        "Unity.Game.Infrastructure",
-        "VContainer",
-        "Facepunch Transport for Netcode for GameObjects",
-        "Unity.Netcode.Runtime"
+        "Unity.Netcode.Runtime",
+        "Unity.Collections"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

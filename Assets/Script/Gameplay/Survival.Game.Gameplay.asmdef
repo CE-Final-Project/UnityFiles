@@ -1,9 +1,7 @@
 {
-    "name": "Unity.Game.ApplicationLifecycle",
+    "name": "Survival.Game.Gameplay",
     "rootNamespace": "",
     "references": [
-        "VContainer",
-        "Unity.Game.ApplicationLifecycle.Messages"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
