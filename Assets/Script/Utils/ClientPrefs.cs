@@ -2,6 +2,13 @@ using UnityEngine;
 
 namespace Survival.Game.Utils
 {
+    
+    /// <summary>
+    /// Singleton class which saves/loads local-client settings.
+    /// (This is just a wrapper around the PlayerPrefs system,
+    /// so that all the calls are in the same place.)
+    /// </summary>
+    /// 
     public static class ClientPrefs
     {
         private const string k_MasterVolumnKey = "MasterVolume";

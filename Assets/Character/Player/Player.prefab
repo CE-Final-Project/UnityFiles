@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3759751250846167873}
   - component: {fileID: 7134254056827641437}
   - component: {fileID: 6288533600248688400}
+  - component: {fileID: 998236924}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -78,10 +79,10 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 177964779, guid: bc1aa0cc5ebbb469ba7abf50028480b8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.48, y: 0.48}
@@ -132,8 +133,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a77b4193891a49d287ce762fac9e1c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  collisionOffset: 0.05
+  healthBar: {fileID: 0}
+  pausemenu: {fileID: 0}
+  moveSpeed: 1
+  collisionOffset: 0.02
+  MaxPlayerHealth: 10
+  CurrentPlayerHealth: 10
+  CurrentPlayerPower: 0
   movementFilter:
     useTriggers: 0
     useLayerMask: 0
@@ -216,6 +222,50 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &998236924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5549058715856663126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NotificationBehavior: 0
+  m_MaxPlayerCount: -1
+  m_AllowJoining: 1
+  m_JoinBehavior: 0
+  m_PlayerJoinedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_PlayerLeftEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_JoinAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_PlayerPrefab: {fileID: 0}
+  m_SplitScreen: 0
+  m_MaintainAspectRatioInSplitScreen: 0
+  m_FixedNumberOfSplitScreens: -1
+  m_SplitScreenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &6288246195614246025
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +312,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.023526274, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -273,7 +323,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.18, y: 0.25}
+  m_Size: {x: 0.22705255, y: 0.25}
   m_EdgeRadius: 0
 --- !u!114 &7216525253764287728
 MonoBehaviour:
@@ -288,4 +338,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
-  swordColider: {fileID: 0}
+  swordColider: {fileID: 837023322073801835}
