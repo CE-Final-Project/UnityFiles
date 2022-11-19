@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3693521212990805059, guid: 46e13abc00c8b46ecbd72b155497b3f3, type: 3}
+      propertyPath: NetworkConfig.PlayerPrefab
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 911459928733215517, guid: 46e13abc00c8b46ecbd72b155497b3f3, type: 3}
       propertyPath: m_Name
       value: NetworkManager
@@ -198,6 +202,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7678926139929603328, guid: 73cb8d73283c9493784ba2a5f810dee1, type: 3}
+      propertyPath: MaxConnectedPlayers
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2373080023859895935, guid: 73cb8d73283c9493784ba2a5f810dee1, type: 3}
       propertyPath: m_Name
       value: ConnectionManager

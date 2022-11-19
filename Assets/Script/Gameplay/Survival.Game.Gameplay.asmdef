@@ -2,6 +2,11 @@
     "name": "Survival.Game.Gameplay",
     "rootNamespace": "",
     "references": [
+        "Unity.Netcode.Runtime",
+        "Unity.Multiplayer.Samples.Utilities",
+        "Survival.Game.Utils",
+        "Survival.Game.Infrastructure",
+        "Survival.Game.ConnectionManagement"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
