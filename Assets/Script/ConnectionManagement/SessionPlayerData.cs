@@ -9,6 +9,7 @@ namespace Survival.Game.ConnectionManagement
         public string PlayerName;
         public int PlayerNumber;
         public Vector3 PlayerPosition;
+        public Quaternion PlayerRotation;
         // Instead of using a NetworkGuid (2 ulong) we could just use an int or even a byte-sized index into an array of possible avatars defined in our game data source
         public NetworkGuid AvatarNetworkGuid;
         public int CurrentHitPoints;
@@ -21,6 +22,7 @@ namespace Survival.Game.ConnectionManagement
             PlayerName = name;
             PlayerNumber = -1;
             PlayerPosition = Vector3.zero;
+            PlayerRotation = Quaternion.identity;
             AvatarNetworkGuid = avatarNetworkGuid;
             CurrentHitPoints = currentHitPoints;
             IsConnected = isConnected;

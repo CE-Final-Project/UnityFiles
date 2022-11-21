@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using Survival.Gameplay.GameplayObjects;
+using Survival.Game.Gameplay.GameplayObjects;
 using UnityEngine.Pool;
 using Object = UnityEngine.Object;
 
-namespace Survival.Gameplay.Actions
+namespace Survival.Game.Gameplay.Actions
 {
     public static class ActionFactory
     {

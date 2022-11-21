@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using Survival.Gameplay.GameplayObjects;
+using Survival.Game.Gameplay.GameplayObjects;
 using Unity.Netcode;
 using UnityEngine;
 
-namespace Survival.Gameplay.Actions
+namespace Survival.Game.Gameplay.Actions
 {
     public static class ActionUtils
     {

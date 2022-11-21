@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Survival.Gameplay.Actions
+namespace Survival.Game.Gameplay.Actions
 {
     public class ChargedActionInput : BaseActionInput
     {

@@ -2,22 +2,27 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Survival.Game.Infrastructure.SubscriptableObjectArchitecture
+namespace Survival.Game.Infrastructure
 {
-    public class RuntimeCollection<T> : ScriptableObject
+    /// <summary>
+    /// ScriptableObject class that contains a list of a given type. The instance of this ScriptableObject can be
+    /// referenced by components, without a hard reference between systems.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public abstract class RuntimeCollection<T> : ScriptableObject
     {
         public List<T> Items = new List<T>();
 
-        public event Action<T> ItemsAdded;
+        public event Action<T> ItemAdded;
 
-        public event Action<T> ItemsRemoved;
+        public event Action<T> ItemRemoved;
 
         public void Add(T item)
         {
             if (Items.Contains(item)) return;
             
             Items.Add(item);
-            ItemsAdded?.Invoke(item);
+            ItemAdded?.Invoke(item);
         }
 
         public void Remove(T item)
@@ -25,7 +30,7 @@ namespace Survival.Game.Infrastructure.SubscriptableObjectArchitecture
             if (!Items.Contains(item)) return;
             
             Items.Remove(item);
-            ItemsRemoved?.Invoke(item);
+            ItemRemoved?.Invoke(item);
         }
     }
 }

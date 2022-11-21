@@ -6,7 +6,6 @@ using Survival.Game.Infrastructure;
 using Survival.Game.UnityServices;
 using Survival.Game.UnityServices.Auth;
 using Survival.Game.UnityServices.Lobbies;
-using Survival.Game.UnityServices.Lobbies.Messages;
 using Survival.Game.Utils;
 using Unity.Netcode;
 using UnityEngine;

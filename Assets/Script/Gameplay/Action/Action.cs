@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
-using Survival.Gameplay.GameplayObjects;
-using Survival.Gameplay.GameplayObjects.Character;
+using Survival.Game.Gameplay.GameplayObjects;
+using Survival.Game.Gameplay.GameplayObjects.Character;
+using Survival.Game.VisualEffects;
 using Unity.Netcode;
 using UnityEngine;
-using BlockingMode = Survival.Gameplay.Actions.BlockingModeType;
+using BlockingMode = Survival.Game.Gameplay.Actions.BlockingModeType;
 
-namespace Survival.Gameplay.Actions
+namespace Survival.Game.Gameplay.Actions
 {
     /// <summary>
     /// The abstract parent class that all Actions derive from.

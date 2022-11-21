@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Survival.Game.Infrastructure;
-using Survival.Game.UnityServices.Lobbies.Messages;
+using Survival.Game.UnityServices.Lobbies;
 using Unity.Services.Authentication;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;

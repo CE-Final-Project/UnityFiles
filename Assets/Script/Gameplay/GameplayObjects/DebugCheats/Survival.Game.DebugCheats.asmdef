@@ -1,0 +1,22 @@
+{
+    "name": "Survival.Game.DebugCheats",
+    "rootNamespace": "",
+    "references": [
+        "Unity.Netcode.Runtime",
+        "Survival.Game.Infrastructure",
+        "Survival.Game.Gameplay",
+        "Survival.Game.ConnectionManagement",
+        "Unity.Multiplayer.Samples.Utilities",
+        "VContainer",
+        "VContainer.EnableCodeGen"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

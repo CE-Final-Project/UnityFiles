@@ -381,10 +381,13 @@ PlayerSettings:
       m_Kind: 4
       m_SubKind: App Store
   m_BuildTargetBatching: []
+  m_BuildTargetShaderSettings: []
   m_BuildTargetGraphicsJobs: []
   m_BuildTargetGraphicsJobMode: []
   m_BuildTargetGraphicsAPIs: []
   m_BuildTargetVRSettings: []
+  m_DefaultShaderChunkSizeInMB: 16
+  m_DefaultShaderChunkCount: 0
   openGLRequireES31: 0
   openGLRequireES31AEP: 0
   openGLRequireES32: 0
@@ -644,6 +647,7 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
+  webGLPowerPreference: 2
   scriptingDefineSymbols:
     Server: 
   additionalCompilerArguments: {}
@@ -656,6 +660,7 @@ PlayerSettings:
   allowUnsafeCode: 0
   useDeterministicCompilation: 1
   enableRoslynAnalyzers: 1
+  selectedPlatform: 0
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 1
   gcIncremental: 1
@@ -739,10 +744,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 2
-  cloudProjectId: eb5ef7de-aa21-476f-9beb-d342b09bf7be
+  windowsGamepadBackendHint: 0
+  cloudProjectId: b407b3ed-5fa1-428b-b83b-8d23fd009049
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: CE Project
+  projectName: FinalProject
   organizationId: the-survival-final-project
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

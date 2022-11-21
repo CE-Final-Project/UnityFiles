@@ -1,8 +1,8 @@
-using Survival.Gameplay.GameplayObjects;
+using Survival.Game.Gameplay.GameplayObjects;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Survival.Gameplay.Actions
+namespace Survival.Game.Gameplay.Actions
 {
     /// <summary>
     /// This class is the first step in AoE ability. It will update the initial input visuals' position and will be in charge

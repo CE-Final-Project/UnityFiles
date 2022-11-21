@@ -1,8 +1,8 @@
 using System;
-using Survival.Gameplay.GameplayObjects.Character;
+using Survival.Game.Gameplay.GameplayObjects.Character;
 using UnityEngine;
 
-namespace Survival.Gameplay.Actions
+namespace Survival.Game.Gameplay.Actions
 {
     public abstract class BaseActionInput : MonoBehaviour
     {

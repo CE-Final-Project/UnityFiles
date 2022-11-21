@@ -1,6 +1,6 @@
 using System;
 
-namespace Survival.Gameplay.Actions
+namespace Survival.Game.Gameplay.Actions
 {
     [Serializable]
     public enum BlockingModeType

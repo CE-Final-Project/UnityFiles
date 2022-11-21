@@ -1,16 +1,16 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 
-namespace Survival.Gameplay.GameplayObjects
+namespace Survival.Game.Gameplay.GameplayObjects
 {
-
     public enum LifeState
     {
         Alive,
         Fainted,
         Dead,
     }
-    
+
     /// <summary>
     /// MonoBehaviour containing only one NetworkVariable of type LifeState which represents this object's life state.
     /// </summary>

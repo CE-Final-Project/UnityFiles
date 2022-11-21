@@ -1,6 +1,6 @@
 using System;
 
-namespace Survival.Gameplay.GameplayObjects
+namespace Survival.Game.Gameplay.GameplayObjects
 {
     /// <summary>
     /// Entities that are Targetable by Skills should have their shared NetworkState component implement this interface.

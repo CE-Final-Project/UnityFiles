@@ -1,7 +1,7 @@
 using System;
 using Unity.Netcode;
 
-namespace Survival.Gameplay.Actions
+namespace Survival.Game.Gameplay.Actions
 {
     /// <summary>
     /// This struct is used by Action system (and GameDataSource) to refer to a specific action in runtime.

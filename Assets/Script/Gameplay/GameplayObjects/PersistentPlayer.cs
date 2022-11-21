@@ -1,12 +1,12 @@
+using System;
 using Survival.Game.ConnectionManagement;
+using Survival.Game.Gameplay.GameplayObjects.Character;
 using Survival.Game.Utils;
-using Survival.Gameplay.GameplayObjects.Character;
-using Survival.Gameplay.GameplayObjects.RuntimeDataContainers;
 using Unity.Multiplayer.Samples.BossRoom;
 using Unity.Netcode;
 using UnityEngine;
 
-namespace Survival.Gameplay.GameplayObjects
+namespace Survival.Game.Gameplay.GameplayObjects
 {
     /// <summary>
     /// NetworkBehaviour that represents a player connection and is the "Default Player Prefab" inside Netcode for
@@ -20,42 +20,45 @@ namespace Survival.Gameplay.GameplayObjects
     [RequireComponent(typeof(NetworkObject))]
     public class PersistentPlayer : NetworkBehaviour
     {
-        [SerializeField] private PersistentPlayerRuntimeCollection m_PersistentPlayerRuntimeCollection;
+        [SerializeField]
+        PersistentPlayerRuntimeCollection m_PersistentPlayerRuntimeCollection;
 
-        [SerializeField] private NetworkNameState m_NetworkNameState;
+        [SerializeField]
+        NetworkNameState m_NetworkNameState;
 
-        [SerializeField] private NetworkAvatarGuidState m_NetworkAvatarGuidState;
-        
-        
+        [SerializeField]
+        NetworkAvatarGuidState m_NetworkAvatarGuidState;
+
         public NetworkNameState NetworkNameState => m_NetworkNameState;
 
         public NetworkAvatarGuidState NetworkAvatarGuidState => m_NetworkAvatarGuidState;
 
-
         public override void OnNetworkSpawn()
         {
             gameObject.name = "PersistentPlayer" + OwnerClientId;
-            
-            // Note that is done here on OnNetworkSpawn in case this NetworkBehaviour's properties are accessed
-            // when this element is added to the runtime collection. If this was done in OnEnable() there is a change
+
+            // Note that this is done here on OnNetworkSpawn in case this NetworkBehaviour's properties are accessed
+            // when this element is added to the runtime collection. If this was done in OnEnable() there is a chance
             // that OwnerClientID could be its default value (0).
             m_PersistentPlayerRuntimeCollection.Add(this);
-            if (!IsServer) return;
-
-            var sessionPlayerData = SessionManager<SessionPlayerData>.Instance.GetPlayerData(OwnerClientId);
-            if (!sessionPlayerData.HasValue) return;
-
-            var playerData = sessionPlayerData.Value;
-            m_NetworkNameState.Name.Value = playerData.PlayerName;
-            if (playerData.HasCharacterSpawned)
+            if (IsServer)
             {
-                m_NetworkAvatarGuidState.AvatarGuid.Value = playerData.AvatarNetworkGuid;
-            }
-            else
-            {
-                m_NetworkAvatarGuidState.SetRandomAvatar();
-                playerData.AvatarNetworkGuid = m_NetworkAvatarGuidState.AvatarGuid.Value;
-                SessionManager<SessionPlayerData>.Instance.SetPlayerData(OwnerClientId, playerData);
+                var sessionPlayerData = SessionManager<SessionPlayerData>.Instance.GetPlayerData(OwnerClientId);
+                if (sessionPlayerData.HasValue)
+                {
+                    var playerData = sessionPlayerData.Value;
+                    m_NetworkNameState.Name.Value = playerData.PlayerName;
+                    if (playerData.HasCharacterSpawned)
+                    {
+                        m_NetworkAvatarGuidState.AvatarGuid.Value = playerData.AvatarNetworkGuid;
+                    }
+                    else
+                    {
+                        m_NetworkAvatarGuidState.SetRandomAvatar();
+                        playerData.AvatarNetworkGuid = m_NetworkAvatarGuidState.AvatarGuid.Value;
+                        SessionManager<SessionPlayerData>.Instance.SetPlayerData(OwnerClientId, playerData);
+                    }
+                }
             }
         }
 
@@ -73,17 +76,17 @@ namespace Survival.Gameplay.GameplayObjects
         void RemovePersistentPlayer()
         {
             m_PersistentPlayerRuntimeCollection.Remove(this);
-
-            if (!IsServer) return;
-
-            var sessionPlayerData = SessionManager<SessionPlayerData>.Instance.GetPlayerData((OwnerClientId));
-
-            if (!sessionPlayerData.HasValue) return;
-
-            var playerData = sessionPlayerData.Value;
-            playerData.PlayerName = m_NetworkNameState.Name.Value;
-            playerData.AvatarNetworkGuid = m_NetworkAvatarGuidState.AvatarGuid.Value;
-            SessionManager<SessionPlayerData>.Instance.SetPlayerData(OwnerClientId, playerData);
+            if (IsServer)
+            {
+                var sessionPlayerData = SessionManager<SessionPlayerData>.Instance.GetPlayerData(OwnerClientId);
+                if (sessionPlayerData.HasValue)
+                {
+                    var playerData = sessionPlayerData.Value;
+                    playerData.PlayerName = m_NetworkNameState.Name.Value;
+                    playerData.AvatarNetworkGuid = m_NetworkAvatarGuidState.AvatarGuid.Value;
+                    SessionManager<SessionPlayerData>.Instance.SetPlayerData(OwnerClientId, playerData);
+                }
+            }
         }
     }
 }

@@ -2,7 +2,9 @@
     "name": "Survival.Game.Utils",
     "rootNamespace": "",
     "references": [
+        "Unity.TextMeshPro",
         "Unity.Netcode.Runtime",
+        "Unity.Networking.Transport",
         "Unity.Collections"
     ],
     "includePlatforms": [],

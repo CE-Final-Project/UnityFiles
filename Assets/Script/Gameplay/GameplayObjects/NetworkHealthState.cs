@@ -2,7 +2,7 @@ using System;
 using Unity.Netcode;
 using UnityEngine;
 
-namespace Survival.Gameplay.GameplayObjects
+namespace Survival.Game.Gameplay.GameplayObjects
 {
     /// <summary>
     /// MonoBehaviour containing only one NetworkVariableInt which represents this object's health.
@@ -11,19 +11,24 @@ namespace Survival.Gameplay.GameplayObjects
     {
         [HideInInspector]
         public NetworkVariable<int> HitPoints = new NetworkVariable<int>();
-        
+
         // public subscribable event to be invoked when HP has been fully depleted
         public event Action HitPointsDepleted;
 
         // public subscribable event to be invoked when HP has been replenished
         public event Action HitPointsReplenished;
 
-        private void OnEnable()
+        void OnEnable()
         {
             HitPoints.OnValueChanged += HitPointsChanged;
         }
 
-        private void HitPointsChanged(int previousValue, int newValue)
+        void OnDisable()
+        {
+            HitPoints.OnValueChanged -= HitPointsChanged;
+        }
+
+        void HitPointsChanged(int previousValue, int newValue)
         {
             if (previousValue > 0 && newValue <= 0)
             {

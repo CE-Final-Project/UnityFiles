@@ -1,6 +1,6 @@
 using System;
 
-namespace Survival.Gameplay.Actions
+namespace Survival.Game.Gameplay.Actions
 {
     /// <summary>
     /// List of all Types of Actions. There is a many-to-one mapping of Actions to ActionLogics.

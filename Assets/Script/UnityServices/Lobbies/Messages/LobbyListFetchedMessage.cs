@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Survival.Game.UnityServices.Lobbies.Messages
+namespace Survival.Game.UnityServices.Lobbies
 {
     public struct LobbyListFetchedMessage
     {
