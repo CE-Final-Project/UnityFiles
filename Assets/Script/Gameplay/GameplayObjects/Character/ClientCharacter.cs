@@ -76,7 +76,7 @@ namespace Survival.Game.Gameplay.GameplayObjects.Character
         /// </summary>
         /// <param name="data"> Data about which action to play and its associated details. </param>
         [ClientRpc]
-        public void RecvDoActionClientRPC(ActionRequestData data)
+        public void RecvDoActionClientRpc(ActionRequestData data)
         {
             ActionRequestData data1 = data;
             m_ClientActionViz.PlayAction(ref data1);

@@ -15,6 +15,6 @@ namespace Survival.Game.Gameplay.Actions.ConcreteActions
         [Tooltip("Damage of the Projectile on hit")]
         public int Damage;
         [Tooltip("Max number of enemies this projectile can hit before disappearing")]
-        public int MaxVictims; 
+        public int MaxVictims;
     }
 }

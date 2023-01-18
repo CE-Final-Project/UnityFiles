@@ -10,7 +10,9 @@ namespace Survival.Game.Infrastructure
     [Serializable]
     public abstract class GuidScriptableObject : ScriptableObject
     {
-        [HideInInspector] [SerializeField] private byte[] m_Guid;
+        [HideInInspector]
+        [SerializeField]
+        byte[] m_Guid;
 
         public Guid Guid => new Guid(m_Guid);
 
@@ -20,6 +22,6 @@ namespace Survival.Game.Infrastructure
             {
                 m_Guid = Guid.NewGuid().ToByteArray();
             }
-        }
+        } 
     }
 }

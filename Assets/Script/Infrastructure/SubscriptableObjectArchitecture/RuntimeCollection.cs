@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json.Bson;
 using UnityEngine;
 
 namespace Survival.Game.Infrastructure
@@ -19,18 +20,20 @@ namespace Survival.Game.Infrastructure
 
         public void Add(T item)
         {
-            if (Items.Contains(item)) return;
-            
-            Items.Add(item);
-            ItemAdded?.Invoke(item);
+            if (!Items.Contains(item))
+            {
+                Items.Add(item);
+                ItemAdded?.Invoke(item);
+            }
         }
 
         public void Remove(T item)
         {
-            if (!Items.Contains(item)) return;
-            
-            Items.Remove(item);
-            ItemRemoved?.Invoke(item);
+            if (Items.Contains(item))
+            {
+                Items.Remove(item);
+                ItemRemoved?.Invoke(item);
+            }
         }
     }
 }
