@@ -42,8 +42,8 @@ PlayerSettings:
   m_SplashScreenLogos: []
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
-  defaultScreenWidth: 1600
-  defaultScreenHeight: 900
+  defaultScreenWidth: 1920
+  defaultScreenHeight: 1080
   defaultScreenWidthWeb: 960
   defaultScreenHeightWeb: 600
   m_StereoRenderingPath: 0
@@ -548,6 +548,7 @@ PlayerSettings:
   switchNetworkInterfaceManagerInitializeEnabled: 1
   switchPlayerConnectionEnabled: 1
   switchUseNewStyleFilepaths: 0
+  switchUseLegacyFmodPriorities: 1
   switchUseMicroSleepForYield: 1
   switchEnableRamDiskSupport: 0
   switchMicroSleepForYieldTime: 25
@@ -745,11 +746,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: b407b3ed-5fa1-428b-b83b-8d23fd009049
+  cloudProjectId: d55659eb-de50-4c0e-a049-ce175c63422a
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: FinalProject
-  organizationId: the-survival-final-project
+  projectName: CE Project
+  organizationId: unity_62011044
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 

@@ -6,7 +6,7 @@ public class fullScreenToggle : MonoBehaviour{
 
     void Start()
     {
-        Screen.SetResolution(1600, 900, false);
+        //Screen.SetResolution(1600, 900, false);
         print(Screen.currentResolution);
     }
 
