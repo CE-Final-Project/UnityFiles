@@ -1,26 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class playerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
-
-    public HealthBar healthBar;
+    
     public pauseMenu pausemenu;
+    
+    [Header("Movement Settings")]
+    [SerializeField]
     public float moveSpeed = 1f;
+    
+    public HealthBar healthBar;
+    
     public float collisionOffset = 0.05f;
-    public float MaxPlayerHealth = 10;
-    public float CurrentPlayerHealth;
-    public float CurrentPlayerPower;
+    
+    public Animator animator;
+
+    
+
+    public int MaxPlayerHealth = 10;
+    [Header("Player Settings")]
+    [SerializeField]
+    private NetworkVariable<int> CurrentPlayerHealth = new NetworkVariable<int>(10);
+
+    private NetworkVariable<int> CurrentPlayerPower = new NetworkVariable<int>(0);
+    
     public ContactFilter2D movementFilter;
+    
     public SwordAttack swordAttack;
+    
+    public Rigidbody2D rb;
+    
+    public SpriteRenderer spriteRenderer;
+
+
 
     Vector2 movementInput;
-    SpriteRenderer spriteRenderer;
-    Rigidbody2D rb;
 
-    Animator animator;
 
     List<RaycastHit2D> castCollosions = new List<RaycastHit2D>();
     bool canMove = true;
@@ -28,14 +48,18 @@ public class playerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CurrentPlayerHealth = MaxPlayerHealth;
+        CurrentPlayerHealth.Value = MaxPlayerHealth;
+
         healthBar.SetMaxHealth(MaxPlayerHealth);
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        // rb = GetComponent<Rigidbody2D>();
+        // animator = GetComponent<Animator>();
+        // spriteRenderer = GetComponent<SpriteRenderer>();
     }
     private void FixedUpdate()
     {
+        
+        if (!IsOwner) return;
+        
         if (canMove)
         {
             // IF movement input is not 0, try to move
@@ -72,15 +96,15 @@ public class playerController : MonoBehaviour
             // Set player health
             if (Input.GetKeyDown(KeyCode.Backspace))
             {
-                CurrentPlayerHealth -= 1;
-                healthBar.SetHealth(CurrentPlayerHealth);
+                CurrentPlayerHealth.Value -= 1;
+                healthBar.SetHealth(CurrentPlayerHealth.Value);
             }
             if (Input.GetKeyDown(KeyCode.R))
             {
-                CurrentPlayerHealth += 1;
-                healthBar.SetHealth(CurrentPlayerHealth);
+                CurrentPlayerHealth.Value += 1;
+                healthBar.SetHealth(CurrentPlayerHealth.Value);
             }
-            if (CurrentPlayerHealth <= 0)
+            if (CurrentPlayerHealth.Value <= 0)
             {
                 PlayerDead();
                 Respawn();
@@ -100,7 +124,7 @@ public class playerController : MonoBehaviour
 
             if (count == 0)
             {
-                rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
+                rb.MovePosition(rb.position + direction * (moveSpeed * Time.fixedDeltaTime));
                 return true;
             }
             else
@@ -157,11 +181,11 @@ public class playerController : MonoBehaviour
     {
         animator.SetTrigger("respawn");
         addHealth();
-        healthBar.SetHealth(CurrentPlayerHealth);
+        healthBar.SetHealth(CurrentPlayerHealth.Value);
         print("Respawn : " + CurrentPlayerHealth);
     }
     private void addHealth()
     {
-        CurrentPlayerHealth += 1;
+        CurrentPlayerHealth.Value += 1;
     }
 }
