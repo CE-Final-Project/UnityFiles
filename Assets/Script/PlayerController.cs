@@ -29,6 +29,8 @@ public class PlayerController : NetworkBehaviour
 
     private NetworkVariable<int> CurrentPlayerPower = new NetworkVariable<int>(0);
     
+    private NetworkVariable<bool> IsSpliteFlipped = new NetworkVariable<bool>(false, default, NetworkVariableWritePermission.Owner);
+
     public ContactFilter2D movementFilter;
     
     public SwordAttack swordAttack;
@@ -48,6 +50,12 @@ public class PlayerController : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         if (!IsOwner) GetComponent<PlayerInput>().enabled = false;
+        IsSpliteFlipped.OnValueChanged += OnIsSpliteFlippedChanged;
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        IsSpliteFlipped.OnValueChanged -= OnIsSpliteFlippedChanged;
     }
 
     // Start is called before the first frame update
@@ -59,9 +67,22 @@ public class PlayerController : NetworkBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (IsServer)
+        {
+            IsSpliteFlipped.Value = spriteRenderer.flipX;
+        }
     }
+    
+    private void OnIsSpliteFlippedChanged(bool previousValue, bool newValue)
+    {
+        spriteRenderer.flipX = newValue;
+    }
+
     private void FixedUpdate()
     {
+        
+        if (!IsOwner) return;
 
         if (canMove)
         {
@@ -85,16 +106,17 @@ public class PlayerController : NetworkBehaviour
             {
                 animator.SetBool("isMoving", false);
             }
-
+            
             // Set sprite direction
             if (movementInput.x < 0)
             {
-                spriteRenderer.flipX = true;
+                IsSpliteFlipped.Value = true;
             }
             else if (movementInput.x > 0)
             {
-                spriteRenderer.flipX = false;
+                IsSpliteFlipped.Value = false;
             }
+
 
             // Set player health
             if (Input.GetKeyDown(KeyCode.Backspace))
