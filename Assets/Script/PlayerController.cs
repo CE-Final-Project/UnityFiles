@@ -51,6 +51,19 @@ public class PlayerController : NetworkBehaviour
     {
         if (!IsOwner) GetComponent<PlayerInput>().enabled = false;
         IsSpliteFlipped.OnValueChanged += OnIsSpliteFlippedChanged;
+        NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+    }
+
+    private void OnClientConnected(ulong obj)
+    {
+        if (IsOwner)
+        {
+            IsSpliteFlipped.Value = spriteRenderer.flipX;
+        }
+        else
+        {
+            spriteRenderer.flipX = IsSpliteFlipped.Value;
+        }
     }
 
     public override void OnNetworkDespawn()
@@ -67,10 +80,11 @@ public class PlayerController : NetworkBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-        if (IsServer)
+        if (IsOwner)
         {
             IsSpliteFlipped.Value = spriteRenderer.flipX;
+        } else {
+            spriteRenderer.flipX = IsSpliteFlipped.Value;
         }
     }
     
