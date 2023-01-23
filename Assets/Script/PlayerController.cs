@@ -45,21 +45,24 @@ public class PlayerController : NetworkBehaviour
     List<RaycastHit2D> castCollosions = new List<RaycastHit2D>();
     bool canMove = true;
 
+    public override void OnNetworkSpawn()
+    {
+        if (!IsOwner) GetComponent<PlayerInput>().enabled = false;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         CurrentPlayerHealth.Value = MaxPlayerHealth;
 
         healthBar.SetMaxHealth(MaxPlayerHealth);
-        // rb = GetComponent<Rigidbody2D>();
-        // animator = GetComponent<Animator>();
-        // spriteRenderer = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
     private void FixedUpdate()
     {
-        
-        if (!IsOwner) return;
-        
+
         if (canMove)
         {
             // IF movement input is not 0, try to move
