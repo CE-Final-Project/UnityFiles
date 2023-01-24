@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -39,6 +40,12 @@ public class PlayerController : NetworkBehaviour
     
     public SpriteRenderer spriteRenderer;
 
+    [Header("Camera Settings")]
+    [SerializeField] public GameObject virtualCameraPrefab;
+    
+    private GameObject virtualCamera;
+
+
 
 
     Vector2 movementInput;
@@ -52,6 +59,14 @@ public class PlayerController : NetworkBehaviour
         if (!IsOwner) GetComponent<PlayerInput>().enabled = false;
         IsSpliteFlipped.OnValueChanged += OnIsSpliteFlippedChanged;
         NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+        SceneTransitionHandler.sceneTransitionHandler.OnClientLoadedScene += OnClientLoadedScene;
+    }
+
+    private void OnClientLoadedScene(ulong clientid)
+    {
+        if (!IsHost) return;
+        virtualCamera = Instantiate(virtualCameraPrefab);
+        virtualCamera.GetComponent<CinemachineVirtualCamera>().Follow = transform;
     }
 
     private void OnClientConnected(ulong obj)
@@ -59,16 +74,23 @@ public class PlayerController : NetworkBehaviour
         if (IsOwner)
         {
             IsSpliteFlipped.Value = spriteRenderer.flipX;
+            if (IsHost) return;
+            virtualCamera = Instantiate(virtualCameraPrefab);
+            virtualCamera.GetComponent<CinemachineVirtualCamera>().Follow = transform;
         }
         else
         {
             spriteRenderer.flipX = IsSpliteFlipped.Value;
+            Destroy(virtualCamera);
         }
     }
-
+    
     public override void OnNetworkDespawn()
     {
         IsSpliteFlipped.OnValueChanged -= OnIsSpliteFlippedChanged;
+        NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
+        SceneTransitionHandler.sceneTransitionHandler.OnClientLoadedScene -= OnClientLoadedScene;
+        Destroy(virtualCamera);
     }
 
     // Start is called before the first frame update
@@ -76,10 +98,10 @@ public class PlayerController : NetworkBehaviour
     {
         CurrentPlayerHealth.Value = MaxPlayerHealth;
 
-        healthBar.SetMaxHealth(MaxPlayerHealth);
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        // healthBar.SetMaxHealth(MaxPlayerHealth);
         if (IsOwner)
         {
             IsSpliteFlipped.Value = spriteRenderer.flipX;

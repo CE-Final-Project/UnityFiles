@@ -1,14 +1,24 @@
 using System;
+using Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
 
 namespace Script
 {
-    public class InGameManager : MonoBehaviour
+    public class InGameManager : NetworkBehaviour
     {
-        private void Start()
-        {
-            NetworkManager.Singleton.StartHost();
-        }
+        // [SerializeField] public GameObject vitualCameraPrefab;
+        // [SerializeField] public GameObject playerPrefab;
+        // public override void OnNetworkSpawn()
+        // {
+        //     base.OnNetworkSpawn();
+        //     if (IsOwner)
+        //     {
+        //         var player = Instantiate(playerPrefab);
+        //         player.GetComponent<NetworkObject>().Spawn();
+        //         var vitualCamera = Instantiate(vitualCameraPrefab);
+        //         vitualCamera.GetComponent<CinemachineVirtualCamera>().Follow = player.transform;
+        //     }
+        // }
     }
 }
