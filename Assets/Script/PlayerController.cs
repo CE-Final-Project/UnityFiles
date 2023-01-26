@@ -117,7 +117,8 @@ public class PlayerController : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        
+        //comment this when play on editor
+        //also character didn't flip when move left, right
         if (!IsOwner) return;
 
         if (canMove)
@@ -228,10 +229,12 @@ public class PlayerController : NetworkBehaviour
     public void LockMovement()
     {
         canMove = false;
+        print("Movement Locked");
     }
     public void UnlockMovement()
     {
         canMove = true;
+        print("Movement Unlocked");
     }
     private void PlayerDead()
     {

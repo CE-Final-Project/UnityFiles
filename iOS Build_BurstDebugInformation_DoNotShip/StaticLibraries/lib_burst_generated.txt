@@ -6,7 +6,7 @@ Library: /Users/bxss101/Documents/GitHub/UnityFiles/Temp/StagingArea/StaticLibra
 --meta-data-generation=False
 --dump=Function
 --float-precision=Standard
---compilation-defines=UNITY_2021_3_16
+--compilation-defines=UNITY_2021_3_17
 --compilation-defines=UNITY_2021_3
 --compilation-defines=UNITY_2021
 --compilation-defines=UNITY_5_3_OR_NEWER
@@ -154,12 +154,11 @@ Library: /Users/bxss101/Documents/GitHub/UnityFiles/Temp/StagingArea/StaticLibra
 --compilation-defines=CINEMACHINE_UNITY_IMGUI
 --compilation-defines=ENABLE_SPRITESHAPE_BURST
 --compilation-defines=TIMELINE_FRAMEACCURATE
---compilation-defines=RELAY_SDK_INSTALLED
 --compilation-defines=ENABLE_URP
---compilation-defines=UGS_QOS_SUPPORTED
 --compilation-defines=COM_UNITY_MODULES_ANIMATION
 --compilation-defines=COM_UNITY_MODULES_PHYSICS
 --compilation-defines=COM_UNITY_MODULES_PHYSICS2D
+--compilation-defines=UNITY_NETCODE_GAMEOBJECTS_1_0
 --linker-options=min-ios-version=11.0
 --generate-link-xml=Temp/burst.link.xml
 --temp-folder=/Users/bxss101/Documents/GitHub/UnityFiles/Temp/Burst
@@ -176,7 +175,7 @@ Library: /Users/bxss101/Documents/GitHub/UnityFiles/Temp/StagingArea/StaticLibra
 --meta-data-generation=False
 --dump=Function
 --float-precision=Standard
---compilation-defines=UNITY_2021_3_16
+--compilation-defines=UNITY_2021_3_17
 --compilation-defines=UNITY_2021_3
 --compilation-defines=UNITY_2021
 --compilation-defines=UNITY_5_3_OR_NEWER
@@ -324,12 +323,11 @@ Library: /Users/bxss101/Documents/GitHub/UnityFiles/Temp/StagingArea/StaticLibra
 --compilation-defines=CINEMACHINE_UNITY_IMGUI
 --compilation-defines=ENABLE_SPRITESHAPE_BURST
 --compilation-defines=TIMELINE_FRAMEACCURATE
---compilation-defines=RELAY_SDK_INSTALLED
 --compilation-defines=ENABLE_URP
---compilation-defines=UGS_QOS_SUPPORTED
 --compilation-defines=COM_UNITY_MODULES_ANIMATION
 --compilation-defines=COM_UNITY_MODULES_PHYSICS
 --compilation-defines=COM_UNITY_MODULES_PHYSICS2D
+--compilation-defines=UNITY_NETCODE_GAMEOBJECTS_1_0
 --linker-options=min-ios-version=11.0
 --generate-link-xml=Temp/burst.link.xml
 --temp-folder=/Users/bxss101/Documents/GitHub/UnityFiles/Temp/Burst
