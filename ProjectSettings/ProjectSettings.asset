@@ -746,11 +746,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 56042cd5-c084-4dde-a1af-2e733f840732
+  cloudProjectId: b407b3ed-5fa1-428b-b83b-8d23fd009049
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: CE Project (7)
-  organizationId: unity_62011044
+  projectName: FinalProject
+  organizationId: the-survival-final-project
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 

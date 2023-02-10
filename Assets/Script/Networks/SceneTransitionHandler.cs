@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,21 +7,19 @@ namespace Script.Networks
     public class SceneTransitionHandler : NetworkBehaviour
     {
 
-        public static SceneTransitionHandler sceneTransitionHandler { get; internal set; }
+        public static SceneTransitionHandler Instance { get; private set; }
 
-        [SerializeField] public string DefaultMainMenu = "MainMenu";
+        [SerializeField] private string defaultMainMenu = "MainMenu";
 
-        [HideInInspector]
         public delegate void ClientLoadedSceneDelegateHandler(ulong clientId);
 
-        [HideInInspector] public event ClientLoadedSceneDelegateHandler OnClientLoadedScene;
+        public event ClientLoadedSceneDelegateHandler OnClientLoadedScene;
 
-        [HideInInspector]
         public delegate void SceneStateChangedDelegateHandler(SceneStates newState);
 
-        [HideInInspector] public event SceneStateChangedDelegateHandler OnSceneStateChanged;
+        public event SceneStateChangedDelegateHandler OnSceneStateChanged;
 
-        private int m_numberOfClientLoaded;
+        private int _numberOfClientLoaded;
 
         public enum SceneStates
         {
@@ -34,7 +30,7 @@ namespace Script.Networks
             PostGame
         }
 
-        private SceneStates m_sceneState;
+        private SceneStates _sceneState;
 
         /// <summary>
         /// Awake
@@ -43,12 +39,12 @@ namespace Script.Networks
         /// </summary>
         private void Awake()
         {
-            if (sceneTransitionHandler != this && sceneTransitionHandler != null)
+            if (Instance != this && Instance != null)
             {
-                GameObject.Destroy(sceneTransitionHandler.gameObject);
+                Destroy(Instance.gameObject);
             }
 
-            sceneTransitionHandler = this;
+            Instance = this;
             SetSceneState(SceneStates.Init);
             DontDestroyOnLoad(this);
         }
@@ -60,10 +56,10 @@ namespace Script.Networks
         /// <param name="sceneState"></param>
         public void SetSceneState(SceneStates sceneState)
         {
-            m_sceneState = sceneState;
+            _sceneState = sceneState;
             if (OnSceneStateChanged != null)
             {
-                OnSceneStateChanged.Invoke(m_sceneState);
+                OnSceneStateChanged.Invoke(_sceneState);
             }
         }
 
@@ -74,7 +70,7 @@ namespace Script.Networks
         /// <returns>current scene state</returns>
         public SceneStates GetCurrentSceneState()
         {
-            return m_sceneState;
+            return _sceneState;
         }
 
         /// <summary>
@@ -83,9 +79,9 @@ namespace Script.Networks
         /// </summary>
         private void Start()
         {
-            if (m_sceneState == SceneStates.Init)
+            if (_sceneState == SceneStates.Init)
             {
-                SceneManager.LoadScene(DefaultMainMenu);
+                SceneManager.LoadScene(defaultMainMenu);
             }
         }
 
@@ -105,7 +101,7 @@ namespace Script.Networks
         {
             if (NetworkManager.Singleton.IsListening)
             {
-                m_numberOfClientLoaded = 0;
+                _numberOfClientLoaded = 0;
                 NetworkManager.Singleton.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
             }
             else
@@ -116,13 +112,13 @@ namespace Script.Networks
 
         private void OnLoadComplete(ulong clientId, string sceneName, LoadSceneMode loadSceneMode)
         {
-            m_numberOfClientLoaded += 1;
+            _numberOfClientLoaded += 1;
             OnClientLoadedScene?.Invoke(clientId);
         }
 
         public bool AllClientsAreLoaded()
         {
-            return m_numberOfClientLoaded == NetworkManager.Singleton.ConnectedClients.Count;
+            return _numberOfClientLoaded == NetworkManager.Singleton.ConnectedClients.Count;
         }
 
         /// <summary>

@@ -11,21 +11,11 @@ namespace Script.Networks
 
         [SerializeField] private GameObject spawnPoints;
 
-        private void Start()
+        public void SpawnEnemy()
         {
-            NetworkManager.Singleton.OnServerStarted += SpawnEnemy;
-        }
-
-        private void OnDestroy()
-        {
-            NetworkManager.Singleton.OnServerStarted -= SpawnEnemy;
-        }
-
-        private void SpawnEnemy()
-        {
-            foreach (var spawnPoint in spawnPoints.GetComponentsInChildren<GameObject>())
+            foreach (GameObject spawnPoint in spawnPoints.GetComponentsInChildren<GameObject>())
             {
-                var enemy = Instantiate(slimePrefab, spawnPoint.transform.position, Quaternion.identity);
+                GameObject enemy = Instantiate(slimePrefab, spawnPoint.transform.position, Quaternion.identity);
                 enemy.GetComponent<NetworkObject>().Spawn();
             }
         }

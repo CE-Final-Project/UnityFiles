@@ -6,7 +6,11 @@
 	<dict>
 		<key>Resources/Data/Managed/Assembly-CSharp.dll</key>
 		<data>
+<<<<<<< Updated upstream:CE Project.app/Contents/_CodeSignature/CodeResources
 		mPYnXvnnxPQ86v3Ss21t9vTiedU=
+=======
+		UwizOxpwbMrTXwrwMDMvtguDkXw=
+>>>>>>> Stashed changes:CE_Project.app/Contents/_CodeSignature/CodeResources
 		</data>
 		<key>Resources/Data/Managed/Cinemachine.dll</key>
 		<data>
@@ -638,27 +642,39 @@
 		</data>
 		<key>Resources/Data/globalgamemanagers</key>
 		<data>
+<<<<<<< Updated upstream:CE Project.app/Contents/_CodeSignature/CodeResources
 		HNPxCjYQVT0BN7btiQescCJsQQ4=
+=======
+		f5jIpD4ijpviJ6k77Le+OXeZODw=
+>>>>>>> Stashed changes:CE_Project.app/Contents/_CodeSignature/CodeResources
 		</data>
 		<key>Resources/Data/globalgamemanagers.assets</key>
 		<data>
-		aIfgdKKC1WGhCLt9HtG8cpZBbyk=
+		cfNJp1PsClRXbKeiv/Rjl/HOg8c=
 		</data>
 		<key>Resources/Data/level0</key>
 		<data>
-		tBfiE2DCjrAMuUPVmo5C/5KXwIE=
+		etAOFYiWZzKB/wSG7kLZJZOGnLc=
 		</data>
 		<key>Resources/Data/level1</key>
 		<data>
+<<<<<<< Updated upstream:CE Project.app/Contents/_CodeSignature/CodeResources
 		qAyUVslYLrdzsbzHcNWd+34WwPA=
 		</data>
 		<key>Resources/Data/level2</key>
 		<data>
 		r0wPO5+2fWSFpPPHjYpvSUuJXqk=
+=======
+		UCsj568SxFrJVhuupaiHVIYisS0=
+		</data>
+		<key>Resources/Data/level2</key>
+		<data>
+		qCinIENTxn3WXlRe0bNEhGpcJeA=
+>>>>>>> Stashed changes:CE_Project.app/Contents/_CodeSignature/CodeResources
 		</data>
 		<key>Resources/Data/resources.assets</key>
 		<data>
-		JzrpWegWetpB+boMRrMw6y5dAsk=
+		kx7StliJ7RPNui9am9HL50BA3EQ=
 		</data>
 		<key>Resources/Data/resources.assets.resS</key>
 		<data>
@@ -674,7 +690,11 @@
 		</data>
 		<key>Resources/Data/sharedassets1.assets</key>
 		<data>
+<<<<<<< Updated upstream:CE Project.app/Contents/_CodeSignature/CodeResources
 		4OKv3MJ0maHiEHe+j/ukq/NZpiE=
+=======
+		A2OTDmpBfhiI0uUcrR3OOlCmp8Y=
+>>>>>>> Stashed changes:CE_Project.app/Contents/_CodeSignature/CodeResources
 		</data>
 		<key>Resources/Data/sharedassets1.assets.resS</key>
 		<data>
@@ -682,7 +702,11 @@
 		</data>
 		<key>Resources/Data/sharedassets2.assets</key>
 		<data>
+<<<<<<< Updated upstream:CE Project.app/Contents/_CodeSignature/CodeResources
 		LZiSzm8l8UQtY3dbyvuCOe4n2QE=
+=======
+		Mxl+74iLkscWTcsQNzlvmiVIleQ=
+>>>>>>> Stashed changes:CE_Project.app/Contents/_CodeSignature/CodeResources
 		</data>
 		<key>Resources/Data/sharedassets2.assets.resS</key>
 		<data>
@@ -886,7 +910,11 @@
 		<dict>
 			<key>hash2</key>
 			<data>
+<<<<<<< Updated upstream:CE Project.app/Contents/_CodeSignature/CodeResources
 			LyLZwCxwiI5F2azO6D9t84L6yUj6QWqKtamaAbwjfGQ=
+=======
+			lD9TH3u8AhDOAB6Y5IRg/kU6M9pDl1k4JkKYx3/l9o0=
+>>>>>>> Stashed changes:CE_Project.app/Contents/_CodeSignature/CodeResources
 			</data>
 		</dict>
 		<key>Resources/Data/Managed/Cinemachine.dll</key>
@@ -1992,42 +2020,54 @@
 		<dict>
 			<key>hash2</key>
 			<data>
+<<<<<<< Updated upstream:CE Project.app/Contents/_CodeSignature/CodeResources
 			fvCwTb+dPJ8rfg7no/zrcUbuX6mFN+P/c4mUESGecyA=
+=======
+			1aSgnbI15qTp2QClALaSN1h8Pgdn+YzaFQ+VKLuk4yU=
+>>>>>>> Stashed changes:CE_Project.app/Contents/_CodeSignature/CodeResources
 			</data>
 		</dict>
 		<key>Resources/Data/globalgamemanagers.assets</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			0pLGsV1dmvYfn6qlDFtrbDTah9gKczmYmXHZAvv3VAM=
+			pl9EMhm8dawl43JXyQywVclrTXYLUDkQAKwjiMuCoJg=
 			</data>
 		</dict>
 		<key>Resources/Data/level0</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			RlTy6gQmnH3po7j4Oy8AKcGLnh6JdZXHbzJNEsAcz4w=
+			sO51YTKwmKVJMeLouJkaLK9hZktkeW66RxbpfP4guH8=
 			</data>
 		</dict>
 		<key>Resources/Data/level1</key>
 		<dict>
 			<key>hash2</key>
 			<data>
+<<<<<<< Updated upstream:CE Project.app/Contents/_CodeSignature/CodeResources
 			G9D7u5P5/tLea6YiW3AmlRQS7gNXh2ZxfnAnZFaJG9c=
+=======
+			+nIYmP4LccSJ5bG3JpMiq2Jj/uhChpPGNRV8t3UYZ7Q=
+>>>>>>> Stashed changes:CE_Project.app/Contents/_CodeSignature/CodeResources
 			</data>
 		</dict>
 		<key>Resources/Data/level2</key>
 		<dict>
 			<key>hash2</key>
 			<data>
+<<<<<<< Updated upstream:CE Project.app/Contents/_CodeSignature/CodeResources
 			kg8gs3aPZ1vEDnLAqQHWzb99PdF6Kd9XHSyjPJ4WM/o=
+=======
+			vosR9Skddem/yV2WwZmtXlT69WnsbWhKN/PorQynk68=
+>>>>>>> Stashed changes:CE_Project.app/Contents/_CodeSignature/CodeResources
 			</data>
 		</dict>
 		<key>Resources/Data/resources.assets</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			glphQ9CsLDUGlBHvvGo4H/Sr6qMF2N2SEnNkmOQHjgk=
+			yYK1zawnRsZ+N3iULLRYkqkLvva6WDrZiOIVXELmOuA=
 			</data>
 		</dict>
 		<key>Resources/Data/resources.assets.resS</key>
@@ -2055,7 +2095,11 @@
 		<dict>
 			<key>hash2</key>
 			<data>
+<<<<<<< Updated upstream:CE Project.app/Contents/_CodeSignature/CodeResources
 			X48O+nCuYMVpQpznExhWsbRjLfQUyf4LY+iLmx63LxE=
+=======
+			LYKoNSwsXTw1439uZ5CczveBYEB/Uv919OnfB2bniBs=
+>>>>>>> Stashed changes:CE_Project.app/Contents/_CodeSignature/CodeResources
 			</data>
 		</dict>
 		<key>Resources/Data/sharedassets1.assets.resS</key>
@@ -2069,7 +2113,11 @@
 		<dict>
 			<key>hash2</key>
 			<data>
+<<<<<<< Updated upstream:CE Project.app/Contents/_CodeSignature/CodeResources
 			NUmWcJWsxu16NH+7/MAggFZn2T4w36iROSELCKZydyQ=
+=======
+			pbjJJK5Bw89cTpRgRJNxt2/rWsnWoh+cfukDhWLfnjQ=
+>>>>>>> Stashed changes:CE_Project.app/Contents/_CodeSignature/CodeResources
 			</data>
 		</dict>
 		<key>Resources/Data/sharedassets2.assets.resS</key>
