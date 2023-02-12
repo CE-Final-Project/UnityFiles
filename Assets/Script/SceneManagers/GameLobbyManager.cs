@@ -1,9 +1,15 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
+using Script.GameFramework.Data;
 using Script.GameFramework.Manager;
+using Script.GameFramework.Models;
 using Script.Networks;
+using TMPro;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using Unity.Services.Authentication;
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,30 +19,84 @@ namespace Script.SceneManagers
     {
         
         [SerializeField] private Button lobbyButton;
+        [SerializeField] private TextMeshProUGUI textButton;
 
         private string _hostIp;
+        private List<LobbyPlayerData> _listLobbyPlayerData = new(); 
+        private LobbyPlayerData _localPlayerData;
 
         private void Start()
         {
             SceneTransitionHandler.Instance.SetSceneState(SceneTransitionHandler.SceneStates.Lobby);
+            
+            LobbyManager.OnLobbyUpdated += OnLobbyUpdated;
+        }
+        
+        private void OnDestroy()
+        {
+            // LobbyManager.OnLobbyCreated -= OnLobbyCreated;
+            // LobbyManager.OnLobbyJoined -= OnLobbyJoined;
+        }
 
-            if (NetworkManager.Singleton.IsHost)
+        private void OnLobbyJoined(LobbyJoinedEventArgs args)
+        {
+            lobbyButton.onClick.AddListener(ReadyHandler);
+            textButton.text = "Ready";
+        }
+
+
+        private void OnLobbyCreated(LobbyCreatedEventArgs args)
+        { 
+            lobbyButton.onClick.AddListener(StartLocalGame);
+            textButton.text = "Start Game";
+        }
+
+        private void OnLobbyUpdated(Lobby lobby)
+        {
+            List<Dictionary<string, PlayerDataObject>> playerData = LobbyManager.Instance.GetPlayerData();
+            _listLobbyPlayerData.Clear();
+            foreach (var data in playerData)
             {
+               LobbyPlayerData lobbyPlayerData = new();
+               lobbyPlayerData.Initialize(data);
+               
+               if (lobbyPlayerData.Id == AuthenticationService.Instance.PlayerId)
+               {
+                   _localPlayerData = lobbyPlayerData;
+               }
+                  
+               _listLobbyPlayerData.Add(lobbyPlayerData);
+            }
+            
+            if (AuthenticationService.Instance.PlayerId == lobby.HostId && _listLobbyPlayerData.All(a => a.IsReady))
+            {
+                lobbyButton.onClick.RemoveAllListeners();
                 lobbyButton.onClick.AddListener(StartLocalGame);
+                textButton.text = "Start Game";
             }
             else
             {
-                lobbyButton.enabled = false;
+                lobbyButton.onClick.RemoveAllListeners();
+                lobbyButton.onClick.AddListener(ReadyHandler);
+                textButton.text = _localPlayerData.IsReady ? "Cancel" : "Ready";
             }
             
-            
-            Debug.Log(
-                $"Lobby Id: {LobbyManager.Instance.CurrentLobbyData.LobbyId} name: {LobbyManager.Instance.CurrentLobbyData.LobbyName} code: {LobbyManager.Instance.CurrentLobbyData.LobbyCode}");
+            Debug.Log($"Update: {_listLobbyPlayerData.Count}");
+        }
+        
+
+        private async void ReadyHandler()
+        {
+            _localPlayerData.IsReady = !_localPlayerData.IsReady;
+            await LobbyManager.Instance.UpdatePlayerDataAsync(_localPlayerData.Id, _localPlayerData.Serialize());
         }
 
         private void StartLocalGame()
         {
-            SceneTransitionHandler.Instance.SwitchScene("InGame");
+            if (_listLobbyPlayerData.All(a => a.IsReady))
+            {
+                SceneTransitionHandler.Instance.SwitchScene("InGame");
+            }
         }
         
         private void StartHostNetwork()

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Script.GameFramework.Core;
+using Script.GameFramework.Data;
 using Script.GameFramework.Infrastructure;
 using Script.GameFramework.Models;
 using Unity.Services.Authentication;
@@ -15,34 +16,37 @@ namespace Script.GameFramework.Manager
 {
     public class LobbyManager : Singleton<LobbyManager>
     {
-
         private Lobby _lobby;
-        private LobbyData _currentLobbyData;
         private Coroutine _heartbeatCoroutine;
         private Coroutine _refreshCoroutine;
-        
-        public LobbyData CurrentLobbyData => _currentLobbyData;
 
-        public async Task<bool> JoinLobbyByCodeAsync(string code)
+        public static event Action<LobbyCreatedEventArgs> OnLobbyCreated;
+        public static event Action<LobbyJoinedEventArgs> OnLobbyJoined;
+        public static event Action<Lobby> OnLobbyUpdated;
+
+        public async Task<bool> JoinLobbyByCodeAsync(string code, Dictionary<string, string> playerData)
         {
-            _lobby = await Lobbies.Instance.JoinLobbyByCodeAsync(code);
             
-            if (_lobby == null)
+            JoinLobbyByCodeOptions options = new()
+            {
+                Player = new Player(AuthenticationService.Instance.PlayerId, null, SerializePlayerData(playerData))
+            };
+
+            try
+            {
+                _lobby = await Lobbies.Instance.JoinLobbyByCodeAsync(code, options);
+            }
+            catch (Exception)
             {
                 return false;
             }
-            
-            _currentLobbyData = new LobbyData
-            {
-                LobbyId = _lobby.Id,
-                LobbyName = _lobby.Name,
-                LobbyCode = _lobby.LobbyCode,
-                IsPrivate = _lobby.IsPrivate,
-                HostId = _lobby.HostId,
-                MaxPlayer = _lobby.MaxPlayers
-            };
-            
+
             _refreshCoroutine = StartCoroutine(RefreshLobbyCoroutine(_lobby.Id, 1f)); // Rate limit is 1 request per second
+            
+            OnLobbyJoined?.Invoke(new LobbyJoinedEventArgs
+            {
+                ClientId = options.Player.Id,
+            });
             
             return true;
         }
@@ -52,9 +56,9 @@ namespace Script.GameFramework.Manager
 
             var playerData = SerializePlayerData(data);
 
-            var player = new Player(AuthenticationService.Instance.PlayerId, null,playerData);
+            Player player = new(AuthenticationService.Instance.PlayerId, null,playerData);
 
-            var options = new CreateLobbyOptions
+            CreateLobbyOptions options = new()
             {
                 IsPrivate = isPrivate,
                 Player = player
@@ -63,27 +67,36 @@ namespace Script.GameFramework.Manager
             try
             {
                 _lobby = await Lobbies.Instance.CreateLobbyAsync("Lobby Name Test", maxPlayer, options);
-                _currentLobbyData = new LobbyData
-                {
-                    LobbyId = _lobby.Id,
-                    LobbyName = _lobby.Name,
-                    LobbyCode = _lobby.LobbyCode,
-                    IsPrivate = _lobby.IsPrivate,
-                    HostId = _lobby.HostId,
-                    MaxPlayer = _lobby.MaxPlayers
-                };
             }
             catch (Exception)
             {
                 return false;
             }
 
-            Debug.Log($"Lobby {_lobby.Id} created");
-
             _heartbeatCoroutine = StartCoroutine(HeartbeatLobbyCoroutine(_lobby.Id, 6f)); // Rate limit is 5 request per 30 seconds
             _refreshCoroutine = StartCoroutine(RefreshLobbyCoroutine(_lobby.Id, 1f)); // Rate limit is 1 request per second
             
+            OnLobbyCreated?.Invoke(new LobbyCreatedEventArgs
+            {
+                HostId = _lobby.HostId,
+                IsPrivate = _lobby.IsPrivate,
+                LobbyCode = _lobby.LobbyCode,
+                MaxPlayer = _lobby.MaxPlayers,
+                LobbyId = _lobby.Id
+            });
+            
+            Debug.Log($"Lobby created with id {_lobby.Id} and code {_lobby.LobbyCode}");
+            
             return true;
+        }
+        
+        public async Task UpdatePlayerDataAsync(string playerId, Dictionary<string, string> data)
+        {
+            var playerData = SerializePlayerData(data);
+            await Lobbies.Instance.UpdatePlayerAsync(_lobby.Id, playerId, new UpdatePlayerOptions()
+            {
+                Data = playerData
+            });
         }
 
         private IEnumerator HeartbeatLobbyCoroutine(string lobbyId, float waitTimeSeconds)
@@ -106,15 +119,8 @@ namespace Script.GameFramework.Manager
                 if (newLobby.LastUpdated > _lobby.LastUpdated)
                 {
                     _lobby = newLobby;
-                    _currentLobbyData = new LobbyData
-                    {
-                        LobbyId = newLobby.Id,
-                        LobbyName = newLobby.Name,
-                        LobbyCode = newLobby.LobbyCode,
-                        IsPrivate = newLobby.IsPrivate,
-                        HostId = newLobby.HostId,
-                        MaxPlayer = newLobby.MaxPlayers
-                    };
+                    OnLobbyUpdated?.Invoke(_lobby);
+                    
                     Debug.Log($"Lobby {lobbyId} refreshed");
                 }
                 yield return new WaitForSecondsRealtime(waitTimeSeconds);
@@ -138,10 +144,18 @@ namespace Script.GameFramework.Manager
                 
                 await Lobbies.Instance.DeleteLobbyAsync(_lobby.Id);
             }
-            
-            Debug.Log("Signing out...");
-            
-            Authentication.Instance.SignOut();
+        }
+
+        public List<Dictionary<string,PlayerDataObject>> GetPlayerData()
+        {
+            List<Dictionary<string, PlayerDataObject>> data = new();
+
+            foreach (Player player in _lobby.Players)
+            {
+                data.Add(player.Data);
+            }
+
+            return data;
         }
     }
 }

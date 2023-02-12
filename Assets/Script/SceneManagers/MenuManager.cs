@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Script.GameFramework.Infrastructure;
 using Script.GameFramework.Manager;
+using Script.GameFramework.Models;
 using Script.Networks;
 using TMPro;
 using Unity.Netcode;
@@ -27,8 +28,12 @@ namespace Script.SceneManagers
         [SerializeField] private Toggle inviteOnlyToggle;
 
 
-        private void Start()
+        private async void Start()
         {
+            if (!AuthenticationService.Instance.IsSignedIn)
+            {
+                await Authentication.Instance.SignInAnonymouslyAsync();
+            }
             
             SceneTransitionHandler.Instance.SetSceneState(SceneTransitionHandler.SceneStates.MainMenu);
             
@@ -38,53 +43,28 @@ namespace Script.SceneManagers
 
         private async void StartLocalGame()
         {
-           
-            
-            // Sign in anonymously
-            if (!AuthenticationService.Instance.IsSignedIn)
-            {
-                await Authentication.Instance.SignInAnonymouslyAsync();
-            }
-            
-            // Create a lobby
-            bool lobbyCreated = await LobbyManager.Instance.CreateLobbyAsync(inviteOnlyToggle.isOn, maxPlayer, new Dictionary<string, string>
-            {
-                {"name", "test"}
-            });
-            
-            if (!lobbyCreated)
-            {
-                Debug.LogError("Failed to create lobby.");
-                return;
-            }
-            
-            StartHostNetwork();
+            LobbyPlayerData lobbyPlayerData = new();
+            lobbyPlayerData.Initialize(AuthenticationService.Instance.PlayerId, "HostPlayer");
 
+            await LobbyManager.Instance.CreateLobbyAsync(inviteOnlyToggle.isOn, maxPlayer, lobbyPlayerData.Serialize());
+            
             SceneTransitionHandler.Instance.SwitchScene(LobbySceneName);
         }
 
         private async void JoinLocalGame()
         {
-
-            
-            // Sign in anonymously
-            if (!AuthenticationService.Instance.IsSignedIn)
-            {
-                await Authentication.Instance.SignInAnonymouslyAsync();
-            }
+            LobbyPlayerData lobbyPlayerData = new LobbyPlayerData();
+            lobbyPlayerData.Initialize(AuthenticationService.Instance.PlayerId, "JoinPlayer");
             
             // Join a lobby
-            bool lobbyJoined = await LobbyManager.Instance.JoinLobbyByCodeAsync(lobbyCodeInputField.text.ToUpper());
+            bool lobbyJoined = await LobbyManager.Instance.JoinLobbyByCodeAsync(lobbyCodeInputField.text.ToUpper(), lobbyPlayerData.Serialize());
             
             if (!lobbyJoined)
             {
                 Debug.LogError("Failed to join lobby.");
                 return;
             }
-            
             SceneTransitionHandler.Instance.SwitchScene(LobbySceneName);
-            // StartClientNetwork();
-            
         }
         
         private void StartHostNetwork()
