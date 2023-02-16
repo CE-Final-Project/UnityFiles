@@ -29,4 +29,5 @@ public class fullScreenToggle : MonoBehaviour{
             }
         }
     }
+
 }
