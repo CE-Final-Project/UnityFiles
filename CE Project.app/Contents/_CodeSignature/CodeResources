@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/Data/Managed/Assembly-CSharp.dll</key>
 		<data>
-		G28FzUgGH+fP5F8wNO8OrN2LB0Y=
+		Md+AXKvW2chbYZ4HbDVWC94OWBg=
 		</data>
 		<key>Resources/Data/Managed/Cinemachine.dll</key>
 		<data>
@@ -210,11 +210,11 @@
 		</data>
 		<key>Resources/Data/Managed/Unity.Netcode.Runtime.dll</key>
 		<data>
-		v1v88fMVSTa1IpP5ptebq+M7FOs=
+		A7OKQae0w3F8xuli6mdpEUpFxvE=
 		</data>
 		<key>Resources/Data/Managed/Unity.Networking.Transport.dll</key>
 		<data>
-		FAU41cKGZZDhF4ArxajreYTPKak=
+		DKmFT6R4K+6woHFFbEt/N2T19VU=
 		</data>
 		<key>Resources/Data/Managed/Unity.Profiling.Core.dll</key>
 		<data>
@@ -638,7 +638,7 @@
 		</data>
 		<key>Resources/Data/globalgamemanagers</key>
 		<data>
-		rXlxgoC7S7vdG30tjavCEF49lWM=
+		qYNoicFSYAXdiIzbK47iO1nt7uw=
 		</data>
 		<key>Resources/Data/globalgamemanagers.assets</key>
 		<data>
@@ -650,11 +650,11 @@
 		</data>
 		<key>Resources/Data/level1</key>
 		<data>
-		fRFMv1C8TeLkU+d+d5IohsG2+J0=
+		G7eQAQmGH+F170HHngEp2QkspS8=
 		</data>
 		<key>Resources/Data/level2</key>
 		<data>
-		HmfU8b8QXVBhMcEgL9MgXHz6pK0=
+		XVKN8AWwNIQq3QmcsXUjpOIffWk=
 		</data>
 		<key>Resources/Data/resources.assets</key>
 		<data>
@@ -674,19 +674,19 @@
 		</data>
 		<key>Resources/Data/sharedassets1.assets</key>
 		<data>
-		J1eVu2VOHSeAVMBDEwIdPBX92/A=
+		2yOnEM1MaDONXkkfc2CqY/attSo=
 		</data>
 		<key>Resources/Data/sharedassets1.assets.resS</key>
 		<data>
-		tXk7FDzkGWUjpq4HpE12UifNA38=
+		LyJ6cJ5OX3nLNaTSi1nNL9SrMX0=
 		</data>
 		<key>Resources/Data/sharedassets2.assets</key>
 		<data>
-		FYYHPZoKz8/pphnLD2YKuaYhHww=
+		kjq5Oqmn2KvVWWAl3XKiMqgozpk=
 		</data>
 		<key>Resources/Data/sharedassets2.assets.resS</key>
 		<data>
-		zGzp9ELEVJR2lgY1byOtywRjf3U=
+		15HTgxtpk5uyqvCEfn9kCU3LwJg=
 		</data>
 		<key>Resources/DefaultPreferences.plist</key>
 		<data>
@@ -886,7 +886,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			zgmiu+jJsash0O3rDa1xUez/0lZbxNmrEKft3HhO5Qc=
+			zUjVhwBCGa+GGsAItmcmPA2jTthn0eb10zMXpi4MD2s=
 			</data>
 		</dict>
 		<key>Resources/Data/Managed/Cinemachine.dll</key>
@@ -1243,14 +1243,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			m+n8muV/wgxGwmvi1SoTjDRPQDWXBVaNiR6KaBrpw5I=
+			EGPUdQoBX7kDtdoTZLqiaY1tC7FUmFVG/2hG93dxC3I=
 			</data>
 		</dict>
 		<key>Resources/Data/Managed/Unity.Networking.Transport.dll</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			sC5uvpUVOjOQzIm3JoXiSw1Sqv8zjKGiGOEDXrVEGFI=
+			dA0veZj1jHpZHq/O3nSFM0uWg4RvAz3ORdrVQXZmdB8=
 			</data>
 		</dict>
 		<key>Resources/Data/Managed/Unity.Profiling.Core.dll</key>
@@ -1992,7 +1992,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			idPtFaxRVnknago01QbpX/+KXXTqkV2evQWsgWEiEDo=
+			EVPExbwyj8nzzl61dtwi07qzAHdAjIbncO4MkeTGHuw=
 			</data>
 		</dict>
 		<key>Resources/Data/globalgamemanagers.assets</key>
@@ -2013,14 +2013,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			znaQMVaBPgeM7vsJX9/ijJi2iVacRw2wf+9JXEZ+ZJ8=
+			6/MjXw8LjaQoIoW7CzbjCeMMreCFC/LICXZ/iq79p6E=
 			</data>
 		</dict>
 		<key>Resources/Data/level2</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			J1yz+52T/Gn9IgBSctzV/BWoEueTGSgo3pJpip75yr8=
+			G/30KSG3t/TsXvQ0bTqhjxs3z5KljMhrzF3p2did5p8=
 			</data>
 		</dict>
 		<key>Resources/Data/resources.assets</key>
@@ -2055,28 +2055,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			7DzbEtCQfp7ewvbN0zfXP90cO8UNUflouJvNWClecyE=
+			UMzhPFxISTxq1JGzMBKhpjEkqU+GFSsc+Y7yJ3EHV7Y=
 			</data>
 		</dict>
 		<key>Resources/Data/sharedassets1.assets.resS</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			xVfxGV2GS6DrAZ9ycqHL/V6jl3UcJrXWCNVjP3Qkb1w=
+			YpOegW+a5GAsnigaJLlcODeKCPMtxrIpLWXFbAvh1hc=
 			</data>
 		</dict>
 		<key>Resources/Data/sharedassets2.assets</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			VFFntNCZNjtac9R0vep+MZx1Q15tyyHXDKWMnXLeGIc=
+			pP6jsmo9a7QhAwJAEZjn3D09DwlML4X0I2whmp8/N0w=
 			</data>
 		</dict>
 		<key>Resources/Data/sharedassets2.assets.resS</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Bng0tdUVZNRnmVM8Y3zxwHDKoUH6Sg+6IctmrFXlDKI=
+			8ybJHUo/SsVj2fyP451qU4/VyB45Qu1JBZBUI/+vhv8=
 			</data>
 		</dict>
 		<key>Resources/DefaultPreferences.plist</key>
