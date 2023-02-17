@@ -1,14 +1,19 @@
 using System.Collections.Generic;
 using Unity.Services.Lobbies.Models;
 
-namespace Script.GameFramework.Models
+namespace Script.GameFramework.Data
 {
     public class LobbyPlayerData
     {
         private string _id;
+        private string _name;
+        private string _characterId;
         private string _gameTag;
         private bool _isReady;
         public string Id => _id;
+        public string Name => _name;
+        public string CharacterId => _characterId;
+
         public string GameTag => _gameTag;
 
         public bool IsReady
@@ -17,9 +22,11 @@ namespace Script.GameFramework.Models
             set => _isReady = value;
         }
 
-        public void Initialize(string id, string gameTag)
+        public void Initialize(string id, string name, string charecterId, string gameTag)
         {
             _id = id;
+            _name = name;
+            _characterId = charecterId;
             _gameTag = gameTag;
         }
         
@@ -28,11 +35,21 @@ namespace Script.GameFramework.Models
             UpdateState(playerData);
         }
 
-        public void UpdateState(Dictionary<string, PlayerDataObject> playerData)
+        private void UpdateState(IReadOnlyDictionary<string, PlayerDataObject> playerData)
         {
             if (playerData.ContainsKey("id"))
             {
                 _id = playerData["id"].Value;
+            }
+            
+            if (playerData.ContainsKey("name"))
+            {
+                _name = playerData["name"].Value;
+            }
+            
+            if (playerData.ContainsKey("characterId"))
+            {
+                _characterId = playerData["characterId"].Value;
             }
             
             if (playerData.ContainsKey("gameTag"))
@@ -51,6 +68,8 @@ namespace Script.GameFramework.Models
             return new Dictionary<string, string>
             {
                 {"id", _id},
+                {"name", _name},
+                {"characterId", _characterId},
                 {"gameTag", _gameTag},
                 {"isReady", _isReady.ToString()}
             };

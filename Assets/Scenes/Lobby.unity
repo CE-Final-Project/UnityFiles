@@ -289,6 +289,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lobbyButton: {fileID: 929959792}
   textButton: {fileID: 1321233580}
+  lobbyCodeText: {fileID: 0}
+  lobbyCountPlayerText: {fileID: 660558167}
 --- !u!4 &245773460
 Transform:
   m_ObjectHideFlags: 0

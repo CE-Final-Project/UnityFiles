@@ -3,7 +3,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Script.GameFramework.Data;
 using Script.GameFramework.Manager;
-using Script.GameFramework.Models;
 using Script.Networks;
 using TMPro;
 using Unity.Netcode;
@@ -20,15 +19,20 @@ namespace Script.SceneManagers
         
         [SerializeField] private Button lobbyButton;
         [SerializeField] private TextMeshProUGUI textButton;
+        [SerializeField] private TextMeshProUGUI lobbyCodeText;
+        [SerializeField] private TextMeshProUGUI lobbyCountPlayerText;
 
         private string _hostIp;
-        private List<LobbyPlayerData> _listLobbyPlayerData = new(); 
+        private readonly List<LobbyPlayerData> _listLobbyPlayerData = new(); 
         private LobbyPlayerData _localPlayerData;
 
         private void Start()
         {
             SceneTransitionHandler.Instance.SetSceneState(SceneTransitionHandler.SceneStates.Lobby);
             
+            lobbyButton.onClick.AddListener(ReadyHandler);
+            textButton.text = "Ready";
+
             LobbyManager.OnLobbyUpdated += OnLobbyUpdated;
         }
         
@@ -36,24 +40,12 @@ namespace Script.SceneManagers
         {
             // LobbyManager.OnLobbyCreated -= OnLobbyCreated;
             // LobbyManager.OnLobbyJoined -= OnLobbyJoined;
+            LobbyManager.OnLobbyUpdated -= OnLobbyUpdated;
         }
 
-        private void OnLobbyJoined(LobbyJoinedEventArgs args)
+        private void OnLobbyUpdated()
         {
-            lobbyButton.onClick.AddListener(ReadyHandler);
-            textButton.text = "Ready";
-        }
-
-
-        private void OnLobbyCreated(LobbyCreatedEventArgs args)
-        { 
-            lobbyButton.onClick.AddListener(StartLocalGame);
-            textButton.text = "Start Game";
-        }
-
-        private void OnLobbyUpdated(Lobby lobby)
-        {
-            List<Dictionary<string, PlayerDataObject>> playerData = LobbyManager.Instance.GetPlayerData();
+            var playerData = LobbyManager.Instance.GetPlayerData();
             _listLobbyPlayerData.Clear();
             foreach (var data in playerData)
             {
@@ -67,21 +59,30 @@ namespace Script.SceneManagers
                   
                _listLobbyPlayerData.Add(lobbyPlayerData);
             }
-            
-            if (AuthenticationService.Instance.PlayerId == lobby.HostId && _listLobbyPlayerData.All(a => a.IsReady))
+
+            if (LobbyManager.Instance.IsHost() && _localPlayerData.IsReady)
             {
-                lobbyButton.onClick.RemoveAllListeners();
-                lobbyButton.onClick.AddListener(StartLocalGame);
-                textButton.text = "Start Game";
-            }
-            else
-            {
-                lobbyButton.onClick.RemoveAllListeners();
-                lobbyButton.onClick.AddListener(ReadyHandler);
-                textButton.text = _localPlayerData.IsReady ? "Cancel" : "Ready";
+                if (LobbyManager.Instance.IsAllPlayerReady())
+                {
+                    lobbyButton.onClick.RemoveListener(ReadyHandler);
+                    lobbyButton.onClick.AddListener(StartLocalGame);
+                    textButton.text = "Start Game";
+                }
+                else
+                {
+                    lobbyButton.onClick.RemoveListener(StartLocalGame);
+                    lobbyButton.onClick.AddListener(ReadyHandler);
+                    textButton.text = "Waiting for players...";
+                }
             }
             
-            Debug.Log($"Update: {_listLobbyPlayerData.Count}");
+            lobbyCountPlayerText.text = $"Players ({_listLobbyPlayerData.Count}/{LobbyManager.Instance.GetMaxPlayer()})";
+
+            // print all player data
+            foreach (LobbyPlayerData data in _listLobbyPlayerData)
+            {
+                Debug.Log($"PlayerId: {data.Id}, PlayerName: {data.Name}, CharacterId: {data.CharacterId}, IsReady: {data.IsReady}");
+            }
         }
         
 
@@ -89,6 +90,26 @@ namespace Script.SceneManagers
         {
             _localPlayerData.IsReady = !_localPlayerData.IsReady;
             await LobbyManager.Instance.UpdatePlayerDataAsync(_localPlayerData.Id, _localPlayerData.Serialize());
+
+            if (LobbyManager.Instance.IsHost())
+            {
+                if (LobbyManager.Instance.IsAllPlayerReady())
+                {
+                    lobbyButton.onClick.RemoveListener(ReadyHandler);
+                    lobbyButton.onClick.AddListener(StartLocalGame);
+                    textButton.text = "Start Game";
+                }
+                textButton.text = "Waiting for players...";
+            }
+            
+            if (_localPlayerData.IsReady)
+            {
+                textButton.text = LobbyManager.Instance.IsHost() ? "Waiting for players..." : "Unready";
+            }
+            else
+            {
+                textButton.text = "Ready";
+            }
         }
 
         private void StartLocalGame()

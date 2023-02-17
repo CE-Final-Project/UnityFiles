@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Script.GameFramework.Data;
 using Script.GameFramework.Infrastructure;
 using Script.GameFramework.Manager;
-using Script.GameFramework.Models;
 using Script.Networks;
 using TMPro;
 using Unity.Netcode;
@@ -44,7 +45,7 @@ namespace Script.SceneManagers
         private async void StartLocalGame()
         {
             LobbyPlayerData lobbyPlayerData = new();
-            lobbyPlayerData.Initialize(AuthenticationService.Instance.PlayerId, "HostPlayer");
+            lobbyPlayerData.Initialize(AuthenticationService.Instance.PlayerId,  $"Player{Guid.NewGuid()}", "0", "HostPlayer");
 
             await LobbyManager.Instance.CreateLobbyAsync(inviteOnlyToggle.isOn, maxPlayer, lobbyPlayerData.Serialize());
             
@@ -54,7 +55,7 @@ namespace Script.SceneManagers
         private async void JoinLocalGame()
         {
             LobbyPlayerData lobbyPlayerData = new LobbyPlayerData();
-            lobbyPlayerData.Initialize(AuthenticationService.Instance.PlayerId, "JoinPlayer");
+            lobbyPlayerData.Initialize(AuthenticationService.Instance.PlayerId, $"Player{Guid.NewGuid()}", "1", "JoinPlayer");
             
             // Join a lobby
             bool lobbyJoined = await LobbyManager.Instance.JoinLobbyByCodeAsync(lobbyCodeInputField.text.ToUpper(), lobbyPlayerData.Serialize());
