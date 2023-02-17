@@ -6,11 +6,7 @@
 	<dict>
 		<key>Resources/Data/Managed/Assembly-CSharp.dll</key>
 		<data>
-<<<<<<< Updated upstream:CE Project.app/Contents/_CodeSignature/CodeResources
-		mPYnXvnnxPQ86v3Ss21t9vTiedU=
-=======
-		UwizOxpwbMrTXwrwMDMvtguDkXw=
->>>>>>> Stashed changes:CE_Project.app/Contents/_CodeSignature/CodeResources
+		Md+AXKvW2chbYZ4HbDVWC94OWBg=
 		</data>
 		<key>Resources/Data/Managed/Cinemachine.dll</key>
 		<data>
@@ -214,11 +210,11 @@
 		</data>
 		<key>Resources/Data/Managed/Unity.Netcode.Runtime.dll</key>
 		<data>
-		v1v88fMVSTa1IpP5ptebq+M7FOs=
+		A7OKQae0w3F8xuli6mdpEUpFxvE=
 		</data>
 		<key>Resources/Data/Managed/Unity.Networking.Transport.dll</key>
 		<data>
-		FAU41cKGZZDhF4ArxajreYTPKak=
+		DKmFT6R4K+6woHFFbEt/N2T19VU=
 		</data>
 		<key>Resources/Data/Managed/Unity.Profiling.Core.dll</key>
 		<data>
@@ -642,39 +638,27 @@
 		</data>
 		<key>Resources/Data/globalgamemanagers</key>
 		<data>
-<<<<<<< Updated upstream:CE Project.app/Contents/_CodeSignature/CodeResources
-		HNPxCjYQVT0BN7btiQescCJsQQ4=
-=======
-		f5jIpD4ijpviJ6k77Le+OXeZODw=
->>>>>>> Stashed changes:CE_Project.app/Contents/_CodeSignature/CodeResources
+		qYNoicFSYAXdiIzbK47iO1nt7uw=
 		</data>
 		<key>Resources/Data/globalgamemanagers.assets</key>
 		<data>
-		cfNJp1PsClRXbKeiv/Rjl/HOg8c=
+		tPBrPwp3/TR5Bd+ws9AQx8KrJoA=
 		</data>
 		<key>Resources/Data/level0</key>
 		<data>
-		etAOFYiWZzKB/wSG7kLZJZOGnLc=
+		UAUORdUUtpxa1vr+Dux2oBO1+mY=
 		</data>
 		<key>Resources/Data/level1</key>
 		<data>
-<<<<<<< Updated upstream:CE Project.app/Contents/_CodeSignature/CodeResources
-		qAyUVslYLrdzsbzHcNWd+34WwPA=
+		G7eQAQmGH+F170HHngEp2QkspS8=
 		</data>
 		<key>Resources/Data/level2</key>
 		<data>
-		r0wPO5+2fWSFpPPHjYpvSUuJXqk=
-=======
-		UCsj568SxFrJVhuupaiHVIYisS0=
-		</data>
-		<key>Resources/Data/level2</key>
-		<data>
-		qCinIENTxn3WXlRe0bNEhGpcJeA=
->>>>>>> Stashed changes:CE_Project.app/Contents/_CodeSignature/CodeResources
+		XVKN8AWwNIQq3QmcsXUjpOIffWk=
 		</data>
 		<key>Resources/Data/resources.assets</key>
 		<data>
-		kx7StliJ7RPNui9am9HL50BA3EQ=
+		aXgKGAmm2es8nkRgHlBqQPQMXT0=
 		</data>
 		<key>Resources/Data/resources.assets.resS</key>
 		<data>
@@ -682,7 +666,7 @@
 		</data>
 		<key>Resources/Data/sharedassets0.assets</key>
 		<data>
-		E0n3az9M1CurHwElsGT3KBQ6ZuU=
+		5Dd6udULhE2ExvZJBoMuakLPfTM=
 		</data>
 		<key>Resources/Data/sharedassets0.assets.resS</key>
 		<data>
@@ -690,27 +674,19 @@
 		</data>
 		<key>Resources/Data/sharedassets1.assets</key>
 		<data>
-<<<<<<< Updated upstream:CE Project.app/Contents/_CodeSignature/CodeResources
-		4OKv3MJ0maHiEHe+j/ukq/NZpiE=
-=======
-		A2OTDmpBfhiI0uUcrR3OOlCmp8Y=
->>>>>>> Stashed changes:CE_Project.app/Contents/_CodeSignature/CodeResources
+		2yOnEM1MaDONXkkfc2CqY/attSo=
 		</data>
 		<key>Resources/Data/sharedassets1.assets.resS</key>
 		<data>
-		C4jBxRVZoAVqkLWWCYsd0sEjEK0=
+		LyJ6cJ5OX3nLNaTSi1nNL9SrMX0=
 		</data>
 		<key>Resources/Data/sharedassets2.assets</key>
 		<data>
-<<<<<<< Updated upstream:CE Project.app/Contents/_CodeSignature/CodeResources
-		LZiSzm8l8UQtY3dbyvuCOe4n2QE=
-=======
-		Mxl+74iLkscWTcsQNzlvmiVIleQ=
->>>>>>> Stashed changes:CE_Project.app/Contents/_CodeSignature/CodeResources
+		kjq5Oqmn2KvVWWAl3XKiMqgozpk=
 		</data>
 		<key>Resources/Data/sharedassets2.assets.resS</key>
 		<data>
-		zGzp9ELEVJR2lgY1byOtywRjf3U=
+		15HTgxtpk5uyqvCEfn9kCU3LwJg=
 		</data>
 		<key>Resources/DefaultPreferences.plist</key>
 		<data>
@@ -910,11 +886,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-<<<<<<< Updated upstream:CE Project.app/Contents/_CodeSignature/CodeResources
-			LyLZwCxwiI5F2azO6D9t84L6yUj6QWqKtamaAbwjfGQ=
-=======
-			lD9TH3u8AhDOAB6Y5IRg/kU6M9pDl1k4JkKYx3/l9o0=
->>>>>>> Stashed changes:CE_Project.app/Contents/_CodeSignature/CodeResources
+			zUjVhwBCGa+GGsAItmcmPA2jTthn0eb10zMXpi4MD2s=
 			</data>
 		</dict>
 		<key>Resources/Data/Managed/Cinemachine.dll</key>
@@ -1271,14 +1243,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			m+n8muV/wgxGwmvi1SoTjDRPQDWXBVaNiR6KaBrpw5I=
+			EGPUdQoBX7kDtdoTZLqiaY1tC7FUmFVG/2hG93dxC3I=
 			</data>
 		</dict>
 		<key>Resources/Data/Managed/Unity.Networking.Transport.dll</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			sC5uvpUVOjOQzIm3JoXiSw1Sqv8zjKGiGOEDXrVEGFI=
+			dA0veZj1jHpZHq/O3nSFM0uWg4RvAz3ORdrVQXZmdB8=
 			</data>
 		</dict>
 		<key>Resources/Data/Managed/Unity.Profiling.Core.dll</key>
@@ -2020,54 +1992,42 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-<<<<<<< Updated upstream:CE Project.app/Contents/_CodeSignature/CodeResources
-			fvCwTb+dPJ8rfg7no/zrcUbuX6mFN+P/c4mUESGecyA=
-=======
-			1aSgnbI15qTp2QClALaSN1h8Pgdn+YzaFQ+VKLuk4yU=
->>>>>>> Stashed changes:CE_Project.app/Contents/_CodeSignature/CodeResources
+			EVPExbwyj8nzzl61dtwi07qzAHdAjIbncO4MkeTGHuw=
 			</data>
 		</dict>
 		<key>Resources/Data/globalgamemanagers.assets</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			pl9EMhm8dawl43JXyQywVclrTXYLUDkQAKwjiMuCoJg=
+			urBqsdlry/9ShckGZyEyHAP8xCjG+500gIQDGiPs+RU=
 			</data>
 		</dict>
 		<key>Resources/Data/level0</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			sO51YTKwmKVJMeLouJkaLK9hZktkeW66RxbpfP4guH8=
+			0Je7AI0QekUzpkk07l8XVveius5Ne2ZIlZTnKtzCh+E=
 			</data>
 		</dict>
 		<key>Resources/Data/level1</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-<<<<<<< Updated upstream:CE Project.app/Contents/_CodeSignature/CodeResources
-			G9D7u5P5/tLea6YiW3AmlRQS7gNXh2ZxfnAnZFaJG9c=
-=======
-			+nIYmP4LccSJ5bG3JpMiq2Jj/uhChpPGNRV8t3UYZ7Q=
->>>>>>> Stashed changes:CE_Project.app/Contents/_CodeSignature/CodeResources
+			6/MjXw8LjaQoIoW7CzbjCeMMreCFC/LICXZ/iq79p6E=
 			</data>
 		</dict>
 		<key>Resources/Data/level2</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-<<<<<<< Updated upstream:CE Project.app/Contents/_CodeSignature/CodeResources
-			kg8gs3aPZ1vEDnLAqQHWzb99PdF6Kd9XHSyjPJ4WM/o=
-=======
-			vosR9Skddem/yV2WwZmtXlT69WnsbWhKN/PorQynk68=
->>>>>>> Stashed changes:CE_Project.app/Contents/_CodeSignature/CodeResources
+			G/30KSG3t/TsXvQ0bTqhjxs3z5KljMhrzF3p2did5p8=
 			</data>
 		</dict>
 		<key>Resources/Data/resources.assets</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			yYK1zawnRsZ+N3iULLRYkqkLvva6WDrZiOIVXELmOuA=
+			VEh+MLWmRJPOiRmPmH1BBYzOAZdvbvZgsEGlgguRcko=
 			</data>
 		</dict>
 		<key>Resources/Data/resources.assets.resS</key>
@@ -2081,7 +2041,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			QpyZOW2bccl29ieAWMf+qovUwpeVkE+oFmlMypttkrE=
+			1mD0k9UoCyN4sVuconhrlVDHLIL8mgb81krwr94qWfk=
 			</data>
 		</dict>
 		<key>Resources/Data/sharedassets0.assets.resS</key>
@@ -2095,36 +2055,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-<<<<<<< Updated upstream:CE Project.app/Contents/_CodeSignature/CodeResources
-			X48O+nCuYMVpQpznExhWsbRjLfQUyf4LY+iLmx63LxE=
-=======
-			LYKoNSwsXTw1439uZ5CczveBYEB/Uv919OnfB2bniBs=
->>>>>>> Stashed changes:CE_Project.app/Contents/_CodeSignature/CodeResources
+			UMzhPFxISTxq1JGzMBKhpjEkqU+GFSsc+Y7yJ3EHV7Y=
 			</data>
 		</dict>
 		<key>Resources/Data/sharedassets1.assets.resS</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			0qm2MMHXNfVMEvzym8nzDVb6/VoNEBd9/O/tjNCjfJg=
+			YpOegW+a5GAsnigaJLlcODeKCPMtxrIpLWXFbAvh1hc=
 			</data>
 		</dict>
 		<key>Resources/Data/sharedassets2.assets</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-<<<<<<< Updated upstream:CE Project.app/Contents/_CodeSignature/CodeResources
-			NUmWcJWsxu16NH+7/MAggFZn2T4w36iROSELCKZydyQ=
-=======
-			pbjJJK5Bw89cTpRgRJNxt2/rWsnWoh+cfukDhWLfnjQ=
->>>>>>> Stashed changes:CE_Project.app/Contents/_CodeSignature/CodeResources
+			pP6jsmo9a7QhAwJAEZjn3D09DwlML4X0I2whmp8/N0w=
 			</data>
 		</dict>
 		<key>Resources/Data/sharedassets2.assets.resS</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Bng0tdUVZNRnmVM8Y3zxwHDKoUH6Sg+6IctmrFXlDKI=
+			8ybJHUo/SsVj2fyP451qU4/VyB45Qu1JBZBUI/+vhv8=
 			</data>
 		</dict>
 		<key>Resources/DefaultPreferences.plist</key>
