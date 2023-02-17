@@ -6797,8 +6797,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0de039afae6743d69a9da0d140755a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HostIpInput: {fileID: 0}
-  m_LobbySceneName: InGame
+  hostButton: {fileID: 1076577420}
+  joinButton: {fileID: 471604416}
+  lobbyCodeInputField: {fileID: 250695911}
+  maxPlayer: 4
+  inviteOnlyToggle: {fileID: 658198944}
 --- !u!4 &1151210047
 Transform:
   m_ObjectHideFlags: 0
@@ -10399,7 +10402,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5b50e8abec134cdb91db6778e02e523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resolutionDropdown: {fileID: 0}
 --- !u!1 &1929715262
 GameObject:
   m_ObjectHideFlags: 0
