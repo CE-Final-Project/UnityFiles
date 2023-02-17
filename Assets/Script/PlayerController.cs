@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Script.Networks;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -59,7 +60,7 @@ public class PlayerController : NetworkBehaviour
         if (!IsOwner) GetComponent<PlayerInput>().enabled = false;
         IsSpliteFlipped.OnValueChanged += OnIsSpliteFlippedChanged;
         NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
-        SceneTransitionHandler.sceneTransitionHandler.OnClientLoadedScene += OnClientLoadedScene;
+        SceneTransitionHandler.Instance.OnClientLoadedScene += OnClientLoadedScene;
     }
 
     private void OnClientLoadedScene(ulong clientid)
@@ -89,7 +90,7 @@ public class PlayerController : NetworkBehaviour
     {
         IsSpliteFlipped.OnValueChanged -= OnIsSpliteFlippedChanged;
         NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
-        SceneTransitionHandler.sceneTransitionHandler.OnClientLoadedScene -= OnClientLoadedScene;
+        SceneTransitionHandler.Instance.OnClientLoadedScene -= OnClientLoadedScene;
         Destroy(virtualCamera);
     }
 
