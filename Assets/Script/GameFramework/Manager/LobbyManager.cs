@@ -1,12 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Script.GameFramework.Core;
 using Script.GameFramework.Data;
-using Script.GameFramework.Infrastructure;
 using Unity.Services.Authentication;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
@@ -17,16 +14,34 @@ namespace Script.GameFramework.Manager
 {
     public class LobbyManager : Singleton<LobbyManager>
     {
-        private Lobby _lobby;
-        private Coroutine _heartbeatCoroutine;
-        private Coroutine _refreshCoroutine;
+        private Lobby _joinLobby;
+        private Lobby _hostLobby;
+        
+        private float _heartbeatTimer;
+        private  float _lobbyUpdateTimer;
         
         private const float HeartbeatInterval = 15f; // Rate limit is 5 request per 30 seconds
-        private const float RefreshInterval = 2f; // Rate limit is 1 request per second
-
+        private const float LobbyUpdateInterval = 1.5f; // Rate limit is 1 request per second
+        
         public static event Action<LobbyCreatedEventArgs> OnLobbyCreated;
         public static event Action<LobbyJoinedEventArgs> OnLobbyJoined;
         public static event Action OnLobbyUpdated;
+        public static event Action OnGameStarted;
+
+        private void Update()
+        {
+            if (_joinLobby != null)
+            {
+                LobbyData lobbyData = new();
+                lobbyData.Initialize(_joinLobby.Data);
+
+                if (!lobbyData.IsGameStarted)
+                {
+                    HandleLobbyPollingForUpdates();
+                }
+            }
+            HandleLobbyHeartbeat();
+        }
 
         public async Task<bool> JoinLobbyByCodeAsync(string code, Dictionary<string, string> playerData)
         {
@@ -38,15 +53,13 @@ namespace Script.GameFramework.Manager
 
             try
             {
-                _lobby = await Lobbies.Instance.JoinLobbyByCodeAsync(code, options);
+                _joinLobby = await Lobbies.Instance.JoinLobbyByCodeAsync(code, options);
             }
             catch (Exception)
             {
                 return false;
             }
 
-            _refreshCoroutine = StartCoroutine(RefreshLobbyCoroutine(_lobby.Id, RefreshInterval)); 
-            
             OnLobbyJoined?.Invoke(new LobbyJoinedEventArgs
             {
                 ClientId = options.Player.Id,
@@ -59,95 +72,121 @@ namespace Script.GameFramework.Manager
         {
 
             var playerData = SerializePlayerData(data);
+            playerData["isReady"].Value = true.ToString();
 
             Player player = new(AuthenticationService.Instance.PlayerId, null,playerData);
 
             CreateLobbyOptions options = new()
             {
                 IsPrivate = isPrivate,
-                Player = player
+                Player = player,
             };
+
+            LobbyData lobbyData = new();
+            lobbyData.Initialize(options.Data);
+            
+            options.Data = lobbyData.Serialize();
 
             try
             {
-                _lobby = await Lobbies.Instance.CreateLobbyAsync("Lobby Name Test", maxPlayer, options);
+                _hostLobby = await Lobbies.Instance.CreateLobbyAsync("Lobby Name Test", maxPlayer, options);
+                _joinLobby = _hostLobby;
             }
             catch (Exception)
             {
                 return false;
             }
 
-            _heartbeatCoroutine = StartCoroutine(HeartbeatLobbyCoroutine(_lobby.Id, HeartbeatInterval));
-            _refreshCoroutine = StartCoroutine(RefreshLobbyCoroutine(_lobby.Id, RefreshInterval));
-            
             OnLobbyCreated?.Invoke(new LobbyCreatedEventArgs
             {
-                HostId = _lobby.HostId,
-                IsPrivate = _lobby.IsPrivate,
-                LobbyCode = _lobby.LobbyCode,
-                MaxPlayer = _lobby.MaxPlayers,
-                LobbyId = _lobby.Id
+                HostId = _hostLobby.HostId,
+                IsPrivate = _hostLobby.IsPrivate,
+                LobbyCode = _hostLobby.LobbyCode,
+                MaxPlayer = _hostLobby.MaxPlayers,
+                LobbyId = _hostLobby.Id
             });
             
-            Debug.Log($"Lobby created with id {_lobby.Id} and code {_lobby.LobbyCode}");
-            
+            Debug.Log($"Lobby created with id {_hostLobby.Id} and code {_hostLobby.LobbyCode}");
+
             return true;
         }
-        
+
         public async Task UpdatePlayerDataAsync(string playerId, Dictionary<string, string> data)
         {
             var playerData = SerializePlayerData(data);
-            await Lobbies.Instance.UpdatePlayerAsync(_lobby.Id, playerId, new UpdatePlayerOptions()
+            await Lobbies.Instance.UpdatePlayerAsync(_joinLobby.Id, playerId, new UpdatePlayerOptions()
             {
                 Data = playerData
             });
         }
 
-        private IEnumerator HeartbeatLobbyCoroutine(string lobbyId, float waitTimeSeconds)
+        private async void HandleLobbyHeartbeat()
         {
-            WaitForSecondsRealtime delay = new(waitTimeSeconds);
-            Debug.Log($"Starting Lobby {lobbyId} heartbeat...");
+            if (_hostLobby == null) return;
             
-            while (true)
+            _heartbeatTimer -= Time.deltaTime;
+
+            if (_heartbeatTimer < 0f)
             {
-                LobbyService.Instance.SendHeartbeatPingAsync(lobbyId);
-                yield return delay;
+                _heartbeatTimer = HeartbeatInterval;
+
+                await LobbyService.Instance.SendHeartbeatPingAsync(_hostLobby.Id);
             }
         }
-        
-        private IEnumerator RefreshLobbyCoroutine(string lobbyId, float waitTimeSeconds)
+
+        private async void HandleLobbyPollingForUpdates()
         {
-            Stopwatch stopwatch = new();
-            Debug.Log($"Staring Lobby {lobbyId} refresh...");
+            if (_joinLobby == null) return;
             
-            while (true)
+            _lobbyUpdateTimer -= Time.deltaTime;
+
+            if (_lobbyUpdateTimer < 0f)
             {
-                stopwatch.Restart();
-                var task = LobbyService.Instance.GetLobbyAsync(lobbyId);
-                yield return new WaitUntil(() => task.IsCompleted);
-                Lobby newLobby = task.Result;
-                if (newLobby.LastUpdated > _lobby.LastUpdated)
+                _lobbyUpdateTimer = LobbyUpdateInterval;
+
+                Lobby lobby = await LobbyService.Instance.GetLobbyAsync(_joinLobby.Id);
+                _joinLobby = lobby;
+                
+                LobbyData lobbyData = new();
+                lobbyData.Initialize(_joinLobby.Data);
+                
+                if (lobbyData.IsGameStarted)
                 {
-                    _lobby = newLobby;
-                    OnLobbyUpdated?.Invoke();
+                    OnGameStarted?.Invoke();
                 }
                 
-                float delay = Mathf.Max(0, 1 - stopwatch.ElapsedMilliseconds * 1000);
-                
-                yield return new WaitForSeconds(delay);
+                OnLobbyUpdated?.Invoke();
             }
         }
 
         private async Task ManualRefreshLobby()
         {
-            Lobby lobby = await LobbyService.Instance.GetLobbyAsync(_lobby.Id);
-            if (lobby.LastUpdated > _lobby.LastUpdated)
+            if (_joinLobby == null) return;
+
+            if (_lobbyUpdateTimer <= 0f)
             {
-                _lobby = lobby;
-                OnLobbyUpdated?.Invoke();
+                _lobbyUpdateTimer = LobbyUpdateInterval;
+
+                Lobby lobby = await LobbyService.Instance.GetLobbyAsync(_joinLobby.Id);
+                _joinLobby = lobby;
                 
-                Debug.Log($"Lobby {_lobby.Id} refreshed");
+                OnLobbyUpdated?.Invoke();
             }
+        }
+        
+        public async Task UpdateLobbyGameStartedAsync()
+        {
+            if (_hostLobby == null) return;
+            
+            LobbyData lobbyData = new()
+            {
+                IsGameStarted = true
+            };
+
+            await LobbyService.Instance.UpdateLobbyAsync(_hostLobby.Id, new UpdateLobbyOptions()
+            {
+                Data = lobbyData.Serialize()
+            });
         }
 
         private static Dictionary<string, PlayerDataObject> SerializePlayerData(Dictionary<string, string> data)
@@ -158,78 +197,81 @@ namespace Script.GameFramework.Manager
         
         public List<Dictionary<string,PlayerDataObject>> GetPlayerData()
         {
-            return _lobby.Players.Select(player => player.Data).ToList();
+            return _joinLobby.Players.Select(player => player.Data).ToList();
         }
         
         public async void OnApplicationQuit()
         {
             Debug.Log("Quitting application...");
 
-
-            if (_lobby == null) return;
-            
-            if (IsHost()) await DeleteLobbyAsync();
-            else await LeaveLobby();
+            if (_hostLobby == null)
+            {
+                await LeaveLobby();
+            }
+            else
+            {
+                await DeleteLobbyAsync();
+            }
         }
         
         private async Task DeleteLobbyAsync()
         {
-            if (_lobby == null) return;
-            StopCoroutine(_heartbeatCoroutine);
-            StopCoroutine(_refreshCoroutine);
-            _heartbeatCoroutine = null;
-            _refreshCoroutine = null;
-            await LobbyService.Instance.DeleteLobbyAsync(_lobby.Id);
-            _lobby = null;
+            if (_hostLobby == null) return;
+            await LobbyService.Instance.DeleteLobbyAsync(_hostLobby.Id);
+            _hostLobby = null;
         }
 
         private async Task LeaveLobby()
         {
-            if (_lobby == null) return;
-            await LobbyService.Instance.RemovePlayerAsync(_lobby.Id, AuthenticationService.Instance.PlayerId);
-            StopCoroutine(_refreshCoroutine);
-            _refreshCoroutine = null;
-            _lobby = null;
+            if (_joinLobby == null) return;
+            await LobbyService.Instance.RemovePlayerAsync(_joinLobby.Id, AuthenticationService.Instance.PlayerId);
+            _joinLobby = null;
         }
         
+        private async Task KickPlayer(string playerId)
+        {
+            if (_hostLobby == null) return;
+            await LobbyService.Instance.RemovePlayerAsync(_hostLobby.Id, playerId);
+        }
+
         public bool IsInLobby()
         {
-            return _lobby != null;
+            return _hostLobby != null;
         }
         
         public bool IsHost()
         {
-            return _lobby != null && _lobby.HostId == AuthenticationService.Instance.PlayerId;
+            return _hostLobby != null && _hostLobby.HostId == AuthenticationService.Instance.PlayerId;
         }
         
         public bool IsPlayerInLobby(string playerId)
         {
-            return _lobby != null && _lobby.Players.Any(player => player.Id == playerId);
+            return _hostLobby != null && _hostLobby.Players.Any(player => player.Id == playerId);
         }
         
         public bool IsPlayerHost(string playerId)
         {
-            return _lobby != null && _lobby.HostId == playerId;
+            return _hostLobby != null && _hostLobby.HostId == playerId;
         }
         
         public bool IsPlayerReady(string playerId)
         {
-            return _lobby != null && GetPlayerData().Any(a => a["isReady"].Value == "true" && a["playerId"].Value == playerId);
+            return _hostLobby != null && GetPlayerData().Any(a => a["isReady"].Value == "true" && a["playerId"].Value == playerId);
         }
         
         public bool IsPlayerReady()
         {
-            return _lobby != null && GetPlayerData().Any(a => a["isReady"].Value == true.ToString() && a["playerId"].Value == AuthenticationService.Instance.PlayerId);
+            return _hostLobby != null && GetPlayerData().Any(a => a["isReady"].Value == true.ToString() && a["playerId"].Value == AuthenticationService.Instance.PlayerId);
         }
         
         public bool IsAllPlayerReady()
         {
-            return _lobby != null && GetPlayerData().All(a => a["isReady"].Value == true.ToString());
+            return _hostLobby != null && GetPlayerData().All(a => a["isReady"].Value == true.ToString());
         }
 
         public string GetMaxPlayer()
         {
-            return _lobby.MaxPlayers.ToString();
+            return _hostLobby.MaxPlayers.ToString();
         }
     }
 }

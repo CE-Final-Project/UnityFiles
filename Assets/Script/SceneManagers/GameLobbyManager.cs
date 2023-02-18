@@ -30,12 +30,44 @@ namespace Script.SceneManagers
         {
             SceneTransitionHandler.Instance.SetSceneState(SceneTransitionHandler.SceneStates.Lobby);
             
-            lobbyButton.onClick.AddListener(ReadyHandler);
-            textButton.text = "Ready";
+            lobbyButton.onClick.AddListener(OnClickHandler);
+            textButton.text = LobbyManager.Instance.IsHost() ? "Start Game" : "Ready";
 
             LobbyManager.OnLobbyUpdated += OnLobbyUpdated;
         }
-        
+
+        private async void OnClickHandler()
+        {
+            if (LobbyManager.Instance.IsHost())
+            {
+                if (LobbyManager.Instance.IsAllPlayerReady())
+                {
+                    StartHostNetwork();
+                    
+                    // Update Lobby Status
+                    await LobbyManager.Instance.UpdateLobbyGameStartedAsync();
+                    
+                    return;
+                }
+            }
+            
+            // Update player data
+            _localPlayerData.IsReady = !_localPlayerData.IsReady;
+            await LobbyManager.Instance.UpdatePlayerDataAsync(_localPlayerData.Id, _localPlayerData.Serialize());
+            textButton.text = _localPlayerData.IsReady ? "Ready" : "Unready";
+            
+            if (_localPlayerData.IsReady && !LobbyManager.Instance.IsHost())
+            {
+                LobbyManager.OnGameStarted += OnGameStarted;
+            }
+        }
+
+        private void OnGameStarted()
+        {
+            SceneTransitionHandler.Instance.RegisterCallbacks();
+            SceneTransitionHandler.Instance.SwitchScene("InGame");
+        }
+
         private void OnDestroy()
         {
             // LobbyManager.OnLobbyCreated -= OnLobbyCreated;
@@ -62,18 +94,7 @@ namespace Script.SceneManagers
 
             if (LobbyManager.Instance.IsHost() && _localPlayerData.IsReady)
             {
-                if (LobbyManager.Instance.IsAllPlayerReady())
-                {
-                    lobbyButton.onClick.RemoveListener(ReadyHandler);
-                    lobbyButton.onClick.AddListener(StartLocalGame);
-                    textButton.text = "Start Game";
-                }
-                else
-                {
-                    lobbyButton.onClick.RemoveListener(StartLocalGame);
-                    lobbyButton.onClick.AddListener(ReadyHandler);
-                    textButton.text = "Waiting for players...";
-                }
+                textButton.text = LobbyManager.Instance.IsAllPlayerReady() ? "Start Game" : "Waiting for players...";
             }
             
             lobbyCountPlayerText.text = $"Players ({_listLobbyPlayerData.Count}/{LobbyManager.Instance.GetMaxPlayer()})";
@@ -91,53 +112,62 @@ namespace Script.SceneManagers
             _localPlayerData.IsReady = !_localPlayerData.IsReady;
             await LobbyManager.Instance.UpdatePlayerDataAsync(_localPlayerData.Id, _localPlayerData.Serialize());
 
-            if (LobbyManager.Instance.IsHost())
-            {
-                if (LobbyManager.Instance.IsAllPlayerReady())
-                {
-                    lobbyButton.onClick.RemoveListener(ReadyHandler);
-                    lobbyButton.onClick.AddListener(StartLocalGame);
-                    textButton.text = "Start Game";
-                }
-                textButton.text = "Waiting for players...";
-            }
-            
             if (_localPlayerData.IsReady)
             {
                 textButton.text = LobbyManager.Instance.IsHost() ? "Waiting for players..." : "Unready";
+                if (!LobbyManager.Instance.IsHost())
+                {
+                    LobbyManager.OnGameStarted += HandleGameStarted;
+                }
             }
             else
             {
                 textButton.text = "Ready";
+                if (!LobbyManager.Instance.IsHost())
+                {
+                    LobbyManager.OnGameStarted -= HandleGameStarted;
+                }
             }
         }
 
-        private void StartLocalGame()
+        private void HandleGameStarted()
+        {
+            StartClientNetwork();
+        }
+
+        private async void StartLocalGame()
         {
             if (_listLobbyPlayerData.All(a => a.IsReady))
             {
-                SceneTransitionHandler.Instance.SwitchScene("InGame");
+                // host start game
+                StartHostNetwork();
+
+                await LobbyManager.Instance.UpdateLobbyGameStartedAsync();
             }
         }
         
         private void StartHostNetwork()
-        {
-            
-           var utpTransport = (UnityTransport)NetworkManager.Singleton.NetworkConfig.NetworkTransport;
+        { 
+            UnityTransport utpTransport = (UnityTransport)NetworkManager.Singleton.NetworkConfig.NetworkTransport;
            if (utpTransport) _hostIp = "127.0.0.1";
            if (NetworkManager.Singleton.StartHost())
            {
+               // NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectGame;
                SceneTransitionHandler.Instance.RegisterCallbacks();
                SceneTransitionHandler.Instance.SwitchScene("InGame");
-               NetworkManager.Singleton.OnServerStarted += () =>
-               {
-                   Debug.Log($"Server Started at {NetworkManager.Singleton.ConnectedHostname}");
-               };
            }
            else
            {
                Debug.LogError("Failed to start host.");
            }
+        }
+
+        private void OnClientConnectGame(ulong obj)
+        {
+            if (NetworkManager.Singleton.ConnectedClients.Count == LobbyManager.Instance.GetPlayerData().Count)
+            {
+                NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnectGame;
+            }
         }
 
         private void StartClientNetwork()
@@ -148,12 +178,11 @@ namespace Script.SceneManagers
             if (utpTransport)
             {
                 utpTransport.SetConnectionData(Sanitize(_hostIp), 7777);
-                utpTransport.SetConnectionData("127.0.0.1", 7777);
             }
             
             if (!NetworkManager.Singleton.StartClient())
             {
-                SceneTransitionHandler.Instance.SwitchScene("InGame");
+                // SceneTransitionHandler.Instance.SwitchScene("InGame");
                 Debug.LogError("Failed to start client.");
             }
         }

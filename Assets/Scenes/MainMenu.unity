@@ -2455,7 +2455,6 @@ GameObject:
   - component: {fileID: 471604418}
   - component: {fileID: 471604417}
   - component: {fileID: 471604416}
-  - component: {fileID: 471604415}
   m_Layer: 5
   m_Name: Join Button (1)
   m_TagString: Untagged
@@ -2484,18 +2483,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -350}
   m_SizeDelta: {x: 500, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &471604415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 471604413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ac442717a61d49dfa589a5d6b16303e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &471604416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2539,19 +2526,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 471604417}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1151210046}
-        m_TargetAssemblyTypeName: Script.MenuManager, Assembly-CSharp
-        m_MethodName: JoinLocalGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
 --- !u!114 &471604417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6216,7 +6191,6 @@ GameObject:
   - component: {fileID: 1076577422}
   - component: {fileID: 1076577421}
   - component: {fileID: 1076577420}
-  - component: {fileID: 1076577419}
   m_Layer: 5
   m_Name: Start Button
   m_TagString: Untagged
@@ -6245,18 +6219,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.000061035156, y: -350}
   m_SizeDelta: {x: 500, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1076577419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1076577417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ac442717a61d49dfa589a5d6b16303e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1076577420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6300,19 +6262,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1076577421}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1151210046}
-        m_TargetAssemblyTypeName: Script.MenuManager, Assembly-CSharp
-        m_MethodName: StartLocalGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
 --- !u!114 &1076577421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10402,6 +10352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5b50e8abec134cdb91db6778e02e523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resolutionDropdown: {fileID: 0}
 --- !u!1 &1929715262
 GameObject:
   m_ObjectHideFlags: 0
