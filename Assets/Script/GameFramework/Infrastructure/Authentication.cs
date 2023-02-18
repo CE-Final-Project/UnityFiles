@@ -17,7 +17,6 @@ namespace Script.GameFramework.Infrastructure
 
                 Debug.Log("Unity Services initialized!");
                 
-                
 #if UNITY_EDITOR 
                 if (ParrelSync.ClonesManager.IsClone())
                 {
@@ -31,16 +30,17 @@ namespace Script.GameFramework.Infrastructure
             catch (Exception e)
             {
                 Debug.LogException(e);
-                throw;
             }
         }
 
-        private void Start()
+        private async void Start()
         {
             AuthenticationService.Instance.SignedIn += OnSignIn;
             AuthenticationService.Instance.SignedOut += OnSignOut;
             AuthenticationService.Instance.SignInFailed += OnSignInFailed;
             AuthenticationService.Instance.Expired += OnSessionExpired;
+
+            await SignInAnonymouslyAsync();
         }
         
         private void OnDestroy()
@@ -50,11 +50,24 @@ namespace Script.GameFramework.Infrastructure
             AuthenticationService.Instance.SignInFailed -= OnSignInFailed;
             AuthenticationService.Instance.Expired -= OnSessionExpired;
         }
-        
-        public async Task SignInAnonymouslyAsync()
+
+        private static async Task SignInAnonymouslyAsync()
         {
             try
             {
+                
+                if (UnityServices.State != ServicesInitializationState.Initialized)
+                {
+                    Debug.LogError("Unity Services is not initialized!");
+                    return;
+                }
+                
+                if (AuthenticationService.Instance.IsAuthorized)
+                {
+                    Debug.Log("Already signed in!");
+                    return;
+                }
+                
                 await AuthenticationService.Instance.SignInAnonymouslyAsync();
                 Debug.Log("Sign in anonymously succeeded!");
             }
