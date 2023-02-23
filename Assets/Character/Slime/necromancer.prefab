@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 8060268812615715776}
   - component: {fileID: 8749695392370026807}
   m_Layer: 0
-  m_Name: Slime
+  m_Name: necromancer
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 744037200, guid: 12785c3d6c9c54ec0adecac31d441e39, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4fa9aecbfdeb740f0836c55dead534ba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -126,8 +126,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00502415, y: -0.025230333}
-  m_Size: {x: 0.15877229, y: 0.15877229}
+  m_Offset: {x: -0.004394032, y: -0.028065816}
+  m_Size: {x: 0.13860874, y: 0.1858671}
   m_Direction: 0
 --- !u!114 &4618556378052374302
 MonoBehaviour:
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4404decc50652400687b11f901c33823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 1
 --- !u!95 &3348280876941386463
 Animator:
   serializedVersion: 5
