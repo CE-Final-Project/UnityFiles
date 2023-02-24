@@ -62,48 +62,6 @@ namespace Script.SceneManagers
             }
             SceneTransitionHandler.Instance.SwitchScene(LobbySceneName);
         }
-        
-        // private void StartHostNetwork()
-        // {
-        //     
-        //     var utpTransport = (UnityTransport)NetworkManager.Singleton.NetworkConfig.NetworkTransport;
-        //     if (utpTransport) _hostIp = "127.0.0.1";
-        //     if (NetworkManager.Singleton.StartHost())
-        //     {
-        //         SceneTransitionHandler.Instance.RegisterCallbacks();
-        //         NetworkManager.Singleton.OnServerStarted += () =>
-        //         {
-        //             Debug.Log($"Server Started at {NetworkManager.Singleton.ConnectedHostname}");
-        //         };
-        //     }
-        //     else
-        //     {
-        //         Debug.LogError("Failed to start host.");
-        //     }
-        // }
-        //
-        // private void StartClientNetwork()
-        // {
-        //     if (_hostIp == "Hostname") return;
-        //     
-        //     var utpTransport = (UnityTransport)NetworkManager.Singleton.NetworkConfig.NetworkTransport;
-        //     if (utpTransport)
-        //     {
-        //         utpTransport.SetConnectionData(Sanitize(_hostIp), 7777);
-        //         utpTransport.SetConnectionData("127.0.0.1", 7777);
-        //     }
-        //     
-        //     if (!NetworkManager.Singleton.StartClient())
-        //     {
-        //         Debug.LogError("Failed to start client.");
-        //     }
-        // }
-        //
-        // private static string Sanitize(string dirtyString)
-        // {
-        //     // sanitize the input for the ip address
-        //     return Regex.Replace(dirtyString, "[^A-Za-z0-9.]", "");
-        // }
-        
+
     }
 }

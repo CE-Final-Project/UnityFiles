@@ -22,7 +22,7 @@ namespace Script.SceneManagers
         [SerializeField] private TextMeshProUGUI lobbyCodeText;
         [SerializeField] private TextMeshProUGUI lobbyCountPlayerText;
 
-        private string _hostIp;
+        private string _hostIp = "127.0.0.1";
         private readonly List<LobbyPlayerData> _listLobbyPlayerData = new(); 
         private LobbyPlayerData _localPlayerData;
 
@@ -31,7 +31,17 @@ namespace Script.SceneManagers
             SceneTransitionHandler.Instance.SetSceneState(SceneTransitionHandler.SceneStates.Lobby);
             
             lobbyButton.onClick.AddListener(OnClickHandler);
-            textButton.text = LobbyManager.Instance.IsHost() ? "Start Game" : "Ready";
+
+            if (LobbyManager.Instance.IsHost())
+            {
+                textButton.text = "Waiting for players...";
+                lobbyButton.interactable = false;
+            }
+            else
+            {
+                textButton.text = "Ready";
+            }
+            
 
             LobbyManager.OnLobbyUpdated += OnLobbyUpdated;
         }
@@ -45,8 +55,9 @@ namespace Script.SceneManagers
                     StartHostNetwork();
                     
                     // Update Lobby Status
+                    Debug.Log("All player ready, start game.");
                     await LobbyManager.Instance.UpdateLobbyGameStartedAsync();
-                    
+
                     return;
                 }
             }
@@ -54,7 +65,7 @@ namespace Script.SceneManagers
             // Update player data
             _localPlayerData.IsReady = !_localPlayerData.IsReady;
             await LobbyManager.Instance.UpdatePlayerDataAsync(_localPlayerData.Id, _localPlayerData.Serialize());
-            textButton.text = _localPlayerData.IsReady ? "Ready" : "Unready";
+            textButton.text = _localPlayerData.IsReady ? "Unready" : "Ready";
             
             if (_localPlayerData.IsReady && !LobbyManager.Instance.IsHost())
             {
@@ -64,8 +75,13 @@ namespace Script.SceneManagers
 
         private void OnGameStarted()
         {
-            SceneTransitionHandler.Instance.RegisterCallbacks();
-            SceneTransitionHandler.Instance.SwitchScene("InGame");
+            
+            Debug.Log("Game Started");
+
+            lobbyButton.interactable = false;
+            
+            // Start Client Network
+            StartClientNetwork();
         }
 
         private void OnDestroy()
@@ -73,6 +89,7 @@ namespace Script.SceneManagers
             // LobbyManager.OnLobbyCreated -= OnLobbyCreated;
             // LobbyManager.OnLobbyJoined -= OnLobbyJoined;
             LobbyManager.OnLobbyUpdated -= OnLobbyUpdated;
+            LobbyManager.OnGameStarted -= OnGameStarted;
         }
 
         private void OnLobbyUpdated()
@@ -95,6 +112,7 @@ namespace Script.SceneManagers
             if (LobbyManager.Instance.IsHost() && _localPlayerData.IsReady)
             {
                 textButton.text = LobbyManager.Instance.IsAllPlayerReady() ? "Start Game" : "Waiting for players...";
+                lobbyButton.interactable = LobbyManager.Instance.IsAllPlayerReady();
             }
             
             lobbyCountPlayerText.text = $"Players ({_listLobbyPlayerData.Count}/{LobbyManager.Instance.GetMaxPlayer()})";
@@ -105,47 +123,7 @@ namespace Script.SceneManagers
                 Debug.Log($"PlayerId: {data.Id}, PlayerName: {data.Name}, CharacterId: {data.CharacterId}, IsReady: {data.IsReady}");
             }
         }
-        
 
-        private async void ReadyHandler()
-        {
-            _localPlayerData.IsReady = !_localPlayerData.IsReady;
-            await LobbyManager.Instance.UpdatePlayerDataAsync(_localPlayerData.Id, _localPlayerData.Serialize());
-
-            if (_localPlayerData.IsReady)
-            {
-                textButton.text = LobbyManager.Instance.IsHost() ? "Waiting for players..." : "Unready";
-                if (!LobbyManager.Instance.IsHost())
-                {
-                    LobbyManager.OnGameStarted += HandleGameStarted;
-                }
-            }
-            else
-            {
-                textButton.text = "Ready";
-                if (!LobbyManager.Instance.IsHost())
-                {
-                    LobbyManager.OnGameStarted -= HandleGameStarted;
-                }
-            }
-        }
-
-        private void HandleGameStarted()
-        {
-            StartClientNetwork();
-        }
-
-        private async void StartLocalGame()
-        {
-            if (_listLobbyPlayerData.All(a => a.IsReady))
-            {
-                // host start game
-                StartHostNetwork();
-
-                await LobbyManager.Instance.UpdateLobbyGameStartedAsync();
-            }
-        }
-        
         private void StartHostNetwork()
         { 
             UnityTransport utpTransport = (UnityTransport)NetworkManager.Singleton.NetworkConfig.NetworkTransport;
@@ -162,19 +140,9 @@ namespace Script.SceneManagers
            }
         }
 
-        private void OnClientConnectGame(ulong obj)
-        {
-            if (NetworkManager.Singleton.ConnectedClients.Count == LobbyManager.Instance.GetPlayerData().Count)
-            {
-                NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnectGame;
-            }
-        }
-
         private void StartClientNetwork()
         {
-            if (_hostIp == "Hostname") return;
-            
-            var utpTransport = (UnityTransport)NetworkManager.Singleton.NetworkConfig.NetworkTransport;
+            UnityTransport utpTransport = (UnityTransport)NetworkManager.Singleton.NetworkConfig.NetworkTransport;
             if (utpTransport)
             {
                 utpTransport.SetConnectionData(Sanitize(_hostIp), 7777);
