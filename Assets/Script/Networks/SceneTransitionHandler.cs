@@ -81,7 +81,7 @@ namespace Script.Networks
         {
             if (_sceneState == SceneStates.Init)
             {
-                SceneManager.LoadScene(defaultMainMenu);
+                SceneManager.LoadScene(defaultMainMenu, LoadSceneMode.Single);
             }
         }
 
@@ -130,7 +130,7 @@ namespace Script.Networks
             NetworkManager.Singleton.SceneManager.OnLoadComplete -= OnLoadComplete;
             OnClientLoadedScene = null;
             SetSceneState(SceneStates.MainMenu);
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(defaultMainMenu);
         }
     }
 }

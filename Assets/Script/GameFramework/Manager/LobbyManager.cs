@@ -271,7 +271,7 @@ namespace Script.GameFramework.Manager
 
         public string GetMaxPlayer()
         {
-            return _hostLobby.MaxPlayers.ToString();
+            return _joinLobby.MaxPlayers.ToString();
         }
     }
 }
