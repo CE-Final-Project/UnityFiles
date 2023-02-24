@@ -118,8 +118,7 @@ public class PlayerController : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        //comment this when play on editor
-        //also character didn't flip when move left, right
+        
         if (!IsOwner) return;
 
         if (canMove)
