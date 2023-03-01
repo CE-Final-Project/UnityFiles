@@ -195,6 +195,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5694656346131016876, guid: 787143f9c7169453c8434975b6397152, type: 3}
+      propertyPath: ConnectionData.Port
+      value: 12121
+      objectReference: {fileID: 0}
+    - target: {fileID: 5694656346131016876, guid: 787143f9c7169453c8434975b6397152, type: 3}
+      propertyPath: ConnectionData.Address
+      value: 0.0.0.0
+      objectReference: {fileID: 0}
     - target: {fileID: 5694656346131016877, guid: 787143f9c7169453c8434975b6397152, type: 3}
       propertyPath: m_RootOrder
       value: 0
