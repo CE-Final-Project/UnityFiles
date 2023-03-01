@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Enemy : NetworkBehaviour
 {
-    [SerializeField] private float moveSpeed = 5f;
+    //[SerializeField] private float moveSpeed = 5f;
     Animator animator;
     private GameObject player;
     public float Health {
