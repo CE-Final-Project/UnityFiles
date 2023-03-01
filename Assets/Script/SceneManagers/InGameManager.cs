@@ -1,13 +1,13 @@
 using Script.Networks;
 using Unity.Netcode;
 using UnityEngine;
+using NetworkSceneManager = Script.Networks.NetworkSceneManager;
 
 namespace Script.SceneManagers
 {
     public class InGameManager : NetworkBehaviour
     {
         [SerializeField] private GameObject enemyPrefab;
-
         [SerializeField] private GameObject spawnPoints;
         public override void OnNetworkSpawn()
         {

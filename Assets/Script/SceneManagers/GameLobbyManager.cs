@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 using Script.GameFramework.Data;
 using Script.GameFramework.Manager;
@@ -10,6 +11,7 @@ using Unity.Netcode.Transports.UTP;
 using Unity.Services.Authentication;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Script.SceneManagers
@@ -41,7 +43,6 @@ namespace Script.SceneManagers
             {
                 textButton.text = "Ready";
             }
-            
 
             LobbyManager.OnLobbyUpdated += OnLobbyUpdated;
         }
@@ -55,8 +56,10 @@ namespace Script.SceneManagers
                     StartHostNetwork();
                     
                     // Update Lobby Status
+                    _hostIp = IPManager.GetIP(ADDRESSFAM.IPv4);
                     Debug.Log("All player ready, start game.");
-                    await LobbyManager.Instance.UpdateLobbyGameStartedAsync();
+                    Debug.Log($"Host IP: {_hostIp}");
+                    await LobbyManager.Instance.UpdateLobbyGameStartedAsync(_hostIp);
 
                     return;
                 }
@@ -77,6 +80,8 @@ namespace Script.SceneManagers
         {
             
             Debug.Log("Game Started");
+            
+            _hostIp = LobbyManager.Instance.GetHostIp();
 
             lobbyButton.interactable = false;
             
@@ -126,20 +131,19 @@ namespace Script.SceneManagers
             }
         }
 
-        private void StartHostNetwork()
+        private static void StartHostNetwork()
         { 
-            UnityTransport utpTransport = (UnityTransport)NetworkManager.Singleton.NetworkConfig.NetworkTransport;
-           if (utpTransport) _hostIp = "127.0.0.1";
-           if (NetworkManager.Singleton.StartHost())
-           {
+            if (NetworkManager.Singleton.StartHost()) 
+            {
                // NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectGame;
                SceneTransitionHandler.Instance.RegisterCallbacks();
                SceneTransitionHandler.Instance.SwitchScene("InGame");
-           }
-           else
-           {
-               Debug.LogError("Failed to start host.");
-           }
+               // SceneManager.LoadScene("inGame");
+            }
+            else
+            {
+                Debug.LogError("Failed to start host.");
+            }
         }
 
         private void StartClientNetwork()
@@ -147,14 +151,28 @@ namespace Script.SceneManagers
             UnityTransport utpTransport = (UnityTransport)NetworkManager.Singleton.NetworkConfig.NetworkTransport;
             if (utpTransport)
             {
-                utpTransport.SetConnectionData(Sanitize(_hostIp), 7777);
+                utpTransport.SetConnectionData(Sanitize(_hostIp), 12121);
             }
-            
+
             if (!NetworkManager.Singleton.StartClient())
             {
-                // SceneTransitionHandler.Instance.SwitchScene("InGame");
                 Debug.LogError("Failed to start client.");
             }
+        }
+        
+        private static string GetLocalIPAddress()
+        {
+            
+            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (IPAddress ip in host.AddressList)
+            {
+                if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork && !IPAddress.IsLoopback(ip))
+                {
+                    return ip.ToString();
+                }
+            }
+
+            throw new System.Exception("No network adapters with an IPv4 address in the system!");
         }
         
         private static string Sanitize(string dirtyString)
