@@ -116,6 +116,7 @@ namespace Script.SceneManagers
             }
             
             lobbyCountPlayerText.text = $"Players ({_listLobbyPlayerData.Count}/{LobbyManager.Instance.GetMaxPlayer()})";
+            lobbyCodeText.text = $"Lobby Code : {LobbyManager.Instance.GetLobbyCode()}";
 
             // print all player data
             foreach (LobbyPlayerData data in _listLobbyPlayerData)

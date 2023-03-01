@@ -273,5 +273,10 @@ namespace Script.GameFramework.Manager
         {
             return _joinLobby.MaxPlayers.ToString();
         }
+
+        public string GetLobbyCode()
+        {
+            return _hostLobby.LobbyCode.ToString();
+        }
     }
 }
