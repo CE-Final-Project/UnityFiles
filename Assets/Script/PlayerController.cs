@@ -96,6 +96,15 @@ namespace Script
             Destroy(virtualCamera);
         }
 
+        private void OnCollisionEnter2D(Collision2D col)
+        {
+            // check if the collision is with another player
+            if (col.gameObject.tag == "Player")
+            {
+                Physics2D.IgnoreCollision(col.collider, GetComponent<Collider2D>());
+            }
+        }
+
         // Start is called before the first frame update
         void Start()
         {

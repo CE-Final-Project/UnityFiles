@@ -119,8 +119,10 @@ namespace Script.SceneManagers
                 textButton.text = LobbyManager.Instance.IsAllPlayerReady() ? "Start Game" : "Waiting for players...";
                 lobbyButton.interactable = LobbyManager.Instance.IsAllPlayerReady();
             }
-            
+
+            //Display lobby player & lobby code
             lobbyCountPlayerText.text = $"Players ({_listLobbyPlayerData.Count}/{LobbyManager.Instance.GetMaxPlayer()})";
+            lobbyCodeText.text = $"Lobby Code : {LobbyManager.Instance.GetLobbyCode()}";
 
             // print all player data
             foreach (LobbyPlayerData data in _listLobbyPlayerData)

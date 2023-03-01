@@ -478,8 +478,8 @@ GameObject:
   - component: {fileID: 837023322073801835}
   - component: {fileID: 7216525253764287728}
   m_Layer: 0
-  m_Name: SwordHitBox
-  m_TagString: Untagged
+  m_Name: SkillHitBox
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

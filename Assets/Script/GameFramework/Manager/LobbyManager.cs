@@ -281,5 +281,9 @@ namespace Script.GameFramework.Manager
             lobbyData.Initialize(_joinLobby.Data);
             return lobbyData.HostIp;
         }
+        public string GetLobbyCode()
+        {
+            return _hostLobby.LobbyCode.ToString();
+        }
     }
 }
