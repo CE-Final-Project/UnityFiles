@@ -62,6 +62,5 @@ namespace Script.SceneManagers
             }
             SceneTransitionHandler.Instance.SwitchScene(LobbySceneName);
         }
-
     }
 }

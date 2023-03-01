@@ -174,13 +174,14 @@ namespace Script.GameFramework.Manager
             }
         }
         
-        public async Task UpdateLobbyGameStartedAsync()
+        public async Task UpdateLobbyGameStartedAsync(string hostIp)
         {
             if (_hostLobby == null) return;
             
             LobbyData lobbyData = new()
             {
-                IsGameStarted = true
+                IsGameStarted = true,
+                HostIp = hostIp
             };
 
             await LobbyService.Instance.UpdateLobbyAsync(_hostLobby.Id, new UpdateLobbyOptions()
@@ -272,6 +273,13 @@ namespace Script.GameFramework.Manager
         public string GetMaxPlayer()
         {
             return _joinLobby.MaxPlayers.ToString();
+        }
+        
+        public string GetHostIp()
+        {
+            LobbyData lobbyData = new();
+            lobbyData.Initialize(_joinLobby.Data);
+            return lobbyData.HostIp;
         }
     }
 }
