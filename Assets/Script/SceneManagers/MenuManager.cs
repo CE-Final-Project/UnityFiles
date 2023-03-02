@@ -18,8 +18,7 @@ namespace Script.SceneManagers
     {
         private const string LobbySceneName = "Lobby";
         private string _hostIp;
-
-
+        
         [SerializeField] private Button hostButton;
         [SerializeField] private Button joinButton;
         
@@ -27,7 +26,6 @@ namespace Script.SceneManagers
 
         [SerializeField] private int maxPlayer = 4;
         [SerializeField] private Toggle inviteOnlyToggle;
-
 
         private void Start()
         {
