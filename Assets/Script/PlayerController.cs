@@ -62,7 +62,7 @@ namespace Script
             SceneTransitionHandler.Instance.OnClientLoadedScene += OnClientLoadedScene;
             
             // randomize position player
-            transform.position = new Vector3(Random.Range(-2f, 0f), Random.Range(0.1f, 1f), 0);
+            transform.position = new Vector3(Random.Range(-2f, 2f), Random.Range(-1f, -2f), 0);
         }
 
         private void OnClientLoadedScene(ulong clientid)
