@@ -1,11 +1,10 @@
-using Script;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Goal_Hunt : Goal_Base
+public class Goal_Flee : Goal_Base
 {
-    [SerializeField] int CurrentPriority = 1;
+    [SerializeField] int CurrentPriority = 100;
     GameObject[] players;
     GameObject enemySpawner;
     public GameObject nearestPlayer;
@@ -15,19 +14,23 @@ public class Goal_Hunt : Goal_Base
     {
         players = GameObject.FindGameObjectsWithTag("Player");
         enemySpawner = GameObject.FindGameObjectWithTag("SpawnerPosition");
+        
+
     }
     public override int CalculatePriority()
     {
-        
-        return 1;
+
+        return CurrentPriority;
     }
 
     public override bool CanRun()
     {
         //Pre condition
-        nearestPlayer = GetClosestPlayer(players);
-        if (Vector2.Distance(nearestPlayer.transform.position, transform.position) <= 1)  {
-            return true; 
+        if (gameObject.GetComponent<Enemy>().health < 3)
+        {
+            return true;
+            Debug.Log("CAN FLEE");
+            
         }
 
         return false;
@@ -37,8 +40,9 @@ public class Goal_Hunt : Goal_Base
     {
         LinkedAction = _linkedAction;
         //Debug.Log("GOAL ACTIVATED");
+        Debug.Log("Low HP");
 
-        
+
     }
 
     public override void OnGoalDeactivated()
@@ -47,22 +51,4 @@ public class Goal_Hunt : Goal_Base
 
         nearestPlayer = null;
     }
-
-    GameObject GetClosestPlayer(GameObject[] players)
-    {
-        GameObject tMin = null;
-        float minDist = Mathf.Infinity;
-        Vector3 currentPos = transform.position;
-        foreach (GameObject t in players)
-        {
-            float dist = Vector3.Distance(t.transform.position, currentPos);
-            if (dist < minDist)
-            {
-                tMin = t;
-                minDist = dist;
-            }
-        }
-        return tMin;
-    }
-
 }

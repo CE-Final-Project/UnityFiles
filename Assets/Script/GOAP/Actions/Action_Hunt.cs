@@ -12,6 +12,9 @@ public class Action_Hunt : Action_Base
     NavMeshAgent agent;
     GameObject[] players;
 
+    float closetPos = 100;
+    GameObject closetPlayer;
+
 
 
 
@@ -37,6 +40,7 @@ public class Action_Hunt : Action_Base
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         players = GameObject.FindGameObjectsWithTag("Player");
+        closetPlayer = GetComponent<Goal_Hunt>().nearestPlayer;
 
     }
 
@@ -48,13 +52,13 @@ public class Action_Hunt : Action_Base
 
         agent = null;
 
-        Debug.Log("STOP HUNTING");
+        
     }
 
     public override void OnTick()
     {
-        //Actions Here
-        agent.SetDestination(players[0].transform.position);
+        //Actions Here 
+        agent.SetDestination(closetPlayer.transform.position);
         //Debug.Log("HUNTING");
     }
 }

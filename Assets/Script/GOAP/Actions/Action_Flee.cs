@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Action_Idle : Action_Base
+public class Action_Flee : Action_Base
 {
-    List<System.Type> SupportedGoals = new List<System.Type>(new System.Type[] { typeof(Goal_Idle) });
+    List<System.Type> SupportedGoals = new List<System.Type>(new System.Type[] { typeof(Goal_Flee) });
 
-    Goal_Idle IdleGoal;
+    Goal_Flee FleeGoal;
 
     NavMeshAgent agent;
     GameObject[] players;
@@ -31,7 +31,7 @@ public class Action_Idle : Action_Base
         base.OnActivated(_linkedGoal);
 
         // cache the chase goal
-        IdleGoal = (Goal_Idle)LinkedGoal;
+        FleeGoal = (Goal_Flee)LinkedGoal;
 
         //Actions Here
         agent = GetComponent<NavMeshAgent>();
@@ -39,7 +39,7 @@ public class Action_Idle : Action_Base
         agent.updateUpAxis = false;
         players = GameObject.FindGameObjectsWithTag("Player");
         enemySpawner = GameObject.FindGameObjectWithTag("SpawnerPosition");
-        
+
 
     }
 
@@ -47,13 +47,13 @@ public class Action_Idle : Action_Base
     {
         base.OnDeactivated();
 
-        IdleGoal = null;
+        FleeGoal = null;
     }
 
     public override void OnTick()
     {
         //Actions Here
-        agent.SetDestination(transform.position);
+        agent.SetDestination(enemySpawner.transform.position);
         //Debug.Log("IDLING");
     }
 }

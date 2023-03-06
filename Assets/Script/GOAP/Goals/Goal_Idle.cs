@@ -15,7 +15,7 @@ public class Goal_Idle : Goal_Base
     }
     public override int CalculatePriority()
     {
-        return players[0].GetComponent<PlayerController>().MaxPlayerHealth;
+        return 0;
     }
 
     public override bool CanRun()

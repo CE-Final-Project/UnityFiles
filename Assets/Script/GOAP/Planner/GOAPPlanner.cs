@@ -96,6 +96,6 @@ public class GOAPPlanner : MonoBehaviour
         if (ActiveAction != null)
             ActiveAction.OnTick();
 
-        Debug.Log(ActiveGoal);
+        
     }
 }
