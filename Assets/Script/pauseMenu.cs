@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class pauseMenu : MonoBehaviour
 {
-    public static  bool gameIsPaused = false;
+    public static bool gameIsPaused = false;
     public GameObject pauseMenuUI;
     public GameObject pauseButtonUI;
     public GameObject gameHUD;
-    public GameObject playerInstance;
+    //public GameObject playerInstance;
 
     // Update is called once per frame
     void Update() {
@@ -27,9 +27,10 @@ public class pauseMenu : MonoBehaviour
     }
 
     public void Resume() {
+        Debug.Log("Game Resume");
         pauseMenuUI.SetActive(false);
         gameHUD.SetActive(true);
-        playerInstance.SetActive(true);
+        //playerInstance.SetActive(true);
         if (SystemInfo.deviceType == DeviceType.Handheld)
         {
             pauseButtonUI.SetActive(true);
@@ -38,14 +39,15 @@ public class pauseMenu : MonoBehaviour
         {
             pauseButtonUI.SetActive(false);
         }
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
         gameIsPaused = false;
     }
     
     public void Pause() {
+        Debug.Log("Game Pause");
         pauseMenuUI.SetActive(true);
         gameHUD.SetActive(false);
-        playerInstance.SetActive(false);
+        //playerInstance.SetActive(false);
         if (SystemInfo.deviceType == DeviceType.Handheld)
         {
             pauseButtonUI.SetActive(false);
@@ -54,7 +56,7 @@ public class pauseMenu : MonoBehaviour
         {
             pauseButtonUI.SetActive(false);
         }
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         gameIsPaused = true;
     }
 
