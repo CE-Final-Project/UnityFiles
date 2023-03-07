@@ -13,7 +13,7 @@ public class CharacterBox : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("Mouse down!");
+        Debug.Log("Mouse down on " + this.name);
         characterSelector.SelectCharacter(this);
     }
 

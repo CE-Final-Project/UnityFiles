@@ -58043,7 +58043,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 247.24, y: 351}
+  m_AnchoredPosition: {x: 240.8346, y: 312}
   m_SizeDelta: {x: 440.0876, y: 116.2412}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1143115178
@@ -58627,7 +58627,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 202.74, y: 108.57}
+  m_AnchoredPosition: {x: 196.3346, y: 69.57001}
   m_SizeDelta: {x: 351.09, y: 105.97}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1384103557
@@ -58804,7 +58804,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 201.4054, y: 223}
+  m_AnchoredPosition: {x: 195, y: 184}
   m_SizeDelta: {x: 348.4099, y: 105.1617}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1466400830
@@ -59010,7 +59010,6 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 446140395}
   pauseButtonUI: {fileID: 1547138352}
   gameHUD: {fileID: 1302853458}
-  playerInstance: {fileID: 0}
 --- !u!114 &1472984842
 MonoBehaviour:
   m_ObjectHideFlags: 0

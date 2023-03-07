@@ -182,7 +182,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2462269865594105245}
+  - {fileID: 13449062570196365}
   - {fileID: 1879368541}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -230,7 +230,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e2db54f9b16a9450ca3ec289ffa9525b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.48, y: 0.48}
@@ -474,9 +474,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2462269865594105245}
+  - component: {fileID: 13449062570196365}
   - component: {fileID: 837023322073801835}
   - component: {fileID: 7216525253764287728}
+  - component: {fileID: 650795354323833994}
   m_Layer: 0
   m_Name: SkillHitBox
   m_TagString: Player
@@ -484,21 +485,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2462269865594105245
-Transform:
+--- !u!224 &13449062570196365
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6288246195614246025}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.11, y: -0.09, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 239658807213997848}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.11, y: -0.09}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &837023322073801835
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -512,7 +518,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0062960386, y: 0.04825449}
+  m_Offset: {x: -0.0078484565, y: 0.035954915}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -523,7 +529,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.11453903, y: 0.19833362}
+  m_Size: {x: 0.08625004, y: 0.077797964}
   m_EdgeRadius: 0
 --- !u!114 &7216525253764287728
 MonoBehaviour:
@@ -539,3 +545,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 3
   swordColider: {fileID: 837023322073801835}
+--- !u!222 &650795354323833994
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6288246195614246025}
+  m_CullTransparentMesh: 1

@@ -21,6 +21,7 @@ public class CharacterSelector : MonoBehaviour
         {
             if (characterBox == selectedCharacterBox)
             {
+                Debug.Log("Selected "+ characterBox.name);
                 characterBox.SetSelected(true);
             }
             else
