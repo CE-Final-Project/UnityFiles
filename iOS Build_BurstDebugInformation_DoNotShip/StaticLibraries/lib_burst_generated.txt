@@ -156,7 +156,9 @@ Library: /Users/bxss101/Documents/GitHub/UnityFiles/Temp/StagingArea/StaticLibra
 --compilation-defines=CINEMACHINE_UNITY_IMGUI
 --compilation-defines=ENABLE_SPRITESHAPE_BURST
 --compilation-defines=TIMELINE_FRAMEACCURATE
+--compilation-defines=RELAY_SDK_INSTALLED
 --compilation-defines=ENABLE_URP
+--compilation-defines=UGS_QOS_SUPPORTED
 --compilation-defines=COM_UNITY_MODULES_ANIMATION
 --compilation-defines=COM_UNITY_MODULES_PHYSICS
 --compilation-defines=COM_UNITY_MODULES_PHYSICS2D
@@ -426,7 +428,9 @@ Library: /Users/bxss101/Documents/GitHub/UnityFiles/Temp/StagingArea/StaticLibra
 --compilation-defines=CINEMACHINE_UNITY_IMGUI
 --compilation-defines=ENABLE_SPRITESHAPE_BURST
 --compilation-defines=TIMELINE_FRAMEACCURATE
+--compilation-defines=RELAY_SDK_INSTALLED
 --compilation-defines=ENABLE_URP
+--compilation-defines=UGS_QOS_SUPPORTED
 --compilation-defines=COM_UNITY_MODULES_ANIMATION
 --compilation-defines=COM_UNITY_MODULES_PHYSICS
 --compilation-defines=COM_UNITY_MODULES_PHYSICS2D

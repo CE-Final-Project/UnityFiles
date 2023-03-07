@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : NetworkBehaviour
 {
+    [SerializeField] public Transform target;
+    NavMeshAgent agent;
+    GameObject[] players;
+
     //[SerializeField] private float moveSpeed = 5f;
     Animator animator;
     private GameObject player;
@@ -24,6 +29,11 @@ public class Enemy : NetworkBehaviour
 
     private void Start() {
         animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+		agent.updateRotation = false;
+		agent.updateUpAxis = false;
+        players = GameObject.FindGameObjectsWithTag("Player");
+        
     }
 
     private void Update()
@@ -34,6 +44,7 @@ public class Enemy : NetworkBehaviour
             Vector3 direction = (player.transform.position - transform.position).normalized;
             transform.position += direction * moveSpeed * Time.deltaTime;
         }*/
+        //agent.SetDestination(players[0].transform.position);
     }
 
     public override void OnNetworkSpawn()

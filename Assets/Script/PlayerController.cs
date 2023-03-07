@@ -62,7 +62,7 @@ namespace Script
             SceneTransitionHandler.Instance.OnClientLoadedScene += OnClientLoadedScene;
             
             // randomize position player
-            transform.position = new Vector3(Random.Range(-2f, 0f), Random.Range(0.1f, 1f), 0);
+            transform.position = new Vector3(Random.Range(-2f, 2f), Random.Range(-1f, -2f), 0);
         }
 
         private void OnClientLoadedScene(ulong clientid)
@@ -96,6 +96,7 @@ namespace Script
             Destroy(virtualCamera);
         }
 
+        //Make plyer not collide to each other but not succeed
         private void OnCollisionEnter2D(Collision2D col)
         {
             // check if the collision is with another player
@@ -236,16 +237,21 @@ namespace Script
             UnlockMovement();
             swordAttack.StopAttack();
         }
+
+        //Lock movement when player attacking
         public void LockMovement()
         {
             canMove = false;
             print("Movement Locked");
         }
+
+        //Unlock movement when player done attack
         public void UnlockMovement()
         {
             canMove = true;
             print("Movement Unlocked");
         }
+
         private void PlayerDead()
         {
             print("Player Dead");
@@ -260,7 +266,7 @@ namespace Script
         }
         private void addHealth()
         {
-            CurrentPlayerHealth.Value += 1;
+            CurrentPlayerHealth.Value += 5;
         }
     }
 }
