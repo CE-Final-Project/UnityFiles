@@ -30,11 +30,4 @@ public class CharacterBox : MonoBehaviour
             backgroundImage.sprite = unselectedSprite;
         }
     }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            backgroundImage.sprite = selectedSprite;
-        }
-    }
 }
