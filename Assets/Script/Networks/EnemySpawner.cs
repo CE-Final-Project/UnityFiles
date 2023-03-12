@@ -11,6 +11,8 @@ namespace Script.Networks
 
         [SerializeField] private GameObject spawnPoints;
 
+        
+
         public float spawnDelay = 5.0f;
         private float lastSpawnTime = 0.0f;
 

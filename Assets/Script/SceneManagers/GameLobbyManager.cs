@@ -25,6 +25,7 @@ namespace Script.SceneManagers
     {
         
         [SerializeField] private Button lobbyButton;
+        [SerializeField] private Button exitLobbyButton;
         [SerializeField] private TextMeshProUGUI textButton;
         [SerializeField] private TextMeshProUGUI lobbyCodeText;
         [SerializeField] private TextMeshProUGUI lobbyCountPlayerText;
