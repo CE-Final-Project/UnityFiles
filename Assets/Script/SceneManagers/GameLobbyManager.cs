@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using Script.GameFramework.Data;
@@ -10,12 +9,9 @@ using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using Unity.Networking.Transport;
 using Unity.Services.Authentication;
-using Unity.Services.Lobbies.Models;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
-using UnityEditor.VersionControl;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Task = System.Threading.Tasks.Task;
 
@@ -82,7 +78,7 @@ namespace Script.SceneManagers
             }
         }
 
-        private void OnGameStarted()
+        private async void OnGameStarted()
         {
             
             Debug.Log("Game Started");
@@ -92,7 +88,7 @@ namespace Script.SceneManagers
             lobbyButton.interactable = false;
             
             // Start Client Network
-            StartClientNetwork();
+            await StartClientNetwork();
         }
 
         private void OnDestroy()

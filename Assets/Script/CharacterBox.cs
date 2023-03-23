@@ -1,40 +1,42 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterBox : MonoBehaviour
+namespace Script
 {
-    public Image backgroundImage;
-    public string characterName;
-    public Sprite unselectedSprite;
-    public Sprite selectedSprite;
-    public CharacterSelector characterSelector;
-
-    private bool isSelected = false;
-
-    private void OnMouseDown()
+    public class CharacterBox : MonoBehaviour
     {
-        Debug.Log("Mouse down on " + this.name);
-        characterSelector.SelectCharacter(this);
-    }
+        public Image backgroundImage;
+        public string characterName;
+        public Sprite unselectedSprite;
+        public Sprite selectedSprite;
+        public CharacterSelector characterSelector;
 
-    public void SetSelected(bool selected)
-    {
-        isSelected = selected;
+        private bool isSelected = false;
 
-        if (isSelected)
+        private void OnMouseDown()
         {
-            backgroundImage.sprite = selectedSprite;
+            Debug.Log("Mouse down on " + this.name);
+            characterSelector.SelectCharacter(this);
         }
-        else
+
+        public void SetSelected(Sprite indicatorSprite)
         {
-            backgroundImage.sprite = unselectedSprite;
+            if (indicatorSprite == null)
+            {
+                backgroundImage.sprite = unselectedSprite;
+            }
+            else
+            {
+                backgroundImage.sprite = indicatorSprite;
+            }
         }
-    }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
+
+        void Update()
         {
-            backgroundImage.sprite = selectedSprite;
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                backgroundImage.sprite = selectedSprite;
+            }
         }
     }
 }

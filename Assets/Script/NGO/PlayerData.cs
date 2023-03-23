@@ -1,4 +1,4 @@
-﻿using Script.Game;
+﻿using Script.Game.GameplayObject.Character;
 using Unity.Netcode;
 
 namespace Script.NGO
@@ -8,19 +8,15 @@ namespace Script.NGO
         public ulong Id;
         public string Name;
         public float Health;
-        public CharacterType CharacterType;
+        public CharacterTypeEnum CharacterTypeEnum;
         public int Score;
-        
-        public PlayerData()
-        {
-        }
-        
-        public PlayerData(string name, ulong id, float health, CharacterType characterType, int score = 0)
+
+        public PlayerData(string name, ulong id, float health, CharacterTypeEnum characterTypeEnum, int score = 0)
         {
             Id = id;
             Name = name;
             Health = health;
-            CharacterType = characterType;
+            CharacterTypeEnum = characterTypeEnum;
             Score = score;
         }
         
@@ -29,7 +25,7 @@ namespace Script.NGO
             serializer.SerializeValue(ref Id);
             serializer.SerializeValue(ref Name);
             serializer.SerializeValue(ref Health);
-            serializer.SerializeValue(ref CharacterType);
+            serializer.SerializeValue(ref CharacterTypeEnum);
             serializer.SerializeValue(ref Score);   
         }
     }

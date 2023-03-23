@@ -1,5 +1,5 @@
 ﻿using System;
-using Script.Game;
+using Script.Game.GameplayObject.Character;
 using Script.Infrastructure;
 
 namespace Script
@@ -19,7 +19,7 @@ namespace Script
     {
         public CallbackValue<bool> IsHost = new CallbackValue<bool>(false);
         public CallbackValue<string> DisplayName = new CallbackValue<string>("");
-        public CallbackValue<CharacterType> Character = new CallbackValue<CharacterType>(CharacterType.None);
+        public CallbackValue<CharacterTypeEnum> Character = new CallbackValue<CharacterTypeEnum>(CharacterTypeEnum.None);
         public CallbackValue<PlayerStatus> UserStatus = new CallbackValue<PlayerStatus>(Script.PlayerStatus.None);
         public CallbackValue<string> ID = new CallbackValue<string>("");
         public CallbackValue<int> Index = new CallbackValue<int>(0);
@@ -27,7 +27,7 @@ namespace Script
         public DateTime LastUpdated;
 
         public LocalPlayer(string id, int index, bool isHost, string displayName = default,
-            CharacterType character = default, PlayerStatus status = default)
+            CharacterTypeEnum character = default, PlayerStatus status = default)
         {
             ID.Value = id;
             IsHost.Value = isHost;
@@ -40,7 +40,7 @@ namespace Script
         public void ResetState()
         {
             IsHost.Value = false;
-            Character.Value = CharacterType.None;
+            Character.Value = CharacterTypeEnum.None;
             UserStatus.Value = Script.PlayerStatus.Menu;
         }
     }

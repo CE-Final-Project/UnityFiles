@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Script.Game;
+using Script.Game.GameplayObject.Character;
 using Unity.Netcode;
 using UnityEngine.Events;
 
@@ -34,15 +34,15 @@ namespace Script.NGO
             _localPlayerId = NetworkManager.Singleton.LocalClientId;
         }
         
-        public void AddPlayer(ulong id, string playerName, float health, CharacterType characterType, int score = 0)
+        public void AddPlayer(ulong id, string playerName, float health, CharacterTypeEnum characterTypeEnum, int score = 0)
         {
             if (!IsServer)
                 return;
 
             if (!_playerData.ContainsKey(id))
-                _playerData.Add(id, new PlayerData(playerName, id, health, characterType, score));
+                _playerData.Add(id, new PlayerData(playerName, id, health, characterTypeEnum, score));
             else
-                _playerData[id] = new PlayerData(playerName, id, health, characterType, score);
+                _playerData[id] = new PlayerData(playerName, id, health, characterTypeEnum, score);
         }
         
         public int UpdateScore(ulong id, int delta)
@@ -114,7 +114,7 @@ namespace Script.NGO
                 GetPlayerData_ClientRpc(callerId, _playerData[id]);
             } else
             {
-                GetPlayerData_ClientRpc(callerId, new PlayerData("Unknown", id, 0, CharacterType.None, 0));
+                GetPlayerData_ClientRpc(callerId, new PlayerData("Unknown", id, 0, CharacterTypeEnum.None, 0));
             }
         }
         

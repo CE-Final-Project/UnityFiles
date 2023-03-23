@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee9bad6794824285968678e923352663, type: 3}
+  m_Name: Lizard
+  m_EditorClassIdentifier: 
+  CharacterType: 4
+  BaseHP: {fileID: 11400000, guid: 48b88fd2f79c88542ba06560660d6792, type: 2}
+  BaseMana: 0
+  Speed: 10
+  DisplayedName: LIZARD
+  ClassBannerLit: {fileID: 0}
+  ClassBannerUnlit: {fileID: 0}

@@ -1,5 +1,4 @@
-﻿using System;
-using Script.Infrastructure;
+﻿using Script.Infrastructure;
 using UnityEngine;
 
 namespace Script.Game

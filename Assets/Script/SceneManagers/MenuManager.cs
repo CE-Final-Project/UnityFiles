@@ -1,13 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
+#if UNITY_EDITOR
+using ParrelSync;
+#endif
 using Script.GameFramework.Data;
-using Script.GameFramework.Infrastructure;
 using Script.GameFramework.Manager;
 using Script.Networks;
 using TMPro;
-using Unity.Netcode;
-using Unity.Netcode.Transports.UTP;
 using Unity.Services.Authentication;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,6 +24,44 @@ namespace Script.SceneManagers
 
         [SerializeField] private int maxPlayer = 4;
         [SerializeField] private Toggle inviteOnlyToggle;
+
+        private void Awake()
+        {
+            if (string.IsNullOrEmpty(Application.cloudProjectId))
+            {
+                OnSignInFailed();
+                return;
+            }
+            TrySignIn();
+        }
+        
+        private async void TrySignIn()
+        {
+            try
+            {
+                string serviceProfileName = "player";
+#if UNITY_EDITOR
+                serviceProfileName = $"{serviceProfileName}_{ClonesManager.GetCurrentProject().name}";
+#endif
+                await Auth.Auth.Authenticate(serviceProfileName, 2);
+                OnAuthSignIn();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                OnSignInFailed();
+            }
+        }
+        
+        private void OnAuthSignIn()
+        {
+            Debug.Log($"Signed in. User Id: {AuthenticationService.Instance.PlayerId}");
+        }
+        
+        private void OnSignInFailed()
+        {
+            Debug.LogError("Failed to sign in.");
+        }
 
         private void Start()
         {

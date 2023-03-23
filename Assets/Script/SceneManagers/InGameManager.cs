@@ -1,7 +1,6 @@
 using Script.Networks;
 using Unity.Netcode;
 using UnityEngine;
-using NetworkSceneManager = Script.Networks.NetworkSceneManager;
 
 namespace Script.SceneManagers
 {

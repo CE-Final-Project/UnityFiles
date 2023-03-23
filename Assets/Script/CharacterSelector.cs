@@ -1,32 +1,37 @@
+using Script.GameState;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class CharacterSelector : MonoBehaviour
+namespace Script
 {
-    public CharacterBox[] characterBoxes;
-
-    private void Start()
+    public class CharacterSelector : MonoBehaviour
     {
-        // Set all character boxes to unselected at start
-        foreach (CharacterBox characterBox in characterBoxes)
-        {
-            characterBox.SetSelected(false);
-        }
-    }
+        public CharacterBox[] characterBoxes;
 
-    public void SelectCharacter(CharacterBox selectedCharacterBox)
-    {
-        // Set all character boxes to unselected except for the selected one
-        foreach (CharacterBox characterBox in characterBoxes)
+        private void Start()
         {
-            if (characterBox == selectedCharacterBox)
+            // Set all character boxes to unselected at start
+            foreach (CharacterBox characterBox in characterBoxes)
             {
-                Debug.Log("Selected "+ characterBox.name);
-                characterBox.SetSelected(true);
+                characterBox.SetSelected(null);
             }
-            else
+        }
+
+        public void SelectCharacter(CharacterBox selectedCharacterBox)
+        {
+            // Set all character boxes to unselected except for the selected one
+            for (int i = 0; i < characterBoxes.Length; i++)
             {
-                characterBox.SetSelected(false);
+                if (characterBoxes[i] == selectedCharacterBox)
+                {
+                    // Debug.Log("Selected "+ characterBoxes[i].name);
+                    characterBoxes[i]
+                        .SetSelected(ClientCharSelectState.Instance.identifiersForEachPlayerNumber[i].Indicator);
+                    ClientCharSelectState.Instance.OnPlayerClickedSeat(i);
+                }
+                else
+                {
+                    characterBoxes[i].SetSelected(null);
+                }
             }
         }
     }

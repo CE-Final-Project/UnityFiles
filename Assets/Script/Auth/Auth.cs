@@ -38,6 +38,8 @@ namespace Script.Auth
             await UnityServices.InitializeAsync(profileOptions);
             await SignInAnonymouslyAsync(tries);
             
+            Debug.Log($"AuthenticationState: {AuthenticationState} PlayerId: {AuthenticationService.Instance.PlayerId} Profile: {profile}");
+            
             return AuthenticationState;
         }
         

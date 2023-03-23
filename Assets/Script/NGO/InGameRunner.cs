@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -45,7 +44,7 @@ namespace Script.NGO
         {
             if (IsHost)
                 FinishInitialize();
-            _localPlayerData = new PlayerData(_localPlayerData.Name, NetworkManager.Singleton.LocalClientId, _localPlayerData.Health, _localPlayerData.CharacterType);
+            _localPlayerData = new PlayerData(_localPlayerData.Name, NetworkManager.Singleton.LocalClientId, _localPlayerData.Health, _localPlayerData.CharacterTypeEnum);
             VerifyConnection_ServerRpc(_localPlayerData.Id);
         }
 
