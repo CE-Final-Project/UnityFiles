@@ -40,6 +40,8 @@ namespace Script
         public Rigidbody2D rb;
     
         public SpriteRenderer spriteRenderer;
+        public GameObject AttackEffect;
+        //public Animator AttackAnim;
 
         [Header("Camera Settings")]
         [SerializeField] public GameObject virtualCameraPrefab;
@@ -50,6 +52,7 @@ namespace Script
         
         List<RaycastHit2D> castCollosions = new List<RaycastHit2D>();
         bool canMove = true;
+
 
         public override void OnNetworkSpawn()
         {
@@ -114,6 +117,8 @@ namespace Script
             rb = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
             spriteRenderer = GetComponent<SpriteRenderer>();
+            //AttackEffect = GetComponent<GameObject>();
+            //AttackAnim = GetComponent<Animator>();
             // healthBar.SetMaxHealth(MaxPlayerHealth);
             if (IsOwner)
             {
@@ -223,6 +228,7 @@ namespace Script
         public void SwordAttack()
         {
             LockMovement();
+            ShowAttackEffect();
             if (spriteRenderer.flipX == true)
             {
                 swordAttack.AttackLeft();
@@ -235,6 +241,7 @@ namespace Script
         public void EndSwordAttack()
         {
             UnlockMovement();
+            HideAttackEffect();
             swordAttack.StopAttack();
         }
 
@@ -267,6 +274,14 @@ namespace Script
         private void addHealth()
         {
             CurrentPlayerHealth.Value += 5;
+        }
+        private void ShowAttackEffect()
+        {
+            AttackEffect.SetActive(true);
+        }
+        private void HideAttackEffect()
+        {
+            AttackEffect.SetActive(false);
         }
     }
 }
