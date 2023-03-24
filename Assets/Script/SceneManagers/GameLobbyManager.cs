@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using Script.GameFramework.Data;
@@ -8,11 +7,13 @@ using Script.Networks;
 using TMPro;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
+using Unity.Networking.Transport;
 using Unity.Services.Authentication;
-using Unity.Services.Lobbies.Models;
+using Unity.Services.Relay;
+using Unity.Services.Relay.Models;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Task = System.Threading.Tasks.Task;
 
 namespace Script.SceneManagers
 {
@@ -77,7 +78,7 @@ namespace Script.SceneManagers
             }
         }
 
-        private void OnGameStarted()
+        private async void OnGameStarted()
         {
             
             Debug.Log("Game Started");
@@ -87,7 +88,7 @@ namespace Script.SceneManagers
             lobbyButton.interactable = false;
             
             // Start Client Network
-            StartClientNetwork();
+            await StartClientNetwork();
         }
 
         private void OnDestroy()
@@ -147,18 +148,43 @@ namespace Script.SceneManagers
             }
         }
 
-        private void StartClientNetwork()
+        private async Task StartClientNetwork()
         {
-            UnityTransport utpTransport = (UnityTransport)NetworkManager.Singleton.NetworkConfig.NetworkTransport;
-            if (utpTransport)
-            {
-                utpTransport.SetConnectionData(Sanitize(_hostIp), 12121);
-            }
+            UnityTransport utpTransport = NetworkManager.Singleton.GetComponentInChildren<UnityTransport>();
+
+            Allocation allocation = await Relay.Instance.CreateAllocationAsync(4);
+            string joinCode = await Relay.Instance.GetJoinCodeAsync(allocation.AllocationId);
+            
+            NetworkEndPoint endPoint = GetEndpointForAllocation(allocation.ServerEndpoints, allocation.RelayServer.IpV4,
+                allocation.RelayServer.Port, out bool isSecure);
+            
+            utpTransport.SetHostRelayData(endPoint.Address.Split(":")[0], endPoint.Port, allocation.AllocationIdBytes,
+                allocation.Key, allocation.ConnectionData, isSecure);
 
             if (!NetworkManager.Singleton.StartClient())
             {
                 Debug.LogError("Failed to start client.");
             }
+        }
+        
+        private NetworkEndPoint GetEndpointForAllocation(
+            List<RelayServerEndpoint> endpoints,
+            string ip,
+            int port,
+            out bool isSecure)
+        {
+#if ENABLE_MANAGED_UNITYTLS
+            foreach (RelayServerEndpoint endpoint in endpoints)
+            {
+                if (endpoint.Secure && endpoint.Network == RelayServerEndpoint.NetworkOptions.Udp)
+                {
+                    isSecure = true;
+                    return NetworkEndPoint.Parse(endpoint.Host, (ushort)endpoint.Port);
+                }
+            }
+#endif
+            isSecure = false;
+            return NetworkEndPoint.Parse(ip, (ushort)port);
         }
         
         private static string GetLocalIPAddress()

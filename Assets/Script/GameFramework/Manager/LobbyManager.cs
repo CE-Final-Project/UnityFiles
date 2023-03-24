@@ -14,8 +14,8 @@ namespace Script.GameFramework.Manager
 {
     public class LobbyManager : Singleton<LobbyManager>
     {
-        private Lobby _joinLobby;
-        private Lobby _hostLobby;
+        private Unity.Services.Lobbies.Models.Lobby _joinLobby;
+        private Unity.Services.Lobbies.Models.Lobby _hostLobby;
         
         private float _heartbeatTimer;
         private  float _lobbyUpdateTimer;
@@ -144,7 +144,7 @@ namespace Script.GameFramework.Manager
             {
                 _lobbyUpdateTimer = LobbyUpdateInterval;
 
-                Lobby lobby = await LobbyService.Instance.GetLobbyAsync(_joinLobby.Id);
+                Unity.Services.Lobbies.Models.Lobby lobby = await LobbyService.Instance.GetLobbyAsync(_joinLobby.Id);
                 _joinLobby = lobby;
                 
                 LobbyData lobbyData = new();
@@ -167,7 +167,7 @@ namespace Script.GameFramework.Manager
             {
                 _lobbyUpdateTimer = LobbyUpdateInterval;
 
-                Lobby lobby = await LobbyService.Instance.GetLobbyAsync(_joinLobby.Id);
+                Unity.Services.Lobbies.Models.Lobby lobby = await LobbyService.Instance.GetLobbyAsync(_joinLobby.Id);
                 _joinLobby = lobby;
                 
                 OnLobbyUpdated?.Invoke();
@@ -283,7 +283,7 @@ namespace Script.GameFramework.Manager
         }
         public string GetLobbyCode()
         {
-            return _hostLobby.LobbyCode.ToString();
+            return _joinLobby.LobbyCode;
         }
     }
 }

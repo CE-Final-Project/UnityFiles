@@ -50,21 +50,21 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 5694656346131016876}
-    PlayerPrefab: {fileID: 0}
+    PlayerPrefab: {fileID: 2989939178083641785, guid: b707f33aa2c76e249a86c82523ed12db, type: 3}
     NetworkPrefabs: []
     TickRate: 30
-    ClientConnectionBufferTimeout: 10
-    ConnectionApproval: 0
+    ClientConnectionBufferTimeout: 5
+    ConnectionApproval: 1
     ConnectionData: 
     EnableTimeResync: 0
     TimeResyncInterval: 30
     EnsureNetworkVariableLengthSafety: 0
     EnableSceneManagement: 1
-    ForceSamePrefabs: 1
+    ForceSamePrefabs: 0
     RecycleNetworkIds: 1
     NetworkIdRecycleDelay: 120
     RpcHashSize: 0
-    LoadSceneTimeOut: 120
+    LoadSceneTimeOut: 20
     SpawnTimeout: 1
     EnableNetworkLogs: 1
 --- !u!114 &5694656346131016876
@@ -80,15 +80,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ProtocolType: 0
-  m_MaxPacketQueueSize: 128
+  m_MaxPacketQueueSize: 512
   m_MaxPayloadSize: 6144
   m_HeartbeatTimeoutMS: 500
   m_ConnectTimeoutMS: 1000
-  m_MaxConnectAttempts: 60
-  m_DisconnectTimeoutMS: 30000
+  m_MaxConnectAttempts: 10
+  m_DisconnectTimeoutMS: 10000
   ConnectionData:
     Address: 127.0.0.1
-    Port: 7777
+    Port: 12121
     ServerListenAddress: 
   DebugSimulator:
     PacketDelayMS: 0

@@ -1,6 +1,4 @@
 using Script;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Goal_Idle : Goal_Base
@@ -28,8 +26,5 @@ public class Goal_Idle : Goal_Base
     {
         LinkedAction = _linkedAction;
         //Debug.Log("GOAL ACTIVATED");
-
-
     }
-
 }
