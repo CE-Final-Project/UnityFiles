@@ -16,13 +16,12 @@ namespace Script
         [SerializeField]
         public float moveSpeed = 1f;
     
-        public HealthBar healthBar;
-    
         public float collisionOffset = 0.05f;
     
         public Animator animator;
 
-    
+        public GameObject AttackEffect;
+        //public Animator AttackAnim;
 
         public int MaxPlayerHealth = 10;
         [Header("Player Settings")]
@@ -40,8 +39,7 @@ namespace Script
         public Rigidbody2D rb;
     
         public SpriteRenderer spriteRenderer;
-        public GameObject AttackEffect;
-        //public Animator AttackAnim;
+        
 
         [Header("Camera Settings")]
         [SerializeField] public GameObject virtualCameraPrefab;
@@ -117,9 +115,6 @@ namespace Script
             rb = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
             spriteRenderer = GetComponent<SpriteRenderer>();
-            //AttackEffect = GetComponent<GameObject>();
-            //AttackAnim = GetComponent<Animator>();
-            // healthBar.SetMaxHealth(MaxPlayerHealth);
             if (IsOwner)
             {
                 IsSpliteFlipped.Value = spriteRenderer.flipX;
@@ -170,17 +165,25 @@ namespace Script
                     IsSpliteFlipped.Value = false;
                 }
 
+                // Set Effect direction
+                if(IsSpliteFlipped.Value)
+                {
+                    AttackEffect.transform.localPosition = new Vector3(-0.137f, -0.045f, 1f);
+                }
+                else
+                {
+                    AttackEffect.transform.localPosition = new Vector3(0.137f, -0.045f, 1f);
+                }
 
-                // Set player health
+
+                // Set player health temporary
                 if (Input.GetKeyDown(KeyCode.Backspace))
                 {
-                    CurrentPlayerHealth.Value -= 1;
-                    healthBar.SetHealth(CurrentPlayerHealth.Value);
+                    CurrentPlayerHealth.Value -= 10;
                 }
                 if (Input.GetKeyDown(KeyCode.R))
                 {
-                    CurrentPlayerHealth.Value += 1;
-                    healthBar.SetHealth(CurrentPlayerHealth.Value);
+                    CurrentPlayerHealth.Value += 10;
                 }
                 if (CurrentPlayerHealth.Value <= 0)
                 {
@@ -268,7 +271,7 @@ namespace Script
         {
             animator.SetTrigger("respawn");
             addHealth();
-            healthBar.SetHealth(CurrentPlayerHealth.Value);
+            //healthBar.SetHealth(CurrentPlayerHealth.Value);
             print("Respawn : " + CurrentPlayerHealth);
         }
         private void addHealth()

@@ -199,8 +199,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TransitionStateInfoList:
   - Layer: 0
-    OriginatingState: 2122063378
-    DestinationState: -419040263
+    OriginatingState: 1140125649
+    DestinationState: -1664485980
     TransitionDuration: 0
     TriggerNameHash: 473107983
     TransitionIndex: 0
