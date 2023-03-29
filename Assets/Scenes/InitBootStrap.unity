@@ -170,6 +170,7 @@ MonoBehaviour:
   updateRunner: {fileID: 1165275337}
   connectionManager: {fileID: 699218001}
   networkManager: {fileID: 38500931}
+  enemySpawner: {fileID: 579374703}
 --- !u!4 &216153951
 Transform:
   m_ObjectHideFlags: 0
@@ -185,6 +186,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &579374701
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 579374702}
+  - component: {fileID: 579374703}
+  m_Layer: 0
+  m_Name: EnemySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &579374702
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579374701}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.47478294, y: 0.33573294, z: -3371.4385}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &579374703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579374701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc48f916f76814214b7a4d47322ff5e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &699218001 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 692223133336151003, guid: 2764efcb411e2d849824a6e6bb8a734c, type: 3}
@@ -295,6 +340,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5694656346131016879, guid: 787143f9c7169453c8434975b6397152, type: 3}
+      propertyPath: NetworkConfig.NetworkPrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5694656346131016879, guid: 787143f9c7169453c8434975b6397152, type: 3}
+      propertyPath: NetworkConfig.NetworkPrefabs.Array.data[0].Prefab
+      value: 
+      objectReference: {fileID: 5570495016602702190, guid: 83768c95b03e64a4992933bfad316e56, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 787143f9c7169453c8434975b6397152, type: 3}
 --- !u!1001 &1811311936169592477

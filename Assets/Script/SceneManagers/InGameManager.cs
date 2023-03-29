@@ -1,6 +1,8 @@
+using System.Linq;
 using Script.Networks;
 using Unity.Netcode;
 using UnityEngine;
+using VContainer;
 
 namespace Script.SceneManagers
 {
@@ -8,14 +10,14 @@ namespace Script.SceneManagers
     {
         [SerializeField] private GameObject enemyPrefab;
         [SerializeField] private GameObject spawnPoints;
+
+        [Inject] private EnemySpawner _enemySpawner;
+        
         public override void OnNetworkSpawn()
         {
             if (!IsServer) return;
-            foreach (Transform spawnPoint in spawnPoints.GetComponentsInChildren<Transform>())
-            {
-                GameObject enemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
-                enemy.GetComponent<NetworkObject>().Spawn();
-            }
+            
+            _enemySpawner.SpawnEnemy(enemyPrefab, 5, 5, spawnPoints.GetComponentsInChildren<Transform>().ToList());
         }
 
         private void Start()

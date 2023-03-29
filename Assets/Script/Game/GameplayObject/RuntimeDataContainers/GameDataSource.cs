@@ -4,6 +4,7 @@ using Script.Configuration;
 using Script.Game.Action;
 using Script.Game.GameplayObject.Character;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Script.Game.GameplayObject.RuntimeDataContainers
 {
@@ -21,6 +22,18 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
         [Tooltip("All Action prototype scriptable objects should be slotted in here")]
         [SerializeField]
         private Action.Action[] actionPrototypes;
+        
+        //Actions that are directly listed here will get automatically assigned ActionIDs and they don't need to be a part of m_ActionPrototypes array
+        [Header("Common action prototypes")]
+        [SerializeField]
+        private Action.Action generalChaseActionPrototype;
+        
+        [SerializeField]
+        private Action.Action generalTargetActionPrototype;
+        
+        public Action.Action GeneralChaseActionPrototype => generalChaseActionPrototype;
+        public Action.Action GeneralTargetActionPrototype => generalTargetActionPrototype;
+
 
         private List<Action.Action> _allActions;
 

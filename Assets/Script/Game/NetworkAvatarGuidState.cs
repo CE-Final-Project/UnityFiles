@@ -1,5 +1,6 @@
 ﻿using System;
 using Script.Configuration;
+using Script.Game.GameplayObject.Character;
 using Script.Utils;
 using Unity.Netcode;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace Script.Game
         [HideInInspector]
         public NetworkVariable<NetworkGuid> AvatarGuid = new NetworkVariable<NetworkGuid>();
         
-        [FormerlySerializedAs("_avatarRegistry")] [SerializeField] private AvatarRegistry avatarRegistry;
+        [SerializeField] private AvatarRegistry avatarRegistry;
         
         private Avatar _avatar;
         
@@ -58,10 +59,10 @@ namespace Script.Game
 
             _avatar = avatar;
             
-            // if (TryGetComponent<ServerCharacter>(out ServerCharacter serverCharacter))
-            // {
-            //     serverCharacter.CharacterClass = avatar.CharacterClass;
-            // }
+            if (TryGetComponent(out ServerCharacter serverCharacter))
+            {
+                serverCharacter.CharacterClass = avatar.CharacterClass;
+            }
         }
 
     }

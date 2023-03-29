@@ -64,9 +64,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5579067c0587472da37a541fdce32319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AvatarConfiguration: []
-  IsLobbyClosed:
-    m_InternalValue: 0
+  AvatarConfiguration:
+  - {fileID: 11400000, guid: dcbd2c90a9053d6428c15a8d9354c2e0, type: 2}
+  - {fileID: 11400000, guid: ec182856ec1aa0849a84fefc14e244c3, type: 2}
+  - {fileID: 11400000, guid: 94069651d38e65f40ae80697c9b67c4e, type: 2}
+  - {fileID: 11400000, guid: bcad8fa1eaa300b48a37767761443827, type: 2}
 --- !u!114 &2668947857700970486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,6 +81,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e725660ed8c843449f21c9f723b37d17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: 
+  autoRun: 1
+  autoInjectGameObjects: []
   netcodeHooks: {fileID: 2668947857700970480}
 --- !u!114 &2668947857700970481
 MonoBehaviour:
@@ -92,10 +98,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1cdfbdaf94f4bcca049294e8779c2e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: 
+  autoRun: 1
+  autoInjectGameObjects: []
   netCodeHooks: {fileID: 2668947857700970480}
   networkCharSelection: {fileID: 2668947857700970487}
   numberOfPlayersText: {fileID: 0}
+  lobbyCodeText: {fileID: 0}
   readyButtonText: {fileID: 0}
+  LobbyNameAndRegionText: {fileID: 0}
+  playerSeats: []
+  identifiersForEachPlayerNumber: []
 --- !u!114 &2668947857700970480
 MonoBehaviour:
   m_ObjectHideFlags: 0

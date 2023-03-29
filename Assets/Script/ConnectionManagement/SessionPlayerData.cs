@@ -1,6 +1,6 @@
-﻿using System.Numerics;
-using Script.Utils;
+﻿using Script.Utils;
 using Unity.Multiplayer.Samples.BossRoom;
+using UnityEngine;
 
 namespace Script.ConnectionManagement
 {
@@ -20,7 +20,7 @@ namespace Script.ConnectionManagement
             ClientID = clientID;
             PlayerName = name;
             PlayerNumber = -1;
-            PlayerPosition = Vector2.Zero;
+            PlayerPosition = Vector2.zero;
             IsPlayerFlipped = false;
             AvatarNetworkGuid = avatarNetworkGuid;
             CurrentHitPoints = currentHitPoints;
