@@ -21,6 +21,7 @@ namespace Script
         public Animator animator;
 
         public GameObject AttackEffect;
+        public Animator attackAnimator;
         //public Animator AttackAnim;
 
         public int MaxPlayerHealth = 10;
@@ -184,6 +185,26 @@ namespace Script
                 if (Input.GetKeyDown(KeyCode.R))
                 {
                     CurrentPlayerHealth.Value += 10;
+                }
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    Debug.Log("Effect 1");
+                    attackAnimator.SetTrigger("Attack_1");
+                }
+                if (Input.GetKeyDown(KeyCode.Alpha2))
+                {
+                    Debug.Log("Effect 2");
+                    attackAnimator.SetTrigger("Attack_2");
+                }
+                if (Input.GetKeyDown(KeyCode.Alpha3))
+                {
+                    Debug.Log("Effect 3");
+                    attackAnimator.SetTrigger("Attack_3");
+                }
+                if (Input.GetKeyDown(KeyCode.Alpha4))
+                {
+                    Debug.Log("Effect 4");
+                    attackAnimator.SetTrigger("Attack_4");
                 }
                 if (CurrentPlayerHealth.Value <= 0)
                 {

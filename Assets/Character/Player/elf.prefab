@@ -284,9 +284,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pausemenu: {fileID: 0}
   moveSpeed: 1
-  healthBar: {fileID: 0}
   collisionOffset: 0.02
   animator: {fileID: 6288533600248688400}
+  AttackEffect: {fileID: 9094172907376617415}
+  attackAnimator: {fileID: 1169431058263170398}
   MaxPlayerHealth: 10
   CurrentPlayerHealth:
     m_InternalValue: 10
@@ -307,7 +308,6 @@ MonoBehaviour:
   swordAttack: {fileID: 7216525253764287728}
   rb: {fileID: 3759751250846167873}
   spriteRenderer: {fileID: 804521757618771511}
-  AttackEffect: {fileID: 9094172907376617415}
   virtualCameraPrefab: {fileID: 6150036607560744444, guid: 8493f30771e3d400fb18b05ac98f98d3, type: 3}
 --- !u!50 &3759751250846167873
 Rigidbody2D:
@@ -412,23 +412,11 @@ MonoBehaviour:
     TriggerNameHash: -81124801
     TransitionIndex: 1
   - Layer: 0
-    OriginatingState: -1268518976
-    DestinationState: 1479913064
-    TransitionDuration: 0
-    TriggerNameHash: -316323548
-    TransitionIndex: 2
-  - Layer: 0
     OriginatingState: 797649510
     DestinationState: -658457627
     TransitionDuration: 0
     TriggerNameHash: -81124801
     TransitionIndex: 1
-  - Layer: 0
-    OriginatingState: 1479913064
-    DestinationState: -1268518976
-    TransitionDuration: 0
-    TriggerNameHash: -393299857
-    TransitionIndex: 0
   m_Animator: {fileID: 6288533600248688400}
 --- !u!114 &8824467993165253777
 MonoBehaviour:
