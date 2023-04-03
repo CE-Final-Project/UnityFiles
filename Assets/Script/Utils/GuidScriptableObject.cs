@@ -12,7 +12,7 @@ namespace Script.Utils
 
         public Guid Guid => new Guid(guid);
 
-        void OnValidate()
+        private void OnValidate()
         {
             if (guid.Length == 0)
             {

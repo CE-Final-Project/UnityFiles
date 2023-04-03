@@ -1,4 +1,6 @@
-﻿using Script.Infrastructure.PubSub;
+﻿using System;
+using Script.Game.GameplayObject.Character;
+using Script.Infrastructure.PubSub;
 using Script.Lobby;
 using Script.Utils;
 using Unity.Multiplayer.Samples.BossRoom;
@@ -108,7 +110,7 @@ namespace Script.ConnectionManagement.ConnectionState
             if (gameReturnStatus == ConnectStatus.Success)
             {
                 SessionManager<SessionPlayerData>.Instance.SetupConnectingPlayerSessionData(clientId, connectionPayload.playerId,
-                    new SessionPlayerData(clientId, connectionPayload.playerName, new NetworkGuid(), 0, true));
+                    new SessionPlayerData(clientId, connectionPayload.playerName, new Guid(), 0, true));
 
                 // connection approval will create a player object for you
                 response.Approved = true;

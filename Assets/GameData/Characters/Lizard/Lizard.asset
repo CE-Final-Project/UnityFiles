@@ -16,6 +16,8 @@ MonoBehaviour:
   BaseHP: {fileID: 11400000, guid: 48b88fd2f79c88542ba06560660d6792, type: 2}
   BaseMana: 0
   Speed: 10
+  IsNpc: 0
   DisplayedName: LIZARD
-  ClassBannerLit: {fileID: 0}
-  ClassBannerUnlit: {fileID: 0}
+  AnimatorController: {fileID: 9100000, guid: b94db3df230fea347af615641faff401, type: 2}
+  ClassBannerLit: {fileID: 21300000, guid: dc6dd2f7130fa438bb49b2a610151d03, type: 3}
+  ClassBannerUnlit: {fileID: 21300000, guid: dc6dd2f7130fa438bb49b2a610151d03, type: 3}

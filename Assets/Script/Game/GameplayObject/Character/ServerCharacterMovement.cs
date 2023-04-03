@@ -1,8 +1,12 @@
-﻿using Script.Configuration;
+﻿using System;
+using System.Collections.Generic;
+using Script.Configuration;
 using Script.Game.GameplayObject.RuntimeDataContainers;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Script.Game.GameplayObject.Character
 {
@@ -23,11 +27,18 @@ namespace Script.Game.GameplayObject.Character
         
         [SerializeField] private ServerCharacter characterLogic;
         
-        private float _forcedSpeed;
+        [SerializeField] private float speed = 3f;
         private float _specialModeDurationRemaining;
-        
-        private Vector2 _knockBackVector;
-        
+        private readonly NetworkVariable<bool> _isFlipped = new NetworkVariable<bool>(false, default, NetworkVariableWritePermission.Owner);
+
+        [SerializeField] private ContactFilter2D movementFilter;
+        private readonly List<RaycastHit2D> _castCollisions = new List<RaycastHit2D>();
+        private Animator _avatarAnimator;
+
+        private Vector2 _knockBackVector; 
+        private Vector2 _movementInput = Vector2.zero;
+        private static readonly int Speed = Animator.StringToHash("Speed");
+
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
         public bool TeleportModeActivated { get; set; }
 
@@ -36,19 +47,29 @@ namespace Script.Game.GameplayObject.Character
         public bool SpeedCheatActivated { get; set; }
 #endif
 
-        private void Awake()
-        {
-            // disable this NetworkBehavior until it is spawned
-            enabled = false;
-        }
-
         public override void OnNetworkSpawn()
         {
-            if (IsServer)
+            _isFlipped.OnValueChanged += OnIsFlippedChanged;
+
+            if (IsOwner)
             {
-                // Only enable this NetworkBehavior on the server
-                enabled = true;
+                _isFlipped.Value = characterLogic.IsFlipped;
             }
+            else
+            {
+                Destroy(GetComponent<PlayerInput>());
+                characterLogic.SetIsFlipped(_isFlipped.Value);
+            }
+
+            _avatarAnimator = GetComponentInChildren<Animator>();
+        }
+        
+        private void OnIsFlippedChanged(bool oldValue, bool newValue)
+        {
+            if (oldValue == newValue)
+                return;
+            
+            characterLogic.SetIsFlipped(newValue);
         }
         
         /// <summary>
@@ -67,6 +88,8 @@ namespace Script.Game.GameplayObject.Character
             // m_MovementState = MovementState.PathFollowing;
             // m_NavPath.SetTargetPosition(position);
         }
+
+        
 
         public void StartForwardCharge(float speed, float duration)
         {
@@ -144,6 +167,17 @@ namespace Script.Game.GameplayObject.Character
             // rigidBody.rotation = transform.rotation;
         }
 
+        private void Update()
+        {
+            if (IsOwner)
+            {
+                _movementInput.x = Input.GetAxisRaw("Horizontal");
+                _movementInput.y = Input.GetAxisRaw("Vertical");
+
+                _avatarAnimator.SetFloat(Speed, _movementInput.sqrMagnitude);
+            }
+        }
+
         private void FixedUpdate()
         {
             PerformMovement();
@@ -172,55 +206,42 @@ namespace Script.Game.GameplayObject.Character
 
         private void PerformMovement()
         {
-            if (_movementState == MovementState.Idle)
+            // if (_movementState == MovementState.Idle)
+            //     return;
+
+            if (!IsOwner)
+            {
                 return;
-
-            Vector2 movementVector;
-
-            if (_movementState == MovementState.Charging)
-            {
-                // if we're done charging, stop moving
-                _specialModeDurationRemaining -= Time.fixedDeltaTime;
-                if (_specialModeDurationRemaining <= 0)
-                {
-                    _movementState = MovementState.Idle;
-                    return;
-                }
-
-                var desiredMovementAmount = _forcedSpeed * Time.fixedDeltaTime;
-                movementVector = transform.forward * desiredMovementAmount;
-            }
-            else if (_movementState == MovementState.KnockBack)
-            {
-                _specialModeDurationRemaining -= Time.fixedDeltaTime;
-                if (_specialModeDurationRemaining <= 0)
-                {
-                    _movementState = MovementState.Idle;
-                    return;
-                }
-
-                var desiredMovementAmount = _forcedSpeed * Time.fixedDeltaTime;
-                movementVector = _knockBackVector * desiredMovementAmount;
-            }
-            else
-            {
-                var desiredMovementAmount = GetBaseMovementSpeed() * Time.fixedDeltaTime;
-                // movementVector = m_NavPath.MoveAlongPath(desiredMovementAmount);
-
-                // If we didn't move stop moving.
-                // if (movementVector == Vector2.zero)
-                // {
-                //     _movementState = MovementState.Idle;
-                //     return;
-                // }
             }
 
-            // m_NavMeshAgent.Move(movementVector);
-            // transform.rotation = Quaternion.LookRotation(movementVector);
+            if (_movementInput.x < 0)
+            {
+                _isFlipped.Value = true;
+            }
+        
+            if (_movementInput.x > 0)
+            {
+                _isFlipped.Value = false;
+            }
 
-            // After moving adjust the position of the dynamic rigidbody.
-            rigidBody.position = transform.position;
-            // rigidBody.rotation = transform.rotation;
+            bool isSuccess = TryMove(_movementInput);
+        }
+        
+        private bool TryMove(Vector2 direction)
+        {
+            int count = rigidBody.Cast(
+                direction,
+                movementFilter,
+                _castCollisions,
+                speed * Time.fixedDeltaTime + 0.01f);
+
+            if (count == 0)
+            {
+                Vector2 moveVector = direction * (speed * Time.fixedDeltaTime);
+                rigidBody.MovePosition(rigidBody.position += moveVector);
+                return true;
+            }
+            return false;
         }
 
         /// <summary>

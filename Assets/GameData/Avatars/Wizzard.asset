@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Wizzard
   m_EditorClassIdentifier: 
   guid: af2bf258856ade4a9bb1cc956b508d76
+  CharacterType: 3
   CharacterClass: {fileID: 11400000, guid: 0d145928c0d060640a54a03b2b0ea319, type: 2}
   Portrait: {fileID: 21300000, guid: f3085892d92c94f85a745555ca439fae, type: 3}

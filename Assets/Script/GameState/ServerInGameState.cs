@@ -72,7 +72,7 @@ namespace Script.GameState
         
         private void OnNetworkDespawn()
         {
-            _lifeStateChangedSubscriber.Unsubscribe(OnLifeStateChangedEventMessage);
+            _lifeStateChangedSubscriber?.Unsubscribe(OnLifeStateChangedEventMessage);
             NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnect;
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= OnLoadEventCompleted;
             NetworkManager.Singleton.SceneManager.OnSynchronizeComplete -= OnSynchronizeComplete;
@@ -153,7 +153,7 @@ namespace Script.GameState
 
             if (spawnPoint != null)
             {
-                Transform transform1 = newPlayer.transform;
+                Transform transform1 = newPlayerCharacter.transform;
                 transform1.position = spawnPoint.position;
                 transform1.rotation = spawnPoint.rotation;
             }
@@ -161,7 +161,7 @@ namespace Script.GameState
             bool persistentPlayerExists = playerNetworkObject.TryGetComponent(out PersistentPlayer persistentPlayer);
             Assert.IsTrue(persistentPlayerExists, $"Matching persistent PersistentPlayer for client {clientId} not found!");
             
-            bool networkAvatarGuidStateExists = playerNetworkObject.TryGetComponent(out NetworkAvatarGuidState networkAvatarGuidState);
+            bool networkAvatarGuidStateExists = newPlayer.TryGetComponent(out NetworkAvatarGuidState networkAvatarGuidState);
             Assert.IsTrue(networkAvatarGuidStateExists, "NetworkCharacterGuidState not found on player avatar!");
 
             if (lateJoin)
@@ -174,7 +174,8 @@ namespace Script.GameState
                 }
             }
 
-            networkAvatarGuidState.AvatarGuid.Value = persistentPlayer.NetworkAvatarGuidState.AvatarGuid.Value;
+            networkAvatarGuidState.avatarNetworkGuid.Value = 
+                persistentPlayer.NetworkAvatarGuidState.avatarNetworkGuid.Value;
             
             if (newPlayer.TryGetComponent(out NetworkNameState networkNameState))
             {

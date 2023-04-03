@@ -1,4 +1,6 @@
-﻿using Script.Utils;
+﻿using System;
+using Script.Game.GameplayObject.Character;
+using Script.Utils;
 using Unity.Multiplayer.Samples.BossRoom;
 using UnityEngine;
 
@@ -11,18 +13,18 @@ namespace Script.ConnectionManagement
         public int PlayerNumber;
         public Vector2 PlayerPosition;
         public bool IsPlayerFlipped;
-        public NetworkGuid AvatarNetworkGuid;
+        public Guid AvatarGuid;
         public int CurrentHitPoints;
         public bool HasCharacterSpawned;
 
-        public SessionPlayerData(ulong clientID, string name, NetworkGuid avatarNetworkGuid, int currentHitPoints = 0, bool isConnected = false, bool hasCharacterSpawned = false)
+        public SessionPlayerData(ulong clientID, string name, Guid avatarGuid, int currentHitPoints = 0, bool isConnected = false, bool hasCharacterSpawned = false)
         {
             ClientID = clientID;
             PlayerName = name;
             PlayerNumber = -1;
             PlayerPosition = Vector2.zero;
             IsPlayerFlipped = false;
-            AvatarNetworkGuid = avatarNetworkGuid;
+            AvatarGuid = avatarGuid;
             CurrentHitPoints = currentHitPoints;
             IsConnected = isConnected;
             HasCharacterSpawned = hasCharacterSpawned;

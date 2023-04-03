@@ -26,8 +26,10 @@ namespace Script.Game.GameplayObject.Character
         {
             get
             {
-                if (characterClass is not null) return characterClass;
-                characterClass = _state.RegisteredAvatar.CharacterClass;
+                if (characterClass is null)
+                {
+                    characterClass = _state.RegisteredAvatar.CharacterClass;
+                }
                 return characterClass;
             }
             set => characterClass = value;
@@ -85,9 +87,13 @@ namespace Script.Game.GameplayObject.Character
         
         public ServerCharacterMovement Movement => movement;
 
+        public bool IsFlipped => _spriteRenderer && _spriteRenderer.flipX;
+
         [SerializeField] private PhysicsWrapper physicsWrapper;
 
         private NetworkAvatarGuidState _state;
+        
+        private SpriteRenderer _spriteRenderer;
 
         private void Awake()
         {
@@ -95,6 +101,8 @@ namespace Script.Game.GameplayObject.Character
             NetHealthState = GetComponent<NetworkHealthState>();
             NetLifeState = GetComponent<NetworkLifeState>();
             _state = GetComponent<NetworkAvatarGuidState>();
+            
+            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
 
         public override void OnNetworkSpawn()
@@ -109,16 +117,16 @@ namespace Script.Game.GameplayObject.Character
                 damageReceiver.DamageReceived += ReceiveHP;
                 damageReceiver.CollisionEntered += CollisionEntered;
 
-                if (IsNpc)
-                {
-                    // npc stuff
-                }
+                // if (IsNpc)
+                // {
+                //     // npc stuff
+                // }
                 
                 if (startingAction != null)
                 {
-                    ActionRequestData startingAction = new ActionRequestData
+                    ActionRequestData action = new ActionRequestData
                         { ActionID = this.startingAction.ActionID };
-                    PlayAction(ref startingAction);
+                    PlayAction(ref action);
                 }
 
                 InitializeHitPoints();
@@ -344,6 +352,11 @@ namespace Script.Game.GameplayObject.Character
             {
                 _serverActionPlayer.CollisionEntered(collision);
             }
+        }
+
+        public void SetIsFlipped(bool isFliped)
+        {
+            _spriteRenderer.flipX = isFliped;
         }
     }
 }

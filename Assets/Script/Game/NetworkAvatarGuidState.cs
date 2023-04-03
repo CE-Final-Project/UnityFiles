@@ -12,8 +12,8 @@ namespace Script.Game
     public class NetworkAvatarGuidState : NetworkBehaviour
     {
         [HideInInspector]
-        public NetworkVariable<NetworkGuid> AvatarGuid = new NetworkVariable<NetworkGuid>();
-        
+        [SerializeField] public NetworkVariable<NetworkGuid> avatarNetworkGuid = new NetworkVariable<NetworkGuid>();
+
         [SerializeField] private AvatarRegistry avatarRegistry;
         
         private Avatar _avatar;
@@ -24,28 +24,30 @@ namespace Script.Game
             {
                 if (_avatar == null)
                 {
-                    RegisterAvatar(AvatarGuid.Value.ToGuid());
+                    Debug.Log($"Registering avatar {avatarNetworkGuid.Value}");
+                    RegisterAvatar(avatarNetworkGuid.Value.ToGuid());
                 }
 
                 return _avatar;
             }
         }
-        
+
         public void SetRandomAvatar()
         {
-            AvatarGuid.Value = avatarRegistry.GetRandomAvatar().Guid.ToNetworkGuid();
+            avatarNetworkGuid.Value = avatarRegistry.GetRandomAvatar().Guid.ToNetworkGuid();
         }
         
-        private void RegisterAvatar(Guid guid)
+        private void RegisterAvatar(Guid charGuid)
         {
-            if (guid.Equals(Guid.Empty))
+            if (charGuid.Equals(Guid.Empty))
             {
-                // not a valid Guid
+                Debug.LogError("Not a valid Guid");
                 return;
             }
-
+            
+            
             // based on the Guid received, Avatar is fetched from AvatarRegistry
-            if (!avatarRegistry.TryGetAvatar(guid, out Avatar avatar))
+            if (!avatarRegistry.TryGetAvatar(charGuid, out Avatar avatar))
             {
                 Debug.LogError("Avatar not found!");
                 return;

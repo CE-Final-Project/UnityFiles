@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using Script.Game.GameplayObject.Character;
 using UnityEngine;
 
 namespace Script.Configuration
@@ -8,9 +10,9 @@ namespace Script.Configuration
     {
         [SerializeField] private Avatar[] _avatars;
         
-        public bool TryGetAvatar(Guid guid, out Avatar avatarValue)
+        public bool TryGetAvatar(Guid charGuid, out Avatar avatarValue)
         {
-            avatarValue = Array.Find(_avatars, avatar => avatar.Guid == guid);
+            avatarValue = _avatars.FirstOrDefault(avatar => avatar.Guid == charGuid);
             return avatarValue != null;
         }
         
