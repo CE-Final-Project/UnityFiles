@@ -186,32 +186,47 @@ namespace Script
                 {
                     CurrentPlayerHealth.Value += 10;
                 }
-                if (Input.GetKeyDown(KeyCode.Alpha1))
-                {
-                    Debug.Log("Effect 1");
-                    attackAnimator.SetTrigger("Attack_1");
-                }
-                if (Input.GetKeyDown(KeyCode.Alpha2))
-                {
-                    Debug.Log("Effect 2");
-                    attackAnimator.SetTrigger("Attack_2");
-                }
-                if (Input.GetKeyDown(KeyCode.Alpha3))
-                {
-                    Debug.Log("Effect 3");
-                    attackAnimator.SetTrigger("Attack_3");
-                }
-                if (Input.GetKeyDown(KeyCode.Alpha4))
-                {
-                    Debug.Log("Effect 4");
-                    attackAnimator.SetTrigger("Attack_4");
-                }
                 if (CurrentPlayerHealth.Value <= 0)
                 {
                     PlayerDead();
                     Respawn();
                 }
             }
+
+            //set attack effect
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                Debug.Log("Effect 1");
+                attackAnimator.SetTrigger("Attack_1");
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                Debug.Log("Effect 2");
+                attackAnimator.SetTrigger("Attack_2");
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                Debug.Log("Effect 3");
+                attackAnimator.SetTrigger("Attack_3");
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                Debug.Log("Effect 4");
+                attackAnimator.SetTrigger("Attack_4");
+            }
+
+            // Make player move faster when press shift with move
+            // * Game will be more balance when use this with player power
+            if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift))
+                moveSpeed = 1.5f;
+            else if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.LeftShift))
+                moveSpeed = 1.5f;
+            else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.LeftShift))
+                moveSpeed = 1.5f;
+            else if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.LeftShift))
+                moveSpeed = 1.5f;
+            else
+                moveSpeed = 1f;
         }
 
         private bool TryMove(Vector2 direction)
