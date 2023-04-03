@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Elf
   m_EditorClassIdentifier: 
   guid: 426ab98a6ecdae4e8ffb805c768d4925
+  CharacterType: 1
   CharacterClass: {fileID: 11400000, guid: 78f77a1e8928817489bd753486209bdc, type: 2}
   Portrait: {fileID: 21300000, guid: e2db54f9b16a9450ca3ec289ffa9525b, type: 3}

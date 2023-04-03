@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Lizard
   m_EditorClassIdentifier: 
   guid: 3b0a20a62f53d14ba8228feb23a4793c
+  CharacterType: 4
   CharacterClass: {fileID: 11400000, guid: 941f36d65ca4ff0409e8c4eebf3afed4, type: 2}
   Portrait: {fileID: 21300000, guid: 0567bf8ad2f0a4138a45ce01f2845385, type: 3}

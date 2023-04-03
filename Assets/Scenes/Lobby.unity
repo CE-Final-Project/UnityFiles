@@ -1950,7 +1950,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 929959793}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1242249893}
+        m_TargetAssemblyTypeName: Script.GameState.ClientCharSelectState, Assembly-CSharp
+        m_MethodName: OnPlayerClickedReady
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &929959793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2320,28 +2332,19 @@ PrefabInstance:
       propertyPath: parentReference.TypeName
       value: Script.ApplicationLifecycle.ApplicationController
       objectReference: {fileID: 0}
-    - target: {fileID: 2668947857700970487, guid: 46b391e696ebf2e47bbc372a73228e47, type: 3}
-      propertyPath: AvatarConfiguration.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2668947857700970487, guid: 46b391e696ebf2e47bbc372a73228e47, type: 3}
-      propertyPath: AvatarConfiguration.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: dcbd2c90a9053d6428c15a8d9354c2e0, type: 2}
-    - target: {fileID: 2668947857700970487, guid: 46b391e696ebf2e47bbc372a73228e47, type: 3}
-      propertyPath: AvatarConfiguration.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: ec182856ec1aa0849a84fefc14e244c3, type: 2}
-    - target: {fileID: 2668947857700970487, guid: 46b391e696ebf2e47bbc372a73228e47, type: 3}
-      propertyPath: AvatarConfiguration.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 94069651d38e65f40ae80697c9b67c4e, type: 2}
-    - target: {fileID: 2668947857700970487, guid: 46b391e696ebf2e47bbc372a73228e47, type: 3}
-      propertyPath: AvatarConfiguration.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: bcad8fa1eaa300b48a37767761443827, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46b391e696ebf2e47bbc372a73228e47, type: 3}
+--- !u!114 &1242249893 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2668947857700970481, guid: 46b391e696ebf2e47bbc372a73228e47, type: 3}
+  m_PrefabInstance: {fileID: 1242249892}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1cdfbdaf94f4bcca049294e8779c2e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1273032447
 GameObject:
   m_ObjectHideFlags: 0

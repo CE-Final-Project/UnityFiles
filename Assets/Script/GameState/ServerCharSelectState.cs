@@ -158,11 +158,12 @@ namespace Script.GameState
             {
                 NetworkObject player = NetworkManager.Singleton.SpawnManager.GetPlayerNetworkObject(playerInfo.ClientId);
 
-                if (player && player.TryGetComponent(out PersistentPlayer persistentPlayer))
+                if (player is not null && player.TryGetComponent(out PersistentPlayer persistentPlayer))
                 {
                     // pass avatar GUID to PersistentPlayer
                     // it'd be great to simplify this with something like a NetworkScriptableObjects :(
-                    persistentPlayer.NetworkAvatarGuidState.AvatarGuid.Value =
+
+                    persistentPlayer.NetworkAvatarGuidState.avatarNetworkGuid.Value =
                         networkCharSelection.AvatarConfiguration[playerInfo.SeatIdx].Guid.ToNetworkGuid();
                 }
             }

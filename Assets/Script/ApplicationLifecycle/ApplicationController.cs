@@ -7,6 +7,7 @@ using Script.GameState;
 using Script.Infrastructure;
 using Script.Infrastructure.PubSub;
 using Script.Lobby;
+using Script.Networks;
 using Script.NGO;
 using Script.Utils;
 using Unity.Netcode;
@@ -22,7 +23,7 @@ namespace Script.ApplicationLifecycle
         [SerializeField] private UpdateRunner updateRunner;
         [SerializeField] private ConnectionManager connectionManager;
         [SerializeField] private NetworkManager networkManager;
-        
+        [SerializeField] private EnemySpawner enemySpawner;
         
         private LocalLobby _localLobby;
         private LobbyServiceFacade _lobbyServiceFacade;
@@ -35,6 +36,7 @@ namespace Script.ApplicationLifecycle
             builder.RegisterComponent(updateRunner);
             builder.RegisterComponent(connectionManager);
             builder.RegisterComponent(networkManager);
+            builder.RegisterComponent(enemySpawner);
 
             builder.Register<LocalLobbyUser>(Lifetime.Singleton);
             builder.Register<LocalLobby>(Lifetime.Singleton);
@@ -42,6 +44,7 @@ namespace Script.ApplicationLifecycle
             builder.Register<ProfileManager>(Lifetime.Singleton);
 
             builder.Register<PersistentGameState>(Lifetime.Singleton);
+            
 
             builder.RegisterInstance(new MessageChannel<QuitApplicationMessage>()).AsImplementedInterfaces();
             builder.RegisterInstance(new MessageChannel<UnityServiceErrorMessage>()).AsImplementedInterfaces();

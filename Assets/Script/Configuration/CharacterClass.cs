@@ -13,6 +13,7 @@ namespace Script.Configuration
         public float Speed;
         public bool IsNpc;
         public string DisplayedName;
+        public RuntimeAnimatorController AnimatorController;
         public Sprite ClassBannerLit;
         public Sprite ClassBannerUnlit;
     }

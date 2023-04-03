@@ -16,6 +16,8 @@ MonoBehaviour:
   BaseHP: {fileID: 11400000, guid: 3f84ee8ceeba52242a282b7763d98884, type: 2}
   BaseMana: 20
   Speed: 5
+  IsNpc: 0
   DisplayedName: WIZZARD
-  ClassBannerLit: {fileID: 0}
-  ClassBannerUnlit: {fileID: 0}
+  AnimatorController: {fileID: 9100000, guid: e4b793f4a372d3442aa6ddc7bf333b51, type: 2}
+  ClassBannerLit: {fileID: 21300000, guid: 5e01bc9ddbca6456ca906df8313d647f, type: 3}
+  ClassBannerUnlit: {fileID: 21300000, guid: 5e01bc9ddbca6456ca906df8313d647f, type: 3}

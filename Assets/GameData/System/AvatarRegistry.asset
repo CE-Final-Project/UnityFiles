@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _avatars:
   - {fileID: 11400000, guid: dcbd2c90a9053d6428c15a8d9354c2e0, type: 2}
+  - {fileID: 11400000, guid: 94069651d38e65f40ae80697c9b67c4e, type: 2}
+  - {fileID: 11400000, guid: ec182856ec1aa0849a84fefc14e244c3, type: 2}
+  - {fileID: 11400000, guid: bcad8fa1eaa300b48a37767761443827, type: 2}

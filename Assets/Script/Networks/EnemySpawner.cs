@@ -1,57 +1,29 @@
+using System.Collections;
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
 namespace Script.Networks
 {
-
-
-    public class EnemySpawner : NetworkBehaviour
+    public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private GameObject enemyPrefab;
-
-        [SerializeField] private GameObject spawnPoints;
-
+        public void SpawnEnemy(GameObject enemyPrefab, float spawnDelay, int spawnCount, List<Transform> spawnPoints)
+        {
+            StartCoroutine(SpawnEnemyCoroutine(enemyPrefab, spawnDelay, spawnCount, spawnPoints));
+        }
         
-
-        public float spawnDelay = 5.0f;
-        private float lastSpawnTime = 0.0f;
-
-        private void Start()
+        private IEnumerator SpawnEnemyCoroutine(GameObject enemyPrefab, float spawnDelay, int spawnCount, List<Transform> spawnPoints)
         {
-            lastSpawnTime = Time.time;
-        }
-
-        private void Update()
-        {
-            // Only the server should spawn enemies
-            if (!IsServer) return;
-
+            Debug.Assert(spawnCount != spawnPoints.Count, "SpawnCount and SpawnPoints not match!");
             
-            // Check if it's time to spawn a new enemy
-            if (Time.time - lastSpawnTime > spawnDelay)
+            yield return new WaitForSeconds(spawnDelay);
+            
+            for(int i = 0; i < spawnCount; i++)
             {
-                //print("==== Time Check ====");
-                //print(lastSpawnTime);
-                //print(Time.time);
-                SpawnEnemy();
-                lastSpawnTime = Time.time;
-            }
-        }
-
-        public void SpawnEnemy()
-        {
-            foreach (Transform spawnPoint in spawnPoints.GetComponentsInChildren<Transform>())
-            {
-
-                if( spawnPoint.transform.childCount > 0 )
-                {
-                    //print("### Child > 0 ###");
-                    continue;
-                }
-                GameObject enemy = Instantiate(enemyPrefab, spawnPoint.transform.position, Quaternion.identity);
+                int randomIndex = Random.Range(0, spawnPoints.Count);
+                GameObject enemy = Instantiate(enemyPrefab, spawnPoints[randomIndex].transform.position, Quaternion.identity);
                 enemy.GetComponent<NetworkObject>().Spawn();
             }
         }
-
     }
 }

@@ -64,7 +64,7 @@ namespace Script.GameState
         
         private void UpdateLobbyCode(LocalLobby localLobby)
         {
-            if (!string.IsNullOrEmpty(localLobby.LobbyCode))
+            if (!string.IsNullOrEmpty(localLobby.LobbyCode) && lobbyCodeText != null)
             {
                 lobbyCodeText.enabled = true;
                 lobbyCodeText.text = $"Lobby Code: {localLobby.LobbyCode}";
@@ -196,6 +196,7 @@ namespace Script.GameState
                     if (isNewSeat)
                     {
                         //TODO: Update UI
+                        ConfigureUIForLobbyMode(LobbyMode.ChooseCharacter);
                     }
                 }
 

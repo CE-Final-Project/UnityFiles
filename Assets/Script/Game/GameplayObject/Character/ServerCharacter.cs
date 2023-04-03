@@ -1,5 +1,10 @@
-﻿using Script.Configuration;
+﻿using System.Collections;
+using Script.Configuration;
+using Script.ConnectionManagement;
 using Script.Game.Action.ActionPlayers;
+using Script.Game.Action.Input;
+using Script.Game.GameplayObject.RuntimeDataContainers;
+using Unity.Multiplayer.Samples.BossRoom;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -21,8 +26,10 @@ namespace Script.Game.GameplayObject.Character
         {
             get
             {
-                if (characterClass is not null) return characterClass;
-                characterClass = _state.RegisteredAvatar.CharacterClass;
+                if (characterClass is null)
+                {
+                    characterClass = _state.RegisteredAvatar.CharacterClass;
+                }
                 return characterClass;
             }
             set => characterClass = value;
@@ -76,7 +83,17 @@ namespace Script.Game.GameplayObject.Character
         
         [SerializeField] private DamageReceiver damageReceiver;
 
+        [SerializeField] private ServerCharacterMovement movement;
+        
+        public ServerCharacterMovement Movement => movement;
+
+        public bool IsFlipped => _spriteRenderer && _spriteRenderer.flipX;
+
+        [SerializeField] private PhysicsWrapper physicsWrapper;
+
         private NetworkAvatarGuidState _state;
+        
+        private SpriteRenderer _spriteRenderer;
 
         private void Awake()
         {
@@ -84,7 +101,262 @@ namespace Script.Game.GameplayObject.Character
             NetHealthState = GetComponent<NetworkHealthState>();
             NetLifeState = GetComponent<NetworkLifeState>();
             _state = GetComponent<NetworkAvatarGuidState>();
+            
+            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
 
+        public override void OnNetworkSpawn()
+        {
+            if (!IsServer)
+            {
+                enabled = false;
+            }
+            else
+            {
+                NetLifeState.LifeState.OnValueChanged += OnLifeStateChanged;
+                damageReceiver.DamageReceived += ReceiveHP;
+                damageReceiver.CollisionEntered += CollisionEntered;
+
+                // if (IsNpc)
+                // {
+                //     // npc stuff
+                // }
+                
+                if (startingAction != null)
+                {
+                    ActionRequestData action = new ActionRequestData
+                        { ActionID = this.startingAction.ActionID };
+                    PlayAction(ref action);
+                }
+
+                InitializeHitPoints();
+            }
+        }
+        
+        public override void OnNetworkDespawn()
+        {
+            NetLifeState.LifeState.OnValueChanged -= OnLifeStateChanged;
+
+            if (damageReceiver)
+            {
+                damageReceiver.DamageReceived -= ReceiveHP;
+                damageReceiver.CollisionEntered -= CollisionEntered;
+            }
+        }
+        
+        /// <summary>
+        /// RPC to send inputs for this character from a client to a server.
+        /// </summary>
+        /// <param name="movementTarget">The position which this character should move towards.</param>
+        [ServerRpc]
+        public void SendCharacterInputServerRpc(Vector3 movementTarget)
+        {
+            if (LifeState == LifeState.Alive && !movement.IsPerformingForcedMovement())
+            {
+                // if we're currently playing an interruptible action, interrupt it!
+                if (_serverActionPlayer.GetActiveActionInfo(out ActionRequestData data))
+                {
+                    if (GameDataSource.Instance.GetActionPrototypeByID(data.ActionID).Config.ActionInterruptible)
+                    {
+                        _serverActionPlayer.ClearActions(false);
+                    }
+                }
+
+                _serverActionPlayer.CancelRunningActionsByLogic(ActionLogic.Target, true); //clear target on move.
+                movement.SetMovementTarget(movementTarget);
+            }
+        }
+
+        // ACTION SYSTEM
+
+        /// <summary>
+        /// Client->Server RPC that sends a request to play an action.
+        /// </summary>
+        /// <param name="data">Data about which action to play and its associated details. </param>
+        [ServerRpc]
+        public void RecvDoActionServerRPC(ActionRequestData data)
+        {
+            ActionRequestData data1 = data;
+            if (!GameDataSource.Instance.GetActionPrototypeByID(data1.ActionID).Config.IsFriendly)
+            {
+                // notify running actions that we're using a new attack. (e.g. so Stealth can cancel itself)
+                ActionPlayer.OnGameplayActivity(Action.Action.GameplayActivity.UsingAttackAction);
+            }
+
+            PlayAction(ref data1);
+        }
+
+        // UTILITY AND SPECIAL-PURPOSE RPCs
+
+        /// <summary>
+        /// Called on server when the character's client decides they have stopped "charging up" an attack.
+        /// </summary>
+        [ServerRpc]
+        public void RecvStopChargingUpServerRpc()
+        {
+            _serverActionPlayer.OnGameplayActivity(Action.Action.GameplayActivity.StoppedChargingUp);
+        }
+
+        void InitializeHitPoints()
+        {
+            HitPoints = CharacterClass.BaseHP.Value;
+
+            if (!IsNpc)
+            {
+                SessionPlayerData? sessionPlayerData = SessionManager<SessionPlayerData>.Instance.GetPlayerData(OwnerClientId);
+                if (sessionPlayerData is { HasCharacterSpawned: true })
+                {
+                    HitPoints = sessionPlayerData.Value.CurrentHitPoints;
+                    if (HitPoints <= 0)
+                    {
+                        LifeState = LifeState.Dead;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Play a sequence of actions!
+        /// </summary>
+        public void PlayAction(ref ActionRequestData action)
+        {
+            //the character needs to be alive in order to be able to play actions
+            if (LifeState == LifeState.Alive && !movement.IsPerformingForcedMovement())
+            {
+                if (action.CancelMovement)
+                {
+                    movement.CancelMove();
+                }
+
+                _serverActionPlayer.PlayAction(ref action);
+            }
+        }
+
+        void OnLifeStateChanged(LifeState prevLifeState, LifeState lifeState)
+        {
+            if (lifeState != LifeState.Alive)
+            {
+                _serverActionPlayer.ClearActions(true);
+                movement.CancelMove();
+            }
+        }
+
+        IEnumerator KilledDestroyProcess()
+        {
+            yield return new WaitForSeconds(killedDestroyDelaySeconds);
+
+            if (NetworkObject != null)
+            {
+                NetworkObject.Despawn(true);
+            }
+        }
+
+        /// <summary>
+        /// Receive an HP change from somewhere. Could be healing or damage.
+        /// </summary>
+        /// <param name="inflicter">Person dishing out this damage/healing. Can be null. </param>
+        /// <param name="HP">The HP to receive. Positive value is healing. Negative is damage.  </param>
+        void ReceiveHP(ServerCharacter inflicter, int HP)
+        {
+            //to our own effects, and modify the damage or healing as appropriate. But in this game, we just take it straight.
+            if (HP > 0)
+            {
+                _serverActionPlayer.OnGameplayActivity(Action.Action.GameplayActivity.Healed);
+                float healingMod = _serverActionPlayer.GetBuffedValue(Action.Action.BuffableValue.PercentHealingReceived);
+                HP = (int)(HP * healingMod);
+            }
+            else
+            {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+                // Don't apply damage if god mode is on
+                if (NetLifeState.IsGodMode.Value)
+                {
+                    return;
+                }
+#endif
+
+                _serverActionPlayer.OnGameplayActivity(Action.Action.GameplayActivity.AttackedByEnemy);
+                float damageMod = _serverActionPlayer.GetBuffedValue(Action.Action.BuffableValue.PercentDamageReceived);
+                HP = (int)(HP * damageMod);
+
+                // serverAnimationHandler.NetworkAnimator.SetTrigger("HitReact1");
+            }
+
+            HitPoints = Mathf.Clamp(HitPoints + HP, 0, CharacterClass.BaseHP.Value);
+
+            // if (m_AIBrain != null)
+            // {
+            //     //let the brain know about the modified amount of damage we received.
+            //     m_AIBrain.ReceiveHP(inflicter, HP);
+            // }
+
+            //we can't currently heal a dead character back to Alive state.
+            //that's handled by a separate function.
+            if (HitPoints <= 0)
+            {
+                if (IsNpc)
+                {
+                    if (killedDestroyDelaySeconds >= 0.0f && LifeState != LifeState.Dead)
+                    {
+                        StartCoroutine(KilledDestroyProcess());
+                    }
+
+                    LifeState = LifeState.Dead;
+                }
+                else
+                {
+                    LifeState = LifeState.Dead;
+                }
+
+                _serverActionPlayer.ClearActions(false);
+            }
+        }
+
+        /// <summary>
+        /// Determines a gameplay variable for this character. The value is determined
+        /// by the character's active Actions.
+        /// </summary>
+        /// <param name="buffType"></param>
+        /// <returns></returns>
+        public float GetBuffedValue(Action.Action.BuffableValue buffType)
+        {
+            return _serverActionPlayer.GetBuffedValue(buffType);
+        }
+
+        /// <summary>
+        /// Receive a Life State change that brings Fainted characters back to Alive state.
+        /// </summary>
+        /// <param name="inflicter">Person reviving the character.</param>
+        /// <param name="HP">The HP to set to a newly revived character.</param>
+        public void Revive(ServerCharacter inflicter, int HP)
+        {
+            if (LifeState == LifeState.Dead)
+            {
+                HitPoints = Mathf.Clamp(HP, 0, CharacterClass.BaseHP.Value);
+                NetLifeState.LifeState.Value = LifeState.Alive;
+            }
+        }
+
+        void Update()
+        {
+            _serverActionPlayer.OnUpdate();
+            // if (m_AIBrain != null && LifeState == LifeState.Alive && m_BrainEnabled)
+            // {
+            //     m_AIBrain.Update();
+            // }
+        }
+
+        void CollisionEntered(Collision collision)
+        {
+            if (_serverActionPlayer != null)
+            {
+                _serverActionPlayer.CollisionEntered(collision);
+            }
+        }
+
+        public void SetIsFlipped(bool isFliped)
+        {
+            _spriteRenderer.flipX = isFliped;
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace Script.Game.GameplayObject
         public override void OnNetworkSpawn()
         {
             gameObject.name = "PersistentPlayer" + OwnerClientId;
-            
+
             // Note that this is done here on OnNetworkSpawn in case this NetworkBehaviour's properties are accessed
             // when this element is added to the runtime collection. If this was done in OnEnable() there is a chance
             // that OwnerClientID could be its default value (0).
@@ -34,12 +34,12 @@ namespace Script.Game.GameplayObject
                     networkNameState.Name.Value = playerData.PlayerName;
                     if (playerData.HasCharacterSpawned)
                     {
-                        networkAvatarGuidState.AvatarGuid.Value = playerData.AvatarNetworkGuid;
+                        networkAvatarGuidState.avatarNetworkGuid.Value = playerData.AvatarGuid.ToNetworkGuid();
                     }
                     else
                     {
                         networkAvatarGuidState.SetRandomAvatar();
-                        playerData.AvatarNetworkGuid = networkAvatarGuidState.AvatarGuid.Value;
+                        playerData.AvatarGuid = networkAvatarGuidState.avatarNetworkGuid.Value.ToGuid();
                         SessionManager<SessionPlayerData>.Instance.SetPlayerData(OwnerClientId, playerData);
                     }
                 }
@@ -67,7 +67,7 @@ namespace Script.Game.GameplayObject
                 {
                     SessionPlayerData playerData = sessionPlayerData.Value;
                     playerData.PlayerName = networkNameState.Name.Value;
-                    playerData.AvatarNetworkGuid = networkAvatarGuidState.AvatarGuid.Value;
+                    playerData.AvatarGuid = networkAvatarGuidState.avatarNetworkGuid.Value.ToGuid();
                     SessionManager<SessionPlayerData>.Instance.SetPlayerData(OwnerClientId, playerData);
                 }
             }
