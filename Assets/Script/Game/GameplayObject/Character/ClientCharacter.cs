@@ -43,7 +43,10 @@ namespace Script.Game.GameplayObject.Character
                 clientVisualAnimator.runtimeAnimatorController = _serverCharacter.CharacterClass.AnimatorController;
             }
 
-            gameObject.AddComponent<CameraController>();
+            if (IsOwner)
+            {
+                gameObject.AddComponent<CameraController>();
+            }
 
         }
     }

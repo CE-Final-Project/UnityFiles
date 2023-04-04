@@ -2659,7 +2659,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ready
+  m_text: READY!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5a6326b85509a42f3b9216753eb4258c, type: 2}
   m_sharedMaterial: {fileID: 276660888814848773, guid: 5a6326b85509a42f3b9216753eb4258c, type: 2}
@@ -3687,7 +3687,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1922328656}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1242249893}
+        m_TargetAssemblyTypeName: Script.GameState.ClientCharSelectState, Assembly-CSharp
+        m_MethodName: OnQuitLobbyClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1922328656
 MonoBehaviour:
   m_ObjectHideFlags: 0
