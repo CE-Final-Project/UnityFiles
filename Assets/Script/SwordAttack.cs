@@ -8,10 +8,12 @@ public class SwordAttack : MonoBehaviour
     
     private void Start() {
         rightAttackOffset = transform.position;
+        
     }
     
     public void AttackRight() {
         swordColider.enabled = true;
+        
         transform.localPosition = rightAttackOffset;
     }
     
@@ -29,6 +31,7 @@ public class SwordAttack : MonoBehaviour
             Enemy enemy = other.GetComponent<Enemy>();
 
             if(enemy != null) {
+                Debug.Log("Attacked enemy");
                 enemy.Health -= damage;
             }
         }

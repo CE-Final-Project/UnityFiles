@@ -30,13 +30,5 @@ namespace Script
                 backgroundImage.sprite = indicatorSprite;
             }
         }
-
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                backgroundImage.sprite = selectedSprite;
-            }
-        }
     }
 }

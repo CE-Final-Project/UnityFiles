@@ -16,13 +16,13 @@ namespace Script
         [SerializeField]
         public float moveSpeed = 1f;
     
-        public HealthBar healthBar;
-    
         public float collisionOffset = 0.05f;
     
         public Animator animator;
 
-    
+        public GameObject AttackEffect;
+        public Animator attackAnimator;
+        //public Animator AttackAnim;
 
         public int MaxPlayerHealth = 10;
         [Header("Player Settings")]
@@ -40,6 +40,7 @@ namespace Script
         public Rigidbody2D rb;
     
         public SpriteRenderer spriteRenderer;
+        
 
         [Header("Camera Settings")]
         [SerializeField] public GameObject virtualCameraPrefab;
@@ -50,6 +51,7 @@ namespace Script
         
         List<RaycastHit2D> castCollosions = new List<RaycastHit2D>();
         bool canMove = true;
+
 
         public override void OnNetworkSpawn()
         {
@@ -114,7 +116,6 @@ namespace Script
             rb = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
             spriteRenderer = GetComponent<SpriteRenderer>();
-            // healthBar.SetMaxHealth(MaxPlayerHealth);
             if (IsOwner)
             {
                 IsSpliteFlipped.Value = spriteRenderer.flipX;
@@ -165,17 +166,25 @@ namespace Script
                     IsSpliteFlipped.Value = false;
                 }
 
+                // Set Effect direction
+                if(IsSpliteFlipped.Value)
+                {
+                    AttackEffect.transform.localPosition = new Vector3(-0.137f, -0.045f, 1f);
+                }
+                else
+                {
+                    AttackEffect.transform.localPosition = new Vector3(0.137f, -0.045f, 1f);
+                }
 
-                // Set player health
+
+                // Set player health temporary
                 if (Input.GetKeyDown(KeyCode.Backspace))
                 {
-                    CurrentPlayerHealth.Value -= 1;
-                    healthBar.SetHealth(CurrentPlayerHealth.Value);
+                    CurrentPlayerHealth.Value -= 10;
                 }
                 if (Input.GetKeyDown(KeyCode.R))
                 {
-                    CurrentPlayerHealth.Value += 1;
-                    healthBar.SetHealth(CurrentPlayerHealth.Value);
+                    CurrentPlayerHealth.Value += 10;
                 }
                 if (CurrentPlayerHealth.Value <= 0)
                 {
@@ -183,6 +192,41 @@ namespace Script
                     Respawn();
                 }
             }
+
+            //set attack effect
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                Debug.Log("Effect 1");
+                attackAnimator.SetTrigger("Attack_1");
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                Debug.Log("Effect 2");
+                attackAnimator.SetTrigger("Attack_2");
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                Debug.Log("Effect 3");
+                attackAnimator.SetTrigger("Attack_3");
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                Debug.Log("Effect 4");
+                attackAnimator.SetTrigger("Attack_4");
+            }
+
+            // Make player move faster when press shift with move
+            // * Game will be more balance when use this with player power
+            if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift))
+                moveSpeed = 1.5f;
+            else if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.LeftShift))
+                moveSpeed = 1.5f;
+            else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.LeftShift))
+                moveSpeed = 1.5f;
+            else if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.LeftShift))
+                moveSpeed = 1.5f;
+            else
+                moveSpeed = 1f;
         }
 
         private bool TryMove(Vector2 direction)
@@ -223,6 +267,7 @@ namespace Script
         public void SwordAttack()
         {
             LockMovement();
+            ShowAttackEffect();
             if (spriteRenderer.flipX == true)
             {
                 swordAttack.AttackLeft();
@@ -235,6 +280,7 @@ namespace Script
         public void EndSwordAttack()
         {
             UnlockMovement();
+            HideAttackEffect();
             swordAttack.StopAttack();
         }
 
@@ -261,12 +307,20 @@ namespace Script
         {
             animator.SetTrigger("respawn");
             addHealth();
-            healthBar.SetHealth(CurrentPlayerHealth.Value);
+            //healthBar.SetHealth(CurrentPlayerHealth.Value);
             print("Respawn : " + CurrentPlayerHealth);
         }
         private void addHealth()
         {
             CurrentPlayerHealth.Value += 5;
+        }
+        private void ShowAttackEffect()
+        {
+            AttackEffect.SetActive(true);
+        }
+        private void HideAttackEffect()
+        {
+            AttackEffect.SetActive(false);
         }
     }
 }
