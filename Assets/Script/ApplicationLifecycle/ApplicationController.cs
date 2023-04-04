@@ -83,6 +83,7 @@ namespace Script.ApplicationLifecycle
             Application.wantsToQuit += OnWantsToQuit;
             DontDestroyOnLoad(gameObject);
             DontDestroyOnLoad(updateRunner.gameObject);
+            DontDestroyOnLoad(enemySpawner.gameObject);
             Application.targetFrameRate = 60;
             SceneManager.LoadScene("MainMenu");
         }
