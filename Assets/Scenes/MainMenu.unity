@@ -12202,6 +12202,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RelayPopup
       objectReference: {fileID: 0}
+    - target: {fileID: 4656820528177055716, guid: 730753b3421275a45aafdd730cfbddc8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4656820528177055717, guid: 730753b3421275a45aafdd730cfbddc8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
