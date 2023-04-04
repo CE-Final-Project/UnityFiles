@@ -1,15 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Script.Networks;
 using UnityEngine;
-using System;
+using VContainer;
 
-namespace Script.Networks
+namespace Script.DDA
 {
     public class DDA : MonoBehaviour
     {
         [SerializeField] GameObject players;
-
-        [SerializeField] EnemySpawner enemySpawner;
         [SerializeField] GameObject enemyPrefab;
         Enemy enemyStats;
 
@@ -26,26 +25,42 @@ namespace Script.Networks
         float KD = 1.0f;
 
         [SerializeField] int numbersOfEnemy = 5;
+        
+        [Inject] private EnemySpawner _enemySpawner;
+        
+        private Coroutine _spawnCoroutine;
 
-
+        
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             enemyStats = enemyPrefab.GetComponent<Enemy>();
+            
+            _spawnCoroutine = StartCoroutine(SpawnEnemyUpdate());
         }
 
-        // Update is called once per frame
-        void Update()
+        // call every 5 minutes
+        private IEnumerator SpawnEnemyUpdate()
         {
-            spawnCount = (int)Mathf.Round((float)((2 * (1 + (0.1 * numbersOfPlayer))) * KKPM * (1 + (0.1 * playerLevel))/KD));
-            spawnDelay = (float)((3.0f *(1 + (0.01 * numbersOfEnemy))) / (KKPM *(1 + (0.1 * playerLevel))));
+            while (true)
+            {
+                yield return new WaitForSeconds(300); // 5 minutes
+                
+                spawnCount = (int)Mathf.Round((float)((2 * (1 + (0.1 * numbersOfPlayer))) * KKPM * (1 + (0.1 * playerLevel))/KD));
+                spawnDelay = (float)((3.0f *(1 + (0.01 * numbersOfEnemy))) / (KKPM *(1 + (0.1 * playerLevel))));
 
 
-            enemyStats.health = (float)(enemyStats.health * (1 + (0.1 * numbersOfPlayer)) * KKPM * (1 + (0.1 * playerLevel))
- * (1 + (0.1 * playerATK)));
+                enemyStats.health = (float)(enemyStats.health * (1 + (0.1 * numbersOfPlayer)) * KKPM * (1 + (0.1 * playerLevel))
+                                            * (1 + (0.1 * playerATK)));
 
-            enemySpawner.SpawnEnemy(enemyPrefab, spawnDelay, spawnCount, spawnPoints);
+                _enemySpawner.SpawnEnemy(enemyPrefab, spawnDelay, spawnCount, spawnPoints);
+            }
+        }
+        
+        private void OnDestroy()
+        {
+            StopCoroutine(_spawnCoroutine);
         }
     }
 }
