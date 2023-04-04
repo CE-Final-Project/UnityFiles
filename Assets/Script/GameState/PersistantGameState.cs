@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Script.Game.GameplayObject.Character;
+using UnityEngine;
 
 namespace Script.GameState
 {
@@ -7,12 +8,12 @@ namespace Script.GameState
     public struct PlayerStats
     {
         public string CharacterType;
-        public ulong KillCount;
-        public ulong DeathCount;
-        public ulong DamageDealt;
-        public ulong DamageTaken;
-        public ulong HealingDone;
-        public ulong HealingTaken;
+        public int KillCount;
+        public int DeathCount;
+        public int DamageDealt;
+        public int DamageTaken;
+        public int HealingDone;
+        public int HealingTaken;
         
         public PlayerStats(string characterType)
         {
@@ -35,22 +36,22 @@ namespace Script.GameState
             DeathCount++;
         }
         
-        public void AddDamageDealt(ulong damage)
+        public void AddDamageDealt(int damage)
         {
             DamageDealt += damage;
         }
         
-        public void AddDamageTaken(ulong damage)
+        public void AddDamageTaken(int damage)
         {
             DamageTaken += damage;
         }
         
-        public void AddHealingDone(ulong healing)
+        public void AddHealingDone(int healing)
         {
             HealingDone += healing;
         }
         
-        public void AddHealingTaken(ulong healing)
+        public void AddHealingTaken(int healing)
         {
             HealingTaken += healing;
         }
@@ -60,7 +61,7 @@ namespace Script.GameState
     {
         public string EnemyType;
         public int Population;
-        public ulong DeathCount;
+        public int DeathCount;
         
         public EnemyStats(string enemyType)
         {

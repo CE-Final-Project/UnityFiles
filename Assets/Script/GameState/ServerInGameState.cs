@@ -157,13 +157,15 @@ namespace Script.GameState
                 transform1.position = spawnPoint.position;
                 transform1.rotation = spawnPoint.rotation;
             }
+
+            newPlayerCharacter.PersistentState = _persistentGameState;
             
             bool persistentPlayerExists = playerNetworkObject.TryGetComponent(out PersistentPlayer persistentPlayer);
             Assert.IsTrue(persistentPlayerExists, $"Matching persistent PersistentPlayer for client {clientId} not found!");
             
             bool networkAvatarGuidStateExists = newPlayer.TryGetComponent(out NetworkAvatarGuidState networkAvatarGuidState);
             Assert.IsTrue(networkAvatarGuidStateExists, "NetworkCharacterGuidState not found on player avatar!");
-            
+
             if (lateJoin)
             {
                 var sessionPlayerData = SessionManager<SessionPlayerData>.Instance.GetPlayerData(clientId);
