@@ -8,6 +8,7 @@ using Unity.Multiplayer.Samples.Utilities;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine;
+using UnityEngine.UI;
 using VContainer;
 
 namespace Script.GameState
@@ -29,6 +30,8 @@ namespace Script.GameState
         [SerializeField] private TextMeshProUGUI LobbyNameAndRegionText;
         
         [SerializeField] private List<UICharSelectPlayerSeat> playerSeats;
+
+        [SerializeField] private PlayerNameListUI playerNameListUI;
 
         [Serializable]
         public class ColorAndIndicator
@@ -146,9 +149,23 @@ namespace Script.GameState
             numberOfPlayersText.text = playerCountText;
         }
         
+        private void UpdatePlayerList()
+        {
+
+            var playerNameList = new Dictionary<int, string>();
+            for (int i = 0; i < networkCharSelection.LobbyPlayerStates.Count; i++)
+            {
+                playerNameList.Add(networkCharSelection.LobbyPlayerStates[i].PlayerNumber, networkCharSelection.LobbyPlayerStates[i].PlayerName);
+            }
+            
+            playerNameListUI.UpdatePlayerNameList(playerNameList);
+        }
+
+        
         private void OnLobbyPlayerStatesChanged(NetworkListEvent<NetworkCharSelection.LobbyPlayerState> changeEvent)
         {
             UpdateSeat();
+            UpdatePlayerList();
             UpdatePlayerCount();
 
             int localPlayerIdx = -1;
@@ -177,7 +194,7 @@ namespace Script.GameState
                 UpdateCharacterSelection(networkCharSelection.LobbyPlayerStates[localPlayerIdx].SeatState, networkCharSelection.LobbyPlayerStates[localPlayerIdx].SeatIdx);
             }
         }
-
+        
         private void UpdateCharacterSelection(NetworkCharSelection.SeatState state, int seatIdx = -1)
         {
             bool isNewSeat = _lastSelectedCharacterIndex != seatIdx;
