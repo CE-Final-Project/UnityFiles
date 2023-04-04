@@ -43,7 +43,7 @@ namespace Script.ApplicationLifecycle
 
             builder.Register<ProfileManager>(Lifetime.Singleton);
 
-            builder.Register<PersistentGameState>(Lifetime.Singleton);
+            builder.Register<PersistantGameState>(Lifetime.Singleton);
             
 
             builder.RegisterInstance(new MessageChannel<QuitApplicationMessage>()).AsImplementedInterfaces();

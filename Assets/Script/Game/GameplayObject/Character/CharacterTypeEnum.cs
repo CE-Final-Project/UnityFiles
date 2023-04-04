@@ -6,6 +6,11 @@
         Elf, 
         Knight, 
         Wizard, 
-        Lizard
+        Lizard,
+        
+        // enemy
+        Skeleton,
+        Slime,
+        Zombie,
     }
 }

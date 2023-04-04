@@ -4,9 +4,11 @@ using Script.ConnectionManagement;
 using Script.Game.Action.ActionPlayers;
 using Script.Game.Action.Input;
 using Script.Game.GameplayObject.RuntimeDataContainers;
+using Script.GameState;
 using Unity.Multiplayer.Samples.BossRoom;
 using Unity.Netcode;
 using UnityEngine;
+using VContainer;
 
 namespace Script.Game.GameplayObject.Character
 {
@@ -101,7 +103,7 @@ namespace Script.Game.GameplayObject.Character
             NetHealthState = GetComponent<NetworkHealthState>();
             NetLifeState = GetComponent<NetworkLifeState>();
             _state = GetComponent<NetworkAvatarGuidState>();
-            
+
             _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
 
@@ -133,6 +135,7 @@ namespace Script.Game.GameplayObject.Character
             }
         }
         
+
         public override void OnNetworkDespawn()
         {
             NetLifeState.LifeState.OnValueChanged -= OnLifeStateChanged;
@@ -214,6 +217,7 @@ namespace Script.Game.GameplayObject.Character
                 }
             }
         }
+
 
         /// <summary>
         /// Play a sequence of actions!
