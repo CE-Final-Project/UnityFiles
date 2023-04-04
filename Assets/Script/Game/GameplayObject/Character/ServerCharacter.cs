@@ -8,7 +8,6 @@ using Script.GameState;
 using Unity.Multiplayer.Samples.BossRoom;
 using Unity.Netcode;
 using UnityEngine;
-using VContainer;
 
 namespace Script.Game.GameplayObject.Character
 {
@@ -36,6 +35,8 @@ namespace Script.Game.GameplayObject.Character
             }
             set => characterClass = value;
         }
+        
+        public PersistantGameState PersistentState { get; set; }
         
         public NetworkVariable<MovementStatus> MovementStatus { get; } = new NetworkVariable<MovementStatus>();
         
@@ -260,7 +261,7 @@ namespace Script.Game.GameplayObject.Character
         /// </summary>
         /// <param name="inflicter">Person dishing out this damage/healing. Can be null. </param>
         /// <param name="HP">The HP to receive. Positive value is healing. Negative is damage.  </param>
-        void ReceiveHP(ServerCharacter inflicter, int HP)
+        private void ReceiveHP(ServerCharacter inflicter, int HP)
         {
             //to our own effects, and modify the damage or healing as appropriate. But in this game, we just take it straight.
             if (HP > 0)
@@ -268,6 +269,10 @@ namespace Script.Game.GameplayObject.Character
                 _serverActionPlayer.OnGameplayActivity(Action.Action.GameplayActivity.Healed);
                 float healingMod = _serverActionPlayer.GetBuffedValue(Action.Action.BuffableValue.PercentHealingReceived);
                 HP = (int)(HP * healingMod);
+
+                PersistentState?.PlayerStatsList[inflicter.CharacterType.ToString()].AddHealingTaken(HP);
+                // PersistentState.PlayerStatsList[CharacterType.ToString()].AddHealingDone(HP);
+
             }
             else
             {
@@ -283,10 +288,14 @@ namespace Script.Game.GameplayObject.Character
                 float damageMod = _serverActionPlayer.GetBuffedValue(Action.Action.BuffableValue.PercentDamageReceived);
                 HP = (int)(HP * damageMod);
 
+                PersistentState?.PlayerStatsList[CharacterType.ToString()].AddDamageTaken(-HP);
+
                 // serverAnimationHandler.NetworkAnimator.SetTrigger("HitReact1");
             }
 
             HitPoints = Mathf.Clamp(HitPoints + HP, 0, CharacterClass.BaseHP.Value);
+            
+            
 
             // if (m_AIBrain != null)
             // {
