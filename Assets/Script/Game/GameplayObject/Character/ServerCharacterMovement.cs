@@ -237,7 +237,7 @@ namespace Script.Game.GameplayObject.Character
 
             if (count == 0)
             {
-                Vector2 moveVector = direction * (speed * Time.fixedDeltaTime);
+                Vector2 moveVector = direction.normalized * (speed * Time.fixedDeltaTime);
                 rigidBody.MovePosition(rigidBody.position += moveVector);
                 return true;
             }
