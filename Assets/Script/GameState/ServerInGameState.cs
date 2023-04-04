@@ -44,8 +44,8 @@ namespace Script.GameState
         [Inject] private ISubscriber<LifeStateChangedEventMessage> _lifeStateChangedSubscriber;
         
         [Inject] private ConnectionManager _connectionManager;
-        [Inject] private PersistentGameState _persistentGameState;
-        
+        [Inject] private PersistantGameState _persistentGameState;
+
         protected override void Awake()
         {
             base.Awake();
@@ -93,7 +93,7 @@ namespace Script.GameState
 
         private void OnSynchronizeComplete(ulong clientId)
         {
-            if (InitialSpawnDone && !PlayerServerCharacter.GetPlayerServerCharacter(clientId)){
+            if (InitialSpawnDone && PlayerServerCharacter.GetPlayerServerCharacter(clientId) is null){
                 // Somebody joined after the initial spawn. This is a Late Join scenario. This player may have issues
                 // either because multiple people are late-joining at once, or because some dynamic entities are
                 //getting spawned while joining. But that's not something we can fully address ny changes in 
@@ -163,10 +163,11 @@ namespace Script.GameState
             
             bool networkAvatarGuidStateExists = newPlayer.TryGetComponent(out NetworkAvatarGuidState networkAvatarGuidState);
             Assert.IsTrue(networkAvatarGuidStateExists, "NetworkCharacterGuidState not found on player avatar!");
-
+            
             if (lateJoin)
             {
                 var sessionPlayerData = SessionManager<SessionPlayerData>.Instance.GetPlayerData(clientId);
+
                 if (sessionPlayerData is { HasCharacterSpawned: true })
                 {
                     Transform transform1 = newPlayer.transform;
@@ -182,6 +183,9 @@ namespace Script.GameState
                 networkNameState.Name.Value = persistentPlayer.NetworkNameState.Name.Value;
             }
             
+            // Add player stats to the persistent game state
+            _persistentGameState.AddPlayerStats(newPlayerCharacter.CharacterType.ToString());
+
             newPlayer.SpawnWithOwnership(clientId, true);
         }
         
@@ -229,8 +233,6 @@ namespace Script.GameState
         
         private IEnumerator CoroGameOver(float delay, bool victory)
         {
-            _persistentGameState.SetWinState(WinState.Loss);
-            
             yield return new WaitForSeconds(delay);
             
             SceneLoaderWrapper.Instance.LoadScene("PostGame", true);
