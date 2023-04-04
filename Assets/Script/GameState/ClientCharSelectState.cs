@@ -200,7 +200,7 @@ namespace Script.GameState
                     }
                 }
 
-                if (state == NetworkCharSelection.SeatState.LockedIn && _hasLocalPlayerLockedIn)
+                if (state == NetworkCharSelection.SeatState.LockedIn && !_hasLocalPlayerLockedIn)
                 {
                     //  the local player has locked in their seat choice!
                     ConfigureUIForLobbyMode(networkCharSelection.IsLobbyClosed.Value ? LobbyMode.LobbyEnding : LobbyMode.CharacterChosen);
@@ -342,6 +342,11 @@ namespace Script.GameState
                 // request to lock in or unlock if already locked in
                 networkCharSelection.ChangeSeatServerRpc(NetworkManager.Singleton.LocalClientId, _lastSelectedCharacterIndex, !_hasLocalPlayerLockedIn);
             }
+        }
+
+        public void OnQuitLobbyClicked()
+        {
+            _connectionManager.RequestShutdown();
         }
 
         // private GameObject GetCharacterGraphics(Avatar avatar)

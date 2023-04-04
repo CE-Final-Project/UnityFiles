@@ -1973,7 +1973,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Start Host
+  m_text: Start Online
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5a6326b85509a42f3b9216753eb4258c, type: 2}
   m_sharedMaterial: {fileID: 276660888814848773, guid: 5a6326b85509a42f3b9216753eb4258c, type: 2}
