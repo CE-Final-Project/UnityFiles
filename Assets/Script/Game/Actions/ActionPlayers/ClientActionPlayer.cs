@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Script.Game.Action.Input;
+using Script.Game.Actions.Input;
 using Script.Game.GameplayObject.Character;
 
-namespace Script.Game.Action.ActionPlayers
+namespace Script.Game.Actions.ActionPlayers
 {
     public sealed class ClientActionPlayer
     {

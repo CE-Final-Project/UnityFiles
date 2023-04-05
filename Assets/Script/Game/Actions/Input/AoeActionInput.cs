@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Script.Game.Action.Input
+namespace Script.Game.Actions.Input
 {
     public class AoeActionInput : BaseActionInput
     {

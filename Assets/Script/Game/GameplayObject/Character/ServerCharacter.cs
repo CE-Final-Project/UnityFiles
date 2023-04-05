@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using Script.Configuration;
 using Script.ConnectionManagement;
-using Script.Game.Action.ActionPlayers;
-using Script.Game.Action.Input;
+using Script.Game.Actions.ActionPlayers;
+using Script.Game.Actions.Input;
 using Script.Game.GameplayObject.RuntimeDataContainers;
 using Script.GameState;
 using Unity.Multiplayer.Samples.BossRoom;
@@ -82,7 +82,7 @@ namespace Script.Game.GameplayObject.Character
 
         [SerializeField]
         [Tooltip("If set, the ServerCharacter will automatically play the StartingAction when it is created. ")]
-        private Action.Action startingAction;
+        private Actions.Action startingAction;
         
         [SerializeField] private DamageReceiver damageReceiver;
 
@@ -189,7 +189,7 @@ namespace Script.Game.GameplayObject.Character
             if (!GameDataSource.Instance.GetActionPrototypeByID(data1.ActionID).Config.IsFriendly)
             {
                 // notify running actions that we're using a new attack. (e.g. so Stealth can cancel itself)
-                ActionPlayer.OnGameplayActivity(Action.Action.GameplayActivity.UsingAttackAction);
+                ActionPlayer.OnGameplayActivity(Actions.Action.GameplayActivity.UsingAttackAction);
             }
 
             PlayAction(ref data1);
@@ -203,7 +203,7 @@ namespace Script.Game.GameplayObject.Character
         [ServerRpc]
         public void RecvStopChargingUpServerRpc()
         {
-            _serverActionPlayer.OnGameplayActivity(Action.Action.GameplayActivity.StoppedChargingUp);
+            _serverActionPlayer.OnGameplayActivity(Actions.Action.GameplayActivity.StoppedChargingUp);
         }
 
         void InitializeHitPoints()
@@ -271,8 +271,8 @@ namespace Script.Game.GameplayObject.Character
             //to our own effects, and modify the damage or healing as appropriate. But in this game, we just take it straight.
             if (HP > 0)
             {
-                _serverActionPlayer.OnGameplayActivity(Action.Action.GameplayActivity.Healed);
-                float healingMod = _serverActionPlayer.GetBuffedValue(Action.Action.BuffableValue.PercentHealingReceived);
+                _serverActionPlayer.OnGameplayActivity(Actions.Action.GameplayActivity.Healed);
+                float healingMod = _serverActionPlayer.GetBuffedValue(Actions.Action.BuffableValue.PercentHealingReceived);
                 HP = (int)(HP * healingMod);
 
                 PersistentState?.PlayerStatsList[inflicter.CharacterType.ToString()].AddHealingTaken(HP);
@@ -289,8 +289,8 @@ namespace Script.Game.GameplayObject.Character
                 }
 #endif
 
-                _serverActionPlayer.OnGameplayActivity(Action.Action.GameplayActivity.AttackedByEnemy);
-                float damageMod = _serverActionPlayer.GetBuffedValue(Action.Action.BuffableValue.PercentDamageReceived);
+                _serverActionPlayer.OnGameplayActivity(Actions.Action.GameplayActivity.AttackedByEnemy);
+                float damageMod = _serverActionPlayer.GetBuffedValue(Actions.Action.BuffableValue.PercentDamageReceived);
                 HP = (int)(HP * damageMod);
 
                 PersistentState?.PlayerStatsList[CharacterType.ToString()].AddDamageTaken(-HP);
@@ -336,7 +336,7 @@ namespace Script.Game.GameplayObject.Character
         /// </summary>
         /// <param name="buffType"></param>
         /// <returns></returns>
-        public float GetBuffedValue(Action.Action.BuffableValue buffType)
+        public float GetBuffedValue(Actions.Action.BuffableValue buffType)
         {
             return _serverActionPlayer.GetBuffedValue(buffType);
         }

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using Script.Game.Action.Input;
+using Script.Game.Actions.Input;
 using Script.Game.GameplayObject.Character;
 using Script.Game.GameplayObject.RuntimeDataContainers;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace Script.Game.Action.ActionPlayers
+namespace Script.Game.Actions.ActionPlayers
 {
     /// <summary>
     /// Class responsible for playing back action inputs from user.

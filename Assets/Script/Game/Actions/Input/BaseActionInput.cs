@@ -2,7 +2,7 @@
 using Script.Game.GameplayObject.Character;
 using UnityEngine;
 
-namespace Script.Game.Action.Input
+namespace Script.Game.Actions.Input
 {
     public abstract class BaseActionInput : MonoBehaviour
     {

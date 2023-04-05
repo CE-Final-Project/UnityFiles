@@ -309,6 +309,20 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
+--- !u!114 &3276181936678884908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5570495016602702190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83f5a2dc5f0c49c2a165fef468072cef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ServerCharacter: {fileID: 4911899850843397521}
+  m_PhysicsWrapper: {fileID: 6042191585345213438}
 --- !u!114 &4525139154018773555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,6 +349,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cachedServerCharacter: {fileID: 4911899850843397521}
+--- !u!114 &8219121529170595544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5570495016602702190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee728ef34b0c4c27a482858d57ad150b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: 
 --- !u!114 &8463175206757900593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,6 +372,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6042191585345213438 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6002752427318837242, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
+  m_PrefabInstance: {fileID: 41696490584337412}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5570495016602702190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7075d4919fb0426e8c3b9ad174b6fe68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &8007516326084977317 stripped

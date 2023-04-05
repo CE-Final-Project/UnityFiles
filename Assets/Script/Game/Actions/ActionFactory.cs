@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Script.Game.Action.Input;
+using Script.Game.Actions.Input;
 using Script.Game.GameplayObject.RuntimeDataContainers;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace Script.Game.Action
+namespace Script.Game.Actions
 {
     public static class ActionFactory
     {

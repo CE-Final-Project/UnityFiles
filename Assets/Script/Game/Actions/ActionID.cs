@@ -1,7 +1,7 @@
 ﻿using System;
 using Unity.Netcode;
 
-namespace Script.Game.Action
+namespace Script.Game.Actions
 {
     /// <summary>
     /// This struct is used by Action system (and GameDataSource) to refer to a specific action in runtime.

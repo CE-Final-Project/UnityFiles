@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using Script.Game.Action.Input;
+using Script.Game.Actions.ConcreteActions;
+using Script.Game.Actions.Input;
 using UnityEngine;
 
-namespace Script.Game.Action
+namespace Script.Game.Actions
 {
     [Serializable]
     public class ActionConfig
     {        
         [Tooltip("ActionLogic that drives this Action. This corresponds to the actual block of code that executes it.")]
         public ActionLogic Logic;
-        
+
         [Tooltip("Could be damage, could be healing, or other things. This is a base, nominal value that will get modified by game logic when the action takes effect")]
         public int Amount;
 
@@ -70,7 +71,13 @@ namespace Script.Game.Action
 
         [Tooltip("This action is interrupted if any of the following actions is requested")]
         public List<Action> IsInterruptableBy;
-        
+
+        [Tooltip("Indicates how long this action blocks other actions from happening: during the execution stage, or for as long as it runs?")]
+        public BlockingModeType BlockingMode;
+
+        [Tooltip("If this Action spawns a projectile, describes it. (\"Charged\" projectiles can list multiple possible shots, ordered from weakest to strongest)")]
+        public ProjectileInfo[] Projectiles;
+
         [Tooltip("If this action spawns miscellaneous GameObjects, list their prefabs here (but not projectiles -- those are separate, see above!)")]
         public GameObject[] Spawns;
 
@@ -90,7 +97,7 @@ namespace Script.Game.Action
 
         public bool CanBeInterruptedBy(ActionID actionActionID)
         {
-            foreach (Action action in IsInterruptableBy)
+            foreach (var action in IsInterruptableBy)
             {
                 if (action.ActionID == actionActionID)
                 {

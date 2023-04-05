@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using Script.Game.GameplayObject;
 using Script.Game.GameplayObject.Character;
 using UnityEngine;
 
-namespace Script.Game.Action
+namespace Script.Game.Actions.ConcreteActions
 {
     [CreateAssetMenu(menuName = "Actions/Attack Action")]
     public partial class AttackAction : Action

@@ -6,15 +6,20 @@ namespace Script.Game.GameplayObject
     public enum LifeState
     {
         Alive,
-        Dead
+        Fainted,
+        Dead,
     }
-    
+
+    /// <summary>
+    /// MonoBehaviour containing only one NetworkVariable of type LifeState which represents this object's life state.
+    /// </summary>
     public class NetworkLifeState : NetworkBehaviour
     {
-        [SerializeField] private NetworkVariable<LifeState> lifeState = new NetworkVariable<LifeState>(GameplayObject.LifeState.Alive);
-        
-        public NetworkVariable<LifeState> LifeState => lifeState;
-        
+        [SerializeField]
+        NetworkVariable<LifeState> m_LifeState = new NetworkVariable<LifeState>(GameplayObject.LifeState.Alive);
+
+        public NetworkVariable<LifeState> LifeState => m_LifeState;
+
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
         /// <summary>
         /// Indicates whether this character is in "god mode" (cannot be damaged).

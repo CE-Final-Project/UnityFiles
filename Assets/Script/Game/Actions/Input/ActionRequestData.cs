@@ -2,7 +2,7 @@
 using Unity.Netcode;
 using UnityEngine;
 
-namespace Script.Game.Action.Input
+namespace Script.Game.Actions.Input
 {
     public struct ActionRequestData : INetworkSerializable
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Script.CameraUtils;
-using Script.Game.Action.ActionPlayers;
-using Script.Game.Action.Input;
+using Script.Game.Actions.ActionPlayers;
+using Script.Game.Actions.Input;
 using Unity.Netcode;
 using UnityEngine;
 
