@@ -1,6 +1,7 @@
 ﻿using System;
 using Script.CameraUtils;
 using Script.Game.Action.ActionPlayers;
+using Script.Game.Action.Input;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -20,6 +21,12 @@ namespace Script.Game.GameplayObject.Character
 
         private ClientActionPlayer _clientActionViz;
 
+        [ClientRpc]
+        public void RecvDoActionClientRPC(ActionRequestData data)
+        {
+            ActionRequestData data1 = data;
+            _clientActionViz.PlayAction(ref data1);
+        }
         private void Awake()
         {
             enabled = false;

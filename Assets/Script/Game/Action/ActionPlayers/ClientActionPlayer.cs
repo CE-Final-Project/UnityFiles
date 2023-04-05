@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Script.Game.Action.Input;
 using Script.Game.GameplayObject.Character;
 
 namespace Script.Game.Action.ActionPlayers
@@ -38,6 +39,32 @@ namespace Script.Game.Action.ActionPlayers
                     _playingActions.RemoveAt(i);
                     ActionFactory.ReturnAction(action);
                 }
+            }
+        }
+
+        private int FindAction(ActionID actionID, bool anticipatedOnly)
+        {
+            return _playingActions.FindIndex(a => a.ActionID == actionID && (!anticipatedOnly || a.AnticipatedClient));
+        }
+
+        public void PlayAction(ref ActionRequestData data)
+        {
+            var anticipatedActionIndex = FindAction(data.ActionID, true);
+
+            var actionFX = anticipatedActionIndex >= 0 ? _playingActions[anticipatedActionIndex] : ActionFactory.CreateActionFromData(ref data);
+            if (actionFX.OnStartClient(ClientCharacter))
+            {
+                if (anticipatedActionIndex < 0)
+                {
+                    _playingActions.Add(actionFX);
+                }
+                //otherwise just let the action sit in it's existing slot
+            }
+            else if (anticipatedActionIndex >= 0)
+            {
+                var removedAction = _playingActions[anticipatedActionIndex];
+                _playingActions.RemoveAt(anticipatedActionIndex);
+                ActionFactory.ReturnAction(removedAction);
             }
         }
     }

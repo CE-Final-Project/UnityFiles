@@ -92,10 +92,15 @@ namespace Script.Game.GameplayObject.Character
 
         public bool IsFlipped => _spriteRenderer && _spriteRenderer.flipX;
 
-        [SerializeField] private PhysicsWrapper physicsWrapper;
+        [SerializeField] public PhysicsWrapper physicsWrapper;
 
         private NetworkAvatarGuidState _state;
-        
+
+        [SerializeField]
+        ServerAnimationHandler m_ServerAnimationHandler;
+
+        public ServerAnimationHandler serverAnimationHandler => m_ServerAnimationHandler;
+
         private SpriteRenderer _spriteRenderer;
 
         private void Awake()
