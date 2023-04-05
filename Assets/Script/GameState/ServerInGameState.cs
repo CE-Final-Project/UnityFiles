@@ -151,11 +151,11 @@ namespace Script.GameState
 
             ServerCharacter newPlayerCharacter = newPlayer.GetComponent<ServerCharacter>();
 
+            Transform physicsTransform = newPlayerCharacter.PhysicsWrapper.Transform;
+
             if (spawnPoint != null)
             {
-                Transform transform1 = newPlayerCharacter.transform;
-                transform1.position = spawnPoint.position;
-                transform1.rotation = spawnPoint.rotation;
+                physicsTransform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
             }
 
             newPlayerCharacter.PersistentState = _persistentGameState;
@@ -172,8 +172,7 @@ namespace Script.GameState
 
                 if (sessionPlayerData is { HasCharacterSpawned: true })
                 {
-                    Transform transform1 = newPlayer.transform;
-                    transform1.position = new Vector3(sessionPlayerData.Value.PlayerPosition.x, sessionPlayerData.Value.PlayerPosition.y, 0);
+                    physicsTransform.SetPositionAndRotation(sessionPlayerData.Value.PlayerPosition, Quaternion.identity);
                 }
             }
 

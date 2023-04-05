@@ -21,7 +21,7 @@ namespace Script.Game.Actions.ConcreteActions
 
             if (Data.Direction != Vector3.zero)
             {
-                serverCharacter.physicsWrapper.Transform.forward = Data.Direction;
+                serverCharacter.PhysicsWrapper.Transform.forward = Data.Direction;
             }
 
             serverCharacter.serverAnimationHandler.NetworkAnimator.SetTrigger(Config.Anim);
@@ -46,7 +46,7 @@ namespace Script.Game.Actions.ConcreteActions
 
         private IDamageable DetectFoe(ServerCharacter parent, ulong foeHint = 0)
         {
-            return GetIdealMeleeFoe(Config.IsFriendly ^ parent.IsNpc, parent.physicsWrapper.DamageCollider, Config.Range, foeHint);
+            return GetIdealMeleeFoe(Config.IsFriendly ^ parent.IsNpc, parent.PhysicsWrapper.DamageCollider, Config.Range, foeHint);
         }
 
         public static IDamageable GetIdealMeleeFoe(bool isNPC, Collider2D ourCollider, float meleeRange, ulong preferredTargetNetworkId)
