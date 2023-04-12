@@ -6,6 +6,7 @@ using Script.ConnectionManagement;
 using Script.Game;
 using Script.Game.GameplayObject;
 using Script.Game.GameplayObject.Character;
+using Script.Game.GameplayObject.RuntimeDataContainers;
 using Script.Game.Messages;
 using Script.Infrastructure.PubSub;
 using Script.Utils;
@@ -52,7 +53,7 @@ namespace Script.GameState
             netCodeHooks.OnNetworkSpawnHook += OnNetworkSpawn;
             netCodeHooks.OnNetworkDespawnHook += OnNetworkDespawn;
         }
-        
+
         private void OnNetworkSpawn()
         {
             if (!NetworkManager.Singleton.IsServer)
@@ -60,7 +61,7 @@ namespace Script.GameState
                 enabled = false;
                 return;
             }
-            _persistentGameState.Reset();
+            PlayersStats.Instance.ClearData();
             _lifeStateChangedSubscriber.Subscribe(OnLifeStateChangedEventMessage);
             
             NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnect;
@@ -185,7 +186,9 @@ namespace Script.GameState
             }
             
             // Add player stats to the persistent game state
-            _persistentGameState.AddPlayerStats(newPlayerCharacter.CharacterType.ToString());
+            // _persistentGameState.AddPlayerStats(newPlayerCharacter.CharacterType.ToString());
+            // GameStats.Instance.AddPlayer(clientId, newPlayerCharacter.CharacterType.ToString());
+            PlayersStats.Instance.AddPlayer(clientId, newPlayerCharacter.CharacterType.ToString());
 
             newPlayer.SpawnWithOwnership(clientId, true);
         }
