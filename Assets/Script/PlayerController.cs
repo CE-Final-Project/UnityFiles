@@ -192,7 +192,7 @@ namespace Script
                     Respawn();
                 }
             }
-
+            /*
             //set attack effect
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
@@ -213,7 +213,7 @@ namespace Script
             {
                 Debug.Log("Effect 4");
                 attackAnimator.SetTrigger("Attack_4");
-            }
+            }*/
 
             // Make player move faster when press shift with move
             // * Game will be more balance when use this with player power

@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Config:
     Logic: 0
-    Amount: 0
-    ManaCost: 0
-    Range: 0
-    DurationSeconds: 0
+    Amount: 30
+    ManaCost: 2
+    Range: 4.5
+    DurationSeconds: 0.5
     ExecTimeSeconds: 0
     EffectDurationSeconds: 0
     ReuseTimeSeconds: 0
     AnimAnticipation: 
-    Anim: 
+    Anim: Attack
     Anim2: 
     ReactAnim: 
     OtherAnimatorVariable: 
@@ -34,6 +34,8 @@ MonoBehaviour:
     ActionInput: {fileID: 0}
     ActionInterruptible: 0
     IsInterruptableBy: []
+    BlockingMode: 0
+    Projectiles: []
     Spawns: []
     IsFriendly: 0
     Icon: {fileID: 0}
