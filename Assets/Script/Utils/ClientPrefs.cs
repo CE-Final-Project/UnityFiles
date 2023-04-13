@@ -40,7 +40,7 @@ namespace Script.Utils
                 return PlayerPrefs.GetString(ClientGuidKey);
             }
             
-            Guid guid = System.Guid.NewGuid();
+            Guid guid = Guid.NewGuid();
             string guidString = guid.ToString();
             
             PlayerPrefs.SetString(ClientGuidKey, guidString);

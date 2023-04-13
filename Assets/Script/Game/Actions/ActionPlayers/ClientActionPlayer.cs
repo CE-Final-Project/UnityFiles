@@ -46,6 +46,32 @@ namespace Script.Game.Actions.ActionPlayers
         {
             return _playingActions.FindIndex(a => a.ActionID == actionID && (!anticipatedOnly || a.AnticipatedClient));
         }
+        
+        public void OnAnimEvent(string id)
+        {
+            foreach (var actionFX in _playingActions)
+            {
+                actionFX.OnAnimEventClient(ClientCharacter, id);
+            }
+        }
+
+        public void OnStoppedChargingUp(float finalChargeUpPercentage)
+        {
+            foreach (var actionFX in _playingActions)
+            {
+                actionFX.OnStoppedChargingUpClient(ClientCharacter, finalChargeUpPercentage);
+            }
+        }
+        
+        public void AnticipateAction(ref ActionRequestData data)
+        {
+            if (!ClientCharacter.IsAnimating() && Action.ShouldClientAnticipate(ClientCharacter, ref data))
+            {
+                var actionFX = ActionFactory.CreateActionFromData(ref data);
+                actionFX.AnticipateActionClient(ClientCharacter);
+                _playingActions.Add(actionFX);
+            }
+        }
 
         public void PlayAction(ref ActionRequestData data)
         {
@@ -65,6 +91,33 @@ namespace Script.Game.Actions.ActionPlayers
                 var removedAction = _playingActions[anticipatedActionIndex];
                 _playingActions.RemoveAt(anticipatedActionIndex);
                 ActionFactory.ReturnAction(removedAction);
+            }
+        }
+        
+        /// <summary>
+        /// Cancels all playing ActionFX.
+        /// </summary>
+        public void CancelAllActions()
+        {
+            foreach (var action in _playingActions)
+            {
+                action.CancelClient(ClientCharacter);
+                ActionFactory.ReturnAction(action);
+            }
+            _playingActions.Clear();
+        }
+
+        public void CancelAllActionsWithSamePrototypeID(ActionID actionID)
+        {
+            for (int i = _playingActions.Count - 1; i >= 0; --i)
+            {
+                if (_playingActions[i].ActionID == actionID)
+                {
+                    var action = _playingActions[i];
+                    action.CancelClient(ClientCharacter);
+                    _playingActions.RemoveAt(i);
+                    ActionFactory.ReturnAction(action);
+                }
             }
         }
     }

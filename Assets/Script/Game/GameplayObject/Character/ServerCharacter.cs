@@ -171,7 +171,7 @@ namespace Script.Game.GameplayObject.Character
                         _serverActionPlayer.ClearActions(false);
                     }
                 }
-
+            
                 _serverActionPlayer.CancelRunningActionsByLogic(ActionLogic.Target, true); //clear target on move.
                 movement.SetMovementTarget(movementTarget);
             }
@@ -280,6 +280,7 @@ namespace Script.Game.GameplayObject.Character
                 // PersistentState.PlayerStatsList[CharacterType.ToString()].AddHealingDone(HP);
                 
                 PlayersStats.Instance.AddHealingTaken(OwnerClientId, HP);
+                PlayersStats.Instance.AddHealingDone(inflicter.OwnerClientId, HP);
             }
             else
             {
@@ -297,6 +298,7 @@ namespace Script.Game.GameplayObject.Character
 
                 // PersistentState?.PlayerStatsList[CharacterType.ToString()].AddDamageTaken(-HP);
                 PlayersStats.Instance.AddDamageTaken(OwnerClientId, -HP);
+                PlayersStats.Instance.AddDamageDealt(inflicter.OwnerClientId, -HP);
 
                 // serverAnimationHandler.NetworkAnimator.SetTrigger("HitReact1");
             }
@@ -355,6 +357,7 @@ namespace Script.Game.GameplayObject.Character
             {
                 HitPoints = Mathf.Clamp(HP, 0, CharacterClass.BaseHP.Value);
                 NetLifeState.LifeState.Value = LifeState.Alive;
+                PlayersStats.Instance.AddHealingDone(inflicter.OwnerClientId, HP);
             }
         }
 

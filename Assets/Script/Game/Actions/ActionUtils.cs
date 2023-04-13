@@ -225,9 +225,9 @@ namespace Script.Game.Actions
     /// <summary>
     /// Utility comparer to sort through RaycastHits by distance.
     /// </summary>
-    public class RaycastHitComparer : IComparer<RaycastHit>
+    public class RaycastHitComparer : IComparer<RaycastHit2D>
     {
-        public int Compare(RaycastHit x, RaycastHit y)
+        public int Compare(RaycastHit2D x, RaycastHit2D y)
         {
             return x.distance.CompareTo(y.distance);
         }

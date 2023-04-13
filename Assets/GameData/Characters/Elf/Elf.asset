@@ -18,7 +18,7 @@ MonoBehaviour:
   Skill3: {fileID: 11400000, guid: 7d2d66fb01eb24bf39e837f8592bc655, type: 2}
   BaseHP: {fileID: 11400000, guid: b74044a2dd187664b8c7e95975b80131, type: 2}
   BaseMana: 10
-  Speed: 10
+  Speed: 2
   IsNpc: 0
   DetectRange: 0
   DisplayedName: ELF

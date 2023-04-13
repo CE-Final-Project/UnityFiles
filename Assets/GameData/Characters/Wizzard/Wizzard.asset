@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: Wizzard
   m_EditorClassIdentifier: 
   CharacterType: 3
+  Skill1: {fileID: 0}
+  Skill2: {fileID: 0}
+  Skill3: {fileID: 0}
   BaseHP: {fileID: 11400000, guid: 3f84ee8ceeba52242a282b7763d98884, type: 2}
   BaseMana: 20
-  Speed: 5
+  Speed: 1.5
   IsNpc: 0
+  DetectRange: 0
   DisplayedName: WIZZARD
   AnimatorController: {fileID: 9100000, guid: e4b793f4a372d3442aa6ddc7bf333b51, type: 2}
   ClassBannerLit: {fileID: 21300000, guid: 5e01bc9ddbca6456ca906df8313d647f, type: 3}

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using Script.Configuration;
 using Script.Game.GameplayObject.RuntimeDataContainers;
+using Unity.BossRoom.Navigation;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -13,13 +15,18 @@ namespace Script.Game.GameplayObject.Character
     public enum MovementState
     {
         Idle = 0,
-        Moving = 1,
+        PathFollowing = 1,
         Charging = 2,
-        KnockBack = 3,
+        Knockback = 3,
     }
+
     public class ServerCharacterMovement : NetworkBehaviour
     {
+        [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private Rigidbody2D rigidBody;
+        
+        private NavigationSystem _navigationSystem;
+        private DynamicNavPath _navPath;
         
         private MovementState _movementState;
         
@@ -27,16 +34,16 @@ namespace Script.Game.GameplayObject.Character
         
         [SerializeField] private ServerCharacter characterLogic;
         
-        [SerializeField] private float speed = 3f;
+        // when we are in charging and knockback mode, we use these additional variables
+        private float _forcedSpeed;
         private float _specialModeDurationRemaining;
-        private readonly NetworkVariable<bool> _isFlipped = new NetworkVariable<bool>(false, default, NetworkVariableWritePermission.Owner);
+        private readonly NetworkVariable<bool> _isFlipped = new NetworkVariable<bool>(false);
 
         [SerializeField] private ContactFilter2D movementFilter;
         private readonly List<RaycastHit2D> _castCollisions = new List<RaycastHit2D>();
         private Animator _avatarAnimator;
-
         private Vector2 _knockBackVector; 
-        private Vector2 _movementInput = Vector2.zero;
+        // private Vector2 _movementInput = Vector2.zero;
         private static readonly int Speed = Animator.StringToHash("Speed");
 
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
@@ -47,20 +54,35 @@ namespace Script.Game.GameplayObject.Character
         public bool SpeedCheatActivated { get; set; }
 #endif
 
+        private void Awake()
+        {
+            enabled = false;
+        }
+
         public override void OnNetworkSpawn()
         {
+            if (IsServer)
+            {
+                enabled = true;
+                
+                // On the server enable navMeshAgent and initialize
+                navMeshAgent.enabled = true;
+                _navigationSystem = GameObject.FindGameObjectWithTag(NavigationSystem.NavigationSystemTag).GetComponent<NavigationSystem>();
+                _navPath = new DynamicNavPath(navMeshAgent, _navigationSystem);
+            }
+            
             _isFlipped.OnValueChanged += OnIsFlippedChanged;
-
-            if (IsOwner)
-            {
-                _isFlipped.Value = characterLogic.IsFlipped;
-            }
-            else
-            {
-                Destroy(GetComponent<PlayerInput>());
-                characterLogic.SetIsFlipped(_isFlipped.Value);
-            }
-
+            //
+            // if (IsOwner)
+            // {
+            //     _isFlipped.Value = characterLogic.IsFlipped;
+            // }
+            // else
+            // {
+            //     Destroy(GetComponent<PlayerInput>());
+            //     characterLogic.SetIsFlipped(_isFlipped.Value);
+            // }
+            //
             _avatarAnimator = GetComponentInChildren<Animator>();
         }
         
@@ -85,27 +107,27 @@ namespace Script.Game.GameplayObject.Character
                 return;
             }
 #endif
-            // m_MovementState = MovementState.PathFollowing;
-            // m_NavPath.SetTargetPosition(position);
+            _movementState = MovementState.PathFollowing;
+            _navPath.SetTargetPosition(position);
         }
 
         
 
         public void StartForwardCharge(float speed, float duration)
         {
-            // m_NavPath.Clear();
-            // m_MovementState = MovementState.Charging;
-            // m_ForcedSpeed = speed;
-            // m_SpecialModeDurationRemaining = duration;
+            _navPath.Clear();
+            _movementState = MovementState.Charging;
+            _forcedSpeed = speed;
+            _specialModeDurationRemaining = duration;
         }
 
         public void StartKnockback(Vector3 knocker, float speed, float duration)
         {
-            // m_NavPath.Clear();
-            // m_MovementState = MovementState.Knockback;
-            // m_KnockbackVector = transform.position - knocker;
-            // m_ForcedSpeed = speed;
-            // m_SpecialModeDurationRemaining = duration;
+            _navPath.Clear();
+            _movementState = MovementState.Knockback;
+            _knockBackVector = transform.position - knocker;
+            _forcedSpeed = speed;
+            _specialModeDurationRemaining = duration;
         }
 
         /// <summary>
@@ -114,8 +136,8 @@ namespace Script.Game.GameplayObject.Character
         /// <param name="followTransform">The transform to follow</param>
         public void FollowTransform(Transform followTransform)
         {
-            // m_MovementState = MovementState.PathFollowing;
-            // m_NavPath.FollowTransform(followTransform);
+            _movementState = MovementState.PathFollowing;
+            _navPath.FollowTransform(followTransform);
         }
 
         /// <summary>
@@ -124,7 +146,7 @@ namespace Script.Game.GameplayObject.Character
         /// <returns></returns>
         public bool IsPerformingForcedMovement()
         {
-            return _movementState is MovementState.KnockBack or MovementState.Charging;
+            return _movementState is MovementState.Knockback or MovementState.Charging;
         }
 
         /// <summary>
@@ -141,7 +163,7 @@ namespace Script.Game.GameplayObject.Character
         /// </summary>
         public void CancelMove()
         {
-            // m_NavPath?.Clear();
+            _navPath?.Clear();
             _movementState = MovementState.Idle;
         }
 
@@ -156,33 +178,36 @@ namespace Script.Game.GameplayObject.Character
         public void Teleport(Vector3 newPosition)
         {
             CancelMove();
-            // if (!m_NavMeshAgent.Warp(newPosition))
-            // {
-            //     // warping failed! We're off the navmesh somehow. Weird... but we can still teleport
-            //     Debug.LogWarning($"NavMeshAgent.Warp({newPosition}) failed!", gameObject);
-            //     transform.position = newPosition;
-            // }
+            if (!navMeshAgent.Warp(newPosition))
+            {
+                // warping failed! We're off the navmesh somehow. Weird... but we can still teleport
+                Debug.LogWarning($"NavMeshAgent.Warp({newPosition}) failed!", gameObject);
+                transform.position = newPosition;
+            }
 
             rigidBody.position = transform.position;
             // rigidBody.rotation = transform.rotation;
         }
 
-        private void Update()
-        {
-            if (IsOwner)
-            {
-                _movementInput.x = Input.GetAxisRaw("Horizontal");
-                _movementInput.y = Input.GetAxisRaw("Vertical");
-
-                _avatarAnimator.SetFloat(Speed, _movementInput.sqrMagnitude);
-            }
-        }
-
+        // private void Update()
+        // {
+        //     if (IsOwner && _canMove)
+        //     {
+        //         _movementInput.x = Input.GetAxisRaw("Horizontal");
+        //         _movementInput.y = Input.GetAxisRaw("Vertical");
+        //
+        //         _avatarAnimator.SetFloat(Speed, _movementInput.sqrMagnitude);
+        //     }
+        // }
+        //
         private void FixedUpdate()
         {
+            // if (_canMove)
+            //     PerformMovement();
+        
             PerformMovement();
-
-            var currentState = GetMovementStatus(_movementState);
+            
+            MovementStatus currentState = GetMovementStatus(_movementState);
             if (_previousState != currentState)
             {
                 characterLogic.MovementStatus.Value = currentState;
@@ -192,43 +217,108 @@ namespace Script.Game.GameplayObject.Character
 
         public override void OnNetworkDespawn()
         {
-            // if (m_NavPath != null)
-            // {
-            //     m_NavPath.Dispose();
-            // }
+            _navPath?.Dispose();
+            
             if (IsServer)
             {
                 // Disable server components when despawning
                 enabled = false;
-                // m_NavMeshAgent.enabled = false;
+                navMeshAgent.enabled = false;
             }
         }
 
+        // private void PerformMovement()
+        // {
+        //     // if (_movementState == MovementState.Idle)
+        //     //     return;
+        //
+        //     if (!IsOwner)
+        //     {
+        //         return;
+        //     }
+        //
+        //     if (_movementInput.x < 0)
+        //     {
+        //         _isFlipped.Value = true;
+        //     }
+        //
+        //     if (_movementInput.x > 0)
+        //     {
+        //         _isFlipped.Value = false;
+        //     }
+        //
+        //     bool isMoving = TryMove(_movementInput);
+        //     
+        //     _movementState = isMoving ? MovementState.Moving : MovementState.Idle;
+        // }
+        
         private void PerformMovement()
         {
-            // if (_movementState == MovementState.Idle)
-            //     return;
-
-            if (!IsOwner)
-            {
+            if (_movementState == MovementState.Idle)
                 return;
+
+            Vector3 movementVector;
+
+            if (_movementState == MovementState.Charging)
+            {
+                // if we're done charging, stop moving
+                _specialModeDurationRemaining -= Time.fixedDeltaTime;
+                if (_specialModeDurationRemaining <= 0)
+                {
+                    _movementState = MovementState.Idle;
+                    return;
+                }
+
+                var desiredMovementAmount = _forcedSpeed * Time.fixedDeltaTime;
+                movementVector = transform.forward * desiredMovementAmount;
+            }
+            else if (_movementState == MovementState.Knockback)
+            {
+                _specialModeDurationRemaining -= Time.fixedDeltaTime;
+                if (_specialModeDurationRemaining <= 0)
+                {
+                    _movementState = MovementState.Idle;
+                    return;
+                }
+
+                float desiredMovementAmount = _forcedSpeed * Time.fixedDeltaTime;
+                movementVector = _knockBackVector * desiredMovementAmount;
+            }
+            else
+            {
+                float desiredMovementAmount = GetBaseMovementSpeed() * Time.fixedDeltaTime;
+                movementVector = _navPath.MoveAlongPath(desiredMovementAmount);
+
+                // If we didn't move stop moving.
+                if (movementVector == Vector3.zero)
+                {
+                    _movementState = MovementState.Idle;
+                    return;
+                }
             }
 
-            if (_movementInput.x < 0)
+            navMeshAgent.Move(movementVector);
+            
+            // transform.rotation = Quaternion.LookRotation(movementVector);
+            // check fliped or not
+            if (movementVector.x < 0)
             {
                 _isFlipped.Value = true;
-            }
-        
-            if (_movementInput.x > 0)
+            } else if (movementVector.x > 0)
             {
                 _isFlipped.Value = false;
             }
+            // _avatarAnimator.SetFloat(Speed, movementVector.sqrMagnitude);
+            
 
-            bool isSuccess = TryMove(_movementInput);
+            // After moving adjust the position of the dynamic rigidbody.
+            rigidBody.position = transform.position;
         }
         
         private bool TryMove(Vector2 direction)
         {
+            float speed = GetBaseMovementSpeed();
+            
             int count = rigidBody.Cast(
                 direction,
                 movementFilter,
@@ -241,6 +331,7 @@ namespace Script.Game.GameplayObject.Character
                 rigidBody.MovePosition(rigidBody.position += moveVector);
                 return true;
             }
+
             return false;
         }
 
@@ -270,7 +361,7 @@ namespace Script.Game.GameplayObject.Character
             {
                 case MovementState.Idle:
                     return MovementStatus.Idle;
-                case MovementState.KnockBack:
+                case MovementState.Knockback:
                     return MovementStatus.Uncontrolled;
                 default:
                     return MovementStatus.Normal;

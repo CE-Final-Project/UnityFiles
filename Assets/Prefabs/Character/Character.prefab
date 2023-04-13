@@ -13,15 +13,17 @@ GameObject:
   - component: {fileID: 4282221427389401383}
   - component: {fileID: 1561083795614066342}
   - component: {fileID: 4953590563975229845}
+  - component: {fileID: 676034515089522443}
   - component: {fileID: 6002752427318837242}
   - component: {fileID: 9185863182362140447}
   - component: {fileID: 7122237379142504217}
+  - component: {fileID: -4610102614321326266}
   - component: {fileID: 6813162783875503538}
   - component: {fileID: 5593306717219914192}
   - component: {fileID: 686632878458279919}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61444be8e107475cb2c2156a98008652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeState:
+  m_LifeState:
     m_InternalValue: 0
 --- !u!114 &4953590563975229845
 MonoBehaviour:
@@ -105,6 +107,22 @@ MonoBehaviour:
   damageReceiver: {fileID: 5593306717219914192}
   movement: {fileID: 6813162783875503538}
   physicsWrapper: {fileID: 6002752427318837242}
+  m_ServerAnimationHandler: {fileID: 676034515089522443}
+--- !u!114 &676034515089522443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5609933761607695722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb3865743a18b406d90e0eb1b87cc28d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NetworkAnimator: {fileID: 0}
+  m_VisualizationConfiguration: {fileID: 0}
+  m_NetworkLifeState: {fileID: 1561083795614066342}
 --- !u!114 &6002752427318837242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,6 +184,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!195 &-4610102614321326266
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5609933761607695722}
+  m_Enabled: 0
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &6813162783875503538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,8 +218,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4693b4c8924349c09a3907d5639992c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  navMeshAgent: {fileID: -4610102614321326266}
   rigidBody: {fileID: 9185863182362140447}
   characterLogic: {fileID: 4953590563975229845}
+  movementFilter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
 --- !u!114 &5593306717219914192
 MonoBehaviour:
   m_ObjectHideFlags: 0

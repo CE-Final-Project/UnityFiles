@@ -18,9 +18,6 @@ namespace Script.Game.Actions.ConcreteActions
             {
                 m_ProvisionalTarget = foe.NetworkObjectId;
                 Data.TargetIDs = new ulong[] { foe.NetworkObjectId };
-                
-                PlayersStats.Instance.AddDamageTaken(foe.NetworkObjectId, Config.Amount);
-                PlayersStats.Instance.AddDamageDealt(serverCharacter.NetworkObjectId, Config.Amount);
             }
 
             // snap to face the right direction

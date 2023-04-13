@@ -25,7 +25,6 @@ namespace Script.Game.GameplayObject.Character
             {
                 enabled = false;
             }
-
         }
 
         private void OnDisable()

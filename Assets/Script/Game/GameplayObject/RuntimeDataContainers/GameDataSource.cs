@@ -26,21 +26,21 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
 
         [SerializeField] private Action m_GeneralTargetActionPrototype;
 
-        [SerializeField] private Action m_Emote1ActionPrototype;
+        // [SerializeField] private Action m_Emote1ActionPrototype;
+        //
+        // [SerializeField] private Action m_Emote2ActionPrototype;
+        //
+        // [SerializeField] private Action m_Emote3ActionPrototype;
+        //
+        // [SerializeField] private Action m_Emote4ActionPrototype;
+        //
+        // [SerializeField] private Action m_ReviveActionPrototype;
+        //
+        // [SerializeField] private Action m_StunnedActionPrototype;
 
-        [SerializeField] private Action m_Emote2ActionPrototype;
-
-        [SerializeField] private Action m_Emote3ActionPrototype;
-
-        [SerializeField] private Action m_Emote4ActionPrototype;
-
-        [SerializeField] private Action m_ReviveActionPrototype;
-
-        [SerializeField] private Action m_StunnedActionPrototype;
-
-        [SerializeField] private Action m_DropActionPrototype;
-
-        [SerializeField] private Action m_PickUpActionPrototype;
+        // [SerializeField] private Action m_DropActionPrototype;
+        //
+        // [SerializeField] private Action m_PickUpActionPrototype;
 
         [Tooltip("All Action prototype scriptable objects should be slotted in here")]
         [SerializeField]
@@ -50,20 +50,20 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
 
         public Action GeneralTargetActionPrototype => m_GeneralTargetActionPrototype;
 
-        public Action Emote1ActionPrototype => m_Emote1ActionPrototype;
-
-        public Action Emote2ActionPrototype => m_Emote2ActionPrototype;
-
-        public Action Emote3ActionPrototype => m_Emote3ActionPrototype;
-
-        public Action Emote4ActionPrototype => m_Emote4ActionPrototype;
-
-        public Action ReviveActionPrototype => m_ReviveActionPrototype;
-
-        public Action StunnedActionPrototype => m_StunnedActionPrototype;
-
-        public Action DropActionPrototype => m_DropActionPrototype;
-        public Action PickUpActionPrototype => m_PickUpActionPrototype;
+        // public Action Emote1ActionPrototype => m_Emote1ActionPrototype;
+        //
+        // public Action Emote2ActionPrototype => m_Emote2ActionPrototype;
+        //
+        // public Action Emote3ActionPrototype => m_Emote3ActionPrototype;
+        //
+        // public Action Emote4ActionPrototype => m_Emote4ActionPrototype;
+        //
+        // public Action ReviveActionPrototype => m_ReviveActionPrototype;
+        //
+        // public Action StunnedActionPrototype => m_StunnedActionPrototype;
+        //
+        // public Action DropActionPrototype => m_DropActionPrototype;
+        // public Action PickUpActionPrototype => m_PickUpActionPrototype;
 
         private List<Action> m_AllActions;
 
@@ -129,14 +129,14 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
             {
                 GeneralChaseActionPrototype,
                 GeneralTargetActionPrototype,
-                Emote1ActionPrototype,
-                Emote2ActionPrototype,
-                Emote3ActionPrototype,
-                Emote4ActionPrototype,
-                ReviveActionPrototype,
-                StunnedActionPrototype,
-                DropActionPrototype,
-                PickUpActionPrototype
+                // Emote1ActionPrototype,
+                // Emote2ActionPrototype,
+                // Emote3ActionPrototype,
+                // Emote4ActionPrototype,
+                // ReviveActionPrototype,
+                // StunnedActionPrototype,
+                // DropActionPrototype,
+                // PickUpActionPrototype
             };
 
             m_AllActions = new List<Action>(uniqueActions.Count);

@@ -26,7 +26,7 @@ namespace Script.Game.GameplayObject.UserInput
         private float m_LastSentMove;
 
         // Cache raycast hit array so that we can use non alloc raycasts
-        private readonly RaycastHit[] k_CachedHit = new RaycastHit[4];
+        private readonly RaycastHit2D[] k_CachedHit = new RaycastHit2D[4];
 
         // This is basically a constant but layer masks cannot be created in the constructor, that's why it's assigned int Awake.
         private LayerMask m_GroundLayerMask;
@@ -147,8 +147,8 @@ namespace Script.Game.GameplayObject.UserInput
                 actionState3 = new ActionState() { actionID = action3.ActionID, selectable = true };
             }
 
-            m_GroundLayerMask = LayerMask.GetMask(new[] { "Ground" });
-            m_ActionLayerMask = LayerMask.GetMask(new[] { "PCs", "NPCs", "Ground" });
+            m_GroundLayerMask = LayerMask.GetMask("Ground");
+            m_ActionLayerMask = LayerMask.GetMask("PCs", "NPCs", "Ground");
 
             m_RaycastHitComparer = new RaycastHitComparer();
         }
@@ -248,13 +248,25 @@ namespace Script.Game.GameplayObject.UserInput
                 if ((Time.time - m_LastSentMove) > k_MoveSendRateSeconds)
                 {
                     m_LastSentMove = Time.time;
-                    var ray = m_MainCamera.ScreenPointToRay(UnityEngine.Input.mousePosition);
-
-                    var groundHits = Physics.RaycastNonAlloc(ray,
+                   
+                    // Ray ray = m_MainCamera.ScreenPointToRay(Input.mousePosition);
+                    //
+                    // var groundHits = Physics.RaycastNonAlloc(ray,
+                    //     k_CachedHit,
+                    //     k_MouseInputRaycastDistance,
+                    //     m_GroundLayerMask);
+                    
+                    // change above to 2d raycast
+                    var mousePos = Input.mousePosition;
+                    mousePos.z = -m_MainCamera.transform.position.z; // adjust z to be in front of the camera
+                    var worldPos = m_MainCamera.ScreenToWorldPoint(mousePos);
+                    
+                    var groundHits = Physics2D.RaycastNonAlloc(worldPos,
+                        Vector2.zero,
                         k_CachedHit,
                         k_MouseInputRaycastDistance,
                         m_GroundLayerMask);
-
+                    
                     if (groundHits > 0)
                     {
                         if (groundHits > 1)
@@ -262,7 +274,7 @@ namespace Script.Game.GameplayObject.UserInput
                             // sort hits by distance
                             Array.Sort(k_CachedHit, 0, groundHits, m_RaycastHitComparer);
                         }
-
+            
                         // verify point is indeed on navmesh surface
                         if (NavMesh.SamplePosition(k_CachedHit[0].point,
                                 out var hit,
@@ -270,7 +282,7 @@ namespace Script.Game.GameplayObject.UserInput
                                 NavMesh.AllAreas))
                         {
                             m_ServerCharacter.SendCharacterInputServerRpc(hit.position);
-
+            
                             //Send our client only click request
                             ClientMoveEvent?.Invoke(hit.position);
                         }
@@ -305,8 +317,10 @@ namespace Script.Game.GameplayObject.UserInput
                 if (triggerStyle == SkillTriggerStyle.MouseClick)
                 {
                     var ray = m_MainCamera.ScreenPointToRay(UnityEngine.Input.mousePosition);
-                    numHits = Physics.RaycastNonAlloc(ray, k_CachedHit, k_MouseInputRaycastDistance, m_ActionLayerMask);
+                    // numHits = Physics.RaycastNonAlloc(ray, k_CachedHit, k_MouseInputRaycastDistance, m_ActionLayerMask);
+                    numHits = Physics2D.RaycastNonAlloc(ray.origin, ray.direction, k_CachedHit, k_MouseInputRaycastDistance, m_ActionLayerMask);
                 }
+                
 
                 int networkedHitIndex = -1;
                 for (int i = 0; i < numHits; i++)
@@ -377,7 +391,8 @@ namespace Script.Game.GameplayObject.UserInput
                     if (!serverCharacter.IsNpc && serverCharacter.LifeState == LifeState.Fainted)
                     {
                         //right-clicked on a downed ally--change the skill play to Revive.
-                        actionID = GameDataSource.Instance.ReviveActionPrototype.ActionID;
+                        // actionID = GameDataSource.Instance.ReviveActionPrototype.ActionID;
+                        Debug.Log("Revive");
                     }
                 }
             }
@@ -495,6 +510,23 @@ namespace Script.Game.GameplayObject.UserInput
                 RequestAction(actionState3.actionID, SkillTriggerStyle.KeyboardRelease);
             }
             
+            // if (Input.GetKeyDown(KeyCode.Alpha5))
+            // {
+            //     RequestAction(GameDataSource.Instance.Emote1ActionPrototype.ActionID, SkillTriggerStyle.Keyboard);
+            // }
+            // if (Input.GetKeyDown(KeyCode.Alpha6))
+            // {
+            //     RequestAction(GameDataSource.Instance.Emote2ActionPrototype.ActionID, SkillTriggerStyle.Keyboard);
+            // }
+            // if (Input.GetKeyDown(KeyCode.Alpha7))
+            // {
+            //     RequestAction(GameDataSource.Instance.Emote3ActionPrototype.ActionID, SkillTriggerStyle.Keyboard);
+            // }
+            // if (Input.GetKeyDown(KeyCode.Alpha8))
+            // {
+            //     RequestAction(GameDataSource.Instance.Emote4ActionPrototype.ActionID, SkillTriggerStyle.Keyboard);
+            // }
+            
 
             if (!EventSystem.current.IsPointerOverGameObject() && m_CurrentSkillInput == null)
             {
@@ -531,7 +563,8 @@ namespace Script.Game.GameplayObject.UserInput
             {
                 // show drop!
 
-                actionState1.actionID = GameDataSource.Instance.DropActionPrototype.ActionID;
+                Debug.Log("Drop");
+                // actionState1.actionID = GameDataSource.Instance.DropActionPrototype.ActionID;
             }
             else if ((m_ServerCharacter.TargetId.Value != 0
                     && selection != null
@@ -540,7 +573,8 @@ namespace Script.Game.GameplayObject.UserInput
             {
                 // special case: targeting a pickup-able item or holding a pickup object
 
-                actionState1.actionID = GameDataSource.Instance.PickUpActionPrototype.ActionID;
+                Debug.Log("Pickup");
+                // actionState1.actionID = GameDataSource.Instance.PickUpActionPrototype.ActionID;
             }
             else if (m_ServerCharacter.TargetId.Value != 0
                 && selection != null
@@ -552,7 +586,8 @@ namespace Script.Game.GameplayObject.UserInput
                 // we have another player selected! In that case we want to reflect that our basic Action is a Revive, not an attack!
                 // But we need to know if the player is alive... if so, the button should be disabled (for better player communication)
 
-                actionState1.actionID = GameDataSource.Instance.ReviveActionPrototype.ActionID;
+                Debug.Log("Revive");
+                // actionState1.actionID = GameDataSource.Instance.ReviveActionPrototype.ActionID;
                 isSelectable = charState.NetLifeState.LifeState.Value != LifeState.Alive;
             }
             else

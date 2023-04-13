@@ -18,7 +18,7 @@ MonoBehaviour:
   Skill3: {fileID: 0}
   BaseHP: {fileID: 11400000, guid: 04b0ab232ac2a5f4f87e43a3dd09f34a, type: 2}
   BaseMana: 0
-  Speed: 5
+  Speed: 1.5
   IsNpc: 0
   DetectRange: 0
   DisplayedName: KNIGHT

@@ -49,4 +49,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d6c63c223ca69d942a25a9513c8934e8, type: 2}
   - {fileID: 11400000, guid: 941f36d65ca4ff0409e8c4eebf3afed4, type: 2}
   - {fileID: 11400000, guid: 0d145928c0d060640a54a03b2b0ea319, type: 2}
-  actionPrototypes: []
+  m_GeneralChaseActionPrototype: {fileID: 11400000, guid: 50b92f183b94b79498ffc9461731315d, type: 2}
+  m_GeneralTargetActionPrototype: {fileID: 11400000, guid: 0a0f53e477dc1754bb9d576187e4ec31, type: 2}
+  m_ActionPrototypes:
+  - {fileID: 11400000, guid: 7c0dc2cfa69addf4fb10f3e6842c1478, type: 2}

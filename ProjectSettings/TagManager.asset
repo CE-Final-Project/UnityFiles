@@ -8,18 +8,19 @@ TagManager:
   - VirtualCamera
   - SpawnerPosition
   - Character
+  - NavigationSystem
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PCs
   - Water
   - UI
+  - NPCs
+  - Projectiles
+  - Ground
   - 
-  - 
-  - 
-  - 
-  - 
+  - Environment
   - 
   - 
   - 
