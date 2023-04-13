@@ -34,7 +34,7 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
 
     public class PlayersStats : MonoBehaviour
     {
-        private struct PlayerStats
+        public struct PlayerStats
         {
             public string CharacterType { get; private set; }
             public int KillCount { get; private set; }
@@ -192,7 +192,7 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
             _playerStatsMap.Remove(playerId);
         }
 
-        public string GetPlayersStats()
+        public string GetStringPlayersStats()
         {
             string stats = "";
             foreach (var playerStats in _playerStatsMap)
@@ -208,6 +208,11 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
             }
 
             return stats;
+        }
+        
+        public Dictionary<PlayerId, PlayerStats> GetPlayerStatsMap()
+        {
+            return _playerStatsMap;
         }
     }
 }

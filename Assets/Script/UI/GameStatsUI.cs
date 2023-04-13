@@ -41,7 +41,7 @@ namespace Script.UI
                 return;
             }
 
-            playerStatsText.text = PlayersStats.Instance.GetPlayersStats();
+            playerStatsText.text = PlayersStats.Instance.GetStringPlayersStats();
         }
 
         public void Show()
