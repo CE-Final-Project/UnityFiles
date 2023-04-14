@@ -9,6 +9,7 @@ TagManager:
   - SpawnerPosition
   - Character
   - NavigationSystem
+  - Audio
   - GameCanvas
   layers:
   - Default
