@@ -9,6 +9,7 @@ TagManager:
   - SpawnerPosition
   - Character
   - NavigationSystem
+  - GameCanvas
   layers:
   - Default
   - TransparentFX

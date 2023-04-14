@@ -370,12 +370,9 @@ namespace Script.Game.GameplayObject.Character
             // }
         }
 
-        void CollisionEntered(Collision collision)
+        private void CollisionEntered(Collision collision)
         {
-            if (_serverActionPlayer != null)
-            {
-                _serverActionPlayer.CollisionEntered(collision);
-            }
+            _serverActionPlayer?.CollisionEntered(collision);
         }
 
         public void SetIsFlipped(bool isFliped)

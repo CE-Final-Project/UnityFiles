@@ -15,7 +15,7 @@ namespace Script.Game.GameplayObject.UserInput
     [RequireComponent(typeof(ServerCharacter))]
     public class ClientInputSender : NetworkBehaviour
     {
-        private const float k_MouseInputRaycastDistance = 100f;
+        private const float k_MouseInputRaycastDistance = 10f;
 
         //The movement input rate is capped at 40ms (or 25 fps). This provides a nice balance between responsiveness and
         //upstream network conservation. This matters when holding down your mouse button to move.
@@ -33,7 +33,7 @@ namespace Script.Game.GameplayObject.UserInput
 
         private LayerMask m_ActionLayerMask;
 
-        private const float k_MaxNavMeshDistance = 1f;
+        private const float k_MaxNavMeshDistance = 0.5f;
 
         private RaycastHitComparer m_RaycastHitComparer;
 
@@ -257,11 +257,11 @@ namespace Script.Game.GameplayObject.UserInput
                     //     m_GroundLayerMask);
                     
                     // change above to 2d raycast
-                    var mousePos = Input.mousePosition;
+                    Vector3 mousePos = Input.mousePosition;
                     mousePos.z = -m_MainCamera.transform.position.z; // adjust z to be in front of the camera
-                    var worldPos = m_MainCamera.ScreenToWorldPoint(mousePos);
+                    Vector3 worldPos = m_MainCamera.ScreenToWorldPoint(mousePos);
                     
-                    var groundHits = Physics2D.RaycastNonAlloc(worldPos,
+                    int groundHits = Physics2D.RaycastNonAlloc(worldPos,
                         Vector2.zero,
                         k_CachedHit,
                         k_MouseInputRaycastDistance,

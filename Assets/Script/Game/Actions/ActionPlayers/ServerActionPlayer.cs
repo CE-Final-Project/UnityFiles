@@ -206,14 +206,14 @@ namespace Script.Game.Actions.ActionPlayers
                 // remember the moment when we successfully used this Action!
                 m_LastUsedTimestamps[m_Queue[0].ActionID] = Time.time;
 
-                // if (m_Queue[0].Config.ExecTimeSeconds == 0 && m_Queue[0].Config.BlockingMode == BlockingModeType.OnlyDuringExecTime)
-                // {
-                //     //this is a non-blocking action with no exec time. It should never be hanging out at the front of the queue (not even for a frame),
-                //     //because it could get cleared if a new Action came in in that interval.
-                //     m_NonBlockingActions.Add(m_Queue[0]);
-                //     AdvanceQueue(false); // note: this will call StartAction() recursively if there's more stuff in the queue ...
-                //     return;              // ... so it's important not to try to do anything more here
-                // }
+                if (m_Queue[0].Config.ExecTimeSeconds == 0 && m_Queue[0].Config.BlockingMode == BlockingModeType.OnlyDuringExecTime)
+                {
+                    //this is a non-blocking action with no exec time. It should never be hanging out at the front of the queue (not even for a frame),
+                    //because it could get cleared if a new Action came in in that interval.
+                    m_NonBlockingActions.Add(m_Queue[0]);
+                    AdvanceQueue(false); // note: this will call StartAction() recursively if there's more stuff in the queue ...
+                    return;              // ... so it's important not to try to do anything more here
+                }
             }
         }
 
