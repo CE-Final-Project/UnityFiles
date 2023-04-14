@@ -15,7 +15,7 @@ namespace Script.Game.GameplayObject.UserInput
     [RequireComponent(typeof(ServerCharacter))]
     public class ClientInputSender : NetworkBehaviour
     {
-        private const float k_MouseInputRaycastDistance = 10f;
+        private const float k_MouseInputRaycastDistance = 100f;
 
         //The movement input rate is capped at 40ms (or 25 fps). This provides a nice balance between responsiveness and
         //upstream network conservation. This matters when holding down your mouse button to move.

@@ -12,5 +12,6 @@
         Skeleton,
         Slime,
         Zombie,
+        Necromancer
     }
 }

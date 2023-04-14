@@ -1,6 +1,7 @@
 ﻿using Script.Game.GameplayObject.RuntimeDataContainers;
 using Script.GameState;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Script.UI
@@ -13,11 +14,17 @@ namespace Script.UI
         
         private void Awake()
         {
+
+            if (!NetworkManager.Singleton.IsServer)
+            {
+                enabled = false;
+            }
+            
             canvasGroup.alpha = 0f;
             canvasGroup.blocksRaycasts = false;
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Tab))
             {
