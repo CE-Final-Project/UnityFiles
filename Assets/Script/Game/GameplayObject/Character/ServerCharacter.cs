@@ -3,6 +3,7 @@ using Script.Configuration;
 using Script.ConnectionManagement;
 using Script.Game.Actions.ActionPlayers;
 using Script.Game.Actions.Input;
+using Script.Game.GameplayObject.Character.AI;
 using Script.Game.GameplayObject.RuntimeDataContainers;
 using Script.GameState;
 using Unity.Multiplayer.Samples.BossRoom;
@@ -96,6 +97,7 @@ namespace Script.Game.GameplayObject.Character
         
         public PhysicsWrapper PhysicsWrapper => physicsWrapper;
 
+        private AIBrain _aiBrain;
         private NetworkAvatarGuidState _state;
 
         [SerializeField] private ServerAnimationHandler m_ServerAnimationHandler;
@@ -126,10 +128,10 @@ namespace Script.Game.GameplayObject.Character
                 damageReceiver.DamageReceived += ReceiveHP;
                 damageReceiver.CollisionEntered += CollisionEntered;
 
-                // if (IsNpc)
-                // {
-                //     // npc stuff
-                // }
+                if (IsNpc)
+                {
+                    _aiBrain = new AIBrain(this, _serverActionPlayer);
+                }
                 
                 if (startingAction != null)
                 {
@@ -304,14 +306,10 @@ namespace Script.Game.GameplayObject.Character
             }
 
             HitPoints = Mathf.Clamp(HitPoints + HP, 0, CharacterClass.BaseHP.Value);
-            
-            
 
-            // if (m_AIBrain != null)
-            // {
-            //     //let the brain know about the modified amount of damage we received.
-            //     m_AIBrain.ReceiveHP(inflicter, HP);
-            // }
+
+            //let the brain know about the modified amount of damage we received.
+            _aiBrain?.ReceiveHP(inflicter, HP);
 
             //we can't currently heal a dead character back to Alive state.
             //that's handled by a separate function.
@@ -364,10 +362,10 @@ namespace Script.Game.GameplayObject.Character
         void Update()
         {
             _serverActionPlayer.OnUpdate();
-            // if (m_AIBrain != null && LifeState == LifeState.Alive && m_BrainEnabled)
-            // {
-            //     m_AIBrain.Update();
-            // }
+            if (_aiBrain != null && LifeState == LifeState.Alive && brainEnabled)
+            {
+                _aiBrain.Update();
+            }
         }
 
         private void CollisionEntered(Collision collision)
@@ -379,5 +377,10 @@ namespace Script.Game.GameplayObject.Character
         {
             _spriteRenderer.flipX = isFliped;
         }
+        
+        /// <summary>
+        /// This character's AIBrain. Will be null if this is not an NPC.
+        /// </summary>
+        public AIBrain AIBrain => _aiBrain;
     }
 }

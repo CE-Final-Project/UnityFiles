@@ -204,7 +204,7 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
                          $"Damage Dealt: {playerStats.Value.DamageDealt}\n" +
                          $"Damage Taken: {playerStats.Value.DamageTaken}\n" +
                          $"Healing Done: {playerStats.Value.HealingDone}\n" +
-                         $"Healing Taken: {playerStats.Value.HealingTaken}";
+                         $"Healing Taken: {playerStats.Value.HealingTaken}\n\n";
             }
 
             return stats;

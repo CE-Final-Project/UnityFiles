@@ -572,6 +572,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5755594385219786691, guid: 1fd442aec23435044beefa21e106d11c, type: 3}
+      propertyPath: m_ActionPrototypes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5755594385219786691, guid: 1fd442aec23435044beefa21e106d11c, type: 3}
+      propertyPath: m_ActionPrototypes.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 03dd53d3feb042f4f86c1684a0f090f3, type: 2}
     - target: {fileID: 8920463376141882484, guid: 1fd442aec23435044beefa21e106d11c, type: 3}
       propertyPath: m_Name
       value: GameDataSource

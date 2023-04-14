@@ -162,10 +162,10 @@ namespace Script.Game.GameplayObject.Character
             {
                 name = "AvatarGraphics" + _serverCharacter.OwnerClientId;
 
-                // if (_serverCharacter.TryGetComponent(out ClientAvatarGuidHandler clientAvatarGuidHandler))
-                // {
-                //     m_ClientVisualsAnimator = clientAvatarGuidHandler.graphicsAnimator;
-                // }
+                if (_serverCharacter.TryGetComponent(out ClientAvatarGuidHandler clientAvatarGuidHandler))
+                {
+                    clientVisualAnimator = clientAvatarGuidHandler.graphicsAnimator;
+                }
                 //
                 // m_CharacterSwapper = GetComponentInChildren<CharacterSwap>();
 
