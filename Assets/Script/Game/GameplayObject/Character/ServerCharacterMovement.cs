@@ -41,10 +41,7 @@ namespace Script.Game.GameplayObject.Character
 
         [SerializeField] private ContactFilter2D movementFilter;
         private readonly List<RaycastHit2D> _castCollisions = new List<RaycastHit2D>();
-        private Animator _avatarAnimator;
         private Vector2 _knockBackVector; 
-        // private Vector2 _movementInput = Vector2.zero;
-        private static readonly int Speed = Animator.StringToHash("Speed");
 
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
         public bool TeleportModeActivated { get; set; }
@@ -72,18 +69,6 @@ namespace Script.Game.GameplayObject.Character
             }
             
             _isFlipped.OnValueChanged += OnIsFlippedChanged;
-            //
-            // if (IsOwner)
-            // {
-            //     _isFlipped.Value = characterLogic.IsFlipped;
-            // }
-            // else
-            // {
-            //     Destroy(GetComponent<PlayerInput>());
-            //     characterLogic.SetIsFlipped(_isFlipped.Value);
-            // }
-            //
-            _avatarAnimator = GetComponentInChildren<Animator>();
         }
         
         private void OnIsFlippedChanged(bool oldValue, bool newValue)
@@ -188,23 +173,9 @@ namespace Script.Game.GameplayObject.Character
             rigidBody.position = transform.position;
             // rigidBody.rotation = transform.rotation;
         }
-
-        // private void Update()
-        // {
-        //     if (IsOwner && _canMove)
-        //     {
-        //         _movementInput.x = Input.GetAxisRaw("Horizontal");
-        //         _movementInput.y = Input.GetAxisRaw("Vertical");
-        //
-        //         _avatarAnimator.SetFloat(Speed, _movementInput.sqrMagnitude);
-        //     }
-        // }
-        //
+        
         private void FixedUpdate()
         {
-            // if (_canMove)
-            //     PerformMovement();
-        
             PerformMovement();
             
             MovementStatus currentState = GetMovementStatus(_movementState);
@@ -227,31 +198,6 @@ namespace Script.Game.GameplayObject.Character
             }
         }
 
-        // private void PerformMovement()
-        // {
-        //     // if (_movementState == MovementState.Idle)
-        //     //     return;
-        //
-        //     if (!IsOwner)
-        //     {
-        //         return;
-        //     }
-        //
-        //     if (_movementInput.x < 0)
-        //     {
-        //         _isFlipped.Value = true;
-        //     }
-        //
-        //     if (_movementInput.x > 0)
-        //     {
-        //         _isFlipped.Value = false;
-        //     }
-        //
-        //     bool isMoving = TryMove(_movementInput);
-        //     
-        //     _movementState = isMoving ? MovementState.Moving : MovementState.Idle;
-        // }
-        
         private void PerformMovement()
         {
             if (_movementState == MovementState.Idle)
@@ -269,7 +215,7 @@ namespace Script.Game.GameplayObject.Character
                     return;
                 }
 
-                var desiredMovementAmount = _forcedSpeed * Time.fixedDeltaTime;
+                float desiredMovementAmount = _forcedSpeed * Time.fixedDeltaTime;
                 movementVector = transform.forward * desiredMovementAmount;
             }
             else if (_movementState == MovementState.Knockback)
@@ -308,32 +254,31 @@ namespace Script.Game.GameplayObject.Character
             {
                 _isFlipped.Value = false;
             }
-            // _avatarAnimator.SetFloat(Speed, movementVector.sqrMagnitude);
-            
+
 
             // After moving adjust the position of the dynamic rigidbody.
             rigidBody.position = transform.position;
         }
         
-        private bool TryMove(Vector2 direction)
-        {
-            float speed = GetBaseMovementSpeed();
-            
-            int count = rigidBody.Cast(
-                direction,
-                movementFilter,
-                _castCollisions,
-                speed * Time.fixedDeltaTime + 0.01f);
-
-            if (count == 0)
-            {
-                Vector2 moveVector = direction.normalized * (speed * Time.fixedDeltaTime);
-                rigidBody.MovePosition(rigidBody.position += moveVector);
-                return true;
-            }
-
-            return false;
-        }
+        // private bool TryMove(Vector2 direction)
+        // {
+        //     float speed = GetBaseMovementSpeed();
+        //     
+        //     int count = rigidBody.Cast(
+        //         direction,
+        //         movementFilter,
+        //         _castCollisions,
+        //         speed * Time.fixedDeltaTime + 0.01f);
+        //
+        //     if (count == 0)
+        //     {
+        //         Vector2 moveVector = direction.normalized * (speed * Time.fixedDeltaTime);
+        //         rigidBody.MovePosition(rigidBody.position += moveVector);
+        //         return true;
+        //     }
+        //
+        //     return false;
+        // }
 
         /// <summary>
         /// Retrieves the speed for this character's class.
@@ -357,15 +302,12 @@ namespace Script.Game.GameplayObject.Character
         /// </summary>
         private MovementStatus GetMovementStatus(MovementState movementState)
         {
-            switch (movementState)
+            return movementState switch
             {
-                case MovementState.Idle:
-                    return MovementStatus.Idle;
-                case MovementState.Knockback:
-                    return MovementStatus.Uncontrolled;
-                default:
-                    return MovementStatus.Normal;
-            }
+                MovementState.Idle => MovementStatus.Idle,
+                MovementState.Knockback => MovementStatus.Uncontrolled,
+                _ => MovementStatus.Normal
+            };
         }
     }
 }
