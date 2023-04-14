@@ -14,7 +14,7 @@ public class PauseScript : MonoBehaviour
     void Start()
     {
         playerAvatar = GameObject.FindGameObjectWithTag("Player");
-        playerCamera = GameObject.FindGameObjectWithTag("VirtualCamera");
+        playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
     }
     void Update()
     {
