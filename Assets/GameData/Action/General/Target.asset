@@ -37,7 +37,7 @@ MonoBehaviour:
     BlockingMode: 0
     Projectiles: []
     Spawns: []
-    IsFriendly: 0
+    IsFriendly: 1
     Icon: {fileID: 0}
     DisplayedName: 
     Description: 

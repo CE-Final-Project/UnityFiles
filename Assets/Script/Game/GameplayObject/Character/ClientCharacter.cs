@@ -222,6 +222,7 @@ namespace Script.Game.GameplayObject.Character
             {
                 OurAnimator.SetTrigger(visualizationConfiguration.AnticipateMoveTriggerID);
             }
+            
         }
 
         // void OnStealthyChanged(bool oldValue, bool newValue)
