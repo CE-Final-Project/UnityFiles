@@ -35,6 +35,10 @@ public class AudioManager : MonoBehaviour
         {
             musicSource.clip = gameBackground1;
         }
+        else if (currentScene.name == "PostGame")
+        {
+            musicSource.clip = postGameBackround;
+        }
 
         musicSource.Play();
     }

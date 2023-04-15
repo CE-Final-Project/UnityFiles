@@ -2284,8 +2284,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 284190400}
-        m_TargetAssemblyTypeName: exitButton, Assembly-CSharp
-        m_MethodName: exitgame
+        m_TargetAssemblyTypeName: ExitButton, Assembly-CSharp
+        m_MethodName: ExitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11725,6 +11725,9 @@ MonoBehaviour:
   SFXSource: {fileID: 1838881637}
   menuBackground: {fileID: 8300000, guid: 54ece8c2941ca4755b8bdbc911e58499, type: 3}
   lobbyBackground: {fileID: 8300000, guid: 4fd102fcd67ec463e8d106aa576bfa81, type: 3}
+  gameBackground1: {fileID: 0}
+  gameBackground2: {fileID: 0}
+  gameBackground3: {fileID: 0}
   postGameBackround: {fileID: 8300000, guid: 4f7b588994fab4ce1a018c8b7d8f437d, type: 3}
   click: {fileID: 8300000, guid: b30fbd81f58674145888d009eeb1224b, type: 3}
   select: {fileID: 8300000, guid: 0104f2f75ccc54831bd00700fb4e0129, type: 3}
