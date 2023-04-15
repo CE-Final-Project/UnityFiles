@@ -144,7 +144,7 @@ MonoBehaviour:
     OriginatingState: 1140125649
     DestinationState: -287304258
     TransitionDuration: 0
-    TriggerNameHash: 813167036
+    TriggerNameHash: -47317214
     TransitionIndex: 2
   m_Animator: {fileID: 6936002768889212131}
 --- !u!1001 &2639544739402122343
@@ -162,6 +162,10 @@ PrefabInstance:
       propertyPath: characterClass
       value: 
       objectReference: {fileID: 11400000, guid: 12dbe8f50ed05614a9817488eacea766, type: 2}
+    - target: {fileID: 1289437194058825631, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
+      propertyPath: startingAction
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1289437194058825631, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
       propertyPath: clientCharacter
       value: 

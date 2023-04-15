@@ -84,7 +84,7 @@ namespace Script.Game.Actions.ConcreteActions
 
                 Vector3 diff = targetObjectPosition - parent.PhysicsWrapper.Transform.position;
 
-                diff.y = 0;
+                diff.z = 0;
                 if (diff != Vector3.zero)
                 {
                     parent.PhysicsWrapper.Transform.forward = diff;

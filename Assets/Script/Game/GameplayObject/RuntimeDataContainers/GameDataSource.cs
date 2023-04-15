@@ -21,8 +21,7 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
         
         //Actions that are directly listed here will get automatically assigned ActionIDs and they don't need to be a part of m_ActionPrototypes array
         [Header("Common action prototypes")]
-        [SerializeField]
-        private Action m_GeneralChaseActionPrototype;
+        [SerializeField] private Action m_GeneralChaseActionPrototype;
 
         [SerializeField] private Action m_GeneralTargetActionPrototype;
 

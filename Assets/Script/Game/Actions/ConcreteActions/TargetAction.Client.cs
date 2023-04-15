@@ -54,7 +54,7 @@ namespace Script.Game.Actions.ConcreteActions
                         m_TargetReticule.transform.parent = parentTransform;
                         m_TargetReticule.transform.localPosition = new Vector3(0, k_ReticuleGroundHeight, 0);
                     }
-                }
+                } 
                 else
                 {
                     // null check here in case the target was destroyed along with the target reticule

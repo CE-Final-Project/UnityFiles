@@ -62,7 +62,6 @@ namespace Script.Game.GameplayObject.Character
         }
 
         public bool IsNpc => CharacterClass.IsNpc;
-        
         public bool IsValidTarget => LifeState != LifeState.Dead;
         
         public bool CanPerformActions => LifeState == LifeState.Alive;
