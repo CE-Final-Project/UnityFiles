@@ -10,18 +10,23 @@ namespace Shaders
         public int outlineSize = 1;
 
         private SpriteRenderer spriteRenderer;
-
-        void OnEnable() {
-            spriteRenderer = GetComponent<SpriteRenderer>();
-
+        
+        void Start() {
+            spriteRenderer = GetComponentInParent<SpriteRenderer>();
             UpdateOutline(true);
         }
 
         void OnDisable() {
             UpdateOutline(false);
+            spriteRenderer = null;
         }
 
         void Update() {
+            
+            if (spriteRenderer == null) {
+                spriteRenderer = GetComponentInParent<SpriteRenderer>();
+            }
+            
             UpdateOutline(true);
         }
 

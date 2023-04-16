@@ -27,14 +27,12 @@ MonoBehaviour:
   SpeedSlowed: 2
   SpeedHasted: 1.5
   SpeedWalking: 0.5
-  TargetReticule: {fileID: 0}
-  ReticuleFriendlyMat: {fileID: 0}
-  ReticuleHostileMat: {fileID: 0}
-  AliveStateTriggerID: 0
-  FaintedStateTriggerID: 0
-  DeadStateTriggerID: 0
-  AnticipateMoveTriggerID: 0
-  EntryDeathTriggerID: 0
-  EntryFaintedTriggerID: 0
-  SpeedVariableID: 0
-  BaseNodeTagID: 0
+  TargetReticule: {fileID: 374465014956892841, guid: 4d621f7032d041e4a8dfc63e342688b3, type: 3}
+  AliveStateTriggerID: -1201797473
+  FaintedStateTriggerID: 426567206
+  DeadStateTriggerID: 1293411866
+  AnticipateMoveTriggerID: 291833189
+  EntryDeathTriggerID: -1864568334
+  EntryFaintedTriggerID: -379974620
+  SpeedVariableID: -823668238
+  BaseNodeTagID: -80330083

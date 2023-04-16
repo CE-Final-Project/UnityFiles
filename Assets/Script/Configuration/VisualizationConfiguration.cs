@@ -45,6 +45,10 @@ namespace Script.Configuration
         [Tooltip("The animator Speed value when character is moving at a slower walking pace")]
         public float SpeedWalking = 0.5f;
         
+        [Header("Associated Resources")]
+        [Tooltip("Prefab for the Target Reticule used by this Character")]
+        public GameObject TargetReticule;
+        
         // These are maintained by our OnValidate(). Code refers to these hashed values, not the string versions!
         [SerializeField] [HideInInspector] public int AliveStateTriggerID;
         [SerializeField] [HideInInspector] public int FaintedStateTriggerID;

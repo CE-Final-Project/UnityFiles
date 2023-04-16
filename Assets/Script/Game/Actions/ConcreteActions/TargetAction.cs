@@ -35,7 +35,7 @@ namespace Script.Game.Actions.ConcreteActions
         public override void Reset()
         {
             base.Reset();
-            // m_TargetReticule = null;
+            m_TargetReticule = null;
             m_CurrentTarget = 0;
             m_NewTarget = 0;
         }

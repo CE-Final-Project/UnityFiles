@@ -23,6 +23,12 @@ namespace Script.Game.GameplayObject.Character
         /// Returns a reference to the active Animator for this visualization
         /// </summary>
         public Animator OurAnimator => clientVisualAnimator;
+        
+        /// <summary>
+        /// Returns the targeting-reticule prefab for this character visualization
+        /// </summary>
+        public GameObject TargetReticulePrefab => visualizationConfiguration.TargetReticule;
+        
 
         private ServerCharacter _serverCharacter;
         
