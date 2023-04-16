@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 public class AudioManager : MonoBehaviour
 {
     [Header("Audio Source")]
-    [SerializeField] AudioSource musicSource;
-    [SerializeField] AudioSource SFXSource;
+    public AudioSource musicSource;
+    public AudioSource SFXSource;
 
     [Header("Audio Clip")]
     public AudioClip menuBackground;
@@ -17,6 +17,10 @@ public class AudioManager : MonoBehaviour
     public AudioClip click;
     public AudioClip select;
     public AudioClip ready;
+    public AudioClip Attack0;
+    public AudioClip Attack1;
+    public AudioClip Attack2;
+    public AudioClip Attack3;
     public AudioClip death;
 
     private void Start()

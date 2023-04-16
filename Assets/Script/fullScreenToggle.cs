@@ -1,30 +1,19 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class fullScreenToggle : MonoBehaviour{
+public class FullScreenToggle : MonoBehaviour
+{
+    public Toggle toggle;
 
-    void Start()
+    public void Toggle()
     {
-        //Screen.SetResolution(1600, 900, false);
-        print(Screen.currentResolution);
-    }
-
-    public void toggle(bool is_fullScreen) {
-        //Screen.fullScreen = is_fullScreen;
-        print(Screen.currentResolution);
-        if (SystemInfo.deviceType == DeviceType.Desktop)
+        if(toggle.GetComponent<Toggle>().isOn)
         {
-            if (is_fullScreen)
-            {
-                print("full screen");
-                Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
-                //Screen.SetResolution(2650, 1600, true);
-            }
-            else
-            {
-                print("not full screen");
-                Screen.fullScreenMode = FullScreenMode.Windowed;
-                //Screen.SetResolution(1600, 900, false);
-            }
+            Screen.fullScreen = true;
+        }
+        else
+        {
+            Screen.fullScreen = false;
         }
     }
 
