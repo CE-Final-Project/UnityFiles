@@ -10,7 +10,7 @@ namespace Script.Game
     {
         public event Action<ServerCharacter, int> DamageReceived;
         
-        public event Action<Collision> CollisionEntered;
+        public event Action<Collision2D> CollisionEntered;
 
         [SerializeField] private NetworkLifeState networkLifeState;
         
@@ -31,7 +31,7 @@ namespace Script.Game
             return networkLifeState.LifeState.Value == LifeState.Alive;
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
             CollisionEntered?.Invoke(collision);
         }

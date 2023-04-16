@@ -43,7 +43,7 @@ namespace Script.Game.Actions.ConcreteActions
         /// <summary>
         /// Keeps track of which Colliders we've already hit, so that our attack doesn't hit the same character twice.
         /// </summary>
-        private HashSet<Collider> m_CollidedAlready = new HashSet<Collider>();
+        private HashSet<Collider2D> m_CollidedAlready = new HashSet<Collider2D>();
 
         /// <summary>
         /// Set to true in the special-case scenario where we are stunned by one of the characters we tried to trample
@@ -181,7 +181,7 @@ namespace Script.Game.Actions.ConcreteActions
         }
 
         // called by owning class when parent's Collider collides with stuff
-        public override void CollisionEntered(ServerCharacter serverCharacter, Collision collision)
+        public override void CollisionEntered(ServerCharacter serverCharacter, Collision2D collision)
         {
             // we only detect other possible victims when we start charging
             if (GetCurrentStage() != ActionStage.Charging)
@@ -191,7 +191,7 @@ namespace Script.Game.Actions.ConcreteActions
         }
 
         // here we handle colliding with anything (whether a victim or not)
-        private void Collide(ServerCharacter parent, Collider collider)
+        private void Collide(ServerCharacter parent, Collider2D collider)
         {
             if (m_CollidedAlready.Contains(collider))
                 return; // already hit them!
@@ -225,7 +225,7 @@ namespace Script.Game.Actions.ConcreteActions
             // We don't get OnCollisionEnter() calls for things that are already collided with us!
             // So when we start charging across the screen, we check to see what's already touching us
             // (or close enough) and treat that like a collision.
-            RaycastHit[] results;
+            RaycastHit2D[] results;
             int numResults = ActionUtils.DetectNearbyEntities(true, true, parent.PhysicsWrapper.DamageCollider, k_PhysicalTouchDistance, out results);
             for (int i = 0; i < numResults; i++)
             {

@@ -367,7 +367,7 @@ namespace Script.Game.GameplayObject.Character
             }
         }
 
-        private void CollisionEntered(Collision collision)
+        private void CollisionEntered(Collision2D collision)
         {
             _serverActionPlayer?.CollisionEntered(collision);
         }

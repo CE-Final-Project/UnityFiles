@@ -120,7 +120,7 @@ namespace Script.Game.Actions
         /// </summary>
         /// <param name="serverCharacter"></param>
         /// <param name="collision"></param>
-        public virtual void CollisionEntered(ServerCharacter serverCharacter, Collision collision) { }
+        public virtual void CollisionEntered(ServerCharacter serverCharacter, Collision2D collision) { }
 
         public enum BuffableValue
         {

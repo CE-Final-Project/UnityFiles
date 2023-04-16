@@ -7,7 +7,7 @@ namespace Script.Game.Actions
     public static class ActionUtils
     {
         //cache Physics Cast hits, to minimize allocs.
-        static RaycastHit[] s_Hits = new RaycastHit[4];
+        static RaycastHit2D[] s_Hits = new RaycastHit2D[4];
         // cache layer IDs (after first use). -1 is a sentinel value meaning "uninitialized"
         static int s_PCLayer = -1;
         static int s_NpcLayer = -1;
@@ -40,7 +40,7 @@ namespace Script.Game.Actions
         /// the next similar query.
         /// </remarks>
         /// <returns>Total number of foes encountered. </returns>
-        public static int DetectMeleeFoe(bool isNPC, Collider2D attacker, float range, out RaycastHit[] results)
+        public static int DetectMeleeFoe(bool isNPC, Collider2D attacker, float range, out RaycastHit2D[] results)
         {
             return DetectNearbyEntities(isNPC, !isNPC, attacker, range, out results);
         }
@@ -54,7 +54,7 @@ namespace Script.Game.Actions
         /// <param name="range">The range in meters to check.</param>
         /// <param name="results">Place an uninitialized RayCastHit[] ref in here. It will be set to the results array. </param>
         /// <returns></returns>
-        public static int DetectNearbyEntities(bool wantPcs, bool wantNpcs, Collider2D attacker, float range, out RaycastHit[] results)
+        public static int DetectNearbyEntities(bool wantPcs, bool wantNpcs, Collider2D attacker, float range, out RaycastHit2D[] results)
         {
             //this simple detect just does a boxcast out from our position in the direction we're facing, out to the range of the attack.
 
@@ -71,8 +71,11 @@ namespace Script.Game.Actions
             if (wantNpcs)
                 mask |= (1 << s_NpcLayer);
 
-            int numResults = Physics.BoxCastNonAlloc(attacker.transform.position, myBounds.extents,
-                attacker.transform.forward, s_Hits, Quaternion.identity, range, mask);
+            // int numResults = Physics.BoxCastNonAlloc(attacker.transform.position, myBounds.extents,
+            //     attacker.transform.forward, s_Hits, Quaternion.identity, range, mask);
+            // change above to 2d
+            int numResults = Physics2D.BoxCastNonAlloc(attacker.transform.position, myBounds.extents,
+                0, attacker.transform.forward, s_Hits, range, mask);
 
             results = s_Hits;
             return numResults;
@@ -122,7 +125,9 @@ namespace Script.Game.Actions
             var rayDirection = character2Pos - character1Pos;
             var distance = rayDirection.magnitude;
 
-            var numHits = Physics.RaycastNonAlloc(new Ray(character1Pos, rayDirection), s_Hits, distance, mask);
+            // var numHits = Physics.RaycastNonAlloc(new Ray(character1Pos, rayDirection), s_Hits, distance, mask);
+            // change above to 2d
+            var numHits = Physics2D.RaycastNonAlloc(character1Pos, rayDirection, s_Hits, distance, mask);
             if (numHits == 0)
             {
                 missPos = character2Pos;

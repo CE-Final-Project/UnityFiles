@@ -76,7 +76,7 @@ namespace Script.Game.Actions.ConcreteActions
         /// <returns>ideal target's IDamageable, or null if no valid target found</returns>
         public static IDamageable GetIdealMeleeFoe(bool isNPC, Collider2D ourCollider, float meleeRange, ulong preferredTargetNetworkId)
         {
-            RaycastHit[] results;
+            RaycastHit2D[] results;
             int numResults = ActionUtils.DetectMeleeFoe(isNPC, ourCollider, meleeRange, out results);
 
             IDamageable foundFoe = null;

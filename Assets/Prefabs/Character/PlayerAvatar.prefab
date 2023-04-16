@@ -469,7 +469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f42141be4854f30a09681a843cf63f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_DisplayHealth: 1
+  m_DisplayHealth: 0
   m_DisplayName: 1
   m_UIStatePrefab: {fileID: 8179117454722641770, guid: a3e11e046077f184bb7365eca6e689b0, type: 3}
   m_NetworkHealthState: {fileID: 4321664604552062243}
@@ -490,7 +490,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b68016e09a4495b4ba71e6aa52d139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BaseHP: {fileID: 0}
 --- !u!114 &6042191585345213438 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6002752427318837242, guid: 7be98b059ed12e84baab70e44b177685, type: 3}

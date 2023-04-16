@@ -393,7 +393,7 @@ namespace Script.Game.Actions.ActionPlayers
             return totalTime - m_Queue[0].TimeRunning;
         }
 
-        public void CollisionEntered(Collision collision)
+        public void CollisionEntered(Collision2D collision)
         {
             if (m_Queue.Count > 0)
             {
