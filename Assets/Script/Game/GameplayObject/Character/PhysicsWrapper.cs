@@ -22,9 +22,9 @@ namespace Script.Game.GameplayObject.Character
         public Transform Transform => m_Transform;
 
         [SerializeField]
-        BoxCollider2D m_DamageCollider;
+        CapsuleCollider2D m_DamageCollider;
 
-        public BoxCollider2D DamageCollider => m_DamageCollider;
+        public CapsuleCollider2D DamageCollider => m_DamageCollider;
 
         ulong m_NetworkObjectID;
 

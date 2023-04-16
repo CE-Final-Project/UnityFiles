@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lizard
   m_EditorClassIdentifier: 
   CharacterType: 4
-  Skill1: {fileID: 0}
+  Skill1: {fileID: 11400000, guid: 3d802d3152ae2a24595a22c348a579a4, type: 2}
   Skill2: {fileID: 0}
   Skill3: {fileID: 0}
   BaseHP: {fileID: 11400000, guid: 48b88fd2f79c88542ba06560660d6792, type: 2}

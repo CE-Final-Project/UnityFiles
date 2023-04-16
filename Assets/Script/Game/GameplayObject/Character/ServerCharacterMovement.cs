@@ -258,6 +258,7 @@ namespace Script.Game.GameplayObject.Character
 
             // After moving adjust the position of the dynamic rigidbody.
             rigidBody.position = transform.position;
+            // rigidBody.SetRotation(Quaternion.Euler(transform.rotation.eulerAngles));
         }
         
         // private bool TryMove(Vector2 direction)

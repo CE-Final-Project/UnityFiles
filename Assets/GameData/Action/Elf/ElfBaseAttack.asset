@@ -9,20 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 403753238e1694333a021a8f768054b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 9df43672b44348edbb6bfacb56aee0c6, type: 3}
   m_Name: ElfBaseAttack
   m_EditorClassIdentifier: 
   Config:
     Logic: 0
-    Amount: 30
-    ManaCost: 2
-    Range: 4.5
-    DurationSeconds: 0.5
+    Amount: 15
+    ManaCost: 0
+    Range: 1
+    DurationSeconds: 1
     ExecTimeSeconds: 0
-    EffectDurationSeconds: 0
+    EffectDurationSeconds: 0.3
     ReuseTimeSeconds: 0
-    AnimAnticipation: 
-    Anim: Attack
+    AnimAnticipation: AnticipateMove
+    Anim: Attack1
     Anim2: 
     ReactAnim: 
     OtherAnimatorVariable: 
@@ -38,6 +38,6 @@ MonoBehaviour:
     Projectiles: []
     Spawns: []
     IsFriendly: 0
-    Icon: {fileID: 0}
-    DisplayedName: Attack
-    Description: Normal Attack Effect
+    Icon: {fileID: -1448861416, guid: 71dc1d74f2f06495193204e59b1c7f83, type: 3}
+    DisplayedName: Melee
+    Description: asdasdasdasd

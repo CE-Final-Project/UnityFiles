@@ -19,6 +19,9 @@ namespace Script.Game.GameplayObject.Character
 
         [SerializeField] private VisualizationConfiguration visualizationConfiguration;
         
+        /// <summary>
+        /// Returns a reference to the active Animator for this visualization
+        /// </summary>
         public Animator OurAnimator => clientVisualAnimator;
 
         private ServerCharacter _serverCharacter;

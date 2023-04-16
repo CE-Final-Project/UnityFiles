@@ -176,21 +176,21 @@ namespace Script.GameState
                     physicsTransform.SetPositionAndRotation(sessionPlayerData.Value.PlayerPosition, Quaternion.identity);
                 }
             }
-
+            
             networkAvatarGuidState.avatarNetworkGuid.Value = 
                 persistentPlayer.NetworkAvatarGuidState.avatarNetworkGuid.Value;
-            
-            if (newPlayer.TryGetComponent(out NetworkNameState networkNameState))
-            {
-                networkNameState.Name.Value = persistentPlayer.NetworkNameState.Name.Value;
-            }
-            
+
             // Add player stats to the persistent game state
             // _persistentGameState.AddPlayerStats(newPlayerCharacter.CharacterType.ToString());
             // GameStats.Instance.AddPlayer(clientId, newPlayerCharacter.CharacterType.ToString());
             PlayersStats.Instance.AddPlayer(clientId, newPlayerCharacter.CharacterType.ToString());
 
             newPlayer.SpawnWithOwnership(clientId, true);
+
+            if (newPlayer.TryGetComponent(out NetworkNameState networkNameState))
+            {
+                networkNameState.Name.Value = persistentPlayer.NetworkNameState.Name.Value;
+            }
         }
         
         private void OnLifeStateChangedEventMessage(LifeStateChangedEventMessage message)

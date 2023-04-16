@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee9bad6794824285968678e923352663, type: 3}
+  m_Name: Skeleton
+  m_EditorClassIdentifier: 
+  CharacterType: 5
+  Skill1: {fileID: 0}
+  Skill2: {fileID: 0}
+  Skill3: {fileID: 0}
+  BaseHP: {fileID: 11400000, guid: 8f9e0035033c99e4e875a8a18d9b739b, type: 2}
+  BaseMana: 0
+  Speed: 1
+  IsNpc: 1
+  DetectRange: 1
+  DisplayedName: 
+  AnimatorController: {fileID: 9100000, guid: e52cf51f9f823a54fb5bdc0bb5054d2e, type: 2}
+  ClassBannerLit: {fileID: 0}
+  ClassBannerUnlit: {fileID: 0}

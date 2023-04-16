@@ -11,7 +11,7 @@ namespace Script.Game.Actions.ConcreteActions
     /// (Set it to 1 if you don't want to take more damage while stunned... set it to 2 to take double damage,
     /// or 0.5 to take half damage, etc.)
     /// </summary>
-    [CreateAssetMenu(menuName = "BossRoom/Actions/Stunned Action")]
+    [CreateAssetMenu(menuName = "TheSurvivor/Actions/Stunned Action")]
     public class StunnedAction : Action
     {
         public override bool OnStart(ServerCharacter serverCharacter)

@@ -7,8 +7,8 @@ namespace Script.Game.Actions.Input
     public struct ActionRequestData : INetworkSerializable
     {
         public ActionID ActionID;
-        public Vector3 Position;
-        public Vector3 Direction;
+        public Vector2 Position;
+        public Vector2 Direction;
         public ulong[] TargetIDs;
         public float Amount;
         public bool ShouldQueue;
@@ -56,8 +56,8 @@ namespace Script.Game.Actions.Input
         private PackFlags GetPackFlags()
         {
             PackFlags flags = PackFlags.None;
-            if (Position != Vector3.zero) { flags |= PackFlags.HasPosition; }
-            if (Direction != Vector3.zero) { flags |= PackFlags.HasDirection; }
+            if (Position != Vector2.zero) { flags |= PackFlags.HasPosition; }
+            if (Direction != Vector2.zero) { flags |= PackFlags.HasDirection; }
             if (TargetIDs != null) { flags |= PackFlags.HasTargetIds; }
             if (Amount != 0) { flags |= PackFlags.HasAmount; }
             if (ShouldQueue) { flags |= PackFlags.ShouldQueue; }

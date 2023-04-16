@@ -26,8 +26,10 @@ namespace Script.Game.GameplayObject.UserInput
         private float m_LastSentMove;
 
         // Cache raycast hit array so that we can use non alloc raycasts
-        private readonly RaycastHit2D[] k_CachedHit = new RaycastHit2D[4];
+        // private readonly RaycastHit[] k_CachedHit = new RaycastHit[4];
+        private readonly RaycastHit2D[] k_CachedHit2D = new RaycastHit2D[4];
 
+        
         // This is basically a constant but layer masks cannot be created in the constructor, that's why it's assigned int Awake.
         private LayerMask m_GroundLayerMask;
 
@@ -260,23 +262,23 @@ namespace Script.Game.GameplayObject.UserInput
                     Vector3 mousePos = Input.mousePosition;
                     mousePos.z = -m_MainCamera.transform.position.z; // adjust z to be in front of the camera
                     Vector3 worldPos = m_MainCamera.ScreenToWorldPoint(mousePos);
-                    
+
                     int groundHits = Physics2D.RaycastNonAlloc(worldPos,
                         Vector2.zero,
-                        k_CachedHit,
+                        k_CachedHit2D,
                         k_MouseInputRaycastDistance,
                         m_GroundLayerMask);
-                    
+
                     if (groundHits > 0)
                     {
                         if (groundHits > 1)
                         {
                             // sort hits by distance
-                            Array.Sort(k_CachedHit, 0, groundHits, m_RaycastHitComparer);
+                            Array.Sort(k_CachedHit2D, 0, groundHits, m_RaycastHitComparer);
                         }
             
                         // verify point is indeed on navmesh surface
-                        if (NavMesh.SamplePosition(k_CachedHit[0].point,
+                        if (NavMesh.SamplePosition(k_CachedHit2D[0].point,
                                 out var hit,
                                 k_MaxNavMeshDistance,
                                 NavMesh.AllAreas))
@@ -316,23 +318,26 @@ namespace Script.Game.GameplayObject.UserInput
                 int numHits = 0;
                 if (triggerStyle == SkillTriggerStyle.MouseClick)
                 {
-                    var ray = m_MainCamera.ScreenPointToRay(UnityEngine.Input.mousePosition);
-                    // numHits = Physics.RaycastNonAlloc(ray, k_CachedHit, k_MouseInputRaycastDistance, m_ActionLayerMask);
-                    numHits = Physics2D.RaycastNonAlloc(ray.origin, ray.direction, k_CachedHit, k_MouseInputRaycastDistance, m_ActionLayerMask);
+                    // Get All Hit object under the mouse click position
+                    // Vector3 mousePos = Input.mousePosition;
+                    // mousePos.z = -m_MainCamera.transform.position.z; // adjust z to be in front of the camera
+                    // Vector3 worldPos = m_MainCamera.ScreenToWorldPoint(mousePos);
+                    Ray ray = m_MainCamera.ScreenPointToRay(Input.mousePosition);
+                    numHits = Physics2D.GetRayIntersectionNonAlloc(ray, k_CachedHit2D);
                 }
                 
 
                 int networkedHitIndex = -1;
                 for (int i = 0; i < numHits; i++)
                 {
-                    if (k_CachedHit[i].transform.GetComponentInParent<NetworkObject>())
+                    if (k_CachedHit2D[i].transform.GetComponentInParent<NetworkObject>())
                     {
                         networkedHitIndex = i;
                         break;
                     }
                 }
 
-                hitTransform = networkedHitIndex >= 0 ? k_CachedHit[networkedHitIndex].transform : null;
+                hitTransform = networkedHitIndex >= 0 ? k_CachedHit2D[networkedHitIndex].transform : null;
             }
 
             if (GetActionRequestForTarget(hitTransform, actionID, triggerStyle, out ActionRequestData playerAction))
@@ -349,7 +354,7 @@ namespace Script.Game.GameplayObject.UserInput
                 // in the desired direction. For others, like mage's bolts, this will fire a "miss" projectile at the spot clicked on.)
 
                 var data = new ActionRequestData();
-                PopulateSkillRequest(k_CachedHit[0].point, actionID, ref data);
+                PopulateSkillRequest(k_CachedHit2D[0].point, actionID, ref data);
 
                 SendInput(data);
             }
@@ -420,7 +425,7 @@ namespace Script.Game.GameplayObject.UserInput
         /// <param name="hitPoint">The point in world space where the click ray hit the target.</param>
         /// <param name="actionID">The action to perform (will be stamped on the resultData)</param>
         /// <param name="resultData">The ActionRequestData to be filled out with additional information.</param>
-        private void PopulateSkillRequest(Vector3 hitPoint, ActionID actionID, ref ActionRequestData resultData)
+        private void PopulateSkillRequest(Vector2 hitPoint, ActionID actionID, ref ActionRequestData resultData)
         {
             resultData.ActionID = actionID;
             var actionConfig = GameDataSource.Instance.GetActionPrototypeByID(actionID).Config;
@@ -429,9 +434,9 @@ namespace Script.Game.GameplayObject.UserInput
             resultData.ShouldClose = true;
 
             // figure out the Direction in case we want to send it
-            Vector3 offset = hitPoint - m_PhysicsWrapper.Transform.position;
-            offset.y = 0;
-            Vector3 direction = offset.normalized;
+            var position = m_PhysicsWrapper.Transform.position;
+            Vector2 offset = hitPoint - new Vector2(position.x, position.y);
+            Vector2 direction = offset.normalized;
 
             switch (actionConfig.Logic)
             {

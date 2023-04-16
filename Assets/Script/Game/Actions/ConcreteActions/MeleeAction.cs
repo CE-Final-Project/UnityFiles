@@ -21,7 +21,7 @@ namespace Script.Game.Actions.ConcreteActions
             }
 
             // snap to face the right direction
-            if (Data.Direction != Vector3.zero)
+            if (Data.Direction != Vector2.zero)
             {
                 serverCharacter.PhysicsWrapper.Transform.forward = Data.Direction;
             }

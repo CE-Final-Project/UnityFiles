@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3094172045988796829}
   - component: {fileID: 4543408387928751984}
   - component: {fileID: 4079486398027957103}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerGraphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ MonoBehaviour:
   - Layer: 0
     OriginatingState: 350747295
     DestinationState: 1624230200
-    TransitionDuration: 0.014418222
+    TransitionDuration: 0
     TriggerNameHash: -47317214
     TransitionIndex: 1
   m_Animator: {fileID: 3094172045988796829}
@@ -148,9 +148,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5375666321376966427, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
+      propertyPath: m_Size.x
+      value: 0.18005718
+      objectReference: {fileID: 0}
+    - target: {fileID: -5375666321376966427, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
+      propertyPath: m_Size.y
+      value: 0.27
+      objectReference: {fileID: 0}
+    - target: {fileID: -5375666321376966427, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0043520704
+      objectReference: {fileID: 0}
+    - target: {fileID: -5375666321376966427, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.014690295
+      objectReference: {fileID: 0}
     - target: {fileID: -4610102614321326266, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
       propertyPath: m_Speed
       value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -4610102614321326266, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
+      propertyPath: m_Height
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 676034515089522443, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
       propertyPath: m_NetworkAnimator
@@ -190,19 +210,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7122237379142504217, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
       propertyPath: m_Size.x
-      value: 0.08043403
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 7122237379142504217, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
       propertyPath: m_Size.y
-      value: 0.02808243
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7122237379142504217, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
       propertyPath: m_Offset.x
-      value: 0.00019868836
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7122237379142504217, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
       propertyPath: m_Offset.y
-      value: -0.13327155
+      value: -0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7122237379142504217, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
@@ -238,11 +258,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8049140970283290273, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.012
       objectReference: {fileID: 0}
     - target: {fileID: 8049140970283290273, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.002
       objectReference: {fileID: 0}
     - target: {fileID: 8049140970283290273, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
       propertyPath: m_LocalPosition.z
@@ -274,6 +294,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8049140970283290273, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9185863182362140447, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
+      propertyPath: m_Constraints
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -454,6 +478,19 @@ MonoBehaviour:
   m_TransformToTrack: {fileID: 585243013286031085}
   m_VerticalWorldOffset: -0.4
   m_VerticalScreenOffset: 20
+--- !u!114 &8924628108343903206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5570495016602702190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b68016e09a4495b4ba71e6aa52d139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BaseHP: {fileID: 0}
 --- !u!114 &6042191585345213438 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6002752427318837242, guid: 7be98b059ed12e84baab70e44b177685, type: 3}

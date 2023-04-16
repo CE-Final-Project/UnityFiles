@@ -75,7 +75,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: da84b109444c0c247aac51bdb7ee5e25, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -154,6 +154,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 438467180720746992, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
+      propertyPath: m_DamageCollider
+      value: 
+      objectReference: {fileID: 4944934894295712392}
     - target: {fileID: 1289437194058825631, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
       propertyPath: brainEnabled
       value: 1
@@ -179,20 +183,48 @@ PrefabInstance:
       value: 951099334
       objectReference: {fileID: 0}
     - target: {fileID: 1539685767661623628, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
+      propertyPath: m_Height
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539685767661623628, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
       propertyPath: m_Radius
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1765918049626354528, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
       propertyPath: m_Name
-      value: necromancer
+      value: Necromancer
       objectReference: {fileID: 0}
     - target: {fileID: 4002843813545066771, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
       propertyPath: m_Size.x
-      value: 0.21
+      value: 0.24191514
       objectReference: {fileID: 0}
     - target: {fileID: 4002843813545066771, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
       propertyPath: m_Size.y
-      value: 0.25
+      value: 0.2545069
+      objectReference: {fileID: 0}
+    - target: {fileID: 4002843813545066771, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4002843813545066771, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.0014507025
+      objectReference: {fileID: 0}
+    - target: {fileID: 4002843813545066771, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.0014506876
+      objectReference: {fileID: 0}
+    - target: {fileID: 4002843813545066771, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4002843813545066771, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
+      propertyPath: m_AutoTiling
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4002843813545066771, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
+      propertyPath: m_EdgeRadius
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4246888969451749547, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
       propertyPath: m_RootOrder
@@ -242,10 +274,32 @@ PrefabInstance:
       propertyPath: m_NetworkAnimator
       value: 
       objectReference: {fileID: 6597696076568103153}
-    m_RemovedComponents: []
+    - target: {fileID: 6935116690602493679, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
+      propertyPath: m_Size.x
+      value: 0.18005718
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935116690602493679, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
+      propertyPath: m_Size.y
+      value: 0.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935116690602493679, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0043520704
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935116690602493679, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.014690295
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4002843813545066771, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
 --- !u!4 &2183807049314518220 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4246888969451749547, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
+  m_PrefabInstance: {fileID: 2639544739402122343}
+  m_PrefabAsset: {fileID: 0}
+--- !u!70 &4944934894295712392 stripped
+CapsuleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 6935116690602493679, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
   m_PrefabInstance: {fileID: 2639544739402122343}
   m_PrefabAsset: {fileID: 0}
