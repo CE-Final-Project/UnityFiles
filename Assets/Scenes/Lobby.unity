@@ -2429,7 +2429,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0567bf8ad2f0a4138a45ce01f2845385, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc6dd2f7130fa438bb49b2a610151d03, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2885,10 +2885,17 @@ MonoBehaviour:
   SFXSource: {fileID: 79606783}
   menuBackground: {fileID: 8300000, guid: 54ece8c2941ca4755b8bdbc911e58499, type: 3}
   lobbyBackground: {fileID: 8300000, guid: 4fd102fcd67ec463e8d106aa576bfa81, type: 3}
+  gameBackground1: {fileID: 0}
+  gameBackground2: {fileID: 0}
+  gameBackground3: {fileID: 0}
   postGameBackround: {fileID: 8300000, guid: 4f7b588994fab4ce1a018c8b7d8f437d, type: 3}
   click: {fileID: 8300000, guid: b30fbd81f58674145888d009eeb1224b, type: 3}
   select: {fileID: 8300000, guid: 0104f2f75ccc54831bd00700fb4e0129, type: 3}
   ready: {fileID: 8300000, guid: cf2f7e51535ea4f01a9571cd8337f7a5, type: 3}
+  Attack0: {fileID: 0}
+  Attack1: {fileID: 0}
+  Attack2: {fileID: 0}
+  Attack3: {fileID: 0}
   death: {fileID: 0}
 --- !u!4 &1441822067
 Transform:

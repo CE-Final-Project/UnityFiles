@@ -7,7 +7,13 @@ public class pauseMenu : MonoBehaviour
     public GameObject optionMenuUI;
     public GameObject pauseButtonUI;
     public GameObject gameHUD;
-    //public GameObject playerInstance;
+
+    private AudioManager gameAudio;
+
+    private void Awake()
+    {
+        gameAudio = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     // Update is called once per frame
     void Update() {
@@ -35,6 +41,7 @@ public class pauseMenu : MonoBehaviour
 
     public void Resume() {
         Debug.Log("Game Resume");
+        gameAudio.musicSource.Play();
         pauseMenuUI.SetActive(false);
         gameHUD.SetActive(true);
         //playerInstance.SetActive(true);
@@ -52,6 +59,7 @@ public class pauseMenu : MonoBehaviour
     
     public void Pause() {
         Debug.Log("Game Pause");
+        gameAudio.musicSource.Pause();
         pauseMenuUI.SetActive(true);
         gameHUD.SetActive(false);
         //playerInstance.SetActive(false);

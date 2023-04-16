@@ -1,59 +1,52 @@
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 using System.Collections.Generic;
 
 public class ResolutionDropdown : MonoBehaviour
 {
-    public Dropdown resolutionDropdown;
+    [SerializeField] private TMP_Dropdown resolutionDropdown;
 
     private Resolution[] resolutions;
+    private List<Resolution> filteredResolution;
+
+    private float currentRefrashRate;
+    private int currentResolutionIndex = 0;
 
     void Start()
     {
-        resolutionDropdown = transform.GetComponent<Dropdown>();
-        // Define the available resolution options
-        resolutions = new Resolution[2];
-        resolutions[0] = new Resolution { width = 1920, height = 1080 };
-        resolutions[1] = new Resolution { width = 2560, height = 1440 };
+        resolutions = Screen.resolutions;
+        filteredResolution = new List<Resolution>();
 
-        // Clear any existing options from the dropdown
         resolutionDropdown.ClearOptions();
+        currentRefrashRate = Screen.currentResolution.refreshRate;
 
-        // Create a list of resolution options to add to the dropdown
-        List<string> resolutionOptions = new List<string>();
-        foreach (Resolution resolution in resolutions)
+        for(int i = 0; i < resolutions.Length; i++)
         {
-            string option = resolution.width + " x " + resolution.height;
-            if (!resolutionOptions.Contains(option))
+            if(resolutions[i].refreshRate == currentRefrashRate)
             {
-                resolutionOptions.Add(option);
+                filteredResolution.Add(resolutions[i]);
             }
         }
 
-        // Add the resolution options to the dropdown
-        resolutionDropdown.AddOptions(resolutionOptions);
-
-        // Set the default resolution option based on the current screen resolution
-        int defaultOption = 0;
-        for (int i = 0; i < resolutions.Length; i++)
+        List<string> options = new List<string>();
+        for(int i = 0; i < filteredResolution.Count; i++)
         {
-            if (resolutions[i].width == Screen.currentResolution.width &&
-                resolutions[i].height == Screen.currentResolution.height)
+            string resolutionOption = filteredResolution[i].width + "x" + filteredResolution[i].height + " " + filteredResolution[i].refreshRate + "Hz";
+            options.Add(resolutionOption);
+            if(filteredResolution[i].width == Screen.width && filteredResolution[i].height == Screen.height)
             {
-                defaultOption = i;
-                break;
+                currentResolutionIndex = i;
             }
         }
-        resolutionDropdown.value = defaultOption;
+
+        resolutionDropdown.AddOptions(options);
+        resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
     }
 
-    public void OnResolutionDropdownValueChanged(int optionIndex)
+    public void SetResolution(int resolutionIndex)
     {
-        // Get the selected resolution from the dropdown
-        Resolution selectedResolution = resolutions[optionIndex];
-
-        // Set the screen resolution to the selected resolution
-        Screen.SetResolution(selectedResolution.width, selectedResolution.height, Screen.fullScreen);
+        Resolution resolution = filteredResolution[resolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 }
