@@ -20,10 +20,10 @@ namespace Script.UI
     public class UIStateDisplayHandler : NetworkBehaviour
     {
         [SerializeField]
-        bool m_DisplayHealth;
+        bool m_DisplayHealth = false;
 
         [SerializeField]
-        bool m_DisplayName;
+        bool m_DisplayName = false;
 
         [SerializeField]
         UIStateDisplay m_UIStatePrefab;

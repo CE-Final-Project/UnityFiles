@@ -150,11 +150,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5375666321376966427, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
       propertyPath: m_Size.x
-      value: 0.18005718
+      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: -5375666321376966427, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
       propertyPath: m_Size.y
-      value: 0.27
+      value: 0.32
       objectReference: {fileID: 0}
     - target: {fileID: -5375666321376966427, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
       propertyPath: m_Offset.x
@@ -162,7 +162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5375666321376966427, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
       propertyPath: m_Offset.y
-      value: -0.014690295
+      value: -0.04
       objectReference: {fileID: 0}
     - target: {fileID: -4610102614321326266, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
       propertyPath: m_Speed
@@ -184,6 +184,10 @@ PrefabInstance:
       propertyPath: avatarRegistry
       value: 
       objectReference: {fileID: 11400000, guid: 42581eb07d2a3a5419cbbb047dbf4106, type: 2}
+    - target: {fileID: 3948444519779597500, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4953590563975229845, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
       propertyPath: clientCharacter
       value: 
@@ -200,6 +204,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6002752427318837242, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
+      propertyPath: m_MeleeAttackPoint
+      value: 
+      objectReference: {fileID: 3918012800871698616}
     - target: {fileID: 6813162783875503538, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
       propertyPath: speed
       value: 1.5
@@ -313,6 +321,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87b7801904364de3ba5c45a7faa0a478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &3918012800871698616 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3948444519779597500, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
+  m_PrefabInstance: {fileID: 41696490584337412}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4321664604552062243 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4282221427389401383, guid: 7be98b059ed12e84baab70e44b177685, type: 3}

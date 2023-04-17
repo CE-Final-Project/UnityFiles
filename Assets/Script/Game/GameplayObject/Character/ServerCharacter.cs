@@ -127,6 +127,13 @@ namespace Script.Game.GameplayObject.Character
                 damageReceiver.DamageReceived += ReceiveHP;
                 damageReceiver.CollisionEntered += CollisionEntered;
 
+                // Track Transfrom to melee attack point to make it in front of the character
+                Transform transform1 = PhysicsWrapper.transform;
+                Vector3 position = transform1.position + transform1.right * 0.1f;
+                // Adjust y position to make it in front of the character
+                position = new Vector3(position.x, position.y - 0.1f, position.z);
+                PhysicsWrapper.MeleeAttackPoint.position = position;
+                
                 if (IsNpc)
                 {
                     _aiBrain = new AIBrain(this, _serverActionPlayer);
@@ -375,6 +382,14 @@ namespace Script.Game.GameplayObject.Character
         public void SetIsFlipped(bool isFliped)
         {
             _spriteRenderer.flipX = isFliped;
+
+            if (isFliped)
+            {
+                PhysicsWrapper.MeleeAttackPoint.position += new Vector3(-0.2f, 0, 0);
+            } else {
+                PhysicsWrapper.MeleeAttackPoint.position += new Vector3(0.2f, 0, 0);
+            }
+            
         }
         
         /// <summary>

@@ -1,3 +1,4 @@
+using System;
 using Script.Utils;
 using Unity.Netcode;
 using UnityEngine;
@@ -14,6 +15,11 @@ namespace Script.UI
 
         [SerializeField]
         UIHealth m_UIHealth;
+
+        public void Awake()
+        {
+            HideHealth();
+        }
 
         public void DisplayName(NetworkVariable<FixedPlayerName> networkedName)
         {

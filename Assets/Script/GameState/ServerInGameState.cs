@@ -16,6 +16,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer;
+using NetworkSceneManager = Script.Networks.NetworkSceneManager;
 using Random = UnityEngine.Random;
 
 namespace Script.GameState
@@ -239,7 +240,7 @@ namespace Script.GameState
         {
             yield return new WaitForSeconds(delay);
             
-            SceneLoaderWrapper.Instance.LoadScene("PostGame", true);
+            NetworkSceneManager.Instance.LoadScene("PostGame", true);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
@@ -18,6 +19,11 @@ namespace Script.Game.GameplayObject.Character
 
         [SerializeField]
         Transform m_Transform;
+        
+        [SerializeField]
+        Transform m_MeleeAttackPoint;
+        
+        public Transform MeleeAttackPoint => m_MeleeAttackPoint;
 
         public Transform Transform => m_Transform;
 
