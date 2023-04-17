@@ -491,7 +491,6 @@ namespace Script.Game.GameplayObject.UserInput
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                Debug.Log("Action1");
                 RequestAction(actionState1.actionID, SkillTriggerStyle.Keyboard);
             }
             else if (Input.GetKeyUp(KeyCode.Alpha1))

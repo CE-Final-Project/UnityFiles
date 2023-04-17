@@ -75,8 +75,9 @@ namespace Script.Game.Actions.ConcreteActions
 
                 //this way, you just need to "place" the arrow by moving it in the prefab, and that will control
                 //where it appears next to the player.
-                no.transform.position = parent.PhysicsWrapper.Transform.localToWorldMatrix.MultiplyPoint(no.transform.position);
-
+                // no.transform.position = parent.PhysicsWrapper.Transform.localToWorldMatrix.MultiplyPoint(no.transform.position);
+                no.transform.position += parent.PhysicsWrapper.Transform.position;
+                
                 no.GetComponent<PhysicsProjectile>().Initialize(parent.NetworkObjectId, projectileInfo);
 
                 no.Spawn(true);

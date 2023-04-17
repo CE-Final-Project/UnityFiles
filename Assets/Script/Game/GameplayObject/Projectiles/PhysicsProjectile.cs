@@ -106,7 +106,6 @@ namespace Script.Game.GameplayObject.Projectiles
                 m_PositionLerper = new PositionLerper(transform.position, k_LerpTime);
                 m_Visualization.transform.rotation = transform.rotation;
             }
-
         }
 
         public override void OnNetworkDespawn()
@@ -169,7 +168,6 @@ namespace Script.Game.GameplayObject.Projectiles
                     m_Visualization.position = transform.position;
                 }
             }
-
         }
 
         void DetectCollisions()
