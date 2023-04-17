@@ -66,6 +66,5 @@ namespace Script.Game
                 serverCharacter.CharacterClass = avatar.CharacterClass;
             }
         }
-
     }
 }

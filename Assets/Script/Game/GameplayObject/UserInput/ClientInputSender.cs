@@ -36,6 +36,8 @@ namespace Script.Game.GameplayObject.UserInput
         private LayerMask m_ActionLayerMask;
 
         private const float k_MaxNavMeshDistance = 0.5f;
+        
+        private Vector2 m_MouseDirection;
 
         private RaycastHitComparer m_RaycastHitComparer;
 
@@ -75,6 +77,7 @@ namespace Script.Game.GameplayObject.UserInput
         /// </remarks>
         private struct ActionRequest
         {
+            public Vector2 TargetPosition;
             public SkillTriggerStyle TriggerStyle;
             public ActionID RequestedActionID;
             public ulong TargetId;
@@ -316,15 +319,15 @@ namespace Script.Game.GameplayObject.UserInput
             {
                 // otherwise try to find an object under the input position
                 int numHits = 0;
-                if (triggerStyle == SkillTriggerStyle.MouseClick)
-                {
+                // if (triggerStyle == SkillTriggerStyle.MouseClick)
+                // {
                     // Get All Hit object under the mouse click position
                     // Vector3 mousePos = Input.mousePosition;
                     // mousePos.z = -m_MainCamera.transform.position.z; // adjust z to be in front of the camera
                     // Vector3 worldPos = m_MainCamera.ScreenToWorldPoint(mousePos);
                     Ray ray = m_MainCamera.ScreenPointToRay(Input.mousePosition);
-                    numHits = Physics2D.GetRayIntersectionNonAlloc(ray, k_CachedHit2D);
-                }
+                    numHits = Physics2D.GetRayIntersectionNonAlloc(ray, k_CachedHit2D, k_MouseInputRaycastDistance, m_ActionLayerMask);
+                // }
                 
 
                 int networkedHitIndex = -1;
@@ -489,6 +492,10 @@ namespace Script.Game.GameplayObject.UserInput
 
         private void Update()
         {
+            
+            // update mouse position
+            Vector2 mousePosition = m_MainCamera.ScreenToWorldPoint(Input.mousePosition);
+            
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 RequestAction(actionState1.actionID, SkillTriggerStyle.Keyboard);
