@@ -14,6 +14,7 @@ namespace Script.Game.GameplayObject.Character.AI
         private ServerActionPlayer m_ServerActionPlayer;
         private ServerCharacter m_Foe;
         private Action m_CurAttackAction;
+        private List<ServerCharacter> m_Squad;
 
         List<Action> m_AttackActions;
 
@@ -25,7 +26,13 @@ namespace Script.Game.GameplayObject.Character.AI
 
         public override bool IsEligible()
         {
+            //return true;
             return m_Foe != null || ChooseFoe() != null;
+        }
+
+        public override int Priority()
+        {
+            return 100;
         }
 
         public override void Initialize()
@@ -49,6 +56,10 @@ namespace Script.Game.GameplayObject.Character.AI
 
             // clear any old foe info; we'll choose a new one in Update()
             m_Foe = null;
+
+            m_Squad = new List<ServerCharacter>();
+
+            Debug.Log("ATTACK");
         }
 
         public override void Update()
@@ -132,6 +143,8 @@ namespace Script.Game.GameplayObject.Character.AI
                     closestFoe = foe;
                 }
             }
+            
+
             return closestFoe;
         }
 
@@ -166,5 +179,7 @@ namespace Script.Game.GameplayObject.Character.AI
             // none of our actions are available now
             return null;
         }
+
+        
     }
 }

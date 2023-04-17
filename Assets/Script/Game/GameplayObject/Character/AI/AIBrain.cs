@@ -15,9 +15,11 @@ namespace Script.Game.GameplayObject.Character.AI
     {
         private enum AIStateType
         {
-            ATTACK,
-            //WANDER,
             IDLE,
+            ATTACK,
+            ATTACK_WEAK,
+            FLEE,
+            
         }
 
         static readonly AIStateType[] k_AIStates = (AIStateType[])Enum.GetValues(typeof(AIStateType));
@@ -42,8 +44,11 @@ namespace Script.Game.GameplayObject.Character.AI
             m_Logics = new Dictionary<AIStateType, AIState>
             {
                 [AIStateType.IDLE] = new IdleAIState(this),
-                //[ AIStateType.WANDER ] = new WanderAIState(this), // not written yet
                 [AIStateType.ATTACK] = new AttackAIState(this, m_ServerActionPlayer),
+                [AIStateType.ATTACK_WEAK] = new AttackWeakAIState(this, m_ServerActionPlayer),
+                [AIStateType.FLEE] = new FleeAIState(this),
+                
+
             };
             m_HatedEnemies = new List<ServerCharacter>();
             m_CurrentState = AIStateType.IDLE;
@@ -80,16 +85,26 @@ namespace Script.Game.GameplayObject.Character.AI
         {
             // for now we assume the AI states are in order of appropriateness,
             // which may be nonsensical when there are more states
+            AIStateType bestAiStateType = m_CurrentState;
             foreach (AIStateType aiStateType in k_AIStates)
             {
-                if (m_Logics[aiStateType].IsEligible())
+                if (!m_Logics[bestAiStateType].IsEligible())
                 {
-                    return aiStateType;
+                    bestAiStateType = AIStateType.IDLE;
+                }
+
+                if (!m_Logics[aiStateType].IsEligible())
+                {
+                    continue;
+                }
+
+                if (m_Logics[bestAiStateType].Priority() < m_Logics[aiStateType].Priority())
+                {
+                    bestAiStateType = aiStateType;
                 }
             }
 
-            Debug.LogError("No AI states are valid!?!");
-            return AIStateType.IDLE;
+            return bestAiStateType;
         }
 
         /// <summary>

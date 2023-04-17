@@ -18,7 +18,7 @@ MonoBehaviour:
   Skill3: {fileID: 0}
   BaseHP: {fileID: 11400000, guid: 3f84ee8ceeba52242a282b7763d98884, type: 2}
   BaseMana: 20
-  Speed: 1.5
+  Speed: 0.75
   IsNpc: 0
   DetectRange: 0
   DisplayedName: WIZZARD

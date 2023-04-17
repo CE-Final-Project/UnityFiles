@@ -16,8 +16,14 @@ namespace Script.Game.GameplayObject.Character.AI
             return m_Brain.GetHatedEnemies().Count == 0;
         }
 
+        public override int Priority()
+        {
+            return 0;
+        }
+
         public override void Initialize()
         {
+            Debug.Log("IDLE");
         }
 
         public override void Update()

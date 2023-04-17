@@ -16,6 +16,9 @@ namespace Script.Game.GameplayObject.Character.AI
         /// Called once each time this state becomes the active state.
         /// (This will only happen if IsEligible() has returned true for this state)
         /// </summary>
+        /// 
+
+        public abstract int Priority();
         public abstract void Initialize();
 
         /// <summary>
