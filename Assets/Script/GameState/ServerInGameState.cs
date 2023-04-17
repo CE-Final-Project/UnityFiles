@@ -181,17 +181,14 @@ namespace Script.GameState
             networkAvatarGuidState.avatarNetworkGuid.Value = 
                 persistentPlayer.NetworkAvatarGuidState.avatarNetworkGuid.Value;
 
-            // Add player stats to the persistent game state
-            // _persistentGameState.AddPlayerStats(newPlayerCharacter.CharacterType.ToString());
-            // GameStats.Instance.AddPlayer(clientId, newPlayerCharacter.CharacterType.ToString());
-            PlayersStats.Instance.AddPlayer(clientId, newPlayerCharacter.CharacterType.ToString());
-
             newPlayer.SpawnWithOwnership(clientId, true);
 
             if (newPlayer.TryGetComponent(out NetworkNameState networkNameState))
             {
                 networkNameState.Name.Value = persistentPlayer.NetworkNameState.Name.Value;
             }
+            
+            PlayersStats.Instance.AddPlayer(newPlayer.NetworkObjectId, newPlayerCharacter.CharacterType.ToString());
         }
         
         private void OnLifeStateChangedEventMessage(LifeStateChangedEventMessage message)

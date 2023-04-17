@@ -21,10 +21,10 @@ namespace Script.Game.Actions.ConcreteActions
             }
 
             // snap to face the right direction
-            // if (Data.Direction != Vector2.zero)
-            // {
-            //     serverCharacter.PhysicsWrapper.Transform.right = Data.Direction;
-            // }
+            if (Data.Direction != Vector2.zero)
+            {
+                serverCharacter.PhysicsWrapper.Transform.right = Data.Direction;
+            }
 
             serverCharacter.serverAnimationHandler.NetworkAnimator.SetTrigger(Config.Anim);
             serverCharacter.ClientCharacter.RecvDoActionClientRPC(Data);
@@ -48,6 +48,16 @@ namespace Script.Game.Actions.ConcreteActions
                 var foe = DetectFoe(clientCharacter, m_ProvisionalTarget);
                 if (foe != null)
                 {
+                    // check if we're hitting an NPC, and if so, add to the damage taken stat otherwise add to damage dealt
+                    if (clientCharacter.IsNpc)
+                    {
+                        PlayersStats.Instance.AddDamageTaken(foe.NetworkObjectId, Config.Amount);
+                    }
+                    else
+                    {
+                        PlayersStats.Instance.AddDamageDealt(clientCharacter.NetworkObjectId, Config.Amount);
+                    }
+                    
                     foe.ReceiveHP(clientCharacter, -Config.Amount);
                 }
             }

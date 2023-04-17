@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Script.Game.Actions.ConcreteActions;
 using Script.Game.GameplayObject.Character;
+using Script.Game.GameplayObject.RuntimeDataContainers;
 using Script.Utils;
 using Unity.Netcode;
 using UnityEngine;
@@ -255,9 +256,15 @@ namespace Script.Game.GameplayObject.Projectiles
                         //retrieve the person that created us, if he's still around.
                         NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(m_SpawnerId, out var spawnerNet);
                         var spawnerObj = spawnerNet != null ? spawnerNet.GetComponent<ServerCharacter>() : null;
-
                         if (m_CollisionCache[i].TryGetComponent(out IDamageable damageable))
                         {
+                            if (!spawnerObj.IsNpc)
+                            {
+                                PlayersStats.Instance.AddDamageDealt(spawnerObj.NetworkObjectId, m_ProjectileInfo.Damage);
+                            } else if (spawnerObj.IsNpc)
+                            {
+                                PlayersStats.Instance.AddDamageTaken(damageable.NetworkObjectId, m_ProjectileInfo.Damage);
+                            }
                             damageable.ReceiveHP(spawnerObj, -m_ProjectileInfo.Damage);
                         }
                     }

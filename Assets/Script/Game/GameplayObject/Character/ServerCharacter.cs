@@ -283,12 +283,6 @@ namespace Script.Game.GameplayObject.Character
                 _serverActionPlayer.OnGameplayActivity(Actions.Action.GameplayActivity.Healed);
                 float healingMod = _serverActionPlayer.GetBuffedValue(Actions.Action.BuffableValue.PercentHealingReceived);
                 HP = (int)(HP * healingMod);
-
-                // PersistentState?.PlayerStatsList[inflicter.CharacterType.ToString()].AddHealingTaken(HP);
-                // PersistentState.PlayerStatsList[CharacterType.ToString()].AddHealingDone(HP);
-                
-                PlayersStats.Instance.AddHealingTaken(OwnerClientId, HP);
-                PlayersStats.Instance.AddHealingDone(inflicter.OwnerClientId, HP);
             }
             else
             {
@@ -303,10 +297,6 @@ namespace Script.Game.GameplayObject.Character
                 _serverActionPlayer.OnGameplayActivity(Actions.Action.GameplayActivity.AttackedByEnemy);
                 float damageMod = _serverActionPlayer.GetBuffedValue(Actions.Action.BuffableValue.PercentDamageReceived);
                 HP = (int)(HP * damageMod);
-
-                // PersistentState?.PlayerStatsList[CharacterType.ToString()].AddDamageTaken(-HP);
-                PlayersStats.Instance.AddDamageTaken(OwnerClientId, -HP);
-                PlayersStats.Instance.AddDamageDealt(inflicter.OwnerClientId, -HP);
 
                 // serverAnimationHandler.NetworkAnimator.SetTrigger("HitReact1");
             }

@@ -203,7 +203,7 @@ namespace Script.Game.GameplayObject.Character
             if (_movementState == MovementState.Idle)
                 return;
 
-            Vector3 movementVector;
+            Vector2 movementVector;
 
             if (_movementState == MovementState.Charging)
             {
@@ -236,7 +236,7 @@ namespace Script.Game.GameplayObject.Character
                 movementVector = _navPath.MoveAlongPath(desiredMovementAmount);
 
                 // If we didn't move stop moving.
-                if (movementVector == Vector3.zero)
+                if (movementVector == Vector2.zero)
                 {
                     _movementState = MovementState.Idle;
                     return;

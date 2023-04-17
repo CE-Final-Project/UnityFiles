@@ -17,7 +17,7 @@ namespace Script.Game.Actions.ConcreteActions
         public override bool OnStart(ServerCharacter serverCharacter)
         {
             //snap to face the direction we're firing, and then broadcast the animation, which we do immediately.
-            // serverCharacter.PhysicsWrapper.Transform.right = Data.Direction;
+            serverCharacter.PhysicsWrapper.Transform.right = Data.Direction;
 
             serverCharacter.serverAnimationHandler.NetworkAnimator.SetTrigger(Config.Anim);
             serverCharacter.ClientCharacter.RecvDoActionClientRPC(Data);
