@@ -16,14 +16,15 @@ namespace Script.Networks
         {
             Debug.Assert(spawnCount != spawnPoints.Count, "SpawnCount and SpawnPoints not match!");
             
-            yield return new WaitForSeconds(spawnDelay);
             
             for(int i = 0; i < spawnCount; i++)
             {
                 int randomIndex = Random.Range(0, spawnPoints.Count);
                 GameObject enemy = Instantiate(enemyPrefab, spawnPoints[randomIndex].transform.position, Quaternion.identity);
                 enemy.GetComponent<NetworkObject>().Spawn();
+                yield return new WaitForSeconds(1);
             }
+
         }
     }
 }
