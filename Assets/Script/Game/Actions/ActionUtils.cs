@@ -75,7 +75,7 @@ namespace Script.Game.Actions
             //     attacker.transform.forward, s_Hits, Quaternion.identity, range, mask);
             // change above to 2d
             int numResults = Physics2D.BoxCastNonAlloc(attacker.transform.position, myBounds.extents,
-                0, attacker.transform.forward, s_Hits, range, mask);
+                0, attacker.transform.right, s_Hits, range, mask);
 
             results = s_Hits;
             return numResults;
@@ -186,7 +186,7 @@ namespace Script.Game.Actions
                 if (destinationSpot == Vector3.zero || Vector3.Distance(characterTransform.position, destinationSpot) <= k_VeryCloseTeleportRange)
                 {
                     // we don't have a meaningful stopping spot. Find a new one based on the character's current direction
-                    destinationSpot = characterTransform.position + characterTransform.forward * distanceToUseIfVeryClose;
+                    destinationSpot = characterTransform.position + characterTransform.right * distanceToUseIfVeryClose;
                 }
             }
 

@@ -107,7 +107,7 @@ namespace Script.Game.GameplayObject.Character.AI
                 ActionID = m_CurAttackAction.ActionID,
                 TargetIDs = new ulong[] { m_Foe.NetworkObjectId },
                 ShouldClose = true,
-                Direction = m_Brain.GetMyServerCharacter().PhysicsWrapper.Transform.forward
+                Direction = m_Brain.GetMyServerCharacter().PhysicsWrapper.Transform.right
             };
             m_ServerActionPlayer.PlayAction(ref attackData);
         }

@@ -21,10 +21,10 @@ namespace Script.Game.Actions.ConcreteActions
             }
 
             // snap to face the right direction
-            if (Data.Direction != Vector2.zero)
-            {
-                serverCharacter.PhysicsWrapper.Transform.forward = Data.Direction;
-            }
+            // if (Data.Direction != Vector2.zero)
+            // {
+            //     serverCharacter.PhysicsWrapper.Transform.right = Data.Direction;
+            // }
 
             serverCharacter.serverAnimationHandler.NetworkAnimator.SetTrigger(Config.Anim);
             serverCharacter.ClientCharacter.RecvDoActionClientRPC(Data);

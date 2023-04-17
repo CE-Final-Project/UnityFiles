@@ -216,7 +216,7 @@ namespace Script.Game.GameplayObject.Character
                 }
 
                 float desiredMovementAmount = _forcedSpeed * Time.fixedDeltaTime;
-                movementVector = transform.forward * desiredMovementAmount;
+                movementVector = transform.right * desiredMovementAmount;
             }
             else if (_movementState == MovementState.Knockback)
             {

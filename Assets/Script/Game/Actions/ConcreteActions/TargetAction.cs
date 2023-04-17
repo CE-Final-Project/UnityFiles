@@ -82,13 +82,13 @@ namespace Script.Game.Actions.ConcreteActions
                     targetObjectPosition = targetObject.transform.position;
                 }
 
-                Vector3 diff = targetObjectPosition - parent.PhysicsWrapper.Transform.position;
-
-                diff.z = 0;
-                if (diff != Vector3.zero)
-                {
-                    parent.PhysicsWrapper.Transform.forward = diff;
-                }
+                // Vector3 diff = targetObjectPosition - parent.PhysicsWrapper.Transform.position;
+                //
+                // diff.z = 0;
+                // if (diff != Vector3.zero)
+                // {
+                //     parent.PhysicsWrapper.Transform.right = diff;
+                // }
             }
         }
     }

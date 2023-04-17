@@ -17,7 +17,7 @@ namespace Script.Game.Actions.ConcreteActions
         public override bool OnStart(ServerCharacter serverCharacter)
         {
             //snap to face the direction we're firing, and then broadcast the animation, which we do immediately.
-            serverCharacter.PhysicsWrapper.Transform.forward = Data.Direction;
+            // serverCharacter.PhysicsWrapper.Transform.right = Data.Direction;
 
             serverCharacter.serverAnimationHandler.NetworkAnimator.SetTrigger(Config.Anim);
             serverCharacter.ClientCharacter.RecvDoActionClientRPC(Data);
@@ -71,7 +71,7 @@ namespace Script.Game.Actions.ConcreteActions
 
                 NetworkObject no = NetworkObjectPool.Singleton.GetNetworkObject(projectileInfo.ProjectilePrefab, projectileInfo.ProjectilePrefab.transform.position, projectileInfo.ProjectilePrefab.transform.rotation);
                 // point the projectile the same way we're facing
-                no.transform.forward = parent.PhysicsWrapper.Transform.forward;
+                no.transform.right = parent.PhysicsWrapper.Transform.right;
 
                 //this way, you just need to "place" the arrow by moving it in the prefab, and that will control
                 //where it appears next to the player.
