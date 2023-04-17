@@ -29,8 +29,8 @@ namespace Script.Game.GameplayObject.Projectiles
         ProjectileInfo m_ProjectileInfo;
 
         const int k_MaxCollisions = 4;
-        const float k_WallLingerSec = 2f; //time in seconds that arrows linger after hitting a target.
-        const float k_EnemyLingerSec = 0.2f; //time after hitting an enemy that we persist.
+        const float k_WallLingerSec = 0.1f; //time in seconds that arrows linger after hitting a target.
+        const float k_EnemyLingerSec = 0.1f; //time after hitting an enemy that we persist.
         Collider2D[] m_CollisionCache = new Collider2D[k_MaxCollisions];
 
         /// <summary>
@@ -241,6 +241,7 @@ namespace Script.Game.GameplayObject.Projectiles
                     if (m_HitTargets.Count >= m_ProjectileInfo.MaxVictims)
                     {
                         // we've hit all the enemies we're allowed to! So we're done
+                        m_ProjectileInfo.Speed_m_s = 0;
                         m_DestroyAtSec = Time.fixedTime + k_EnemyLingerSec;
                         m_IsDead = true;
                     }
