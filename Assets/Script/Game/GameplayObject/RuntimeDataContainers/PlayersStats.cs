@@ -145,6 +145,12 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
                 }
         }
 
+        public int GetPlayTime()
+        {
+            int playTime = DateTime.Now.Subtract(_startTime).Seconds;
+            return playTime;
+        }
+
         public void ClearData()
         {
             _playerStatsMap.Clear();    
