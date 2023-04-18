@@ -78,7 +78,10 @@ namespace Script.DDA
 
         private void OnDestroy()
         {
-            StopCoroutine(_spawnCoroutine);
+            if (_spawnCoroutine != null)
+            {
+                StopCoroutine(_spawnCoroutine);
+            }
         }
 
         private float CalculateK_KillPerMinute()

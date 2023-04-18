@@ -53,7 +53,7 @@ public class GlowOnValueChange : MonoBehaviour
         {
             // Reset the slider's image color and/or alpha to normal
             Image image = slider.fillRect.GetComponent<Image>();
-            ColorUtility.TryParseHtmlString("#B02613", out newCol);
+            ColorUtility.TryParseHtmlString("#11FF00", out newCol);
             image.color = newCol;
         }
     }

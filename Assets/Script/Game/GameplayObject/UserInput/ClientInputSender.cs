@@ -319,15 +319,15 @@ namespace Script.Game.GameplayObject.UserInput
             {
                 // otherwise try to find an object under the input position
                 int numHits = 0;
-                // if (triggerStyle == SkillTriggerStyle.MouseClick)
-                // {
+                if (triggerStyle != SkillTriggerStyle.UI)
+                {
                     // Get All Hit object under the mouse click position
                     // Vector3 mousePos = Input.mousePosition;
                     // mousePos.z = -m_MainCamera.transform.position.z; // adjust z to be in front of the camera
                     // Vector3 worldPos = m_MainCamera.ScreenToWorldPoint(mousePos);
                     Ray ray = m_MainCamera.ScreenPointToRay(Input.mousePosition);
                     numHits = Physics2D.GetRayIntersectionNonAlloc(ray, k_CachedHit2D, k_MouseInputRaycastDistance, m_ActionLayerMask);
-                // }
+                }
                 
 
                 int networkedHitIndex = -1;

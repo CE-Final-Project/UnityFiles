@@ -180,14 +180,14 @@ namespace Script.GameState
             
             networkAvatarGuidState.avatarNetworkGuid.Value = 
                 persistentPlayer.NetworkAvatarGuidState.avatarNetworkGuid.Value;
-
-            newPlayer.SpawnWithOwnership(clientId, true);
-
+            
             if (newPlayer.TryGetComponent(out NetworkNameState networkNameState))
             {
                 networkNameState.Name.Value = persistentPlayer.NetworkNameState.Name.Value;
             }
             
+            newPlayer.SpawnWithOwnership(clientId, true);
+
             PlayersStats.Instance.AddPlayer(newPlayer.NetworkObjectId, newPlayerCharacter.CharacterType.ToString());
         }
         

@@ -43,6 +43,6 @@ MonoBehaviour:
       MaxVictims: 1
     Spawns: []
     IsFriendly: 0
-    Icon: {fileID: 0}
-    DisplayedName: 
-    Description: 
+    Icon: {fileID: 21300000, guid: a3bce14c39f0988439d4a375c4c06833, type: 3}
+    DisplayedName: Fire Ball
+    Description: Shoot Fire Ball Magic to enemy
