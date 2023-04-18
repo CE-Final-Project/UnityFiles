@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Knight
   m_EditorClassIdentifier: 
   CharacterType: 2
-  Skill1: {fileID: 11400000, guid: 7c0dc2cfa69addf4fb10f3e6842c1478, type: 2}
-  Skill2: {fileID: 0}
+  Skill1: {fileID: 11400000, guid: 78d666559ec414e4da066f8b2167eeaa, type: 2}
+  Skill2: {fileID: 11400000, guid: 7c0dc2cfa69addf4fb10f3e6842c1478, type: 2}
   Skill3: {fileID: 0}
   BaseHP: {fileID: 11400000, guid: 04b0ab232ac2a5f4f87e43a3dd09f34a, type: 2}
   BaseMana: 0
-  Speed: 1.5
+  Speed: 0.8
   IsNpc: 0
   DetectRange: 0
   DisplayedName: KNIGHT

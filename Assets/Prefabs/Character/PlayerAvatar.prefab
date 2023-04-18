@@ -136,10 +136,16 @@ MonoBehaviour:
   TransitionStateInfoList:
   - Layer: 0
     OriginatingState: 350747295
-    DestinationState: 1624230200
+    DestinationState: -1413572384
     TransitionDuration: 0
     TriggerNameHash: -47317214
     TransitionIndex: 1
+  - Layer: 0
+    OriginatingState: 350747295
+    DestinationState: 850905434
+    TransitionDuration: 0
+    TriggerNameHash: 1680125592
+    TransitionIndex: 2
   m_Animator: {fileID: 3094172045988796829}
 --- !u!1001 &41696490584337412
 PrefabInstance:
@@ -187,6 +193,14 @@ PrefabInstance:
     - target: {fileID: 3948444519779597500, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3948444519779597500, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.098
+      objectReference: {fileID: 0}
+    - target: {fileID: 3948444519779597500, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.059
       objectReference: {fileID: 0}
     - target: {fileID: 4953590563975229845, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
       propertyPath: clientCharacter
