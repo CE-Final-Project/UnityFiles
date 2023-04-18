@@ -16,7 +16,7 @@ MonoBehaviour:
     Logic: 7
     Amount: 15
     ManaCost: 2
-    Range: 5
+    Range: 20
     DurationSeconds: 2
     ExecTimeSeconds: 1
     EffectDurationSeconds: 0
@@ -30,8 +30,8 @@ MonoBehaviour:
     MoveSpeed: 0
     KnockbackSpeed: 0
     KnockbackDuration: 0
-    Radius: 4
-    ActionInput: {fileID: 0}
+    Radius: 0.5
+    ActionInput: {fileID: -4957136897550301328, guid: 2dd7f1d64be5ba043a4c5319522747fb, type: 3}
     ActionInterruptible: 0
     IsInterruptableBy: []
     BlockingMode: 0
