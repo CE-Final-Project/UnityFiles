@@ -325,8 +325,8 @@ namespace Script.Game.GameplayObject.UserInput
                     // Vector3 mousePos = Input.mousePosition;
                     // mousePos.z = -m_MainCamera.transform.position.z; // adjust z to be in front of the camera
                     // Vector3 worldPos = m_MainCamera.ScreenToWorldPoint(mousePos);
-                    // Ray ray = m_MainCamera.ScreenPointToRay(Input.mousePosition);
-                    // numHits = Physics2D.GetRayIntersectionNonAlloc(ray, k_CachedHit2D, k_MouseInputRaycastDistance, m_ActionLayerMask);
+                    Ray ray = m_MainCamera.ScreenPointToRay(Input.mousePosition);
+                    numHits = Physics2D.GetRayIntersectionNonAlloc(ray, k_CachedHit2D, k_MouseInputRaycastDistance, m_ActionLayerMask);
                 // }
                 
 

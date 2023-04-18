@@ -17,7 +17,7 @@ MonoBehaviour:
     Amount: 15
     ManaCost: 2
     Range: 20
-    DurationSeconds: 2
+    DurationSeconds: 1
     ExecTimeSeconds: 1
     EffectDurationSeconds: 0
     ReuseTimeSeconds: 0
