@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Elf
   m_EditorClassIdentifier: 
   CharacterType: 1
-  Skill1: {fileID: 11400000, guid: 7d2d66fb01eb24bf39e837f8592bc655, type: 2}
-  Skill2: {fileID: 0}
+  Skill1: {fileID: 11400000, guid: c53a426b621b03b43b54338f899d7653, type: 2}
+  Skill2: {fileID: 11400000, guid: 2fe51e3c175bab24584ef52ff012acdc, type: 2}
   Skill3: {fileID: 0}
   BaseHP: {fileID: 11400000, guid: b74044a2dd187664b8c7e95975b80131, type: 2}
   BaseMana: 10

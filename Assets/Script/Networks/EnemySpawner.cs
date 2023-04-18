@@ -25,7 +25,6 @@ namespace Script.Networks
             int spawnCount,
             List<Transform> spawnPoints,
             int newEnemyBaseHP = 0)
-
         {
             //Debug.Assert(spawnCount != spawnPoints.Count, "SpawnCount and SpawnPoints not match!");
             Debug.Log("SPAWN : " + spawnCount + ", " + spawnDelay);
@@ -35,12 +34,12 @@ namespace Script.Networks
                 int randomIndex = Random.Range(0, spawnPoints.Count);
                 GameObject enemy = Instantiate(enemyPrefab, spawnPoints[randomIndex].transform.position,
                     Quaternion.identity);
-                enemy.GetComponent<NetworkObject>().Spawn();
+                enemy.GetComponent<NetworkObject>().Spawn(true);
                 
                 if (newEnemyBaseHP != 0)
                 {
                     // Set new enemy base HP
-                    enemy.GetComponent<ServerCharacter>().CharacterClass.BaseHP.Value = newEnemyBaseHP;
+                    enemy.GetComponent<ServerCharacter>().SetNewHitPoints(newEnemyBaseHP);
                 }
                 
                 yield return new WaitForSeconds(1);

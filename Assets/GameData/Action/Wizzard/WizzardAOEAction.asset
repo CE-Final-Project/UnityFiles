@@ -18,7 +18,7 @@ MonoBehaviour:
     ManaCost: 2
     Range: 20
     DurationSeconds: 1
-    ExecTimeSeconds: 1
+    ExecTimeSeconds: 0.5
     EffectDurationSeconds: 0
     ReuseTimeSeconds: 0
     AnimAnticipation: AnticipateMove
@@ -37,8 +37,8 @@ MonoBehaviour:
     BlockingMode: 0
     Projectiles: []
     Spawns:
-    - {fileID: 4527224387690391092, guid: 2ba0baf27935c9644b6e108ae156850d, type: 3}
+    - {fileID: 1539796726324455230, guid: 507e5741bb866eb47b4f745750fc3a77, type: 3}
     IsFriendly: 0
-    Icon: {fileID: 21300000, guid: a3e6aa3f4f5253c4bb0e017a619279b3, type: 3}
-    DisplayedName: asdasd
+    Icon: {fileID: 21300000, guid: 9118b64077de0ea47bb8ac1b0a9745c9, type: 3}
+    DisplayedName: Explotion
     Description: asdasd

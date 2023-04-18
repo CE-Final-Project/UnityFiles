@@ -16,7 +16,7 @@ MonoBehaviour:
     Logic: 0
     Amount: 15
     ManaCost: 0
-    Range: 1
+    Range: 0.5
     DurationSeconds: 0.5
     ExecTimeSeconds: 0
     EffectDurationSeconds: 0.5
@@ -38,6 +38,6 @@ MonoBehaviour:
     Projectiles: []
     Spawns: []
     IsFriendly: 0
-    Icon: {fileID: 21300000, guid: d59e1c784612a4c659aa18c6dc26f924, type: 3}
+    Icon: {fileID: 21300000, guid: 16de27e0f7d97f442a9e846660bb7980, type: 3}
     DisplayedName: Bite
     Description: asdasdasd

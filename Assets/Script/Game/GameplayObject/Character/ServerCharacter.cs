@@ -232,6 +232,20 @@ namespace Script.Game.GameplayObject.Character
                 }
             }
         }
+        
+        public void SetNewHitPoints(int newHitPoints)
+        {
+            if (!IsNpc)
+            {
+                Debug.LogWarning("ServerCharacter.SetNewHitPoints() should only be called on NPCs!");
+                return;
+            }
+            HitPoints = newHitPoints;
+            if (HitPoints <= 0)
+            {
+                LifeState = LifeState.Dead;
+            }
+        }
 
 
         /// <summary>
@@ -297,8 +311,9 @@ namespace Script.Game.GameplayObject.Character
                 _serverActionPlayer.OnGameplayActivity(Actions.Action.GameplayActivity.AttackedByEnemy);
                 float damageMod = _serverActionPlayer.GetBuffedValue(Actions.Action.BuffableValue.PercentDamageReceived);
                 HP = (int)(HP * damageMod);
-
-                // serverAnimationHandler.NetworkAnimator.SetTrigger("HitReact1");
+                
+                if (IsNpc)
+                    serverAnimationHandler.NetworkAnimator.SetTrigger("HitReact1");
             }
 
             HitPoints = Mathf.Clamp(HitPoints + HP, 0, CharacterClass.BaseHP.Value);
@@ -317,10 +332,11 @@ namespace Script.Game.GameplayObject.Character
                     {
                         StartCoroutine(KilledDestroyProcess());
                     }
-
+                    ClientCharacter.OurAnimator.SetTrigger("Dead");
                 }
+
                 LifeState = LifeState.Dead;
-                
+
                 // Add kill to the player who killed this character
                 PlayersStats.Instance.AddKill(inflicter.NetworkObjectId);
 

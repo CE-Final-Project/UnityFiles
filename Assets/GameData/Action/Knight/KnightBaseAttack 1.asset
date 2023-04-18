@@ -38,6 +38,6 @@ MonoBehaviour:
     Projectiles: []
     Spawns: []
     IsFriendly: 0
-    Icon: {fileID: -1448861416, guid: 71dc1d74f2f06495193204e59b1c7f83, type: 3}
+    Icon: {fileID: 21300000, guid: f8ee25c44d32e474c921f951997e1d8e, type: 3}
     DisplayedName: Charge
     Description: asdasdasd

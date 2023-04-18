@@ -101,6 +101,5 @@ namespace Script.Game.Actions.ConcreteActions
         {
             return ActionConclusion.Continue;
         }
-
     }
 }

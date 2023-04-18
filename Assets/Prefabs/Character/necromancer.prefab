@@ -146,6 +146,12 @@ MonoBehaviour:
     TransitionDuration: 0
     TriggerNameHash: -47317214
     TransitionIndex: 2
+  - Layer: 0
+    OriginatingState: 1140125649
+    DestinationState: 1928664032
+    TransitionDuration: 0
+    TriggerNameHash: 1293411866
+    TransitionIndex: 3
   m_Animator: {fileID: 6936002768889212131}
 --- !u!1001 &2639544739402122343
 PrefabInstance:
@@ -176,7 +182,7 @@ PrefabInstance:
       objectReference: {fileID: 4260244398285273791}
     - target: {fileID: 1289437194058825631, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
       propertyPath: killedDestroyDelaySeconds
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1336001147316046305, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -192,7 +198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1765918049626354528, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
       propertyPath: m_Name
-      value: necromancer
+      value: Necromancer
       objectReference: {fileID: 0}
     - target: {fileID: 4002843813545066771, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
       propertyPath: m_Size.x

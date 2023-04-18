@@ -98,6 +98,8 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
         private Dictionary<PlayerId, PlayerStats> _playerStatsMap = new Dictionary<PlayerId, PlayerStats>();
         private DateTime _startTime;
         private DateTime _playTime;
+        
+        private Coroutine _writeDataToCsvCoroutine;
 
         private void Awake()
         {
@@ -115,7 +117,7 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
         private void Start()
         {
             _startTime = DateTime.Now;
-            StartCoroutine(WriteDataToCsvCoroutine());
+            _writeDataToCsvCoroutine = StartCoroutine(WriteDataToCsvCoroutine());
         }
         
         private IEnumerator WriteDataToCsvCoroutine()
@@ -158,6 +160,10 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
 
         public void ClearData()
         {
+            if (_writeDataToCsvCoroutine != null)
+            {
+                StopCoroutine(_writeDataToCsvCoroutine);
+            }
             _playerStatsMap.Clear();    
         }
         

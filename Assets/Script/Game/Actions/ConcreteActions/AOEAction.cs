@@ -73,7 +73,15 @@ namespace Script.Game.Actions.ConcreteActions
             //     }
             // }
             // change it to 2d;
-            var colliders = Physics2D.OverlapCircleAll(Data.Position, Config.Radius, LayerMask.GetMask("NPCs"));
+            
+            int layerMask = LayerMask.GetMask("NPCs");
+
+            if (Config.IsFriendly)
+            {
+                layerMask = LayerMask.GetMask("PCs");
+            }
+            
+            var colliders = Physics2D.OverlapCircleAll(Data.Position, Config.Radius, layerMask);
             foreach (var collider in colliders)
             {
                 var enemy = collider.GetComponent<IDamageable>();

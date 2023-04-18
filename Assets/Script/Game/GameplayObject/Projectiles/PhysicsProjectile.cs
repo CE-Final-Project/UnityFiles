@@ -41,6 +41,7 @@ namespace Script.Game.GameplayObject.Projectiles
         int m_CollisionMask;  //mask containing everything we test for while moving
         int m_BlockerMask;    //physics mask for things that block the arrow's flight.
         int m_NpcLayer;
+        int m_PcLayer;
 
         /// <summary>
         /// List of everyone we've hit and dealt damage to.
@@ -92,9 +93,10 @@ namespace Script.Game.GameplayObject.Projectiles
 
                 m_DestroyAtSec = Time.fixedTime + (m_ProjectileInfo.Range / m_ProjectileInfo.Speed_m_s);
 
-                m_CollisionMask = LayerMask.GetMask(new[] { "NPCs", "Default", "Environment" });
+                m_CollisionMask = LayerMask.GetMask(new[] { "PCs", "NPCs", "Default", "Environment" });
                 m_BlockerMask = LayerMask.GetMask(new[] { "Default", "Environment" });
                 m_NpcLayer = LayerMask.NameToLayer("NPCs");
+                m_PcLayer = LayerMask.NameToLayer("PCs");
             }
 
             if (IsClient)
@@ -219,9 +221,12 @@ namespace Script.Game.GameplayObject.Projectiles
             //         }
             //     }
             // }
-            
+
             var position = transform.position + (Vector3)m_OurCollider.offset;
-            var numCollisions = Physics2D.OverlapCircleNonAlloc(position, m_OurCollider.radius, m_CollisionCache, m_CollisionMask);
+            var numCollisions = Physics2D.OverlapCircleNonAlloc(position,
+                m_OurCollider.radius,
+                m_CollisionCache,
+                m_CollisionMask);
             for (int i = 0; i < numCollisions; i++)
             {
                 int layerTest = 1 << m_CollisionCache[i].gameObject.layer;
@@ -252,7 +257,7 @@ namespace Script.Game.GameplayObject.Projectiles
                     {
                         RecvHitEnemyClientRPC(targetNetObj.NetworkObjectId);
 
-                        //retrieve the person that created us, if he's still around.
+                        // //retrieve the person that created us, if he's still around.
                         NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(m_SpawnerId, out var spawnerNet);
                         var spawnerObj = spawnerNet != null ? spawnerNet.GetComponent<ServerCharacter>() : null;
                         if (m_CollisionCache[i].TryGetComponent(out IDamageable damageable))

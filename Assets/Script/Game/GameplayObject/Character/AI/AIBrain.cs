@@ -189,6 +189,5 @@ namespace Script.Game.GameplayObject.Character.AI
                 m_DetectRangeOverride = value;
             }
         }
-
     }
 }

@@ -26,9 +26,9 @@ namespace Script.UI
 
         [SerializeField]
         private GameObject[] m_AllyPanel;
-        
-        [SerializeField]
-        private Image[] m_AllyPortrait;
+        //
+        // [SerializeField]
+        // private Image[] m_AllyPortrait;
 
         [SerializeField]
         private TextMeshProUGUI[] m_PartyNames;
@@ -157,11 +157,11 @@ namespace Script.UI
             m_PartyHealthSliders[slot].maxValue = serverCharacter.CharacterClass.BaseHP.Value;
             m_PartyHealthSliders[slot].value = serverCharacter.HitPoints;
             m_PartyNames[slot].text = GetPlayerName(serverCharacter);
-            // set ally portrait
-            if (serverCharacter.TryGetComponent(out NetworkAvatarGuidState avatarGuidState))
-            {
-                m_AllyPortrait[slot].sprite = avatarGuidState.RegisteredAvatar.Portrait;
-            }
+            // // set ally portrait
+            // if (serverCharacter.TryGetComponent(out NetworkAvatarGuidState avatarGuidState))
+            // {
+            //     m_AllyPortrait[slot].sprite = avatarGuidState.RegisteredAvatar.Portrait;
+            // }
         }
 
         void SetAllyHealth(ulong id, int hp)

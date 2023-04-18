@@ -111,6 +111,10 @@ namespace Script.Game.GameplayObject.Character.AI
                 // no actions are usable right now
                 return;
             }
+            var foePosition = m_Foe.PhysicsWrapper.Transform.position;
+            var position = m_Brain.GetMyServerCharacter().PhysicsWrapper.Transform.position;
+            Vector2 offset = new Vector2(foePosition.x,foePosition.y) - new Vector2(position.x, position.y);
+            Vector2 direction = offset.normalized;
 
             // attack!
             var attackData = new ActionRequestData
@@ -118,7 +122,7 @@ namespace Script.Game.GameplayObject.Character.AI
                 ActionID = m_CurAttackAction.ActionID,
                 TargetIDs = new ulong[] { m_Foe.NetworkObjectId },
                 ShouldClose = true,
-                Direction = m_Brain.GetMyServerCharacter().PhysicsWrapper.Transform.right
+                Direction = direction
             };
             m_ServerActionPlayer.PlayAction(ref attackData);
         }

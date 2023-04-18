@@ -453,6 +453,7 @@ namespace Script.Game.GameplayObject.UserInput
                     return;
                 case ActionLogic.Melee:
                     resultData.Direction = direction;
+                    resultData.ShouldClose = false; //some times you want to melee from a distance, so don't close distance.
                     return;
                 case ActionLogic.Target:
                     resultData.ShouldClose = false;

@@ -38,6 +38,6 @@ MonoBehaviour:
     Projectiles: []
     Spawns: []
     IsFriendly: 0
-    Icon: {fileID: -1448861416, guid: 71dc1d74f2f06495193204e59b1c7f83, type: 3}
+    Icon: {fileID: 21300000, guid: 8462deef7028f496288af5345c2611d2, type: 3}
     DisplayedName: Slash
     Description: asdasdasd

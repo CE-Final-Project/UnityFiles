@@ -9,7 +9,8 @@ public class GlowOnValueChange : MonoBehaviour
     private float delayTimer;
     private float glowDelay = 1f;
 
-    public Color glowColor = Color.white;
+    [SerializeField] public Color glowColor = Color.white;
+    [SerializeField] public Color normalColor = Color.white;
     public float glowIntensity = 1f;
 
     private Color newCol;
@@ -53,8 +54,7 @@ public class GlowOnValueChange : MonoBehaviour
         {
             // Reset the slider's image color and/or alpha to normal
             Image image = slider.fillRect.GetComponent<Image>();
-            ColorUtility.TryParseHtmlString("#11FF00", out newCol);
-            image.color = newCol;
+            image.color = normalColor;
         }
     }
 }

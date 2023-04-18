@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Wizzard
   m_EditorClassIdentifier: 
   CharacterType: 3
-  Skill1: {fileID: 11400000, guid: 5940be20d58a29b45a120b3696595da5, type: 2}
-  Skill2: {fileID: 11400000, guid: b3bb2a5499c97174fa999f02dbc5b3a0, type: 2}
-  Skill3: {fileID: 11400000, guid: b05647234ac8ba248a9e71f78654cd0d, type: 2}
+  Skill1: {fileID: 11400000, guid: b3bb2a5499c97174fa999f02dbc5b3a0, type: 2}
+  Skill2: {fileID: 11400000, guid: b05647234ac8ba248a9e71f78654cd0d, type: 2}
+  Skill3: {fileID: 0}
   BaseHP: {fileID: 11400000, guid: 3f84ee8ceeba52242a282b7763d98884, type: 2}
   BaseMana: 20
   Speed: 0.75

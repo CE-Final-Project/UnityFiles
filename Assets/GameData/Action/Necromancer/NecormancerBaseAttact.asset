@@ -20,7 +20,7 @@ MonoBehaviour:
     DurationSeconds: 1.4
     ExecTimeSeconds: 0.65
     EffectDurationSeconds: 0
-    ReuseTimeSeconds: 0
+    ReuseTimeSeconds: 2
     AnimAnticipation: 
     Anim: Attack1
     Anim2: 
