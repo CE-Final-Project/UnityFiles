@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff25fce842ff46f9b27a4d96afb7f7c9, type: 3}
+  m_Name: ElfMagicArrow
+  m_EditorClassIdentifier: 
+  Config:
+    Logic: 4
+    Amount: 30
+    ManaCost: 3
+    Range: 5
+    DurationSeconds: 0.55
+    ExecTimeSeconds: 0.15
+    EffectDurationSeconds: 0
+    ReuseTimeSeconds: 1
+    AnimAnticipation: AnticipateMove
+    Anim: Attack1
+    Anim2: 
+    ReactAnim: 
+    OtherAnimatorVariable: 
+    SplashDamage: 0
+    MoveSpeed: 0
+    KnockbackSpeed: 0
+    KnockbackDuration: 0
+    Radius: 0
+    ActionInput: {fileID: 0}
+    ActionInterruptible: 0
+    IsInterruptableBy: []
+    BlockingMode: 0
+    Projectiles:
+    - ProjectilePrefab: {fileID: 4527224387690391092, guid: c3fcf054ece129a46bd43155d6099093, type: 3}
+      Speed_m_s: 6
+      Range: 5
+      Damage: 30
+      MaxVictims: 1
+    Spawns: []
+    IsFriendly: 0
+    Icon: {fileID: 21300000, guid: f9495af490202fa48b5a39908bc267bc, type: 3}
+    DisplayedName: Magic Arrow
+    Description: it is Magic Arrow
