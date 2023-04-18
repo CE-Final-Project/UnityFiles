@@ -27,7 +27,7 @@ namespace Script.Networks
             int newEnemyBaseHP = 0)
 
         {
-            Debug.Assert(spawnCount != spawnPoints.Count, "SpawnCount and SpawnPoints not match!");
+            //Debug.Assert(spawnCount != spawnPoints.Count, "SpawnCount and SpawnPoints not match!");
 
             for (int i = 0; i < spawnCount; i++)
             {
@@ -42,7 +42,7 @@ namespace Script.Networks
                     enemy.GetComponent<ServerCharacter>().CharacterClass.BaseHP.Value = newEnemyBaseHP;
                 }
                 
-                yield return new WaitForSeconds(spawnDelay);
+                yield return new WaitForSeconds(1);
             }
 
         }

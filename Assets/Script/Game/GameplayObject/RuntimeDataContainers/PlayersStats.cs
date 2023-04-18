@@ -136,7 +136,7 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
                         // Wait for 2 minutes before writing data again
                         yield return new WaitForSecondsRealtime(120);
                         
-                        string playTime = DateTime.Now.Subtract(_startTime).Seconds.ToString();
+                        string playTime = DateTime.Now.Subtract(_startTime).TotalSeconds.ToString();
 
                         // Write data for each player
                         foreach (var playerStats in _playerStatsMap)
@@ -150,9 +150,9 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
                 }
         }
         
-        public int GetPlayTime()
+        public double GetPlayTime()
         {
-            int playTime = DateTime.Now.Subtract(_startTime).Seconds;
+            double playTime = DateTime.Now.Subtract(_startTime).TotalSeconds;
             return playTime;
         }
 

@@ -28,7 +28,7 @@ namespace Script.Game.GameplayObject.Character.AI
         public override bool IsEligible()
         {
             //return true;
-            return m_Brain.GetMyServerCharacter().HitPoints < 100;
+            return m_Brain.GetMyServerCharacter().HitPoints < 10;
         }
 
         public override int Priority()
