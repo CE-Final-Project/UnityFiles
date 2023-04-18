@@ -28,6 +28,7 @@ namespace Script.Networks
 
         {
             //Debug.Assert(spawnCount != spawnPoints.Count, "SpawnCount and SpawnPoints not match!");
+            Debug.Log("SPAWN : " + spawnCount + ", " + spawnDelay);
 
             for (int i = 0; i < spawnCount; i++)
             {

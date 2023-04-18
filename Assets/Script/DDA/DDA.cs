@@ -12,11 +12,12 @@ namespace Script.DDA
     public class DDA : MonoBehaviour
     {
         [SerializeField] GameObject players;
-        [SerializeField] GameObject enemyPrefab;
+        [SerializeField] List<GameObject> enemyPrefab;
   
 
-        float spawnDelay = 30.0f;
-        int spawnCount = 6;
+        float spawnDelay = 15.0f;
+        int spawnCount = 10;
+        int enemyHP = 100;
         [SerializeField] List<Transform> spawnPoints;
 
        
@@ -52,21 +53,24 @@ namespace Script.DDA
             while (true)
             {
 
-                yield return new WaitForSeconds(10); // 5 minutes
+                yield return new WaitForSeconds(60); // 5 minutes
 
                 spawnCount = 0;
                 spawnDelay = 0;
+                enemyHP = 0;
 
                 foreach (var player in PlayersStats.Instance.GetPlayerStatsMap())
                 {
                     //spawnCount += player.Value.DamageDealt / 100;
                     //spawnCount += (int)Mathf.Round((1.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)));
                     //spawnDelay += Mathf.Round((10.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)));
-                    spawnCount += (int)Mathf.Round((5.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt))/ EnemyServerCharacter.GetEnemyServerCharacters().Count);
+                    spawnCount += (int)Mathf.Round((20.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)) / (0.5f * (EnemyServerCharacter.GetEnemyServerCharacters().Count+1)));
 
-                    spawnDelay += (int)Mathf.Round(30.0f / ( CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt )));
+                    spawnDelay += (int)Mathf.Round((15.0f * (0.25f * (EnemyServerCharacter.GetEnemyServerCharacters().Count)+1)) / ( CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt )));
 
-                    Debug.Log("Count " + spawnCount + " Delay : " + spawnDelay);
+                    enemyHP += (int)Mathf.Round((100.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)));
+
+                    Debug.Log("Count " + spawnCount + " Delay : " + spawnDelay + " HP : " + enemyHP);
                     Debug.Log(" KPM : " + CalculateK_KillPerMinute(player.Value.KillCount) + " DMD : " + CalculateK_DMDPerMinute(player.Value.DamageDealt));
 
 
@@ -74,7 +78,7 @@ namespace Script.DDA
 
                 spawnDelay /= PlayersStats.Instance.GetPlayerStatsMap().Count;
 
-                Debug.Log(PlayersStats.Instance.GetPlayerStatsMap().Count);
+                
 
 
             }
@@ -85,7 +89,7 @@ namespace Script.DDA
             while (true)
             {
 
-                _enemySpawner.SpawnEnemy(enemyPrefab, spawnDelay, spawnCount, spawnPoints, 100);
+                _enemySpawner.SpawnEnemy(enemyPrefab[0], spawnDelay, spawnCount, spawnPoints, enemyHP);
                 yield return new WaitForSeconds(spawnDelay); // 5 minutes
 
             }
@@ -101,9 +105,9 @@ namespace Script.DDA
 
         private float CalculateK_KillPerMinute(int KillCount)
         {
-            float KPM = ((float)((float)KillCount / (PlayersStats.Instance.GetPlayTime()/60.0f)));
+            float KPM = ((float)((float)(KillCount+1) / (PlayersStats.Instance.GetPlayTime() / 60.0f)));
 
-            float K_KPM = KPM / 8.7f;
+            float K_KPM = KPM / 6.7f;
             return K_KPM;
         }
 
@@ -115,7 +119,7 @@ namespace Script.DDA
 
         private float CalculateK_DMDPerMinute(float DMD)
         {
-            float DMDPM = ((float)((float)DMD / (PlayersStats.Instance.GetPlayTime() / 60.0f)));
+            float DMDPM = ((float)((float)(DMD + 1.0f) / (PlayersStats.Instance.GetPlayTime()/ 60.0f)));
 
             float K_DMD = DMDPM / 957.4f; 
             return K_DMD;
