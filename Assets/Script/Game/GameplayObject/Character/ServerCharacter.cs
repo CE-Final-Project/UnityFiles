@@ -318,12 +318,11 @@ namespace Script.Game.GameplayObject.Character
                         StartCoroutine(KilledDestroyProcess());
                     }
 
-                    LifeState = LifeState.Dead;
                 }
-                else
-                {
-                    LifeState = LifeState.Dead;
-                }
+                LifeState = LifeState.Dead;
+                
+                // Add kill to the player who killed this character
+                PlayersStats.Instance.AddKill(inflicter.NetworkObjectId);
 
                 _serverActionPlayer.ClearActions(false);
             }
