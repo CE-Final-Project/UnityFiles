@@ -16,7 +16,7 @@ MonoBehaviour:
     Logic: 0
     Amount: 10
     ManaCost: 0
-    Range: 2
+    Range: 0.5
     DurationSeconds: 1
     ExecTimeSeconds: 0.3
     EffectDurationSeconds: 0
