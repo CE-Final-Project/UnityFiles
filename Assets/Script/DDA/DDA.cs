@@ -71,7 +71,7 @@ namespace Script.DDA
                 /*enemyStats.health = (float)(enemyStats.health * (1 + (0.1 * numbersOfPlayer)) * KKPM * (1 + (0.1 * playerLevel))
                                             * (1 + (0.1 * playerATK)));*/
 
-                _enemySpawner.SpawnEnemy(enemyPrefab, spawnDelay, spawnCount, spawnPoints);
+                _enemySpawner.SpawnEnemy(enemyPrefab, spawnDelay, spawnCount, spawnPoints, 5);
                 yield return new WaitForSeconds(20); // 5 minutes
             }
         }
