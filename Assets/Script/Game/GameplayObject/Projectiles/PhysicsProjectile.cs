@@ -264,10 +264,10 @@ namespace Script.Game.GameplayObject.Projectiles
                         {
                             if (!spawnerObj.IsNpc)
                             {
-                                PlayersStats.Instance.AddDamageDealt(spawnerObj.NetworkObjectId, m_ProjectileInfo.Damage);
+                                GameStats.Instance.PlayersStats.AddDamageDealt(spawnerObj.NetworkObjectId, m_ProjectileInfo.Damage);
                             } else if (spawnerObj.IsNpc)
                             {
-                                PlayersStats.Instance.AddDamageTaken(damageable.NetworkObjectId, m_ProjectileInfo.Damage);
+                                GameStats.Instance.PlayersStats.AddDamageTaken(damageable.NetworkObjectId, m_ProjectileInfo.Damage);
                             }
                             damageable.ReceiveHP(spawnerObj, -m_ProjectileInfo.Damage);
                         }

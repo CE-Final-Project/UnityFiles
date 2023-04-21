@@ -30,7 +30,7 @@ namespace Script.GameState
                 return;
             }
             
-            var playTime = PlayersStats.Instance.GetPlayTime();
+            var playTime = GameStats.Instance.PlayersStats.GetCurrentPlayTime();
             networkPostGameState.RpcPlayTimeUpdateClientRpc(playTime);
         }
 

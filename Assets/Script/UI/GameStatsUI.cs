@@ -43,12 +43,12 @@ namespace Script.UI
 
         private void UpdatePlayerStats()
         {
-            if (PlayersStats.Instance == null || canvasGroup.alpha == 0f)
+            if (GameStats.Instance.PlayersStats == null || canvasGroup.alpha == 0f)
             {
                 return;
             }
 
-            playerStatsText.text = PlayersStats.Instance.GetStringPlayersStats();
+            playerStatsText.text = GameStats.Instance.PlayersStats.GetStringPlayersStats();
         }
 
         public void Show()

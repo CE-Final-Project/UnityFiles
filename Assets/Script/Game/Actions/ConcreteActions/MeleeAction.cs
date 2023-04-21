@@ -51,11 +51,11 @@ namespace Script.Game.Actions.ConcreteActions
                     // check if we're hitting an NPC, and if so, add to the damage taken stat otherwise add to damage dealt
                     if (clientCharacter.IsNpc)
                     {
-                        PlayersStats.Instance.AddDamageTaken(foe.NetworkObjectId, Config.Amount);
+                        GameStats.Instance.PlayersStats.AddDamageTaken(foe.NetworkObjectId, Config.Amount);
                     }
                     else
                     {
-                        PlayersStats.Instance.AddDamageDealt(clientCharacter.NetworkObjectId, Config.Amount);
+                        GameStats.Instance.PlayersStats.AddDamageDealt(clientCharacter.NetworkObjectId, Config.Amount);
                     }
                     
                     foe.ReceiveHP(clientCharacter, -Config.Amount);

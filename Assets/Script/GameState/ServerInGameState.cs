@@ -62,7 +62,11 @@ namespace Script.GameState
                 enabled = false;
                 return;
             }
-            PlayersStats.Instance.ClearData();
+            
+            // Reset the game stats
+            GameStats.Instance.StopTracking();
+            GameStats.Instance.StartTracking();
+            
             _lifeStateChangedSubscriber.Subscribe(OnLifeStateChangedEventMessage);
             
             NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnect;
@@ -188,7 +192,7 @@ namespace Script.GameState
             
             newPlayer.SpawnWithOwnership(clientId, true);
 
-            PlayersStats.Instance.AddPlayer(newPlayer.NetworkObjectId, newPlayerCharacter.CharacterType.ToString());
+            GameStats.Instance.PlayersStats.AddPlayer(newPlayer.NetworkObjectId, newPlayerCharacter.CharacterType.ToString());
         }
         
         private void OnLifeStateChangedEventMessage(LifeStateChangedEventMessage message)
@@ -236,7 +240,7 @@ namespace Script.GameState
         private IEnumerator CoroGameOver(float delay, bool victory)
         {
             yield return new WaitForSeconds(delay);
-            
+            GameStats.Instance.StopTracking();
             NetworkSceneManager.Instance.LoadScene("PostGame", true);
         }
     }

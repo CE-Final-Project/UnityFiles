@@ -312,8 +312,7 @@ namespace Script.Game.GameplayObject.Character
                 float damageMod = _serverActionPlayer.GetBuffedValue(Actions.Action.BuffableValue.PercentDamageReceived);
                 HP = (int)(HP * damageMod);
                 
-                if (IsNpc)
-                    serverAnimationHandler.NetworkAnimator.SetTrigger("HitReact1");
+                serverAnimationHandler.NetworkAnimator.SetTrigger("HitReact1");
             }
 
             HitPoints = Mathf.Clamp(HitPoints + HP, 0, CharacterClass.BaseHP.Value);
@@ -333,12 +332,15 @@ namespace Script.Game.GameplayObject.Character
                         StartCoroutine(KilledDestroyProcess());
                     }
                     ClientCharacter.OurAnimator.SetTrigger("Dead");
+                    
+                    // Add kill to the player who killed this character
+                    GameStats.Instance.PlayersStats.AddKill(inflicter.NetworkObjectId);
                 }
 
                 LifeState = LifeState.Dead;
 
                 // Add kill to the player who killed this character
-                PlayersStats.Instance.AddKill(inflicter.NetworkObjectId);
+                GameStats.Instance.PlayersStats.AddKill(inflicter.NetworkObjectId);
 
                 _serverActionPlayer.ClearActions(false);
             }
@@ -366,7 +368,7 @@ namespace Script.Game.GameplayObject.Character
             {
                 HitPoints = Mathf.Clamp(HP, 0, CharacterClass.BaseHP.Value);
                 NetLifeState.LifeState.Value = LifeState.Alive;
-                PlayersStats.Instance.AddHealingDone(inflicter.OwnerClientId, HP);
+                GameStats.Instance.PlayersStats.AddHealingDone(inflicter.OwnerClientId, HP);
             }
         }
 

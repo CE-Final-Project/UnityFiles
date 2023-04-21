@@ -58,7 +58,7 @@ namespace Script.Game.GameplayObject.Character.AI
             float closestDistanceSqr = int.MaxValue;
             ServerCharacter closestFoe = null;
 
-            foreach (var foe in EnemyServerCharacter.GetEnemyServerCharacters())
+            foreach (var foe in EnemyServerCharacter.GetEnemiesServerCharacters(m_Brain.GetMyServerCharacter().CharacterType.ToString())) // get all enemies of the same type
             {
                 float distanceSqr = (myPosition - foe.PhysicsWrapper.Transform.position).sqrMagnitude;
                 if (distanceSqr < closestDistanceSqr)
@@ -82,7 +82,7 @@ namespace Script.Game.GameplayObject.Character.AI
             Vector3 position = m_Brain.GetMyServerCharacter().PhysicsWrapper.Transform.position;
 
             // in this game, NPCs only attack players (and never other NPCs), so we can just iterate over the players to see if any are nearby
-            foreach (var character in EnemyServerCharacter.GetEnemyServerCharacters())
+            foreach (var character in EnemyServerCharacter.GetEnemiesServerCharacters(m_Brain.GetMyServerCharacter().CharacterType.ToString()))
             {
                 if (!m_Brain.IsAppropriateFoe(character) && (character.PhysicsWrapper.Transform.position - position).sqrMagnitude <= detectionRangeSqr)
                 {

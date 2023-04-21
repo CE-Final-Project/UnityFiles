@@ -2,43 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Script.ConnectionManagement;
-using Script.Game.GameplayObject.Character;
-using Script.Game.Messages;
-using Script.Infrastructure;
-using Script.Infrastructure.PubSub;
-using TMPro;
+using JetBrains.Annotations;
 using UnityEngine;
-using VContainer;
 
 namespace Script.Game.GameplayObject.RuntimeDataContainers
 {
-    
-    public class PlayerId : IEquatable<PlayerId>
-    {
-        public ulong ClientId { get; }
-
-        public PlayerId(ulong clientId)
-        {
-            ClientId = clientId;
-        }
-
-        public bool Equals(PlayerId other)
-        {
-            return other != null && ClientId == other.ClientId;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is PlayerId other && Equals(other);
-        }
-
-        public override int GetHashCode()
-        {
-            return ClientId.GetHashCode();
-        }
-    }
-    
     public class PlayerStats
     {
         public string CharacterType { get; private set; }
@@ -94,163 +62,149 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
 
     public class PlayersStats : MonoBehaviour
     {
-        public static PlayersStats Instance { get; private set; }
-        private Dictionary<PlayerId, PlayerStats> _playerStatsMap = new Dictionary<PlayerId, PlayerStats>();
+        private Dictionary<ulong, PlayerStats> _playerStatsMap = new Dictionary<ulong, PlayerStats>();
         private DateTime _startTime;
         private DateTime _playTime;
         
         private Coroutine _writeDataToCsvCoroutine;
-
-        private void Awake()
-        {
-            if (Instance != null)
-            {
-                throw new Exception("There should be only one PlayersStats object in the scene");
-            }
-    
-            ClearData();
-            
-            DontDestroyOnLoad(gameObject);
-            Instance = this;
-        }
+        private StreamWriter _writer;
         
-        private void Start()
+        private const int WriteDataToCsvInterval = 5; // Seconds
+
+        public void StartTracking()
         {
+            StopTracking(); // Stop tracking if it's already running or if the game is restarted
             _startTime = DateTime.Now;
-            _writeDataToCsvCoroutine = StartCoroutine(WriteDataToCsvCoroutine());
+            string filePath = Application.persistentDataPath + $"/players_stats{_startTime:yyyy-M-d-HH-mm-ss}.csv";
+            StartWriteDataToCsvCoroutine(filePath);
         }
-        
-        private IEnumerator WriteDataToCsvCoroutine()
+
+        private void StartWriteDataToCsvCoroutine(string filePath)
         {
-            // Write the data to a CSV file
-                string filePath = Application.persistentDataPath + $"/players_stats{_startTime:yyyy-M-d-HH-mm-ss}.csv";
-                bool fileExists = File.Exists(filePath);
-                
-                using (StreamWriter writer = new StreamWriter(filePath, true))
-                {
-                    if (!fileExists)
-                    {
-                      writer.WriteLine("Play Time (Second),PlayerId,CharacterType,KillCount,DeathCount,DamageDealt,DamageTaken,HealingDone,HealingTaken");   
-                    }
-
-                    while (true)
-                    {
-                        // Wait for 2 minutes before writing data again
-                        yield return new WaitForSecondsRealtime(120);
-                        
-                        string playTime = DateTime.Now.Subtract(_startTime).TotalSeconds.ToString();
-
-                        // Write data for each player
-                        foreach (var playerStats in _playerStatsMap)
-                        {
-                            string row = $"{playTime}, {playerStats.Key.ClientId},{playerStats.Value.CharacterType},{playerStats.Value.KillCount},{playerStats.Value.DeathCount},{playerStats.Value.DamageDealt},{playerStats.Value.DamageTaken},{playerStats.Value.HealingDone},{playerStats.Value.HealingTaken}";
-                            writer.WriteLine(row);
-                        }
-                        writer.Flush();
-                        Debug.Log($"Wrote player stats to {filePath}");
-                    }
-                }
-        }
-        
-        public double GetPlayTime()
-        {
-            double playTime = DateTime.Now.Subtract(_startTime).TotalSeconds;
-            return playTime;
+            bool fileExists = File.Exists(filePath);
+            
+            _writer = new StreamWriter(filePath, true);
+            
+            if (!fileExists)
+            {
+                _writer.WriteLine("Play Time (Second),PlayerId,CharacterType,KillCount,DeathCount,DamageDealt,DamageTaken,HealingDone,HealingTaken");
+            }
+            
+            _writeDataToCsvCoroutine = StartCoroutine(WriteDataToCsvCoroutine(filePath));
         }
 
-        public void ClearData()
+        public void StopTracking()
         {
             if (_writeDataToCsvCoroutine != null)
             {
                 StopCoroutine(_writeDataToCsvCoroutine);
             }
-            _playerStatsMap.Clear();    
+            _writer?.Close();
+            _playerStatsMap.Clear();   
         }
         
+        private IEnumerator WriteDataToCsvCoroutine(string filePath)
+        {
+            while (true)
+            {
+                // Wait before writing data again
+                yield return new WaitForSecondsRealtime(WriteDataToCsvInterval);
+                
+                string playTime = DateTime.Now.Subtract(_startTime).ToString(@"hh\:mm\:ss");
+
+                // Write data for each player
+                foreach (var playerStats in _playerStatsMap)
+                {
+                    string row = $"{playTime}, {playerStats.Key},{playerStats.Value.CharacterType},{playerStats.Value.KillCount},{playerStats.Value.DeathCount},{playerStats.Value.DamageDealt},{playerStats.Value.DamageTaken},{playerStats.Value.HealingDone},{playerStats.Value.HealingTaken}";
+                    _writer.WriteLine(row);
+                }
+                _writer.Flush();
+                Debug.Log($"Time: {playTime} - Player Data written to {filePath}");
+            }
+        }
+        
+        public double GetCurrentPlayTime()
+        {
+            double playTime = DateTime.Now.Subtract(_startTime).TotalSeconds;
+            return playTime;
+        }
+
         public void AddPlayer(ulong clientId, string characterType)
         {
-            PlayerId playerId = new(clientId);
-            if (_playerStatsMap.ContainsKey(playerId))
+            if (_playerStatsMap.ContainsKey(clientId))
             {
                 Debug.LogError($"Player {clientId} with character type {characterType} already exists");
             }
             
-            _playerStatsMap.Add(playerId, new PlayerStats(characterType, 0, 0, 0, 0, 0, 0));
+            _playerStatsMap.Add(clientId, new PlayerStats(characterType, 0, 0, 0, 0, 0, 0));
         }
         
         public void AddKill(ulong clientId)
         {
-            PlayerId playerId = new(clientId);
-            if (!_playerStatsMap.ContainsKey(playerId))
+            if (!_playerStatsMap.ContainsKey(clientId))
             {
                 Debug.LogError($"Player {clientId} does not exist");
             }
             
-            _playerStatsMap[playerId].AddKill();
+            _playerStatsMap[clientId].AddKill();
         }
         
         public void AddDeath(ulong clientId)
         {
-            PlayerId playerId = new(clientId);
-            if (!_playerStatsMap.ContainsKey(playerId))
+            if (!_playerStatsMap.ContainsKey(clientId))
             {
                 Debug.LogError($"Player {clientId} does not exist");
             }
             
-            _playerStatsMap[playerId].AddDeath();
+            _playerStatsMap[clientId].AddDeath();
         }
         
         public void AddDamageDealt(ulong clientId, int damage)
         {
-            PlayerId playerId = new(clientId);
-            if (!_playerStatsMap.ContainsKey(playerId))
+            if (!_playerStatsMap.ContainsKey(clientId))
             {
                 Debug.LogError($"Player {clientId} does not exist");
             }
-            _playerStatsMap[playerId].AddDamageDealt(damage);
+            _playerStatsMap[clientId].AddDamageDealt(damage);
         }
         
         public void AddDamageTaken(ulong clientId, int damage)
         {
-            PlayerId playerId = new(clientId);
-            if (!_playerStatsMap.ContainsKey(playerId))
+            if (!_playerStatsMap.ContainsKey(clientId))
             {
                 Debug.LogError($"Player {clientId} does not exist");
             }
-            _playerStatsMap[playerId].AddDamageTaken(damage);
+            _playerStatsMap[clientId].AddDamageTaken(damage);
         }
         
         public void AddHealingDone(ulong clientId, int healing)
         {
-            PlayerId playerId = new(clientId);
-            if (!_playerStatsMap.ContainsKey(playerId))
+            if (!_playerStatsMap.ContainsKey(clientId))
             {
                 Debug.LogError($"Player {clientId} does not exist");
             }
             
-            _playerStatsMap[playerId].AddHealingDone(healing);
+            _playerStatsMap[clientId].AddHealingDone(healing);
         }
         
         public void AddHealingTaken(ulong clientId, int healing)
         {
-            PlayerId playerId = new(clientId);
-            if (!_playerStatsMap.ContainsKey(playerId))
+            if (!_playerStatsMap.ContainsKey(clientId))
             {
                 Debug.LogError($"Player {clientId} does not exist");
             }
             
-            _playerStatsMap[playerId].AddHealingTaken(healing);
+            _playerStatsMap[clientId].AddHealingTaken(healing);
         }
         
         public void RemovePlayer(ulong clientId)
         {
-            PlayerId playerId = new(clientId);
-            if (!_playerStatsMap.ContainsKey(playerId))
+            if (!_playerStatsMap.ContainsKey(clientId))
             {
                 Debug.LogError($"Player {clientId} does not exist");
             }
             
-            _playerStatsMap.Remove(playerId);
+            _playerStatsMap.Remove(clientId);
         }
 
         public string GetStringPlayersStats()
@@ -258,7 +212,7 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
             string stats = "";
             foreach (var playerStats in _playerStatsMap)
             {
-                stats += $"Player {playerStats.Key.ClientId}\n" +
+                stats += $"Player {playerStats.Key}\n" +
                          $"Character type: {playerStats.Value.CharacterType}\n" +
                          $"Kill count: {playerStats.Value.KillCount}\n" +
                          $"Death Count: {playerStats.Value.DeathCount}\n" +
@@ -271,9 +225,20 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
             return stats;
         }
         
-        public Dictionary<PlayerId, PlayerStats> GetPlayerStatsMap()
+        public Dictionary<ulong, PlayerStats> GetPlayerStatsMap()
         {
             return _playerStatsMap;
+        }
+        
+        [CanBeNull]
+        public PlayerStats GetPlayerStats(ulong clientId)
+        {
+            if (_playerStatsMap.TryGetValue(clientId, out PlayerStats playerStats))
+            {
+                return playerStats;
+            }
+            
+            return null;
         }
     }
 }

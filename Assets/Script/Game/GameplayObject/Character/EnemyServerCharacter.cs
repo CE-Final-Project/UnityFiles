@@ -1,25 +1,32 @@
 using System.Collections.Generic;
-using Script.ConnectionManagement;
-using Unity.Multiplayer.Samples.BossRoom;
+using System.Linq;
+using Script.Game.GameplayObject.RuntimeDataContainers;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Vector3 = UnityEngine.Vector3;
 
 namespace Script.Game.GameplayObject.Character
 {
     [RequireComponent(typeof(ServerCharacter))]
     public class EnemyServerCharacter : NetworkBehaviour
     {
-        private static readonly List<ServerCharacter> ActiveEnemies = new List<ServerCharacter>();
-
         [SerializeField] private ServerCharacter cachedServerCharacter;
+        
+        public static readonly Dictionary<string, List<ServerCharacter>> ActiveEnemies = new Dictionary<string, List<ServerCharacter>>();
 
         public override void OnNetworkSpawn()
         {
             if (IsServer)
             {
-                ActiveEnemies.Add(cachedServerCharacter);
+                if (!ActiveEnemies.ContainsKey(cachedServerCharacter.CharacterType.ToString()))
+                {
+                    ActiveEnemies.Add(cachedServerCharacter.CharacterType.ToString(), new List<ServerCharacter>{ cachedServerCharacter });
+                } 
+                else 
+                {
+                    ActiveEnemies[cachedServerCharacter.CharacterType.ToString()].Add(cachedServerCharacter);
+                }
+                
+                GameStats.Instance.EnemiesStats.AddEnemy(cachedServerCharacter);
             }
             else
             {
@@ -29,33 +36,25 @@ namespace Script.Game.GameplayObject.Character
 
         private void OnDisable()
         {
-            ActiveEnemies.Remove(cachedServerCharacter);
+            GameStats.Instance.EnemiesStats.RemoveEnemy(cachedServerCharacter);
+            
+            // remove enemy from list
+            ActiveEnemies[cachedServerCharacter.CharacterType.ToString()].Remove(cachedServerCharacter);
         }
-
-        /// <summary>
-        /// Returns a list of all active players' ServerCharacters. Treat the list as read-only!
-        /// The list will be empty on the client.
-        /// </summary>
-        public static List<ServerCharacter> GetEnemyServerCharacters()
+        
+        public static List<ServerCharacter> GetAllEnemiesServerCharacters()
         {
-            return ActiveEnemies;
+            return ActiveEnemies.SelectMany(x => x.Value).ToList();
         }
-
-        /// <summary>
-        /// Returns the ServerCharacter owned by a specific client. Always returns null on the client.
-        /// </summary>
-        /// <param name="ownerClientId"></param>
-        /// <returns>The ServerCharacter owned by the client, or null if no ServerCharacter is found</returns>
-        public static ServerCharacter GetEnemyServerCharacter(ulong ownerClientId)
+        
+        public static List<ServerCharacter> GetEnemiesServerCharacters(string enemyType)
         {
-            foreach (ServerCharacter playerServerCharacter in ActiveEnemies)
+            if (ActiveEnemies.TryGetValue(enemyType, out var enemies))
             {
-                if (playerServerCharacter.OwnerClientId == ownerClientId)
-                {
-                    return playerServerCharacter;
-                }
+                return enemies;
             }
-            return null;
+
+            return new List<ServerCharacter>();
         }
     }
 }
