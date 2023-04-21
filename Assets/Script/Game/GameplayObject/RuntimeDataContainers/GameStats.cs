@@ -36,6 +36,7 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
             // Reset Stats if already tracking
             StopTracking();
             
+            Debug.Log("Starting Tracking");
             // Start new tracking stats
             m_PlayersStats.StartTracking();
             m_EnemiesStats.StartTracking();
@@ -43,6 +44,7 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
         
         public void StopTracking()
         {
+            Debug.Log("Stop Tracking");
             m_PlayersStats.StopTracking();
             m_EnemiesStats.StopTracking();
         }

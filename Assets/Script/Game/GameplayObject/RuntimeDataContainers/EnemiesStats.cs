@@ -107,7 +107,7 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
             _enemiesStats.Clear();
         }
         
-        public string GetEnemiesStats()
+        public string GetStringEnemiesStats()
         {
             string enemiesStats = "";
             foreach (var enemyStats in _enemiesStats)

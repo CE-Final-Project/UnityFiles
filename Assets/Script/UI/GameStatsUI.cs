@@ -39,6 +39,7 @@ namespace Script.UI
             }
             
             UpdatePlayerStats();
+            UpdateEnemyStats();
         }
 
         private void UpdatePlayerStats()
@@ -49,6 +50,16 @@ namespace Script.UI
             }
 
             playerStatsText.text = GameStats.Instance.PlayersStats.GetStringPlayersStats();
+        }
+        
+        private void UpdateEnemyStats()
+        {
+            if (GameStats.Instance.EnemiesStats == null || canvasGroup.alpha == 0f)
+            {
+                return;
+            }
+
+            enemyStatsText.text = GameStats.Instance.EnemiesStats.GetStringEnemiesStats();
         }
 
         public void Show()
