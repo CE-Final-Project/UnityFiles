@@ -1,5 +1,4 @@
 ﻿using System;
-using NUnit.Framework;
 using Script.Configuration;
 using Script.Game.Actions;
 using Script.Game.Actions.Input;
@@ -8,6 +7,7 @@ using Script.Game.GameplayObject.RuntimeDataContainers;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Assertions;
 using UnityEngine.EventSystems;
 
 namespace Script.Game.GameplayObject.UserInput

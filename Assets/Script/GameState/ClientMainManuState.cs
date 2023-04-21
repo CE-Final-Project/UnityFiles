@@ -1,5 +1,8 @@
 ﻿using System;
+using Script.ApplicationLifecycle.Messages;
 using Script.Configuration;
+using Script.ConnectionManagement;
+using Script.Infrastructure.PubSub;
 using Script.Lobby;
 using Script.NGO;
 using Script.UI;
@@ -26,6 +29,8 @@ namespace Script.GameState
         [Inject] private LocalLobbyUser _localUser;
         [Inject] private LocalLobby _localLobby;
         [Inject] private ProfileManager _profileManager;
+        
+        [Inject] private IPublisher<QuitApplicationMessage> _quitApplicationPub;
 
         protected override void Awake()
         {
@@ -126,6 +131,11 @@ namespace Script.GameState
         public void OnChangeProfileClicked()
         {
             // uiProfileSelector.Show();
+        }
+        
+        public void OnQuitClicked()
+        {
+            _quitApplicationPub.Publish(new QuitApplicationMessage());
         }
     }
 }
