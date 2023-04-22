@@ -140,6 +140,12 @@ MonoBehaviour:
     TransitionDuration: 0
     TriggerNameHash: -47317214
     TransitionIndex: 1
+  - Layer: 0
+    OriginatingState: 800694067
+    DestinationState: 515400450
+    TransitionDuration: 0
+    TriggerNameHash: 1293411866
+    TransitionIndex: 2
   m_Animator: {fileID: 3094172045988796829}
 --- !u!1001 &41696490584337412
 PrefabInstance:
@@ -200,6 +206,10 @@ PrefabInstance:
       propertyPath: clientCharacter
       value: 
       objectReference: {fileID: 4543408387928751984}
+    - target: {fileID: 4953590563975229845, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
+      propertyPath: killedDestroyDelaySeconds
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5175161417027586027, guid: 7be98b059ed12e84baab70e44b177685, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 951099334

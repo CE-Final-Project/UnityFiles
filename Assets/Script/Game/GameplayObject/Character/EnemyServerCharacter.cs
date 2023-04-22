@@ -36,10 +36,14 @@ namespace Script.Game.GameplayObject.Character
 
         private void OnDisable()
         {
-            GameStats.Instance.EnemiesStats.RemoveEnemy(cachedServerCharacter);
+            if (IsServer)
+            {
+                GameStats.Instance.EnemiesStats.RemoveEnemy(cachedServerCharacter);
+                    
+                // remove enemy from list
+                ActiveEnemies[cachedServerCharacter.CharacterType.ToString()].Remove(cachedServerCharacter);
+            }
             
-            // remove enemy from list
-            ActiveEnemies[cachedServerCharacter.CharacterType.ToString()].Remove(cachedServerCharacter);
         }
         
         public static List<ServerCharacter> GetAllEnemiesServerCharacters()

@@ -327,13 +327,13 @@ namespace Script.Game.GameplayObject.Character
             {
                 if (IsNpc)
                 {
-                    if (killedDestroyDelaySeconds >= 0.0f && LifeState != LifeState.Dead)
-                    {
-                        StartCoroutine(KilledDestroyProcess());
-                    }
-
                     // Add kill to the player who killed this character
                     GameStats.Instance.PlayersStats.AddKill(inflicter.NetworkObjectId);
+                }
+                
+                if (killedDestroyDelaySeconds >= 0.0f && LifeState != LifeState.Dead)
+                {
+                    StartCoroutine(KilledDestroyProcess());
                 }
 
                 LifeState = LifeState.Dead;

@@ -17,8 +17,8 @@ MonoBehaviour:
     Amount: 15
     ManaCost: 2
     Range: 20
-    DurationSeconds: 1
-    ExecTimeSeconds: 0.5
+    DurationSeconds: 0.3
+    ExecTimeSeconds: 0.3
     EffectDurationSeconds: 0
     ReuseTimeSeconds: 0
     AnimAnticipation: AnticipateMove
