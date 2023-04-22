@@ -94,6 +94,8 @@ namespace Script.GameState
             
             netCodeHooks.OnNetworkSpawnHook += OnNetworkSpawn;
             netCodeHooks.OnNetworkDespawnHook += OnNetworkDespawn;
+            
+            AudioManager.Instance.StartLobbyMusic();
         }
 
         protected override void OnDestroy()
@@ -376,6 +378,5 @@ namespace Script.GameState
         //
         //     return characterGraphics;
         // }
-
     }
 }

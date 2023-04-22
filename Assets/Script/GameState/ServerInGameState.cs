@@ -53,6 +53,8 @@ namespace Script.GameState
             base.Awake();
             netCodeHooks.OnNetworkSpawnHook += OnNetworkSpawn;
             netCodeHooks.OnNetworkDespawnHook += OnNetworkDespawn;
+            
+            AudioManager.Instance.StartGameMusic();
         }
 
         private void OnNetworkSpawn()

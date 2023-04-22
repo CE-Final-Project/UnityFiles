@@ -45,6 +45,8 @@ namespace Script.GameState
             }
             
             TrySignIn();
+            
+            AudioManager.Instance.StartMainMenuMusic();
         }
 
         protected override void Configure(IContainerBuilder builder)

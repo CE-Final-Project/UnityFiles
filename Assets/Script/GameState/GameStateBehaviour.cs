@@ -61,5 +61,10 @@ namespace Script.GameState
                 _activeStateGo = null;
             }
         }
+        
+        public void OnPlayerClickSound(AudioClip clip)
+        {
+            AudioManager.Instance.PlaySFX(clip);
+        }
     }
 }

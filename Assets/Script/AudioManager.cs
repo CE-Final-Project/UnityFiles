@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager Instance { get; private set; }
+    
     [Header("Audio Source")]
     public AudioSource musicSource;
     public AudioSource SFXSource;
@@ -22,28 +24,40 @@ public class AudioManager : MonoBehaviour
     public AudioClip Attack2;
     public AudioClip Attack3;
     public AudioClip death;
-
-    private void Start()
+    
+    private void Awake()
     {
-        // Get scene name to slelct BGM to play
-        Scene currentScene = SceneManager.GetActiveScene();
-        if (currentScene.name == "MainMenu")
+        if (Instance != null)
         {
-            musicSource.clip = menuBackground;
-        }
-        else if (currentScene.name == "Lobby")
-        {
-            musicSource.clip = lobbyBackground;
-        }
-        else if (currentScene.name == "inGame")
-        {
-            musicSource.clip = gameBackground1;
-        }
-        else if (currentScene.name == "PostGame")
-        {
-            musicSource.clip = postGameBackround;
+            Destroy(gameObject);
+            return;
         }
 
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public void StartMainMenuMusic()
+    {
+        musicSource.clip = menuBackground;
+        musicSource.Play();
+    }
+    
+    public void StartLobbyMusic()
+    {
+        musicSource.clip = lobbyBackground;
+        musicSource.Play();
+    }
+    
+    public void StartGameMusic()
+    {
+        musicSource.clip = gameBackground1;
+        musicSource.Play();
+    }
+    
+    public void StartPostGameMusic()
+    {
+        musicSource.clip = postGameBackround;
         musicSource.Play();
     }
 

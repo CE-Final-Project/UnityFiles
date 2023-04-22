@@ -21,6 +21,8 @@ namespace Script.GameState
         {
             base.Awake();
             netCodeHooks.OnNetworkSpawnHook += OnNetworkSpawn;
+            
+            AudioManager.Instance.StartPostGameMusic();
         }
         
         private void OnNetworkSpawn()
