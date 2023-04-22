@@ -38,6 +38,7 @@ MonoBehaviour:
     Projectiles: []
     Spawns: []
     IsFriendly: 0
+    SoundEffect: {fileID: 0}
     Icon: {fileID: -1448861416, guid: 71dc1d74f2f06495193204e59b1c7f83, type: 3}
     DisplayedName: Melee
     Description: asdasdasdasd

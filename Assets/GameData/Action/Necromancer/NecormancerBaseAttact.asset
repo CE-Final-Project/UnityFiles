@@ -38,6 +38,7 @@ MonoBehaviour:
     Projectiles: []
     Spawns: []
     IsFriendly: 0
+    SoundEffect: {fileID: 8300000, guid: ee78959afd5b04e65ae570c740391b03, type: 3}
     Icon: {fileID: 0}
     DisplayedName: 
     Description: 

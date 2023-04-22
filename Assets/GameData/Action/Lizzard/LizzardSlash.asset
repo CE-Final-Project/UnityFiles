@@ -38,6 +38,7 @@ MonoBehaviour:
     Projectiles: []
     Spawns: []
     IsFriendly: 0
+    SoundEffect: {fileID: 8300000, guid: 9e83b6da5853446929e631c5509b4908, type: 3}
     Icon: {fileID: 1505030398, guid: 8d59aa21af879a34fbe48dfa5f10cd51, type: 3}
     DisplayedName: Slash
     Description: Lizzard Slash

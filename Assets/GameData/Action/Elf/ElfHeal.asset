@@ -39,6 +39,7 @@ MonoBehaviour:
     Spawns:
     - {fileID: 1539796726324455230, guid: 8e59736b28ae72f47af8a5eb44dcc402, type: 3}
     IsFriendly: 1
+    SoundEffect: {fileID: 8300000, guid: 902cf3ae2735d44508653423a497a63f, type: 3}
     Icon: {fileID: -242327032, guid: 8d59aa21af879a34fbe48dfa5f10cd51, type: 3}
     DisplayedName: Healing
     Description: Heal HP Ally

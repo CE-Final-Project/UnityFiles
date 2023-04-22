@@ -43,6 +43,7 @@ MonoBehaviour:
       MaxVictims: 1
     Spawns: []
     IsFriendly: 0
+    SoundEffect: {fileID: 8300000, guid: 2bc012137cf984023b7c0dee4e4d123f, type: 3}
     Icon: {fileID: 222701666, guid: 8d59aa21af879a34fbe48dfa5f10cd51, type: 3}
     DisplayedName: Magic Arrow
     Description: it is Magic Arrow

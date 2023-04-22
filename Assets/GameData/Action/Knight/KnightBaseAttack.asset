@@ -38,6 +38,7 @@ MonoBehaviour:
     Projectiles: []
     Spawns: []
     IsFriendly: 0
+    SoundEffect: {fileID: 8300000, guid: 6607257ea5f084885b9545c1fe6ce308, type: 3}
     Icon: {fileID: 1222041170, guid: 8d59aa21af879a34fbe48dfa5f10cd51, type: 3}
     DisplayedName: Charge
     Description: asdasdasd
