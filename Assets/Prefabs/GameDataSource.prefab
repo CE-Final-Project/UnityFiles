@@ -51,6 +51,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0d145928c0d060640a54a03b2b0ea319, type: 2}
   - {fileID: 11400000, guid: 12dbe8f50ed05614a9817488eacea766, type: 2}
   - {fileID: 11400000, guid: 0dcbeb436a1b7d2439aa6976b34ee277, type: 2}
+  - {fileID: 11400000, guid: 99e99c044b29b8d49a97c45a36d260c6, type: 2}
   m_GeneralChaseActionPrototype: {fileID: 11400000, guid: 50b92f183b94b79498ffc9461731315d, type: 2}
   m_GeneralTargetActionPrototype: {fileID: 11400000, guid: 0a0f53e477dc1754bb9d576187e4ec31, type: 2}
   m_ActionPrototypes:
@@ -64,4 +65,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b3bb2a5499c97174fa999f02dbc5b3a0, type: 2}
   - {fileID: 11400000, guid: b05647234ac8ba248a9e71f78654cd0d, type: 2}
   - {fileID: 11400000, guid: 03dd53d3feb042f4f86c1684a0f090f3, type: 2}
+  - {fileID: 11400000, guid: b1b676f920b3f9d488647257374849d3, type: 2}
   - {fileID: 11400000, guid: bd46591607b65b64693cc573bbe37814, type: 2}
+  - {fileID: 11400000, guid: 87e775f41d5b20f4d904ba3ac9e648e9, type: 2}

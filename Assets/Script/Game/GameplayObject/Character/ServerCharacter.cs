@@ -331,8 +331,7 @@ namespace Script.Game.GameplayObject.Character
                     {
                         StartCoroutine(KilledDestroyProcess());
                     }
-                    ClientCharacter.OurAnimator.SetTrigger("Dead");
-                    
+
                     // Add kill to the player who killed this character
                     GameStats.Instance.PlayersStats.AddKill(inflicter.NetworkObjectId);
                 }

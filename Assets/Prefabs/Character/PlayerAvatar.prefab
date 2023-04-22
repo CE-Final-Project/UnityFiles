@@ -97,7 +97,7 @@ Animator:
   m_GameObject: {fileID: 5810391564570231211}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b94db3df230fea347af615641faff401, type: 2}
+  m_Controller: {fileID: 9100000, guid: e4b793f4a372d3442aa6ddc7bf333b51, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -135,8 +135,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TransitionStateInfoList:
   - Layer: 0
-    OriginatingState: 1280983629
-    DestinationState: 377163174
+    OriginatingState: 800694067
+    DestinationState: 1604686932
     TransitionDuration: 0
     TriggerNameHash: -47317214
     TransitionIndex: 1

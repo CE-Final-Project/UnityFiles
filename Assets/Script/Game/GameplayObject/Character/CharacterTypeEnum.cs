@@ -12,6 +12,7 @@
         Skeleton,
         Slime,
         Zombie,
-        Necromancer
+        Necromancer,
+        BigDemon,
     }
 }
