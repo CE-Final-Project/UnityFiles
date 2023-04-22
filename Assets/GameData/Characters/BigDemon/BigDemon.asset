@@ -18,7 +18,7 @@ MonoBehaviour:
   Skill3: {fileID: 0}
   BaseHP: {fileID: 11400000, guid: a80fb11e8a3fd6c40b6b80d1b417adfa, type: 2}
   BaseMana: 0
-  Speed: 0.4
+  Speed: 0.5
   IsNpc: 1
   DetectRange: 100
   DisplayedName: BIG DEMON

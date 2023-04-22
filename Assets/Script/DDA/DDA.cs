@@ -28,7 +28,7 @@ namespace Script.DDA
         
         [SerializeField] List<Transform> spawnPoints;
         
-        private const float CalculationInterval = 60; // Seconds
+        private const float CalculationInterval = 10; // Seconds
 
         [Inject] private EnemySpawner _enemySpawner;
 
@@ -47,8 +47,8 @@ namespace Script.DDA
         private void Start()
         {
             // spawn default enemy
-            GameObject enemy = ChooseEnemy();
-            _enemySpawner.SpawnEnemy(enemy, SPAWN_DELAY, SPAWN_COUNT, spawnPoints, 0); // HP = 0 will use default HP from enemy config
+            //GameObject enemy = ChooseEnemy();
+            _enemySpawner.SpawnEnemy(enemyPrefab[1], SPAWN_DELAY, SPAWN_COUNT, spawnPoints, 0); // HP = 0 will use default HP from enemy config
             
             // Start dynamic spawn
             _dynamicSpawnCoroutine = StartCoroutine(DynamicSpawnUpdate());
@@ -82,11 +82,19 @@ namespace Script.DDA
                 //spawnCount += player.Value.DamageDealt / 100;
                 //spawnCount += (int)Mathf.Round((1.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)));
                 //spawnDelay += Mathf.Round((10.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)));
-                spawnCount += (int)Mathf.Round((20.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)) / (0.5f * (activeEnemies.Count+1)));
+                spawnCount += (int)Mathf.Round((20.0f * CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1)) / (0.5f * (activeEnemies.Count+1)));
+                if(spawnCount > 50)
+                {
+                    spawnCount = 50;
+                }
 
-                spawnDelay += (int)Mathf.Round((15.0f * (0.25f * (activeEnemies.Count)+1)) / ( CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt )));
+                spawnDelay += (int)Mathf.Round((15.0f * (0.25f * (activeEnemies.Count)+1)) / ( CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1)));
+                if(spawnDelay < 7)
+                {
+                    spawnDelay = 7;
+                }
 
-                enemyHp += (int)Mathf.Round((100.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)));
+                enemyHp += (int)Mathf.Round((100.0f * CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1)));
 
                 Debug.Log("Count " + spawnCount + " Delay : " + spawnDelay + " HP : " + enemyHp);
                 Debug.Log(" KPM : " + CalculateK_KillPerMinute(player.Value.KillCount) + " DMD : " + CalculateK_DMDPerMinute(player.Value.DamageDealt));
@@ -105,7 +113,40 @@ namespace Script.DDA
         private GameObject ChooseEnemy()
         {
             // TODO: Choose enemy by performance
-            return enemyPrefab[Random.Range(0, enemyPrefab.Count)];
+            //return enemyPrefab[Random.Range(0, enemyPrefab.Count)];
+
+            float K_KPM_AVG = 0;
+            float K_DMD_AVG = 0;
+            var activePlayers = GameStats.Instance.PlayersStats.GetPlayerStatsMap();
+
+            foreach (var player in activePlayers)
+            {
+                K_KPM_AVG += CalculateK_KillPerMinute(player.Value.KillCount+1);
+                K_DMD_AVG += CalculateK_DMDPerMinute(player.Value.DamageDealt+1);
+
+                
+            }
+
+            K_KPM_AVG /= activePlayers.Count;
+            K_DMD_AVG /= activePlayers.Count;
+
+            Debug.Log(K_KPM_AVG);
+            Debug.Log(K_DMD_AVG);
+
+            if (K_KPM_AVG > 1.5 && K_DMD_AVG > 1.5)
+            {
+                return enemyPrefab[2];
+            }
+            else if(K_KPM_AVG > 1.2 && K_DMD_AVG > 1.2)
+            {
+                return enemyPrefab[0];
+            }
+            else
+            {
+                return enemyPrefab[1];
+            }
+
+            
         }
 
         private void OnDestroy()
@@ -118,7 +159,7 @@ namespace Script.DDA
 
         private float CalculateK_KillPerMinute(int KillCount)
         {
-            float KPM = ((float)((float)(KillCount+1) / (GameStats.Instance.PlayersStats.GetCurrentPlayTime() / 60.0f)));
+            float KPM = (float)((float)(KillCount) / (GameStats.Instance.PlayersStats.GetCurrentPlayTime() / 60.0f));
 
             float K_KPM = KPM / 6.7f;
             return K_KPM;
@@ -132,7 +173,7 @@ namespace Script.DDA
 
         private float CalculateK_DMDPerMinute(float DMD)
         {
-            float DMDPM = ((float)((float)(DMD + 1.0f) / (GameStats.Instance.PlayersStats.GetCurrentPlayTime()/ 60.0f)));
+            float DMDPM = ((float)((float)(DMD) / (GameStats.Instance.PlayersStats.GetCurrentPlayTime()/ 60.0f)));
 
             float K_DMD = DMDPM / 957.4f; 
             return K_DMD;

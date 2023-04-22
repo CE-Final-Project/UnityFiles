@@ -18,7 +18,7 @@ MonoBehaviour:
   Skill3: {fileID: 0}
   BaseHP: {fileID: 11400000, guid: 8f9e0035033c99e4e875a8a18d9b739b, type: 2}
   BaseMana: 0
-  Speed: 0.75
+  Speed: 0.7
   IsNpc: 1
   DetectRange: 100
   DisplayedName: 

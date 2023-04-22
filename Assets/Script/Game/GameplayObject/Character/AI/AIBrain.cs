@@ -17,7 +17,7 @@ namespace Script.Game.GameplayObject.Character.AI
         {
             IDLE,
             ATTACK,
-            ATTACK_WEAK,
+            //ATTACK_WEAK,
             //FLEE,
             
         }
@@ -45,7 +45,7 @@ namespace Script.Game.GameplayObject.Character.AI
             {
                 [AIStateType.IDLE] = new IdleAIState(this),
                 [AIStateType.ATTACK] = new AttackAIState(this, m_ServerActionPlayer),
-                [AIStateType.ATTACK_WEAK] = new AttackWeakAIState(this, m_ServerActionPlayer),
+                //[AIStateType.ATTACK_WEAK] = new AttackWeakAIState(this, m_ServerActionPlayer),
                 //[AIStateType.FLEE] = new FleeAIState(this),
                 
 
