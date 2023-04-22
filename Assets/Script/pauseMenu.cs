@@ -37,7 +37,7 @@ public class pauseMenu : MonoBehaviour
         Debug.Log("Game Resume");
         AudioManager.Instance.musicSource.UnPause();
         pauseMenuUI.SetActive(false);
-        gameHUD.SetActive(true);
+        //gameHUD.SetActive(true);
         //playerInstance.SetActive(true);
         if (SystemInfo.deviceType == DeviceType.Handheld)
         {
@@ -55,7 +55,7 @@ public class pauseMenu : MonoBehaviour
         Debug.Log("Game Pause");
         AudioManager.Instance.musicSource.Pause();
         pauseMenuUI.SetActive(true);
-        gameHUD.SetActive(false);
+        //gameHUD.SetActive(false);
         //playerInstance.SetActive(false);
         if (SystemInfo.deviceType == DeviceType.Handheld)
         {

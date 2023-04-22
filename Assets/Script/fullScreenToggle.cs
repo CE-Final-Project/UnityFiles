@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FullScreenToggle : MonoBehaviour
+public class fullScreenToggle : MonoBehaviour
 {
     public Toggle toggle;
 

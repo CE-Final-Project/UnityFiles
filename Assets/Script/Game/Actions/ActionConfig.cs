@@ -84,6 +84,9 @@ namespace Script.Game.Actions
         [Tooltip("If true, this action affects friendly targets, if false Unfriendly. Not all ActionLogics use this parameter.")]
         public bool IsFriendly;
 
+        [Header("Sound Effect")]
+        public AudioClip SoundEffect;
+
         [Header("In-game description info (Only used for player abilities!)")]
         [Tooltip("If this Action describes a player ability, this is the ability's iconic representation")]
         public Sprite Icon;
