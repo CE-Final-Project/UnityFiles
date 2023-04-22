@@ -18,7 +18,7 @@ MonoBehaviour:
   Skill3: {fileID: 0}
   BaseHP: {fileID: 11400000, guid: 48b88fd2f79c88542ba06560660d6792, type: 2}
   BaseMana: 0
-  Speed: 2
+  Speed: 1
   IsNpc: 0
   DetectRange: 0
   DisplayedName: LIZARD

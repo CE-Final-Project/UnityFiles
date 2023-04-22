@@ -18,9 +18,9 @@ MonoBehaviour:
   Skill3: {fileID: 0}
   BaseHP: {fileID: 11400000, guid: 8f9e0035033c99e4e875a8a18d9b739b, type: 2}
   BaseMana: 0
-  Speed: 1
+  Speed: 0.75
   IsNpc: 1
-  DetectRange: 1
+  DetectRange: 100
   DisplayedName: 
   AnimatorController: {fileID: 9100000, guid: e52cf51f9f823a54fb5bdc0bb5054d2e, type: 2}
   ClassBannerLit: {fileID: 0}
