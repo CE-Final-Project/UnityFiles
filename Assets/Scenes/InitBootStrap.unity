@@ -342,7 +342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5694656346131016879, guid: 787143f9c7169453c8434975b6397152, type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5694656346131016879, guid: 787143f9c7169453c8434975b6397152, type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[0].Prefab
@@ -470,58 +470,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5755594385219786691, guid: 1fd442aec23435044beefa21e106d11c, type: 3}
-      propertyPath: characterData.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5755594385219786691, guid: 1fd442aec23435044beefa21e106d11c, type: 3}
-      propertyPath: characterData.Array.data[5]
-      value: 
-      objectReference: {fileID: 11400000, guid: 0dcbeb436a1b7d2439aa6976b34ee277, type: 2}
-    - target: {fileID: 5755594385219786691, guid: 1fd442aec23435044beefa21e106d11c, type: 3}
-      propertyPath: m_ActionPrototypes.Array.size
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 5755594385219786691, guid: 1fd442aec23435044beefa21e106d11c, type: 3}
-      propertyPath: m_ActionPrototypes.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 2fe51e3c175bab24584ef52ff012acdc, type: 2}
-    - target: {fileID: 5755594385219786691, guid: 1fd442aec23435044beefa21e106d11c, type: 3}
-      propertyPath: m_ActionPrototypes.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: c53a426b621b03b43b54338f899d7653, type: 2}
-    - target: {fileID: 5755594385219786691, guid: 1fd442aec23435044beefa21e106d11c, type: 3}
-      propertyPath: m_ActionPrototypes.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: 7c0dc2cfa69addf4fb10f3e6842c1478, type: 2}
-    - target: {fileID: 5755594385219786691, guid: 1fd442aec23435044beefa21e106d11c, type: 3}
-      propertyPath: m_ActionPrototypes.Array.data[4]
-      value: 
-      objectReference: {fileID: 11400000, guid: 3d802d3152ae2a24595a22c348a579a4, type: 2}
-    - target: {fileID: 5755594385219786691, guid: 1fd442aec23435044beefa21e106d11c, type: 3}
-      propertyPath: m_ActionPrototypes.Array.data[5]
-      value: 
-      objectReference: {fileID: 11400000, guid: 8fc95a1414614354db64d2bb33c2d63c, type: 2}
-    - target: {fileID: 5755594385219786691, guid: 1fd442aec23435044beefa21e106d11c, type: 3}
-      propertyPath: m_ActionPrototypes.Array.data[6]
-      value: 
-      objectReference: {fileID: 11400000, guid: b3bb2a5499c97174fa999f02dbc5b3a0, type: 2}
-    - target: {fileID: 5755594385219786691, guid: 1fd442aec23435044beefa21e106d11c, type: 3}
-      propertyPath: m_ActionPrototypes.Array.data[7]
-      value: 
-      objectReference: {fileID: 11400000, guid: 5940be20d58a29b45a120b3696595da5, type: 2}
-    - target: {fileID: 5755594385219786691, guid: 1fd442aec23435044beefa21e106d11c, type: 3}
-      propertyPath: m_ActionPrototypes.Array.data[8]
-      value: 
-      objectReference: {fileID: 11400000, guid: b05647234ac8ba248a9e71f78654cd0d, type: 2}
-    - target: {fileID: 5755594385219786691, guid: 1fd442aec23435044beefa21e106d11c, type: 3}
-      propertyPath: m_ActionPrototypes.Array.data[9]
-      value: 
-      objectReference: {fileID: 11400000, guid: 03dd53d3feb042f4f86c1684a0f090f3, type: 2}
-    - target: {fileID: 5755594385219786691, guid: 1fd442aec23435044beefa21e106d11c, type: 3}
-      propertyPath: m_ActionPrototypes.Array.data[10]
-      value: 
-      objectReference: {fileID: 11400000, guid: 760657589d9e67941b55f6e504c62083, type: 2}
     - target: {fileID: 8920463376141882484, guid: 1fd442aec23435044beefa21e106d11c, type: 3}
       propertyPath: m_Name
       value: GameDataSource

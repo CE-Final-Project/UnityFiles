@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skeleton
   m_EditorClassIdentifier: 
   CharacterType: 5
-  Skill1: {fileID: 0}
+  Skill1: {fileID: 11400000, guid: bd46591607b65b64693cc573bbe37814, type: 2}
   Skill2: {fileID: 0}
   Skill3: {fileID: 0}
   BaseHP: {fileID: 11400000, guid: 8f9e0035033c99e4e875a8a18d9b739b, type: 2}

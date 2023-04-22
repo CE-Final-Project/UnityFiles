@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
-using Script.Game.Actions;
 using Script.Game.GameplayObject.Character;
 using Script.Game.GameplayObject.RuntimeDataContainers;
 using Script.Game.GameplayObject.UserInput;
 using UnityEngine;
+using UnityEngine.UI;
+using Action = Script.Game.Actions.Action;
 
 namespace Script.UI
 {
@@ -24,6 +26,10 @@ namespace Script.UI
         [SerializeField]
         [Tooltip("The button that activates the hero's second special move")]
         UIHUDButton m_SpecialAction2Button;
+
+        [SerializeField] private Text m_BasicActionName;
+        [SerializeField] private Text m_SpecialAction1Name;
+        [SerializeField] private Text m_SpecialAction2Name;
 
         // [SerializeField]
         // [Tooltip("The button that opens/closes the Emote bar")]
@@ -247,11 +253,13 @@ namespace Script.UI
         {
             // first find the info we need (sprite and description)
             Sprite sprite = null;
+            string skillName = "";
             string description = "";
 
             if (action != null)
             {
                 sprite = action.Config.Icon;
+                skillName = action.Config.DisplayedName;
                 description = action.Config.Description;
             }
 
@@ -265,6 +273,20 @@ namespace Script.UI
                 buttonInfo.Button.gameObject.SetActive(true);
                 buttonInfo.Button.interactable = isClickable;
                 buttonInfo.Button.image.sprite = sprite;
+                switch (buttonInfo.Type)
+                {
+                    case ActionButtonType.BasicAction:
+                        m_BasicActionName.text = skillName;
+                        break;
+                    case ActionButtonType.Special1:
+                        m_SpecialAction1Name.text = skillName;
+                        break;
+                    case ActionButtonType.Special2:
+                        m_SpecialAction2Name.text = skillName;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
                 // buttonInfo.Tooltip.SetText(description);
             }
 

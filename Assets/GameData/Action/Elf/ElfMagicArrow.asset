@@ -43,6 +43,6 @@ MonoBehaviour:
       MaxVictims: 1
     Spawns: []
     IsFriendly: 0
-    Icon: {fileID: 21300000, guid: f9495af490202fa48b5a39908bc267bc, type: 3}
+    Icon: {fileID: 222701666, guid: 8d59aa21af879a34fbe48dfa5f10cd51, type: 3}
     DisplayedName: Magic Arrow
     Description: it is Magic Arrow

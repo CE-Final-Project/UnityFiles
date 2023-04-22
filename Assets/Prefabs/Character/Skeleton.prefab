@@ -160,7 +160,7 @@ PrefabInstance:
       objectReference: {fileID: 4260244398285273791}
     - target: {fileID: 1289437194058825631, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
       propertyPath: killedDestroyDelaySeconds
-      value: 2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1336001147316046305, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
       propertyPath: GlobalObjectIdHash
