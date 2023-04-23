@@ -157,7 +157,8 @@ namespace Script.GameState
             var playerNameList = new Dictionary<int, string>();
             for (int i = 0; i < networkCharSelection.LobbyPlayerStates.Count; i++)
             {
-                playerNameList.Add(networkCharSelection.LobbyPlayerStates[i].PlayerNumber, networkCharSelection.LobbyPlayerStates[i].PlayerName);
+                string IsReady = networkCharSelection.LobbyPlayerStates[i].SeatState == NetworkCharSelection.SeatState.LockedIn ? " - Ready" : "";
+                playerNameList.Add(networkCharSelection.LobbyPlayerStates[i].PlayerNumber, networkCharSelection.LobbyPlayerStates[i].PlayerName + IsReady);
             }
             
             playerNameListUI.UpdatePlayerNameList(playerNameList);

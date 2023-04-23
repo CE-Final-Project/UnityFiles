@@ -11,6 +11,10 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
         public float KDmdAvgValue { get; private set; }
         public float KDmtAvgValue { get; private set; }
         
+        
+        public int SpawnCount { get; private set; }
+        public float SpawnDelay { get; private set; }
+        
         public DynamicDiffStat()
         {
             KillPerMin = 0;
@@ -19,17 +23,20 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
             KkpmAvgValue = 0;
             KDmdAvgValue = 0;
             KDmtAvgValue = 0;
+            SpawnCount = 0;
+            SpawnDelay = 0;
         }
         
         public DynamicDiffStat(
             float killPerMin,
             float damageDonePerMin,
             float damageTakenPerMin,
-            float healingTakenPerMin,
             float kkpmAvgValue,
             float kDmdAvgValue,
             float kDmtAvgValue,
-            float kHtAvgValue)
+            int spawnCount,
+            float spawnDelay
+            )
         {
             KillPerMin = killPerMin;
             DamageDonePerMin = damageDonePerMin;
@@ -37,6 +44,8 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
             KkpmAvgValue = kkpmAvgValue;
             KDmdAvgValue = kDmdAvgValue;
             KDmtAvgValue = kDmtAvgValue;
+            SpawnCount = spawnCount;
+            SpawnDelay = spawnDelay;
         }
         
         public void SetKillPerMin(float killPerMin)
@@ -68,10 +77,27 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
         {
             KDmtAvgValue = kDmtAvgValue;
         }
+        
+        public void SetSpawnCount(int spawnCount)
+        {
+            SpawnCount = spawnCount;
+        }
+        
+        public void SetSpawnDelay(float spawnDelay)
+        {
+            SpawnDelay = spawnDelay;
+        }
 
         public string GetDynamicDiffStat()
         {
-            return $"KPM: {KillPerMin}\nDDPM: {DamageDonePerMin}\nDTPM: {DamageTakenPerMin}\nKKPM: {KkpmAvgValue}\nKDMD: {KDmdAvgValue}\nKDMT: {KDmtAvgValue}";
+            return $"KPM: {KillPerMin}\n" +
+                   $"DDPM: {DamageDonePerMin}\n" +
+                   $"DTPM: {DamageTakenPerMin}\n" +
+                   $"KKPM: {KkpmAvgValue}\n" +
+                   $"KDMD: {KDmdAvgValue}\n" +
+                   $"KDMT: {KDmtAvgValue}\n" +
+                   $"SpawnCount: {SpawnCount}\n"+
+                   $"SpawnDelay: {SpawnDelay}\n";
         }
     }
 }

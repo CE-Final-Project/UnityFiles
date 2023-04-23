@@ -115,6 +115,9 @@ namespace Script.DDA
 
             spawnDelay = SPAWN_DELAY - (spawnDelay / 4);
             
+            GameStats.Instance.DynamicDiffStat.SetSpawnCount(spawnCount);
+            GameStats.Instance.DynamicDiffStat.SetSpawnDelay(spawnDelay);
+            
             return new CalculationPerformanceResult // return result
             {
                 SpawnCount = spawnCount,
