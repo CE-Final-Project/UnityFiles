@@ -85,7 +85,10 @@ namespace Script.Game.Actions.ActionPlayers
                     _playingActions.Add(actionFX);
                 }
                 //otherwise just let the action sit in it's existing slot
-                AudioManager.Instance.SFXSource.PlayOneShot(actionFX.Config.SoundEffect);
+                if (actionFX != null)
+                {
+                    AudioManager.Instance.SFXSource.PlayOneShot(actionFX.Config.SoundEffect);
+                }
             }
             else if (anticipatedActionIndex >= 0)
             {
