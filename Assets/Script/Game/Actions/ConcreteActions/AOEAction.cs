@@ -88,7 +88,7 @@ namespace Script.Game.Actions.ConcreteActions
                 if (enemy != null)
                 {
                     if (!Config.IsFriendly)
-                        GameStats.Instance.PlayersStats.AddDamageDealt(parent.NetworkObjectId, -Config.Amount);
+                        GameStats.Instance.PlayersStats.AddDamageDealt(parent.NetworkObjectId, Config.Amount);
                     // actually deal the damage
                     enemy.ReceiveHP(parent, -Config.Amount);
                 }
