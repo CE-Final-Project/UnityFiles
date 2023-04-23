@@ -147,7 +147,6 @@ namespace Script.DDA
             GameStats.Instance.DynamicDiffStat.SetKkpmAvgValue(K_KPM_AVG);
             GameStats.Instance.DynamicDiffStat.SetKDmdAvgValue(K_DMD_AVG);
             GameStats.Instance.DynamicDiffStat.SetKDmtAvgValue(K_DTK_AVG);
-            GameStats.Instance.DynamicDiffStat.SetKHtAvgValue(K_HTK_AVG);
 
             //Debug.Log(K_KPM_AVG);
             //Debug.Log(K_DMD_AVG);
@@ -164,8 +163,6 @@ namespace Script.DDA
             {
                 return enemyPrefab[1];
             }
-
-            
         }
 
         private void OnDestroy()
@@ -224,11 +221,6 @@ namespace Script.DDA
         private float CalculateK_HealTaken(float HTK)
         {
             float HTPM = (float)((float)(HTK) / (GameStats.Instance.PlayersStats.GetCurrentPlayTime() / 60.0f));
-            
-            if (Math.Abs(HTPM - GameStats.Instance.DynamicDiffStat.HealingTakenPerMin) > 0.00001f)
-            {
-                GameStats.Instance.DynamicDiffStat.SetHealingTakenPerMin(HTPM);
-            }
 
             float K_HTPM = HTPM / 2250.0f;
 
