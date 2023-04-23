@@ -84,14 +84,14 @@ namespace Script.DDA
                 //spawnCount += (int)Mathf.Round((1.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)));
                 //spawnDelay += Mathf.Round((10.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)));
                 spawnCount += (int)Mathf.Round((10.0f * CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1)) / (0.5f * (activeEnemies.Count+1)) * (0.5f * (CalculateK_DTKPerMinute(player.Value.DamageTaken + 1))));
-                if(spawnCount < 5)
+                if(spawnCount < 3)
                 {
-                    spawnCount = 5;
+                    spawnCount = 3;
                 }
                 
-                if(spawnCount > 20)
+                if(spawnCount > 15)
                 {
-                    spawnCount = 20;
+                    spawnCount = 15;
                 }
 
                 spawnDelay += (int)Mathf.Round(1.0f * (CalculateK_KillPerMinute(player.Value.KillCount + 1) * CalculateK_DMDPerMinute(player.Value.DamageDealt + 1)) / (0.25f * (activeEnemies.Count) + 1) * (0.2f * (CalculateK_DTKPerMinute(player.Value.DamageTaken + 1))));
@@ -156,11 +156,11 @@ namespace Script.DDA
             //Debug.Log(K_KPM_AVG);
             //Debug.Log(K_DMD_AVG);
 
-            if (K_KPM_AVG > 1.5 && K_DMD_AVG > 1.5 & K_DTK_AVG > 1.5)
+            if (K_KPM_AVG > 1.5 && K_DMD_AVG > 1.5 & K_DTK_AVG < 1)
             {
                 return enemyPrefab[2];
             }
-            else if(K_KPM_AVG > 1.2 && K_DMD_AVG > 1.2 & K_DTK_AVG > 1.2)
+            else if(K_KPM_AVG > 1.2 && K_DMD_AVG > 1.2 & K_DTK_AVG < 1.2)
             {
                 return enemyPrefab[0];
             }
