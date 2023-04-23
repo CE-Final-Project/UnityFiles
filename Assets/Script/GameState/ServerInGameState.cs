@@ -45,7 +45,6 @@ namespace Script.GameState
 
         [Inject] private ISubscriber<LifeStateChangedEventMessage> _lifeStateChangedSubscriber;
         
-        [Inject] private ConnectionManager _connectionManager;
         [Inject] private PersistantGameState _persistentGameState;
 
         protected override void Awake()
