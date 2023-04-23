@@ -84,9 +84,9 @@ namespace Script.DDA
                 //spawnCount += (int)Mathf.Round((1.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)));
                 //spawnDelay += Mathf.Round((10.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)));
                 spawnCount += (int)Mathf.Round((10.0f * CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1)) / (0.5f * (activeEnemies.Count+1)) * (0.5f * (CalculateK_DTKPerMinute(player.Value.DamageTaken + 1))));
-                if(spawnCount < 3)
+                if(spawnCount < 5)
                 {
-                    spawnCount = 3;
+                    spawnCount = 5;
                 }
                 
                 if(spawnCount > 15)
