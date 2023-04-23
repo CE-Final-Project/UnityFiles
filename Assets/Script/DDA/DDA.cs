@@ -22,7 +22,7 @@ namespace Script.DDA
         [SerializeField] List<GameObject> enemyPrefab;
 
         // Default spawn
-        private const float SPAWN_DELAY = 15.0f;
+        private const float SPAWN_DELAY = 30.0f;
         private const int SPAWN_COUNT = 10;
         private const int ENEMY_HP = 100;
         
@@ -77,30 +77,24 @@ namespace Script.DDA
             var activePlayers = GameStats.Instance.PlayersStats.GetPlayerStatsMap();
             var activeEnemies = GameStats.Instance.EnemiesStats.GetEnemiesStatsMap();
 
-            foreach (var player in activePlayers)
+            spawnCount = SPAWN_COUNT + (int)Mathf.Round((float)GameStats.Instance.PlayersStats.GetCurrentPlayTime() / 60);
+            if(spawnCount > 30)
             {
-                //spawnCount += player.Value.DamageDealt / 100;
-                //spawnCount += (int)Mathf.Round((1.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)));
-                //spawnDelay += Mathf.Round((10.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)));
-                spawnCount += (int)Mathf.Round((20.0f * CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1)) / (0.5f * (activeEnemies.Count+1)));
-                if(spawnCount > 50)
-                {
-                    spawnCount = 50;
-                }
-
-                spawnDelay += (int)Mathf.Round((15.0f * (0.25f * (activeEnemies.Count)+1)) / ( CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1)));
-                if(spawnDelay < 7)
-                {
-                    spawnDelay = 7;
-                }
-
-                enemyHp += (int)Mathf.Round((100.0f * CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1)));
-
-                Debug.Log("Count " + spawnCount + " Delay : " + spawnDelay + " HP : " + enemyHp);
-                Debug.Log(" KPM : " + CalculateK_KillPerMinute(player.Value.KillCount) + " DMD : " + CalculateK_DMDPerMinute(player.Value.DamageDealt));
+                spawnCount = 30;
             }
 
-            spawnDelay /= activePlayers.Count;
+            spawnDelay = SPAWN_DELAY - (int)Mathf.Round(0.5f * (float)GameStats.Instance.PlayersStats.GetCurrentPlayTime() / 60);
+            if(spawnDelay < 5 )
+            {
+                spawnDelay = 5;
+            }
+
+            enemyHp = ENEMY_HP + (5 *(int)Mathf.Round(0.5f * (float)GameStats.Instance.PlayersStats.GetCurrentPlayTime() / 60));
+            if(enemyHp > 200)
+            {
+                enemyHp = 200;
+            }
+
             
             return new CalculationPerformanceResult // return result
             {
@@ -112,32 +106,12 @@ namespace Script.DDA
 
         private GameObject ChooseEnemy()
         {
-            // TODO: Choose enemy by performance
-            //return enemyPrefab[Random.Range(0, enemyPrefab.Count)];
 
-            float K_KPM_AVG = 0;
-            float K_DMD_AVG = 0;
-            var activePlayers = GameStats.Instance.PlayersStats.GetPlayerStatsMap();
-
-            foreach (var player in activePlayers)
-            {
-                K_KPM_AVG += CalculateK_KillPerMinute(player.Value.KillCount+1);
-                K_DMD_AVG += CalculateK_DMDPerMinute(player.Value.DamageDealt+1);
-
-                
-            }
-
-            K_KPM_AVG /= activePlayers.Count;
-            K_DMD_AVG /= activePlayers.Count;
-
-            Debug.Log(K_KPM_AVG);
-            Debug.Log(K_DMD_AVG);
-
-            if (K_KPM_AVG > 1.5 && K_DMD_AVG > 1.5)
+            if ((int)Mathf.Round(0.5f * (float)GameStats.Instance.PlayersStats.GetCurrentPlayTime() / 60) > 10)
             {
                 return enemyPrefab[2];
             }
-            else if(K_KPM_AVG > 1.2 && K_DMD_AVG > 1.2)
+            else if((int)Mathf.Round(0.5f * (float)GameStats.Instance.PlayersStats.GetCurrentPlayTime() / 60) > 5)
             {
                 return enemyPrefab[0];
             }
