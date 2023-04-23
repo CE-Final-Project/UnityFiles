@@ -83,13 +83,13 @@ namespace Script.DDA
                 //spawnCount += player.Value.DamageDealt / 100;
                 //spawnCount += (int)Mathf.Round((1.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)));
                 //spawnDelay += Mathf.Round((10.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)));
-                spawnCount += (int)Mathf.Round((10.0f * CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1)) / (0.5f * (activeEnemies.Count+1)));
+                spawnCount += (int)Mathf.Round((10.0f * CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1)) / (0.5f * (activeEnemies.Count+1)) * (0.5f * (CalculateK_DTKPerMinute(player.Value.DamageTaken + 1) * (0.5f * CalculateK_HealTaken(player.Value.HealingTaken + 1)))));
                 if(spawnCount > 20)
                 {
                     spawnCount = 20;
                 }
 
-                spawnDelay += (int)Mathf.Round(2.0f * (CalculateK_KillPerMinute(player.Value.KillCount + 1) * CalculateK_DMDPerMinute(player.Value.DamageDealt + 1)) / (0.25f * (activeEnemies.Count) + 1));
+                spawnDelay += (int)Mathf.Round(2.0f * (CalculateK_KillPerMinute(player.Value.KillCount + 1) * CalculateK_DMDPerMinute(player.Value.DamageDealt + 1)) / (0.25f * (activeEnemies.Count) + 1) * (0.2f * (CalculateK_DTKPerMinute(player.Value.DamageTaken + 1) * (0.2f * CalculateK_HealTaken(player.Value.HealingTaken + 1)))));
                 if(spawnDelay < 1)
                 {
                     spawnDelay = 1;
@@ -182,12 +182,7 @@ namespace Script.DDA
             return K_KPM;
         }
 
-        private float CalculateK_DeathPerMinute(float Death)
-        {
-            float K_D = Death + 0.1f / 0.67f;
-            return K_D;
-        }
-
+        
         private float CalculateK_DMDPerMinute(float DMD)
         {
             float DMDPM = ((float)((float)(DMD) / (GameStats.Instance.PlayersStats.GetCurrentPlayTime()/ 60.0f)));
@@ -201,15 +196,33 @@ namespace Script.DDA
             return K_DMD;
         }
 
-        private float CalculateK_DTKPerMinute()
+        private float CalculateK_DTKPerMinute(float DTK)
         {
-            
-            // if (Math.Abs(DTKPM - GameStats.Instance.DynamicDiffStat.DamageTakenPerMin) > 0.00001f)
-            // {
-            //     GameStats.Instance.DynamicDiffStat.SetDamageTakenPerMin(DTKPM);
-            // }
-            
-            return 1.0f;
+
+
+            float DTKPM = (float)((float)(DTK) / (GameStats.Instance.PlayersStats.GetCurrentPlayTime() / 60.0f));
+
+            if (Math.Abs(DTKPM - GameStats.Instance.DynamicDiffStat.DamageTakenPerMin) > 0.00001f)
+            {
+                GameStats.Instance.DynamicDiffStat.SetDamageTakenPerMin(DTKPM);
+            }
+
+
+            float K_DTKPM = DTKPM / 86.2f;
+
+            return K_DTKPM;
+        }
+
+        private float CalculateK_HealTaken(float HTK)
+        {
+            float HTPM = (float)((float)(HTK) / (GameStats.Instance.PlayersStats.GetCurrentPlayTime() / 60.0f));
+            //if (Math.Abs(HTPM - GameStats.Instance.DynamicDiffStat.DamageTakenPerMin) > 0.00001f)
+            //{
+            //    GameStats.Instance.DynamicDiffStat.SetDamageTakenPerMin(HTPM);
+            //}
+            float K_HTPM = HTPM / 2250.0f;
+
+            return K_HTPM;
         }
 
 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Config:
     Logic: 7
-    Amount: -200
+    Amount: -100
     ManaCost: 2
     Range: 20
     DurationSeconds: 1
