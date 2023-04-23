@@ -49,6 +49,7 @@ namespace Script.Game.Actions.Input
             if (UnityEngine.Input.GetMouseButtonDown(0))
             {
                 m_ReceivedMouseDownEvent = true;
+                AudioManager.Instance.SFXSource.PlayOneShot(GameDataSource.Instance.GetActionPrototypeByID(ActionPrototypeID).Config.SoundEffect);
             }
 
             if (UnityEngine.Input.GetMouseButtonUp(0) && m_ReceivedMouseDownEvent)

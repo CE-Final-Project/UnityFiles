@@ -38,7 +38,7 @@ MonoBehaviour:
     Projectiles: []
     Spawns: []
     IsFriendly: 0
-    SoundEffect: {fileID: 8300000, guid: 9e83b6da5853446929e631c5509b4908, type: 3}
+    SoundEffect: {fileID: 8300000, guid: 2aa069f1de4d846adb0a144d70fb380e, type: 3}
     Icon: {fileID: 21300000, guid: 16de27e0f7d97f442a9e846660bb7980, type: 3}
     DisplayedName: Bite
     Description: asdasdasd
