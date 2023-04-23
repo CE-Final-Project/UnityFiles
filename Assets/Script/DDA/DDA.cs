@@ -23,13 +23,13 @@ namespace Script.DDA
         [SerializeField] List<GameObject> enemyPrefab;
 
         // Default spawn
-        private const float SPAWN_DELAY = 30.0f;
+        private const float SPAWN_DELAY = 5.0f;
         private const int SPAWN_COUNT = 10;
         private const int ENEMY_HP = 100;
         
         [SerializeField] List<Transform> spawnPoints;
         
-        private const float CalculationInterval = 10; // Seconds
+        private const float CalculationInterval = 30; // Seconds
 
         [Inject] private EnemySpawner _enemySpawner;
 
@@ -89,24 +89,26 @@ namespace Script.DDA
                     spawnCount = 20;
                 }
 
-                spawnDelay += (int)Mathf.Round((20.0f * (0.25f * (activeEnemies.Count)+1)) / ( CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1)));
-                if(spawnDelay < 7)
+                spawnDelay += (int)Mathf.Round(2.0f * (CalculateK_KillPerMinute(player.Value.KillCount + 1) * CalculateK_DMDPerMinute(player.Value.DamageDealt + 1)) / (0.25f * (activeEnemies.Count) + 1));
+                if(spawnDelay < 1)
                 {
-                    spawnDelay = 7;
+                    spawnDelay = 1;
                 }
 
-                if(spawnDelay > 90)
+                if(spawnDelay > 10)
                 {
-                    spawnDelay = 90;
+                    spawnDelay = 10;
                 }
 
                 enemyHp += (int)Mathf.Round((20.0f * CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1)));
+
+               
 
                 Debug.Log("Count " + spawnCount + " Delay : " + spawnDelay + " HP : " + enemyHp);
                 Debug.Log(" KPM : " + CalculateK_KillPerMinute(player.Value.KillCount) + " DMD : " + CalculateK_DMDPerMinute(player.Value.DamageDealt));
             }
 
-            spawnDelay /= activePlayers.Count;
+            spawnDelay = SPAWN_DELAY - (spawnDelay / 4);
             
             return new CalculationPerformanceResult // return result
             {
@@ -195,7 +197,7 @@ namespace Script.DDA
                 GameStats.Instance.DynamicDiffStat.SetDamageDonePerMin(DMDPM);
             }
 
-            float K_DMD = DMDPM / 1357.4f; 
+            float K_DMD = DMDPM / 857.4f; 
             return K_DMD;
         }
 

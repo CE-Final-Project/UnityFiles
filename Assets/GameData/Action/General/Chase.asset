@@ -38,6 +38,7 @@ MonoBehaviour:
     Projectiles: []
     Spawns: []
     IsFriendly: 0
+    SoundEffect: {fileID: 0}
     Icon: {fileID: 0}
     DisplayedName: 
     Description: 

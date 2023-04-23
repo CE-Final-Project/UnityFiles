@@ -29,6 +29,8 @@ namespace Script.Networks
             //Debug.Assert(spawnCount != spawnPoints.Count, "SpawnCount and SpawnPoints not match!");
             Debug.Log("SPAWN : " + spawnCount + ", " + spawnDelay);
 
+            
+
             for (int i = 0; i < spawnCount; i++)
             {
                 int randomIndex = Random.Range(0, spawnPoints.Count);
@@ -42,7 +44,7 @@ namespace Script.Networks
                     enemy.GetComponent<ServerCharacter>().SetNewHitPoints(enemy.GetComponent<ServerCharacter>().HitPoints+newEnemyBaseHP);
                 }
                 
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(spawnDelay);
             }
 
         }
