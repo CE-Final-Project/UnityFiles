@@ -92,6 +92,7 @@ namespace Script.Game.Actions.ConcreteActions
                     enemy.ReceiveHP(parent, -Config.Amount);
                 }
             }
+            AudioManager.Instance.SFXSource.PlayOneShot(Config.SoundEffect);
         }
 
         public override bool OnStartClient(ClientCharacter clientCharacter)
