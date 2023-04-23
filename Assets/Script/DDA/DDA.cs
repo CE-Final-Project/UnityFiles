@@ -22,7 +22,7 @@ namespace Script.DDA
         [SerializeField] List<GameObject> enemyPrefab;
 
         // Default spawn
-        private const float SPAWN_DELAY = 15.0f;
+        private const float SPAWN_DELAY = 30.0f;
         private const int SPAWN_COUNT = 10;
         private const int ENEMY_HP = 100;
         
@@ -82,19 +82,24 @@ namespace Script.DDA
                 //spawnCount += player.Value.DamageDealt / 100;
                 //spawnCount += (int)Mathf.Round((1.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)));
                 //spawnDelay += Mathf.Round((10.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)));
-                spawnCount += (int)Mathf.Round((20.0f * CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1)) / (0.5f * (activeEnemies.Count+1)));
-                if(spawnCount > 50)
+                spawnCount += (int)Mathf.Round((10.0f * CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1)) / (0.5f * (activeEnemies.Count+1)));
+                if(spawnCount > 20)
                 {
-                    spawnCount = 50;
+                    spawnCount = 20;
                 }
 
-                spawnDelay += (int)Mathf.Round((15.0f * (0.25f * (activeEnemies.Count)+1)) / ( CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1)));
+                spawnDelay += (int)Mathf.Round((20.0f * (0.25f * (activeEnemies.Count)+1)) / ( CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1)));
                 if(spawnDelay < 7)
                 {
                     spawnDelay = 7;
                 }
 
-                enemyHp += (int)Mathf.Round((100.0f * CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1)));
+                if(spawnDelay > 90)
+                {
+                    spawnDelay = 90;
+                }
+
+                enemyHp += (int)Mathf.Round((20.0f * CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1)));
 
                 Debug.Log("Count " + spawnCount + " Delay : " + spawnDelay + " HP : " + enemyHp);
                 Debug.Log(" KPM : " + CalculateK_KillPerMinute(player.Value.KillCount) + " DMD : " + CalculateK_DMDPerMinute(player.Value.DamageDealt));
@@ -161,7 +166,7 @@ namespace Script.DDA
         {
             float KPM = (float)((float)(KillCount) / (GameStats.Instance.PlayersStats.GetCurrentPlayTime() / 60.0f));
 
-            float K_KPM = KPM / 6.7f;
+            float K_KPM = KPM / 11.2f;
             return K_KPM;
         }
 
@@ -175,7 +180,7 @@ namespace Script.DDA
         {
             float DMDPM = ((float)((float)(DMD) / (GameStats.Instance.PlayersStats.GetCurrentPlayTime()/ 60.0f)));
 
-            float K_DMD = DMDPM / 957.4f; 
+            float K_DMD = DMDPM / 1357.4f; 
             return K_DMD;
         }
 

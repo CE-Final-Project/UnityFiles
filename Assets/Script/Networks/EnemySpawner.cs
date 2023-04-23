@@ -39,7 +39,7 @@ namespace Script.Networks
                 if (newEnemyBaseHP != 0)
                 {
                     // Set new enemy base HP
-                    enemy.GetComponent<ServerCharacter>().SetNewHitPoints(newEnemyBaseHP);
+                    enemy.GetComponent<ServerCharacter>().SetNewHitPoints(enemy.GetComponent<ServerCharacter>().HitPoints+newEnemyBaseHP);
                 }
                 
                 yield return new WaitForSeconds(1);
