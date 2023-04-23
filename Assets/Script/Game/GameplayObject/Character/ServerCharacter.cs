@@ -297,6 +297,9 @@ namespace Script.Game.GameplayObject.Character
                 _serverActionPlayer.OnGameplayActivity(Actions.Action.GameplayActivity.Healed);
                 float healingMod = _serverActionPlayer.GetBuffedValue(Actions.Action.BuffableValue.PercentHealingReceived);
                 HP = (int)(HP * healingMod);
+                
+                GameStats.Instance.PlayersStats.AddHealingTaken(NetworkObjectId, HP);
+                GameStats.Instance.PlayersStats.AddHealingDone(inflicter.NetworkObjectId, HP);
             }
             else
             {

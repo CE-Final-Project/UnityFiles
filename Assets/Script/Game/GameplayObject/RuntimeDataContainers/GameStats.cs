@@ -15,6 +15,10 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
         
         [SerializeField] private PlayersStats m_PlayersStats; 
         [SerializeField] private EnemiesStats m_EnemiesStats;
+        
+        private DynamicDiffStat m_DynamicDiffStat;
+        
+        public DynamicDiffStat DynamicDiffStat => m_DynamicDiffStat;
 
         public PlayersStats PlayersStats => m_PlayersStats;
         public EnemiesStats EnemiesStats => m_EnemiesStats;
@@ -26,6 +30,8 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
                 Destroy(gameObject);
                 return;
             }
+            
+            m_DynamicDiffStat = new DynamicDiffStat(0, 0, 0, 0, 0);
 
             Instance = this;
             DontDestroyOnLoad(gameObject);

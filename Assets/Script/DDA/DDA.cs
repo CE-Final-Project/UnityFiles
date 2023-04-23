@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Script.Game.GameplayObject.Character;
@@ -134,6 +135,9 @@ namespace Script.DDA
 
             K_KPM_AVG /= activePlayers.Count;
             K_DMD_AVG /= activePlayers.Count;
+            
+            GameStats.Instance.DynamicDiffStat.SetKkpmAvgValue(K_KPM_AVG);
+            GameStats.Instance.DynamicDiffStat.SetKDmdAvgValue(K_DMD_AVG);
 
             Debug.Log(K_KPM_AVG);
             Debug.Log(K_DMD_AVG);
@@ -166,7 +170,13 @@ namespace Script.DDA
         {
             float KPM = (float)((float)(KillCount) / (GameStats.Instance.PlayersStats.GetCurrentPlayTime() / 60.0f));
 
+            if (Math.Abs(KPM - GameStats.Instance.DynamicDiffStat.KillPerMin) > 0.00001f)
+            {
+                GameStats.Instance.DynamicDiffStat.SetKillPerMin(KPM);
+            }
+
             float K_KPM = KPM / 11.2f;
+
             return K_KPM;
         }
 
@@ -179,6 +189,11 @@ namespace Script.DDA
         private float CalculateK_DMDPerMinute(float DMD)
         {
             float DMDPM = ((float)((float)(DMD) / (GameStats.Instance.PlayersStats.GetCurrentPlayTime()/ 60.0f)));
+            
+            if (Math.Abs(DMDPM - GameStats.Instance.DynamicDiffStat.DamageDonePerMin) > 0.00001f)
+            {
+                GameStats.Instance.DynamicDiffStat.SetDamageDonePerMin(DMDPM);
+            }
 
             float K_DMD = DMDPM / 1357.4f; 
             return K_DMD;
@@ -186,6 +201,12 @@ namespace Script.DDA
 
         private float CalculateK_DTKPerMinute()
         {
+            
+            // if (Math.Abs(DTKPM - GameStats.Instance.DynamicDiffStat.DamageTakenPerMin) > 0.00001f)
+            // {
+            //     GameStats.Instance.DynamicDiffStat.SetDamageTakenPerMin(DTKPM);
+            // }
+            
             return 1.0f;
         }
 

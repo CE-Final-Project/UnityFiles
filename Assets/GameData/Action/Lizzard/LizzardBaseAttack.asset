@@ -32,7 +32,7 @@ MonoBehaviour:
     KnockbackDuration: 0
     Radius: 0
     ActionInput: {fileID: 0}
-    ActionInterruptible: 0
+    ActionInterruptible: 1
     IsInterruptableBy: []
     BlockingMode: 0
     Projectiles: []

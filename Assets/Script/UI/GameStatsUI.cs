@@ -9,8 +9,10 @@ namespace Script.UI
     public class GameStatsUI : MonoBehaviour
     {
         [SerializeField] private CanvasGroup canvasGroup;
+        [SerializeField] private CanvasGroup ddaCanvasGroup;
         [SerializeField] private TextMeshProUGUI playerStatsText;
         [SerializeField] private TextMeshProUGUI enemyStatsText;
+        [SerializeField] private TextMeshProUGUI ddaStatsText;
         
         private void Awake()
         {
@@ -22,13 +24,16 @@ namespace Script.UI
             
             canvasGroup.alpha = 0f;
             canvasGroup.blocksRaycasts = false;
+            
+            ddaCanvasGroup.alpha = 0f;
+            ddaCanvasGroup.blocksRaycasts = false;
         }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Tab))
             {
-                if (canvasGroup.alpha == 0f)
+                if (canvasGroup.alpha == 0f && ddaCanvasGroup.alpha == 0f)
                 {
                     Show();
                 }
@@ -40,6 +45,7 @@ namespace Script.UI
             
             UpdatePlayerStats();
             UpdateEnemyStats();
+            UpdateDDAStats();
         }
 
         private void UpdatePlayerStats()
@@ -61,17 +67,33 @@ namespace Script.UI
 
             enemyStatsText.text = GameStats.Instance.EnemiesStats.GetStringEnemiesStats();
         }
+        
+        private void UpdateDDAStats()
+        {
+            if (GameStats.Instance.DynamicDiffStat == null || ddaCanvasGroup.alpha == 0f)
+            {
+                return;
+            }
+            
+            ddaStatsText.text = GameStats.Instance.DynamicDiffStat.GetDynamicDiffStat();
+        }
 
         public void Show()
         {
             canvasGroup.alpha = 1f;
             canvasGroup.blocksRaycasts = true;
+            
+            ddaCanvasGroup.alpha = 1f;
+            ddaCanvasGroup.blocksRaycasts = true;
         }
 
         public void Hide()
         {
             canvasGroup.alpha = 0f;
             canvasGroup.blocksRaycasts = false;
+            
+            ddaCanvasGroup.alpha = 0f;
+            ddaCanvasGroup.blocksRaycasts = false;
         }
     }
 }

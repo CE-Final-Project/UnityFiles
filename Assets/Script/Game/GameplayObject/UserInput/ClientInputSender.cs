@@ -450,10 +450,12 @@ namespace Script.Game.GameplayObject.UserInput
                 case ActionLogic.LaunchProjectile:
                     resultData.Direction = direction;
                     resultData.ShouldClose = false; //why? Because you could be lining up a shot, hoping to hit other people between you and your target. Moving you would be quite invasive.
+                    resultData.ShouldQueue = false;
                     return;
                 case ActionLogic.Melee:
                     resultData.Direction = direction;
                     resultData.ShouldClose = false; //some times you want to melee from a distance, so don't close distance.
+                    resultData.ShouldQueue = false;
                     return;
                 case ActionLogic.Target:
                     resultData.ShouldClose = false;

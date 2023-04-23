@@ -87,7 +87,8 @@ namespace Script.Game.Actions.ConcreteActions
                 var enemy = collider.GetComponent<IDamageable>();
                 if (enemy != null)
                 {
-                    GameStats.Instance.PlayersStats.AddDamageDealt(parent.NetworkObjectId, Config.Amount);
+                    if (!Config.IsFriendly)
+                        GameStats.Instance.PlayersStats.AddDamageDealt(parent.NetworkObjectId, -Config.Amount);
                     // actually deal the damage
                     enemy.ReceiveHP(parent, -Config.Amount);
                 }
