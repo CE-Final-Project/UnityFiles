@@ -83,13 +83,13 @@ namespace Script.DDA
                 //spawnCount += player.Value.DamageDealt / 100;
                 //spawnCount += (int)Mathf.Round((1.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)));
                 //spawnDelay += Mathf.Round((10.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)));
-                spawnCount += (int)Mathf.Round((10.0f * CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1)) / (0.5f * (activeEnemies.Count+1)) * (0.5f * (CalculateK_DTKPerMinute(player.Value.DamageTaken + 1) * (0.5f * CalculateK_HealTaken(player.Value.HealingTaken + 1)))));
+                spawnCount += (int)Mathf.Round((10.0f * CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1)) / (0.5f * (activeEnemies.Count+1)) * (0.5f * (CalculateK_DTKPerMinute(player.Value.DamageTaken + 1))));
                 if(spawnCount > 20)
                 {
                     spawnCount = 20;
                 }
 
-                spawnDelay += (int)Mathf.Round(2.0f * (CalculateK_KillPerMinute(player.Value.KillCount + 1) * CalculateK_DMDPerMinute(player.Value.DamageDealt + 1)) / (0.25f * (activeEnemies.Count) + 1) * (0.2f * (CalculateK_DTKPerMinute(player.Value.DamageTaken + 1) * (0.2f * CalculateK_HealTaken(player.Value.HealingTaken + 1)))));
+                spawnDelay += (int)Mathf.Round(2.0f * (CalculateK_KillPerMinute(player.Value.KillCount + 1) * CalculateK_DMDPerMinute(player.Value.DamageDealt + 1)) / (0.25f * (activeEnemies.Count) + 1) * (0.2f * (CalculateK_DTKPerMinute(player.Value.DamageTaken + 1))));
                 if(spawnDelay < 1)
                 {
                     spawnDelay = 1;
@@ -125,30 +125,38 @@ namespace Script.DDA
 
             float K_KPM_AVG = 0;
             float K_DMD_AVG = 0;
+            float K_DTK_AVG = 0;
+            float K_HTK_AVG = 0;
             var activePlayers = GameStats.Instance.PlayersStats.GetPlayerStatsMap();
 
             foreach (var player in activePlayers)
             {
                 K_KPM_AVG += CalculateK_KillPerMinute(player.Value.KillCount+1);
                 K_DMD_AVG += CalculateK_DMDPerMinute(player.Value.DamageDealt+1);
+                K_DTK_AVG += CalculateK_DTKPerMinute(player.Value.DamageTaken+1);
+                //K_HTK_AVG +=  CalculateK_HealTaken(player.Value.HealingTaken+1);
 
                 
             }
 
             K_KPM_AVG /= activePlayers.Count;
             K_DMD_AVG /= activePlayers.Count;
+            K_DTK_AVG /= activePlayers.Count;
+            K_HTK_AVG /= activePlayers.Count;
             
             GameStats.Instance.DynamicDiffStat.SetKkpmAvgValue(K_KPM_AVG);
             GameStats.Instance.DynamicDiffStat.SetKDmdAvgValue(K_DMD_AVG);
+            GameStats.Instance.DynamicDiffStat.SetKDmtAvgValue(K_DTK_AVG);
+            GameStats.Instance.DynamicDiffStat.SetKHtAvgValue(K_HTK_AVG);
 
-            Debug.Log(K_KPM_AVG);
-            Debug.Log(K_DMD_AVG);
+            //Debug.Log(K_KPM_AVG);
+            //Debug.Log(K_DMD_AVG);
 
-            if (K_KPM_AVG > 1.5 && K_DMD_AVG > 1.5)
+            if (K_KPM_AVG > 1.5 && K_DMD_AVG > 1.5 & K_DTK_AVG > 1.5)
             {
                 return enemyPrefab[2];
             }
-            else if(K_KPM_AVG > 1.2 && K_DMD_AVG > 1.2)
+            else if(K_KPM_AVG > 1.2 && K_DMD_AVG > 1.2 & K_DTK_AVG > 1.2)
             {
                 return enemyPrefab[0];
             }
