@@ -2,10 +2,8 @@ using Script.Game.Actions.Input;
 using Script.Game.GameplayObject.Character;
 using Script.Game.GameplayObject.RuntimeDataContainers;
 using Script.Game.GameplayObject.UserInput;
-using Shaders;
 using Unity.Netcode;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Script.Game.Actions.ConcreteActions
 {
@@ -81,15 +79,6 @@ namespace Script.Game.Actions.ConcreteActions
             {
                 m_TargetReticule = Instantiate(parent.TargetReticulePrefab);
             }
-            
-            bool target_isnpc = targetObject.GetComponent<ITargetable>().IsNpc;
-            bool myself_isnpc = parent.ServerCharacter.CharacterClass.IsNpc;
-            bool hostile = target_isnpc != myself_isnpc;
-
-
-            SpriteOutline so = m_TargetReticule.GetComponent<SpriteOutline>();
-            so.color = hostile ? Color.red : Color.green;
-            so.outlineSize = 1;
         }
 
         public override void CancelClient(ClientCharacter clientCharacter)

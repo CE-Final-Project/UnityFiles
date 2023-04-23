@@ -75,7 +75,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: da84b109444c0c247aac51bdb7ee5e25, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -198,7 +198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1765918049626354528, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
       propertyPath: m_Name
-      value: Necromancer
+      value: necromancer
       objectReference: {fileID: 0}
     - target: {fileID: 4002843813545066771, guid: 0ff8cd738588cdd498d41031749d53e5, type: 3}
       propertyPath: m_Size.x
