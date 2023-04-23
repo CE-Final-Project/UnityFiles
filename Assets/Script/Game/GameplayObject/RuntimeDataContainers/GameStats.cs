@@ -31,7 +31,7 @@ namespace Script.Game.GameplayObject.RuntimeDataContainers
                 return;
             }
             
-            m_DynamicDiffStat = new DynamicDiffStat(0, 0, 0, 0, 0);
+            m_DynamicDiffStat = new DynamicDiffStat();
 
             Instance = this;
             DontDestroyOnLoad(gameObject);

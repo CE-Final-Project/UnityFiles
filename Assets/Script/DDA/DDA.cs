@@ -216,17 +216,15 @@ namespace Script.DDA
         private float CalculateK_HealTaken(float HTK)
         {
             float HTPM = (float)((float)(HTK) / (GameStats.Instance.PlayersStats.GetCurrentPlayTime() / 60.0f));
-            //if (Math.Abs(HTPM - GameStats.Instance.DynamicDiffStat.DamageTakenPerMin) > 0.00001f)
-            //{
-            //    GameStats.Instance.DynamicDiffStat.SetDamageTakenPerMin(HTPM);
-            //}
+            
+            if (Math.Abs(HTPM - GameStats.Instance.DynamicDiffStat.HealingTakenPerMin) > 0.00001f)
+            {
+                GameStats.Instance.DynamicDiffStat.SetHealingTakenPerMin(HTPM);
+            }
+
             float K_HTPM = HTPM / 2250.0f;
 
             return K_HTPM;
         }
-
-
-
-
     }
 }
