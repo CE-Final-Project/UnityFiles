@@ -94,16 +94,8 @@ namespace Script.DDA
                     spawnCount = 15;
                 }
 
-                spawnDelay += (int)Mathf.Round(1.0f * (CalculateK_KillPerMinute(player.Value.KillCount + 1) * CalculateK_DMDPerMinute(player.Value.DamageDealt + 1)) / (0.25f * (activeEnemies.Count) + 1) * (0.2f * (CalculateK_DTKPerMinute(player.Value.DamageTaken + 1))));
-                if(spawnDelay < 1)
-                {
-                    spawnDelay = 1;
-                }
-
-                if(spawnDelay > 10)
-                {
-                    spawnDelay = 10;
-                }
+                spawnDelay += (3.0f * ((0.25f * (activeEnemies.Count) + 1) * (0.25f * (CalculateK_DTKPerMinute(player.Value.DamageTaken + 1)))) / (CalculateK_KillPerMinute(player.Value.KillCount + 1) * CalculateK_DMDPerMinute(player.Value.DamageDealt + 1)));
+                
 
                 enemyHp += (int)Mathf.Round((20.0f * CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1)));
 
@@ -113,8 +105,18 @@ namespace Script.DDA
                 Debug.Log(" KPM : " + CalculateK_KillPerMinute(player.Value.KillCount) + " DMD : " + CalculateK_DMDPerMinute(player.Value.DamageDealt));
             }
 
-            spawnDelay = SPAWN_DELAY - (spawnDelay / 4);
-            
+            spawnDelay = (spawnDelay / 4);
+
+            if (spawnDelay < 1)
+            {
+                spawnDelay = 1;
+            }
+
+            if (spawnDelay > 10)
+            {
+                spawnDelay = 10;
+            }
+
             GameStats.Instance.DynamicDiffStat.SetSpawnCount(spawnCount);
             GameStats.Instance.DynamicDiffStat.SetSpawnDelay(spawnDelay);
             
@@ -159,7 +161,7 @@ namespace Script.DDA
             //Debug.Log(K_KPM_AVG);
             //Debug.Log(K_DMD_AVG);
 
-            if (K_KPM_AVG > 1.5 && K_DMD_AVG > 1.5 & K_DTK_AVG < 1)
+            if (K_KPM_AVG > 1.5 && K_DMD_AVG > 1.5 & K_DTK_AVG < 0.8)
             {
                 return enemyPrefab[2];
             }

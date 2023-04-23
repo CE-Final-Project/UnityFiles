@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Script.Game.Actions.Input;
 using Script.Game.GameplayObject.Character;
 
@@ -16,6 +17,8 @@ namespace Script.Game.Actions.ActionPlayers
         {
             ClientCharacter = clientCharacter;
         }
+
+        private DateTime lastActionSoundFX = DateTime.UtcNow;
 
         public void OnUpdate()
         {
@@ -85,9 +88,10 @@ namespace Script.Game.Actions.ActionPlayers
                     _playingActions.Add(actionFX);
                 }
                 //otherwise just let the action sit in it's existing slot
-                if (actionFX != null)
+                if (actionFX != null && lastActionSoundFX.Subtract(DateTime.UtcNow).TotalSeconds <= 0)
                 {
                     AudioManager.Instance.SFXSource.PlayOneShot(actionFX.Config.SoundEffect);
+                    lastActionSoundFX = DateTime.UtcNow.AddSeconds(actionFX.Config.ReuseTimeSeconds);
                 }
             }
             else if (anticipatedActionIndex >= 0)

@@ -28,8 +28,8 @@ MonoBehaviour:
     OtherAnimatorVariable: 
     SplashDamage: 0
     MoveSpeed: 0
-    KnockbackSpeed: 0
-    KnockbackDuration: 0
+    KnockbackSpeed: 1
+    KnockbackDuration: 1
     Radius: 0
     ActionInput: {fileID: 0}
     ActionInterruptible: 0
