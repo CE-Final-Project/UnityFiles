@@ -89,7 +89,7 @@ namespace Script.DDA
                 spawnDelay = 5;
             }
 
-            enemyHp = ENEMY_HP + (5 *(int)Mathf.Round(0.5f * (float)GameStats.Instance.PlayersStats.GetCurrentPlayTime() / 60));
+            enemyHp = ENEMY_HP + (5 *(int)Mathf.Round((float)GameStats.Instance.PlayersStats.GetCurrentPlayTime() / 60));
             if(enemyHp > 200)
             {
                 enemyHp = 200;
