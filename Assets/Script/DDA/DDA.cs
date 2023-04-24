@@ -84,15 +84,7 @@ namespace Script.DDA
                 //spawnCount += (int)Mathf.Round((1.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)));
                 //spawnDelay += Mathf.Round((10.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)));
                 spawnCount += (int)Mathf.Round((10.0f * CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1)) / (0.5f * (activeEnemies.Count+1)) * (0.5f * (CalculateK_DTKPerMinute(player.Value.DamageTaken + 1))));
-                if(spawnCount < 5)
-                {
-                    spawnCount = 5;
-                }
-                
-                if(spawnCount > 15)
-                {
-                    spawnCount = 15;
-                }
+               
 
                 spawnDelay += (3.0f * ((0.25f * (activeEnemies.Count) + 1) * (0.25f * (CalculateK_DTKPerMinute(player.Value.DamageTaken + 1)))) / (CalculateK_KillPerMinute(player.Value.KillCount + 1) * CalculateK_DMDPerMinute(player.Value.DamageDealt + 1)));
                 
@@ -105,7 +97,17 @@ namespace Script.DDA
                 Debug.Log(" KPM : " + CalculateK_KillPerMinute(player.Value.KillCount) + " DMD : " + CalculateK_DMDPerMinute(player.Value.DamageDealt));
             }
 
-            spawnDelay = (spawnDelay / 4);
+            spawnDelay = (spawnDelay / activePlayers.Count);
+
+            if (spawnCount < 3 * activePlayers.Count)
+            {
+                spawnCount = 3;
+            }
+
+            if (spawnCount > 15 * activePlayers.Count)
+            {
+                spawnCount = 15;
+            }
 
             if (spawnDelay < 1)
             {
@@ -208,7 +210,7 @@ namespace Script.DDA
             }
 
             float K_DMD = DMDPM / 857.4f; 
-            return K_DMD;
+            return K_DMD;2
         }
 
         private float CalculateK_DTKPerMinute(float DTK)
