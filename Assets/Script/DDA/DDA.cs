@@ -49,7 +49,8 @@ namespace Script.DDA
         {
             // spawn default enemy
             //GameObject enemy = ChooseEnemy();
-            _enemySpawner.SpawnEnemy(enemyPrefab[1], SPAWN_DELAY, SPAWN_COUNT, spawnPoints, 0); // HP = 0 will use default HP from enemy config
+            var activePlayers = GameStats.Instance.PlayersStats.GetPlayerStatsMap();
+            _enemySpawner.SpawnEnemy(enemyPrefab[1], SPAWN_DELAY, SPAWN_COUNT*activePlayers.Count, spawnPoints, 0); // HP = 0 will use default HP from enemy config
             
             // Start dynamic spawn
             _dynamicSpawnCoroutine = StartCoroutine(DynamicSpawnUpdate());
