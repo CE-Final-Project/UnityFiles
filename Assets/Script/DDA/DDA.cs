@@ -164,11 +164,11 @@ namespace Script.DDA
             //Debug.Log(K_KPM_AVG);
             //Debug.Log(K_DMD_AVG);
 
-            if (K_KPM_AVG > 1.5 && K_DMD_AVG > 1.5 & K_DTK_AVG < 0.8)
+            if (K_KPM_AVG > 1.2 && K_DMD_AVG > 1.2)
             {
                 return enemyPrefab[2];
             }
-            else if(K_KPM_AVG > 1.2 && K_DMD_AVG > 1.2 & K_DTK_AVG < 1.2)
+            else if(K_KPM_AVG > 1.0 && K_DMD_AVG > 1.0)
             {
                 return enemyPrefab[0];
             }
@@ -211,7 +211,7 @@ namespace Script.DDA
             }
 
             float K_DMD = DMDPM / 857.4f; 
-            return K_DMD;2
+            return K_DMD;
         }
 
         private float CalculateK_DTKPerMinute(float DTK)
