@@ -79,15 +79,19 @@ namespace Script.DDA
             var activePlayers = GameStats.Instance.PlayersStats.GetPlayerStatsMap();
             var activeEnemies = GameStats.Instance.EnemiesStats.GetEnemiesStatsMap();
 
+            Debug.Log(activeEnemies.Count);
+
+            
+
             foreach (var player in activePlayers)
             {
                 //spawnCount += player.Value.DamageDealt / 100;
                 //spawnCount += (int)Mathf.Round((1.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)));
                 //spawnDelay += Mathf.Round((10.0f * CalculateK_KillPerMinute(player.Value.KillCount) * CalculateK_DMDPerMinute(player.Value.DamageDealt)));
-                spawnCount += (int)Mathf.Round(10.0f * CalculateK_KillPerMinute(player.Value.KillCount+1) * 0.5f * CalculateK_DMDPerMinute(player.Value.DamageDealt+1) / ((activeEnemies.Count+1) * (0.5f * CalculateK_DTKPerMinute(player.Value.DamageTaken + 1))));
+                spawnCount += (int)Mathf.Round(10.0f * CalculateK_KillPerMinute(player.Value.KillCount+1) * 0.5f * CalculateK_DMDPerMinute(player.Value.DamageDealt+1) / ((activeEnemies.Count+1) * CalculateK_DTKPerMinute(player.Value.DamageTaken + 1)));
                
 
-                spawnDelay += 3.0f * (0.5f * (activeEnemies.Count + 1) * (0.25f * CalculateK_DTKPerMinute(player.Value.DamageTaken + 1))) / (CalculateK_KillPerMinute(player.Value.KillCount + 1) * CalculateK_DMDPerMinute(player.Value.DamageDealt + 1));
+                spawnDelay += 3.0f * (0.5f * (activeEnemies.Count + 1) * CalculateK_DTKPerMinute(player.Value.DamageTaken + 1)) / (CalculateK_KillPerMinute(player.Value.KillCount + 1) * CalculateK_DMDPerMinute(player.Value.DamageDealt + 1));
                 
 
                 enemyHp += (int)Mathf.Round(20.0f * CalculateK_KillPerMinute(player.Value.KillCount+1) * CalculateK_DMDPerMinute(player.Value.DamageDealt+1));
@@ -102,12 +106,12 @@ namespace Script.DDA
 
             if (spawnCount < 3 * activePlayers.Count)
             {
-                spawnCount = 3;
+                spawnCount = 3 * activePlayers.Count;
             }
 
-            if (spawnCount > 20 * activePlayers.Count)
+            if (spawnCount > 15 * activePlayers.Count)
             {
-                spawnCount = 20;
+                spawnCount = 15 * activePlayers.Count;
             }
 
             if (spawnDelay < 1)
@@ -122,6 +126,17 @@ namespace Script.DDA
 
             GameStats.Instance.DynamicDiffStat.SetSpawnCount(spawnCount);
             GameStats.Instance.DynamicDiffStat.SetSpawnDelay(spawnDelay);
+
+            if(activeEnemies.Count > 15 * activePlayers.Count)
+            {
+                Debug.Log("Max");
+                return new CalculationPerformanceResult // return result
+                {
+                    SpawnCount = 0,
+                    SpawnDelay = spawnDelay,
+                    EnemyHP = enemyHp
+                };
+            }
             
             return new CalculationPerformanceResult // return result
             {
