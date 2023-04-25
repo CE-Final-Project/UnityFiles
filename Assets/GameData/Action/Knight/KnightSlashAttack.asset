@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Config:
     Logic: 0
-    Amount: 25
+    Amount: 30
     ManaCost: 0
     Range: 0.5
     DurationSeconds: 1
@@ -26,7 +26,7 @@ MonoBehaviour:
     Anim2: 
     ReactAnim: 
     OtherAnimatorVariable: 
-    SplashDamage: 0
+    SplashDamage: 30
     MoveSpeed: 0
     KnockbackSpeed: 0
     KnockbackDuration: 0
