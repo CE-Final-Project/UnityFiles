@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Script.Game.GameplayObject.Character;
 using Script.Game.GameplayObject.RuntimeDataContainers;
 using Script.Networks;
+using Unity.Multiplayer.Samples.Utilities;
 using Unity.Netcode;
 using UnityEngine;
 using VContainer;
@@ -21,10 +22,10 @@ namespace Script.DDA
     {
         [SerializeField] GameObject players;
         [SerializeField] List<GameObject> enemyPrefab;
-
+        
         // Default spawn
         private const float SPAWN_DELAY = 1.0f;
-        private const int SPAWN_COUNT = 10;
+        private const int SPAWN_COUNT = 15;
         private const int ENEMY_HP = 100;
         
         [SerializeField] List<Transform> spawnPoints;
@@ -49,8 +50,7 @@ namespace Script.DDA
         {
             // spawn default enemy
             //GameObject enemy = ChooseEnemy();
-            var activePlayers = GameStats.Instance.PlayersStats.GetPlayerStatsMap();
-            _enemySpawner.SpawnEnemy(enemyPrefab[1], SPAWN_DELAY, SPAWN_COUNT * activePlayers.Count, spawnPoints, 0); // HP = 0 will use default HP from enemy config
+            _enemySpawner.SpawnEnemy(enemyPrefab[1], SPAWN_DELAY, SPAWN_COUNT, spawnPoints, 0); // HP = 0 will use default HP from enemy config
             
             // Start dynamic spawn
             _dynamicSpawnCoroutine = StartCoroutine(DynamicSpawnUpdate());
