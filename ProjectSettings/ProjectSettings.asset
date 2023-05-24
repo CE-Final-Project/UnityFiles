@@ -8,18 +8,18 @@ PlayerSettings:
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
-  defaultScreenOrientation: 2
+  defaultScreenOrientation: 4
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: KMITL
-  productName: CE Project
-  defaultCursor: {fileID: 0}
+  companyName: CE KMITL
+  productName: The Survival
+  defaultCursor: {fileID: 2800000, guid: 3bf7fa1f7649d41e7ba7152482307e09, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1
-  m_SplashScreenOverlayOpacity: 1
+  m_SplashScreenOverlayOpacity: 0.201
   m_SplashScreenAnimation: 1
   m_SplashScreenLogoStyle: 1
   m_SplashScreenDrawMode: 0
@@ -39,11 +39,13 @@ PlayerSettings:
     y: 0
     width: 1
     height: 1
-  m_SplashScreenLogos: []
+  m_SplashScreenLogos:
+  - logo: {fileID: 21300000, guid: 4cacc2680721342f4a31c40759c34976, type: 3}
+    duration: 2
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
-  defaultScreenWidth: 1920
-  defaultScreenHeight: 1080
+  defaultScreenWidth: 1600
+  defaultScreenHeight: 900
   defaultScreenWidthWeb: 960
   defaultScreenHeightWeb: 600
   m_StereoRenderingPath: 0
@@ -56,8 +58,8 @@ PlayerSettings:
   androidShowActivityIndicatorOnLoading: -1
   iosUseCustomAppBackgroundBehavior: 0
   iosAllowHTTPDownload: 1
-  allowedAutorotateToPortrait: 1
-  allowedAutorotateToPortraitUpsideDown: 1
+  allowedAutorotateToPortrait: 0
+  allowedAutorotateToPortraitUpsideDown: 0
   allowedAutorotateToLandscapeRight: 1
   allowedAutorotateToLandscapeLeft: 1
   useOSAutorotation: 1
@@ -65,7 +67,7 @@ PlayerSettings:
   preserveFramebufferAlpha: 0
   disableDepthAndStencilBuffers: 0
   androidStartInFullscreen: 1
-  androidRenderOutsideSafeArea: 1
+  androidRenderOutsideSafeArea: 0
   androidUseSwappy: 1
   androidBlitType: 0
   androidResizableWindow: 0
@@ -76,7 +78,7 @@ PlayerSettings:
   androidFullscreenMode: 1
   defaultIsNativeResolution: 1
   macRetinaSupport: 1
-  runInBackground: 0
+  runInBackground: 1
   captureSingleScreen: 0
   muteOtherAudioSources: 0
   Prepare IOS For Recording: 0
@@ -134,7 +136,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.2
+  bundleVersion: 1.0
   preloadedAssets:
   - {fileID: 0}
   - {fileID: 0}
@@ -160,7 +162,8 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Standalone: com.KMITL.CE-Project
+    Android: com.KMITL.TheSurvival
+    Standalone: com.CE-KMITL.The-Survival
   buildNumber:
     Standalone: 0
     iPhone: 0
@@ -278,9 +281,51 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 9810c33e5551c4b2f8531552eba31370, type: 3}
+      m_Icon: {fileID: 2800000, guid: 704c6fa815ad84f37bdc5550d19c9c5e, type: 3}
       m_Width: 128
       m_Height: 128
+      m_Kind: 0
+  - m_BuildTarget: Standalone
+    m_Icons:
+    - serializedVersion: 2
+      m_Icon: {fileID: 0}
+      m_Width: 1024
+      m_Height: 1024
+      m_Kind: 0
+    - serializedVersion: 2
+      m_Icon: {fileID: 0}
+      m_Width: 512
+      m_Height: 512
+      m_Kind: 0
+    - serializedVersion: 2
+      m_Icon: {fileID: 0}
+      m_Width: 256
+      m_Height: 256
+      m_Kind: 0
+    - serializedVersion: 2
+      m_Icon: {fileID: 0}
+      m_Width: 128
+      m_Height: 128
+      m_Kind: 0
+    - serializedVersion: 2
+      m_Icon: {fileID: 0}
+      m_Width: 64
+      m_Height: 64
+      m_Kind: 0
+    - serializedVersion: 2
+      m_Icon: {fileID: 0}
+      m_Width: 48
+      m_Height: 48
+      m_Kind: 0
+    - serializedVersion: 2
+      m_Icon: {fileID: 0}
+      m_Width: 32
+      m_Height: 32
+      m_Kind: 0
+    - serializedVersion: 2
+      m_Icon: {fileID: 0}
+      m_Width: 16
+      m_Height: 16
       m_Kind: 0
   m_BuildTargetPlatformIcons:
   - m_BuildTarget: iPhone
@@ -380,6 +425,135 @@ PlayerSettings:
       m_Height: 1024
       m_Kind: 4
       m_SubKind: App Store
+  - m_BuildTarget: Android
+    m_Icons:
+    - m_Textures: []
+      m_Width: 192
+      m_Height: 192
+      m_Kind: 1
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 144
+      m_Height: 144
+      m_Kind: 1
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 96
+      m_Height: 96
+      m_Kind: 1
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 72
+      m_Height: 72
+      m_Kind: 1
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 48
+      m_Height: 48
+      m_Kind: 1
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 36
+      m_Height: 36
+      m_Kind: 1
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 432
+      m_Height: 432
+      m_Kind: 2
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 324
+      m_Height: 324
+      m_Kind: 2
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 216
+      m_Height: 216
+      m_Kind: 2
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 162
+      m_Height: 162
+      m_Kind: 2
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 108
+      m_Height: 108
+      m_Kind: 2
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 81
+      m_Height: 81
+      m_Kind: 2
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 192
+      m_Height: 192
+      m_Kind: 0
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 144
+      m_Height: 144
+      m_Kind: 0
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 96
+      m_Height: 96
+      m_Kind: 0
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 72
+      m_Height: 72
+      m_Kind: 0
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 48
+      m_Height: 48
+      m_Kind: 0
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 36
+      m_Height: 36
+      m_Kind: 0
+      m_SubKind: 
+  - m_BuildTarget: tvOS
+    m_Icons:
+    - m_Textures: []
+      m_Width: 1280
+      m_Height: 768
+      m_Kind: 0
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 800
+      m_Height: 480
+      m_Kind: 0
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 400
+      m_Height: 240
+      m_Kind: 0
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 4640
+      m_Height: 1440
+      m_Kind: 1
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 2320
+      m_Height: 720
+      m_Kind: 1
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 3840
+      m_Height: 1440
+      m_Kind: 1
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 1920
+      m_Height: 720
+      m_Kind: 1
+      m_SubKind: 
   m_BuildTargetBatching: []
   m_BuildTargetShaderSettings: []
   m_BuildTargetGraphicsJobs: []
@@ -629,8 +803,8 @@ PlayerSettings:
   ps4IncludedModules: []
   ps4attribVROutputEnabled: 0
   monoEnv: 
-  splashScreenBackgroundSourceLandscape: {fileID: 0}
-  splashScreenBackgroundSourcePortrait: {fileID: 0}
+  splashScreenBackgroundSourceLandscape: {fileID: 21300000, guid: a6bcf5c08e24342ff8be7b73cc3dd943, type: 3}
+  splashScreenBackgroundSourcePortrait: {fileID: 21300000, guid: a6bcf5c08e24342ff8be7b73cc3dd943, type: 3}
   blurSplashScreenBackground: 1
   spritePackerPolicy: 
   webGLMemorySize: 32
@@ -650,10 +824,27 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   webGLPowerPreference: 2
   scriptingDefineSymbols:
+    Android: UNITY_MP_TOOLS_NETSIM_ENABLED_IN_RELEASE;UNITY_MP_TOOLS_NET_STATS_MONITOR_ENABLED_IN_RELEASE
+    EmbeddedLinux: UNITY_MP_TOOLS_NETSIM_ENABLED_IN_RELEASE;UNITY_MP_TOOLS_NET_STATS_MONITOR_ENABLED_IN_RELEASE
+    GameCoreScarlett: UNITY_MP_TOOLS_NETSIM_ENABLED_IN_RELEASE;UNITY_MP_TOOLS_NET_STATS_MONITOR_ENABLED_IN_RELEASE
+    GameCoreXboxOne: UNITY_MP_TOOLS_NETSIM_ENABLED_IN_RELEASE;UNITY_MP_TOOLS_NET_STATS_MONITOR_ENABLED_IN_RELEASE
+    LinuxHeadlessSimulation: UNITY_MP_TOOLS_NETSIM_ENABLED_IN_RELEASE;UNITY_MP_TOOLS_NET_STATS_MONITOR_ENABLED_IN_RELEASE
+    Lumin: UNITY_MP_TOOLS_NETSIM_ENABLED_IN_RELEASE;UNITY_MP_TOOLS_NET_STATS_MONITOR_ENABLED_IN_RELEASE
+    Nintendo Switch: UNITY_MP_TOOLS_NETSIM_ENABLED_IN_RELEASE;UNITY_MP_TOOLS_NET_STATS_MONITOR_ENABLED_IN_RELEASE
+    PS4: UNITY_MP_TOOLS_NETSIM_ENABLED_IN_RELEASE;UNITY_MP_TOOLS_NET_STATS_MONITOR_ENABLED_IN_RELEASE
+    PS5: UNITY_MP_TOOLS_NETSIM_ENABLED_IN_RELEASE;UNITY_MP_TOOLS_NET_STATS_MONITOR_ENABLED_IN_RELEASE
     Server: 
+    Stadia: UNITY_MP_TOOLS_NETSIM_ENABLED_IN_RELEASE;UNITY_MP_TOOLS_NET_STATS_MONITOR_ENABLED_IN_RELEASE
+    Standalone: UNITY_MP_TOOLS_NETSIM_ENABLED_IN_RELEASE;UNITY_MP_TOOLS_NET_STATS_MONITOR_ENABLED_IN_RELEASE;UGS_BETA_LOBBY_EVENTS;UGS_LOBBY_EVENTS
+    WebGL: UNITY_MP_TOOLS_NETSIM_ENABLED_IN_RELEASE;UNITY_MP_TOOLS_NET_STATS_MONITOR_ENABLED_IN_RELEASE
+    Windows Store Apps: UNITY_MP_TOOLS_NETSIM_ENABLED_IN_RELEASE;UNITY_MP_TOOLS_NET_STATS_MONITOR_ENABLED_IN_RELEASE
+    XboxOne: UNITY_MP_TOOLS_NETSIM_ENABLED_IN_RELEASE;UNITY_MP_TOOLS_NET_STATS_MONITOR_ENABLED_IN_RELEASE
+    iPhone: UNITY_MP_TOOLS_NETSIM_ENABLED_IN_RELEASE;UNITY_MP_TOOLS_NET_STATS_MONITOR_ENABLED_IN_RELEASE
+    tvOS: UNITY_MP_TOOLS_NETSIM_ENABLED_IN_RELEASE;UNITY_MP_TOOLS_NET_STATS_MONITOR_ENABLED_IN_RELEASE
   additionalCompilerArguments: {}
   platformArchitecture: {}
-  scriptingBackend: {}
+  scriptingBackend:
+    Standalone: 0
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}
@@ -746,11 +937,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: d55659eb-de50-4c0e-a049-ce175c63422a
+  cloudProjectId: b407b3ed-5fa1-428b-b83b-8d23fd009049
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: CE Project
-  organizationId: unity_62011044
+  projectName: FinalProject
+  organizationId: the-survival-final-project
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 

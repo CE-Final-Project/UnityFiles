@@ -3,7 +3,11 @@ guid: ca3dfc67b8967436ca37f3be7b92ae76
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - pauseMenuUI: {instanceID: 0}
+  - pauseButtonUI: {instanceID: 0}
+  - gameHUD: {instanceID: 0}
+  - playerInstance: {fileID: 5549058715856663126, guid: 97f5fe662e6144e188b3db5ed21baf64, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

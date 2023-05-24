@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee9bad6794824285968678e923352663, type: 3}
+  m_Name: Elf
+  m_EditorClassIdentifier: 
+  CharacterType: 1
+  Skill1: {fileID: 11400000, guid: c53a426b621b03b43b54338f899d7653, type: 2}
+  Skill2: {fileID: 11400000, guid: 2fe51e3c175bab24584ef52ff012acdc, type: 2}
+  Skill3: {fileID: 0}
+  BaseHP: {fileID: 11400000, guid: b74044a2dd187664b8c7e95975b80131, type: 2}
+  BaseMana: 10
+  Speed: 0.8
+  IsNpc: 0
+  DetectRange: 0
+  DisplayedName: ELF
+  AnimatorController: {fileID: 9100000, guid: 3fb2bf09854175149a7322985dc5f95b, type: 2}
+  ClassBannerLit: {fileID: 21300000, guid: e2db54f9b16a9450ca3ec289ffa9525b, type: 3}
+  ClassBannerUnlit: {fileID: 21300000, guid: e2db54f9b16a9450ca3ec289ffa9525b, type: 3}

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee9bad6794824285968678e923352663, type: 3}
+  m_Name: BigDemon
+  m_EditorClassIdentifier: 
+  CharacterType: 9
+  Skill1: {fileID: 11400000, guid: 87e775f41d5b20f4d904ba3ac9e648e9, type: 2}
+  Skill2: {fileID: 0}
+  Skill3: {fileID: 0}
+  BaseHP: {fileID: 11400000, guid: a80fb11e8a3fd6c40b6b80d1b417adfa, type: 2}
+  BaseMana: 0
+  Speed: 0.5
+  IsNpc: 1
+  DetectRange: 100
+  DisplayedName: BIG DEMON
+  AnimatorController: {fileID: 9100000, guid: 8f0096c5397fc8a48b947e934472bc94, type: 2}
+  ClassBannerLit: {fileID: 0}
+  ClassBannerUnlit: {fileID: 0}

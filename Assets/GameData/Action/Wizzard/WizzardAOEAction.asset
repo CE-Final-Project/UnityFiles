@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a34cbcdb254835b1f423bba0353a6f, type: 3}
+  m_Name: WizzardAOEAction
+  m_EditorClassIdentifier: 
+  Config:
+    Logic: 7
+    Amount: 30
+    ManaCost: 2
+    Range: 20
+    DurationSeconds: 0.3
+    ExecTimeSeconds: 0.3
+    EffectDurationSeconds: 0
+    ReuseTimeSeconds: 2
+    AnimAnticipation: AnticipateMove
+    Anim: Attack1
+    Anim2: 
+    ReactAnim: 
+    OtherAnimatorVariable: 
+    SplashDamage: 0
+    MoveSpeed: 0
+    KnockbackSpeed: 0
+    KnockbackDuration: 0
+    Radius: 0.5
+    ActionInput: {fileID: -4957136897550301328, guid: 2dd7f1d64be5ba043a4c5319522747fb, type: 3}
+    ActionInterruptible: 0
+    IsInterruptableBy: []
+    BlockingMode: 0
+    Projectiles: []
+    Spawns:
+    - {fileID: 1539796726324455230, guid: 507e5741bb866eb47b4f745750fc3a77, type: 3}
+    IsFriendly: 0
+    SoundEffect: {fileID: 8300000, guid: e3d814aa25b16489fa48ae8eca85a08e, type: 3}
+    Icon: {fileID: 1947726577, guid: 8d59aa21af879a34fbe48dfa5f10cd51, type: 3}
+    DisplayedName: Explotion
+    Description: asdasd

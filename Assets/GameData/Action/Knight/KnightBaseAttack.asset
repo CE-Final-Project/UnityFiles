@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9df43672b44348edbb6bfacb56aee0c6, type: 3}
+  m_Name: KnightBaseAttack
+  m_EditorClassIdentifier: 
+  Config:
+    Logic: 0
+    Amount: 30
+    ManaCost: 0
+    Range: 0.5
+    DurationSeconds: 1
+    ExecTimeSeconds: 0.3
+    EffectDurationSeconds: 0
+    ReuseTimeSeconds: 0.5
+    AnimAnticipation: AnticipateMove
+    Anim: Attack1
+    Anim2: 
+    ReactAnim: 
+    OtherAnimatorVariable: 
+    SplashDamage: 0
+    MoveSpeed: 0
+    KnockbackSpeed: 0
+    KnockbackDuration: 0
+    Radius: 0
+    ActionInput: {fileID: 0}
+    ActionInterruptible: 1
+    IsInterruptableBy: []
+    BlockingMode: 0
+    Projectiles: []
+    Spawns: []
+    IsFriendly: 0
+    SoundEffect: {fileID: 8300000, guid: 6607257ea5f084885b9545c1fe6ce308, type: 3}
+    Icon: {fileID: 1222041170, guid: 8d59aa21af879a34fbe48dfa5f10cd51, type: 3}
+    DisplayedName: Charge
+    Description: asdasdasd

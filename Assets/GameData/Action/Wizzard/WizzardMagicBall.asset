@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff25fce842ff46f9b27a4d96afb7f7c9, type: 3}
+  m_Name: WizzardMagicBall
+  m_EditorClassIdentifier: 
+  Config:
+    Logic: 4
+    Amount: 50
+    ManaCost: 5
+    Range: 5
+    DurationSeconds: 0.55
+    ExecTimeSeconds: 0.15
+    EffectDurationSeconds: 0
+    ReuseTimeSeconds: 0.25
+    AnimAnticipation: AnticipateMove
+    Anim: Attack1
+    Anim2: 
+    ReactAnim: 
+    OtherAnimatorVariable: 
+    SplashDamage: 0
+    MoveSpeed: 0
+    KnockbackSpeed: 0
+    KnockbackDuration: 0
+    Radius: 0
+    ActionInput: {fileID: 0}
+    ActionInterruptible: 0
+    IsInterruptableBy: []
+    BlockingMode: 0
+    Projectiles:
+    - ProjectilePrefab: {fileID: 4527224387690391092, guid: 2ba0baf27935c9644b6e108ae156850d, type: 3}
+      Speed_m_s: 4
+      Range: 5
+      Damage: 30
+      MaxVictims: 1
+    Spawns: []
+    IsFriendly: 0
+    SoundEffect: {fileID: 8300000, guid: f66b53fe763434f0abbf40d4d712f851, type: 3}
+    Icon: {fileID: 514233422, guid: 8d59aa21af879a34fbe48dfa5f10cd51, type: 3}
+    DisplayedName: Fire Ball
+    Description: Shoot Fire Ball Magic to enemy
